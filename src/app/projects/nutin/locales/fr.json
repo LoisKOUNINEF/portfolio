@@ -1,0 +1,135 @@
+{
+	"name": "nutin",
+	"tagline": "Une boîte à outils frontend légère construite pour valider ma compréhension des fondements des SPAs.",
+	"imageSrc": "./assets/images/projects/nutin",
+	"presentation": {
+		"keyPoints": [
+			"Composants et vues basés sur le DOM (pas de DOM virtuel).",
+			"Router et bus d'événements pour la navigation et le flux d'état.",
+			"Mises à jour explicites pilotées par événements (pas de détection automatique des changements).",
+			"N'a pas vocation à remplacer les frameworks; volontairement limité en portée.",
+			"Optimisé pour des projets personnels."
+		]
+	},
+	"popTagline": "Une boîte à outils frontend minimaliste construite pour explorer l'architecture SPA, le rendu et le flux d'état.",
+	"overview": {
+		"mainContent": "nutin est un toolkit frontend léger que j’ai conçu pour créer de petites applications monopage maintenables, sans dépendre d’un framework complet. Il fournit uniquement les briques essentielles — routage, gestion des événements, rendu des vues et quelques utilitaires de confort — tout en restant proche du DOM et des API web standards. Il est conçu pour des projets personnels et de petites applications où le contrôle, la clarté et une faible surcharge priment sur l’exhaustivité fonctionnelle.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Base SPA légère avec routage, bus d’événements et vues basées sur le DOM.",
+			"Architecture événementielle permettant un faible couplage entre les modules.",
+			"Dépendances minimales et contrôle explicite du flux d’exécution.",
+			"Build personnalisé et outils de test légers.",
+			"Utilisé pour développer ce portfolio et le site web du toolkit."
+		],
+		"after": "TypeScript a été intentionnellement utilisé à la place de JavaScript: le typage fort a réduit les erreurs d'implémentation pendant le développement, tandis que les interfaces fournissent une documentation claire et applicable pour l'API publique."
+	},
+	"purpose": {
+		"title": "Objectif",
+		"mainContent": "Les objectifs principaux étaient :",
+		"keyPoints": [
+			"Créer une base réutilisable pour de petits projets et des expérimentations.",
+			"Comprendre comment fonctionnent réellement les briques d’une SPA sous le capot."
+		],
+		"after": "Ce toolkit n’a pas vocation à concurrencer les frameworks établis, mais à servir d’alternative ciblée et transparente pour des cas d’usage bien délimités."
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Dépendances minimales : éviter de tirer de larges écosystèmes pour des besoins simples.",
+			"Architecture explicite : pas de magie cachée ni de conventions implicites.",
+			"Approche centrée sur le DOM : travailler avec la plateforme, pas autour.",
+			"Lisibilité à long terme : un code qui reste compréhensible des mois plus tard."
+		],
+		"after": "Chaque fonctionnalité devait justifier son existence."
+	},
+	"choices": [
+		{
+			"title": "Cœur orienté événements",
+			"mainContent": "Au cœur du toolkit se trouve un bus d’événements simple. La navigation, les mises à jour des vues et la communication inter-modules sont pilotées par des événements explicites plutôt que par un couplage implicite de l’état.",
+			"after": "Cela maintient les modules faiblement couplés et rend le flux d’exécution facile à suivre."
+		},
+		{
+			"title": "Le routeur comme coordinateur, pas comme contrôleur",
+			"mainContent": "La responsabilité du routeur est volontairement limitée : faire correspondre les routes et déclencher le rendu des vues. Il ne possède ni l’état de l’application ni la logique métier.",
+			"after": "Cette séparation évite le pattern du « routeur tout-puissant » et rend le routage prévisible."
+		},
+		{
+			"title": "Vues basées sur le DOM plutôt que sur des abstractions virtuelles",
+			"mainContent": "Les vues rendent directement dans le DOM, sans DOM virtuel ni couche de templating. Cela permet de conserver :",
+			"keyPoints": [
+				"Des caractéristiques de performance évidentes.",
+				"Un débogage simple et direct.",
+				"Un modèle mental aligné avec le comportement natif du navigateur."
+			],
+			"after": "L’objectif n’est pas l’abstraction pour l’abstraction, mais la clarté."
+		},
+		{
+			"title": "L’outillage comme support, pas comme fondation",
+			"mainContent": "L’outillage environnant (builder, scripts de développement, setup de tests) existe pour améliorer l’expérience développeur sans devenir un framework en soi."
+		},
+		{
+			"title": "Choix Open Source et de Distribution",
+			"keyPoints": [
+				"Le projet est développé ouvertement, avec un dépôt structuré et une hygiène de contribution de base. Cela reflète une intention de s'aligner sur les pratiques open-source standard et de rendre les décisions de conception et les compromis transparents.",
+				"Les fonctionnalités principales sont empaquetées et publiées sur npm, rendant la boîte à outils consommable. Cela a nécessité la gestion du versionnage, de la sortie de build et des limites de l'API publique.",
+				"Le projet utilise un monorepo npm très simple pour héberger à la fois le package de la boîte à outils et son site web de documentation/démonstration. Cela maintient le code partagé et les exemples à proximité, sans introduire d'outils lourds ou de couches d'orchestration.",
+				"Handlebars est utilisé pour les modèles de code et de fichiers au sein du package, favorisant une solution de templating minimale et explicite plutôt que des générateurs plus complexes. Cela s'aligne avec l'accent mis par le projet sur la clarté, la prévisibilité et une faible surcharge de dépendances."
+			]
+		}
+	],
+	"challenges": [
+		{
+			"title": "Éviter le couplage fort à mesure que les fonctionnalités augmentaient",
+			"mainContent": "À mesure que de nouvelles fonctionnalités étaient ajoutées, il existait un risque que les modules deviennent implicitement dépendants les uns des autres. Le bus d’événements aidait à imposer des frontières claires, mais uniquement lorsqu’il était utilisé de manière disciplinée.",
+			"after": "Cela m’a conduit à formaliser les contrats d’événements et à maintenir des responsabilités de modules très ciblées."
+		},
+		{
+			"title": "Éviter la généralisation prématurée",
+			"mainContent": "Il était tentant de concevoir le toolkit pour des cas d’usage hypothétiques futurs. J’ai au contraire limité le développement aux besoins réels issus de projets concrets.",
+			"after": "Cela a évité des abstractions inutiles et permis de conserver une base de code compacte et focalisée."
+		},
+		{
+			"title": "Explorer et implémenter la logique de test.",
+			"mainContent": "Tester de la logique basée sur le DOM sans framework de test complet demandait une attention particulière. J’ai construit des utilitaires de test légers avec jsdom et Node.js, en privilégiant la clarté plutôt qu’une automatisation exhaustive.",
+			"after": "Cela a renforcé l’importance d’isoler la logique et de rendre les effets de bord explicites."
+		}
+	],
+	"learned": {
+		"mainContent": "Construire nutin m’a fait prendre conscience de l’ampleur du travail que réalisent les frameworks, avec pourtant très peu de code de configuration visible.",
+		"keyPoints": [
+			"Une architecture explicite passe mieux à l’échelle que des abstractions astucieuses.",
+			"Rester proche des API de la plateforme améliore à la fois le débogage et la confiance.",
+			"Les contraintes sont essentielles pour éviter qu’un toolkit ne devienne un framework."
+		],
+		"after": "Plus important encore, nutin a grandement amélioré mes capacités de déboguage et affiné ma capacité à évaluer les outils de manière pragmatique : choisir la solution la plus simple qui répond entièrement au problème, et rien de plus."
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "nodejs"
+		},
+		{
+			"svgKey": "handlebars"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/nutin"	
+		},
+		{
+			"svgKey": "npm",
+			"url": "npmjs.com/package/@nutin/cli"
+		},
+		{
+			"svgKey": "live",
+			"url": "nutin.org"
+		}
+	]
+}

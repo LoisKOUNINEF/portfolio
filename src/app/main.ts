@@ -1,19 +1,19 @@
 import { AppRouter, Service, I18nService } from '../core/index.js';
 import { registerPipes } from '../libs/index.js';
+import { FooterComponent, NavbarComponent } from './components/index.js';
 import { appRoutes } from './routes.js';
 
 class App {
-  // private header: NavbarComponent;
+  private footer: FooterComponent;
+  private header: NavbarComponent;
 
   constructor() {
     registerPipes();
     AppRouter(appRoutes);
 
-    // Init global components
-    // this.header = new NavbarComponent('body' as unknown as HTMLElement);
-    // this.footer = new FooterComponent('body' as unknown as HTMLElement);
+    this.header = new NavbarComponent('body' as unknown as HTMLElement);
+    this.footer = new FooterComponent('body' as unknown as HTMLElement);
 
-    // Init app
     this.initialize();
   }
 
@@ -22,9 +22,8 @@ class App {
   }
 
   private renderBaseLayout() {
-    // e
-    // document.body.prepend(this.header.render());
-    // document.body.append(this.footer.render());
+    document.body.prepend(this.header.render());
+    document.body.append(this.footer.render());
   }
 }
 

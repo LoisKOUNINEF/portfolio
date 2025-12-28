@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.project-issues__container {
+	line-height: map.get($spacings, large);
+  padding-left: map.get($spacings, large);
+  padding-bottom: map.get($spacings, small);
+  @include mixins.respond-to(medium) {
+    padding-left: 0;
+  }
+}

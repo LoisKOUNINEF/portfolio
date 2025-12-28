@@ -1,4 +1,4 @@
-import { View, ButtonManager, BaseButton, ViewRenderManager } from '../../core/index.js';
+import { View, ButtonManager, BaseButton, ComponentConfig, AppPipeRegistry, CatalogConfig } from '../../core/index.js';
 
 export interface PopoverButton extends BaseButton {
   // if needed for Popover-specific properties
@@ -6,6 +6,8 @@ export interface PopoverButton extends BaseButton {
 
 export interface PopoverOptions {
   template: string;
+  children?: ComponentConfig[];
+  catalogs?: CatalogConfig[];
   viewName?: string;
   onClose?: () => void;
   buttons?: PopoverButton[];
@@ -15,20 +17,46 @@ export class PopoverView extends View {
   private onClose?: () => void;
   private overlay: HTMLElement | null = null;
   private buttonManager: ButtonManager;
+  private prevTitle: string | undefined;
+  private children: ComponentConfig[];
+  private catalogs: CatalogConfig[];
 
   constructor({
     template,
     buttons = [],
     onClose,
-    viewName = 'popover',
+    viewName,
+    children = [],
+    catalogs = [],
   }: PopoverOptions) {
-    super({template, tagName: 'div', mountTarget: 'body', viewName});
+    super({ template, tagName: 'div', mountTarget: 'body' });
     this.onClose = onClose;
+    this.children = children;
+    this.catalogs = catalogs;
     this.buttonManager = new ButtonManager(
       this, 
       this.wrapButtonCallbacks(buttons), 
       { containerClassName: 'popover-buttons' }
     );
+    if (viewName) {
+      this.prevTitle = document.title;
+      document.title = AppPipeRegistry.apply('capitalize', viewName);
+    }
+  }
+
+  public childConfigs(): ComponentConfig[] {
+    return [
+      ...this.children,
+      ...this.catalogConfigs()
+    ];
+  }
+
+  public catalogConfigs(): ComponentConfig[] {
+    const configs: ComponentConfig[] = []
+    this.catalogs.map((catalog) => {
+      configs.push(...this.catalogConfig(catalog));
+    })
+    return configs;
   }
 
   public override shouldUpdateMetaContent(): boolean {
@@ -72,6 +100,9 @@ export class PopoverView extends View {
     }
 
     document.body.classList.remove('no-scroll');
+
+    if (this.prevTitle) document.title = this.prevTitle;
+
     super.destroy();
 
     if (typeof this.onClose === 'function') {
@@ -107,7 +138,6 @@ export class PopoverView extends View {
   private createContent(): HTMLElement {
     const content = super.render();
     content.classList.add('popover-content');
-    ViewRenderManager.cleanupOptionalContent();
     return content;
   }
 

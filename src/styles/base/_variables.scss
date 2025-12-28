@@ -1,13 +1,28 @@
-/* 
-	Variables used in libs (snackbar, popover) and utility classes
-	Adapt to customize
-*/
-
+@use "fonts";
 // colours (RGB)
-$background-color: rgb(255 255 255); // WHITE
-$text-color: rgb(0 0 0); // BLACK
-$primary-color: rgb(0 0 0); // BLACK
-$secondary-color: rgb(0 0 0); // BLACK
+
+// used in utils
+$background-color: rgb(245 240 233);
+$text-color: rgb(40 30 20);
+$primary-color: rgb(200 140 40);
+$secondary-color: rgb(200 70 50);
+$accent-color: rgb(60 130 135);
+
+$light-theme: (
+  background: rgb(245 240 233), // #F5F0E9
+  text: rgb(40 30 20), // #281E14
+  primary: rgb(200 140 40), // #C88C28
+  secondary: rgb(200 70 50), // #C84632
+  accent: rgb(60 130 135) // #3C8287
+);
+
+$dark-theme: (
+  background: rgb(28 17 10), // #1C110A
+  text: rgb(228 214 167), // #E4D6A7
+  primary: rgb(233 180 76), // #E9B44C
+  secondary: rgb(155 41 21), // #9B2915
+  accent: rgb(80 162 167) // #50A2A7
+);
 
 // snackbar colours
 $snack-success: rgb(76 175 80);
@@ -21,8 +36,8 @@ $snack-default: rgb(153 153 153);
 */
 
 // fonts
-$primary-font: Arial, Helvetica, sans-serif;
-$secondary-font: Arial, Helvetica, sans-serif;
+$primary-font: Inter, Arial, sans-serif;
+$secondary-font: Sora, Arial, sans-serif;
 
 // font sizes
 $font-sizes: (
@@ -60,15 +75,15 @@ $box-sizes: (
 
 // shadows
 $shadows: (
-	small: 0 1px 2px rgba(0, 0, 0, 0.05),
-	medium: 0 4px 6px rgba(0, 0, 0, 0.1),
-	large: 0 10px 15px rgba(0, 0, 0, 0.15),
+	small: 0 1px 2px rgba($primary-color, 0.05),
+	medium: 0 4px 6px rgba($primary-color, 0.1),
+	large: 0 10px 15px rgba($primary-color, 0.15),
 );
 
 // breakpoints
 $breakpoints: (
 	small: 576px,
-	medium: 768px,
+	medium: 815px,
 	large: 992px,
 	largest: 1201px,
 );
@@ -80,4 +95,3 @@ $transitions: (
 	normal: 0.3s,
 	slow: 0.5s,
 );
-

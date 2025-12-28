@@ -1,0 +1,107 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.hero__wrapper {
+	@include mixins.wrapper;
+	min-height: 90vh;
+}
+
+.hero__container {
+	width: 100%;
+	@include mixins.container;
+	@include mixins.flex-between;
+	@include mixins.flex-column;
+	align-items: flex-start;
+	text-align: left;
+	padding-bottom: map.get($spacings, large);
+}
+
+.hero__title {
+	padding-top: map.get($spacings, small);
+	@include mixins.respond-to(medium) {
+		padding-top: 0;
+	}
+}
+
+.hero__value-prop {
+	padding-left: map.get($spacings, largest);
+	padding-bottom: map.get($spacings, largest);
+	font-size: map.get($font-sizes, largest);
+	max-width: 50ch;
+	@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+	@include mixins.respond-to(medium) {
+		font-size: map.get($font-sizes, large);
+		padding-left: 0;
+		padding-bottom: map.get($spacings, smallest);
+	}
+}
+
+.hero__main-stack {
+	padding-left: map.get($spacings, largest);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	.svgs__container {
+		padding-left: map.get($spacings, large);
+	}
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+		.svgs__container {
+			padding-left: map.get($spacings, small);
+		}
+	}
+}
+
+.hero__main-stack-title {
+	@include mixins.tech-badges-title;
+	@include mixins.tech-badges-underline;
+}
+
+.hero__main-stack-icons {
+	padding-top: map.get($spacings, medium);
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.hero__cta-container {
+	padding-left: map.get($spacings, largest);
+	@include mixins.respond-to(medium) {
+		padding: 0;
+	}
+}
+
+.hero__cta {
+	width: fit-content;
+	@include mixins.themed(background-color, map.get($light-theme, accent), map.get($dark-theme, accent));
+	@include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, background));
+	transition: background-color ease-in-out .3s;
+	margin-top: map.get($spacings, largest);
+	padding: map.get($spacings, small) map.get($spacings, large);
+	font-size: map.get($font-sizes, large);
+	text-align: left;
+	border-radius: map.get($border-radius, pill);
+	&:hover {
+		@include mixins.themed(background-color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: -20%));
+		cursor: pointer;
+		a {
+			text-decoration: none;
+		}
+	}
+	a {
+		&:focus-visible {
+			outline: none;
+			text-decoration: none;
+      @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
+      font-style: italic;
+		}
+	}
+	@media(hover: none) {
+		&:hover {
+			@include mixins.themed(background-color, map.get($light-theme, accent), map.get($dark-theme, accent));
+		}
+	}
+}

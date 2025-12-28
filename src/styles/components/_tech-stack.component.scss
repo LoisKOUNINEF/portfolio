@@ -1,0 +1,122 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.tech-stack__wrapper {
+	@include mixins.wrapper;
+	margin: map.get($spacings, small) 0;
+}
+
+.tech-stack__container {
+	width: 70%;
+	@include mixins.container(accent);
+}
+
+.tech-stack__header {
+	@include mixins.header(accent);
+	@include mixins.flex-center;
+	justify-content: space-around;
+	padding-top: map.get($spacings, large);
+  padding-bottom: map.get($spacings, medium);
+	h2 {
+  	font-size: map.get($font-sizes, largest);
+  }
+  @include mixins.respond-to(medium) {
+  	padding-bottom: map.get($spacings, smallest);
+  }
+}
+
+.tech-stack__badges {
+	gap: 1rem;
+	text-wrap: nowrap;
+	padding-bottom: map.get($spacings, small);
+	font-size: 1.1rem;
+	&.underline {
+		@include mixins.tech-badges-underline;
+	}
+	@include mixins.flex-center;
+	@include mixins.flex-column;
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, large);
+		padding-bottom: map.get($spacings, medium);
+	}
+}
+
+[class*="tech-stack__badges-title"] {
+	@include mixins.tech-badges-title;
+	@include mixins.tech-badges-underline;
+  min-width: 40%;
+  flex-basis: 100%;
+	@include mixins.flex-center;
+  gap: map.get($spacings, small);
+  font-size: map.get($font-sizes, small);
+  padding: 0 map.get($spacings, small);
+	padding-top: map.get($spacings, small);
+}
+
+.tech-stack__badges-title-main {
+  font-size: map.get($font-sizes, medium);
+}
+
+.tech-stack__badges-title-tools {
+  font-size: map.get($font-sizes, smallest);
+  letter-spacing: 0.125rem;
+}
+
+.tech-stack__icon {
+	font-size: 1.4rem;
+}
+
+[class*="tech-stack__badge-catalog"] {
+	display: flex;
+	justify-self: flex-start;
+	.svg-tech-label {
+	  font-weight: 700;
+	  letter-spacing: 0.15em;
+	  opacity: 0.75;
+	  font-style: normal;
+	}
+	> * {
+		@include mixins.respond-to(medium) {
+			flex: 1;
+		}
+	}
+	@include mixins.respond-to(medium) {
+		width: 90vw;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.svg-tech-item { }
+}
+
+.tech-stack__badge-catalog {
+	> * {
+		width: 3rem;
+	}
+	.svg-tech-label {
+	  font-size: 0.8rem;
+	}
+  .base-svg {
+		&::after {
+	    padding: 1rem;
+	  }
+	}
+}
+
+.tech-stack__badge-catalog-tools {
+	padding-bottom: map.get($spacings, small);
+	> * {
+		width: 3rem;
+		@include mixins.respond-to(medium) {
+			flex-basis: 20%;
+		}
+	}
+	.svg-tech-label {
+	  font-size: 0.7rem;
+	}
+  .base-svg {
+		&::after {
+	    padding: .8rem;
+	  }
+	}
+}

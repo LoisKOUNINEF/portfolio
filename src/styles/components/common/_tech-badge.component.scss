@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "svgs-common" as *;
+
+$tech-badges-path: '#{$base-folder}/tech-badges/';
+
+$tech-badge-svgs: (
+  'angular': 'angular',
+  'bash': 'bash',
+  'docker': 'docker',
+  'linux': 'linux',
+  'nestjs': 'nestjs',
+  'vuejs': 'vuejs',
+  'rails': 'rails',
+  'csharp': 'csharp',
+  'golang': 'golang',
+  'ruby': 'ruby',
+  'nodejs': 'nodejs',
+  'nx': 'nx',
+  'nginx': 'nginx',
+  'git': 'git',
+  'jest': 'jest',
+  'postgresql': 'postgresql',
+  'sass': 'sass',
+  'traefik': 'traefik',
+  'typescript': 'typescript',
+  'handlebars': 'handlebars',
+  'html': 'html',
+  'typeorm': 'typeorm',
+  'mysql': 'mysql',
+  'express': 'express'
+);
+
+@each $name, $file in $tech-badge-svgs {
+  .svg-#{$file} {
+    @include svg-background('#{$tech-badges-path}#{$file}.svg');
+  }
+}
+
+// dark theme adapt
+.dark-theme .svg-nx::after,
+.dark-theme .svg-handlebars::after,
+.dark-theme .svg-express::after {
+  filter: invert(1);
+}
+
+.svg-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.svg-tech-label {}

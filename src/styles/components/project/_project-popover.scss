@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.project-popover__container {
+  display: flex;
+  padding: map.get($spacings, 'medium');
+  opacity: 1;
+  @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
+  height: 100%;
+  width: 100%;
+  @include mixins.respond-to(medium) {
+    padding: map.get($spacings, medium) 0;
+  }
+}
+
+.project-popover__content {
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  min-width: 100%;
+  padding-left: map.get($spacings, medium);
+  h4 {
+    font-family: $secondary-font;
+    font-size: 1.05rem;
+    font-weight: bold;
+    padding: map.get($spacings, small) 0;
+  }
+}
+
+.project-popover__links {
+  display: flex;
+  padding: map.get($spacings, medium);
+  gap: map.get($spacings, largest);
+  flex-wrap: nowrap;
+  .svgs__container {
+    padding-top: map.get($spacings, medium);
+    padding-left: map.get($spacings, medium);
+    .base-svg {
+      &::after {
+        padding: map.get($spacings, large);
+      }
+    }
+  }
+  @include mixins.respond-to(medium) {
+    padding: map.get($spacings, medium) 0;
+    justify-content: space-between;
+  }
+}

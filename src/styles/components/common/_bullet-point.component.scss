@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.bullet-point__container {
+  padding-left: map.get($spacings, 'medium');
+  line-height: 2rem;
+  @include mixins.respond-to(medium) {
+    padding-left: map.get($spacings, 'small');
+  }
+}

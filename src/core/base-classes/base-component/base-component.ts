@@ -4,8 +4,9 @@ import { I18nHelper } from './helpers/i18n.helper.js';
 import { PipeHelper } from './helpers/pipe.helper.js';
 import { ChildrenHelper } from './helpers/children.helper.js';
 import { CatalogHelper, CatalogConfig } from './helpers/catalog.helper.js';
-import { TrustLevel } from './helpers/security.helper.js';
-export { CatalogItemConfig } from './helpers/catalog.helper.js';
+import { Component, ComponentOptions } from '../index.js';
+import { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
+export { CatalogItemConfig, CatalogConfig } from './helpers/catalog.helper.js';
 
 /**```typescript
  * export interface ComponentConfig {
@@ -16,7 +17,7 @@ export { CatalogItemConfig } from './helpers/catalog.helper.js';
  */ 
 export interface ComponentConfig {
   selector: string;
-  factory: (element: HTMLElement) => BaseComponent;
+  factory: (element: HTMLElement) => Component;
 }
 
 export interface BaseComponentOptions {
@@ -30,6 +31,7 @@ export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
   private _children: BaseComponent[] = [];
   protected element: T;
   protected eventListeners: Array<[string, EventListener]> = [];
+  private _options: ComponentOptions;
 
   constructor({
     template = '',
@@ -37,6 +39,7 @@ export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
     tagName = 'div',
     trustLevel
   }: BaseComponentOptions) {
+    this._options = { template, mountTarget, tagName, trustLevel }
     this.element = DomHelper.createElement<T>(tagName, template, trustLevel);
     this.parseDataAttributes();
     this.autoBindEvents();
@@ -55,12 +58,13 @@ export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
 
   public render(): HTMLElement {
     this.addChildren();
+    DomHelper.cleanupOptionalContent()
     return this.element;
   }
 
 /**
  * ```typescript
-interface CatalogConfig {
+interface CatalogConfig extends ComponentOptions {
   array: CatalogItemConfig[];
   elementName: string;
   elementTag?: keyof HTMLElementTagNameMap;
@@ -84,5 +88,10 @@ interface CatalogConfig {
 
   protected addChildren(): void {
     ChildrenHelper.addChildren(this, this.element, this._children);
+  }
+
+  protected forceRender(): void {
+    this.element.innerHTML = SecurityHelper.sanitizeTemplate(this._options.template, this._options.trustLevel);
+    this.render();
   }
 }

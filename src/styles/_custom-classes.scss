@@ -2,8 +2,29 @@
 @use "variables" as *;
 @use "mixins";
 
-/*
-	 Add your classes here
-	 Custom classes prefix : 'c-'
-	 ( prefix view-specific classes with viewname__ )
-*/
+.c-external-link {
+	[href^="http"]::after {
+    content: "";
+    display: inline-block;
+    width: map.get($spacings, medium);
+    height: map.get($spacings, medium);
+    background-color: currentColor;
+    mask-image: url(/assets/images/svgs/external/external-link.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+}
+
+.c-download-link {
+  [href]::after {
+    content: "";
+    display: inline-block;
+    margin-left: .1rem;
+    width: map.get($spacings, medium);
+    height: map.get($spacings, medium);
+    background-color: currentColor;
+    mask-image: url(/assets/images/svgs/download.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+}

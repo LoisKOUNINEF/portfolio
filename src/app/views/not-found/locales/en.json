@@ -3,6 +3,6 @@
     "title": "Page Not Found",
     "description": "404 Page"
   },
-  "content": "This page doesn't exist.",
-  "redirect": "Back to home"
+  "content": "Looks like you're lost...",
+  "redirect": "<- Go Back"
 }

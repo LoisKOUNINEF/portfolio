@@ -2,6 +2,7 @@ import { AttributesHelper, IAttributesConfig } from "../helpers/attributes.helpe
 
 export interface BaseButton extends IAttributesConfig {
   callback: () => void;
+  label?: string;
 }
 
 export interface ButtonContainerOptions {
@@ -22,6 +23,7 @@ export interface ButtonContainerOptions {
 
 interface BaseButton extends IAttributesConfig {
   callback: () => void;
+  label?: string;
 }
 
 interface ButtonContainerOptions {
@@ -59,9 +61,13 @@ export class ButtonManager {
     container.style = this.containerOptions.containerStyles || '';
 
     this.buttons.forEach((config, index) => {
-      const button = this.createButton(config, index);
-      container.appendChild(button);
-      this.bindButtonCallback(config, index);
+      if (config.label) {
+        return this.createButtonWithCheckbox(config, index, container);
+      } else {
+        const button = this.createButton(config, index);
+        container.appendChild(button);
+        this.bindButtonCallback(config, index);
+      }
     });
 
     return container;
@@ -72,6 +78,25 @@ export class ButtonManager {
     if (container) {
       target.appendChild(container);
     }
+  }
+
+  private createButtonWithCheckbox(config: BaseButton, index: number, container: HTMLElement): HTMLElement {
+    if (!config.label) return container;
+    const checkbox = document.createElement('input');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('id', config.label);
+    checkbox.hidden = true;
+    container.appendChild(checkbox);
+    
+    const label = document.createElement('label');
+    label.setAttribute('for', config.label);
+        
+    const button = this.createButton(config, index);
+    label.appendChild(button);
+        
+    container.appendChild(label);
+    this.bindButtonCallback(config, index, checkbox);
+    return container;
   }
 
   private createButton(config: BaseButton, index: number): HTMLElement {
@@ -88,12 +113,15 @@ export class ButtonManager {
     button.setAttribute('data-event', `click:onButtonClick_${index}`);
   }
 
-  private bindButtonCallback(config: BaseButton, index: number): void {
+  private bindButtonCallback(config: BaseButton, index: number, checkbox?: HTMLInputElement): void {
     const methodName = `onButtonClick_${index}`;
     
     this.component[methodName] = () => {
       if (typeof config.callback === 'function') {
         config.callback();
+        if (checkbox) {
+          checkbox.checked = !checkbox.checked;
+        }
       }
     };
   }

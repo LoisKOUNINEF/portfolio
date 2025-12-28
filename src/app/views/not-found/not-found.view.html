@@ -1,10 +1,19 @@
 <div 
-  class="u-flex-center u-flex-column u-padd-y-large"
+  class="not-found__container"
 >
   <h1 
     data-i18n="not-found.content" 
-    class="u-color-sec u-font-largest u-bold u-font-secondary"
+    class="not-found__content"
   ></h1>
-  <img src="/assets/images/logo-small-trans.avif" width=250 height=250 alt="nutin's small logo with a growing plant.">
-  <div data-component="home"></div>
+  <div class="not-found__image-container">
+    <picture>
+      <source srcset="/assets/images/404.avif" type="image/avif"/>
+      <source srcset="/assets/images/404.webp" type="image/webp"/>
+      <img src="/assets/images/404.jpg" width=350 height=250 alt="Black and white picture of a man standing on the edge of a wall. From the movie 'Das Cabinet des Doktor Caligari', R. Wiene, 1920."/>
+    </picture>
+    <!-- <img src="/assets/images/404.avif" width=350 height=250 alt="nutin's small logo with a growing plant."> -->
+  </div>
+  <div class="not-found__back-btn-container">
+    <span data-component="back-to-home"></span>
+  </div>
 </div>

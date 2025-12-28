@@ -1,3 +1,9 @@
-// global components style export
+@forward "global";
+@forward "common";
 
-// @forward "my-component";
+@forward "project";
+
+@forward "hero.component";
+@forward "about.component";
+@forward "contact.component";
+@forward "tech-stack.component";
