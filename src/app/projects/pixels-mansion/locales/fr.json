@@ -1,0 +1,91 @@
+{
+	"name": "PixelsMansion",
+	"tagline": "Un petit terrain de jeu rétro construit pour approfondir ma compréhension de la conception orientée objet.",
+	"imageSrc": "./assets/images/projects/pixels-mansion",
+	"presentation": {
+		"keyPoints": [
+			"Jeux rétro sur grille avec abstractions de jeu partagées.",
+			"Architecture orientée objet avec logique de jeu polymorphe.",
+			"Sauvegarde automatique des scores et de l'état actuel du jeu.",
+			"Composants UI réutilisables (incluant un effet machine à écrire personnalisé)."
+		]
+	},
+	"popTagline": "Construit comme un bac à sable pour pratiquer la conception orientée objet en implémentant des mécaniques de jeu classiques.",
+	"overview": {
+		"mainContent": "PixelsMansion est une application de jeux rétro en navigateur, construite avec Angular. Elle sert de conteneur pour plusieurs petits jeux, partageant une structure commune, un système de navigation et un pipeline de rendu.",
+		"keyPointsTitle": "Fonctionnalités principales",
+		"keyPoints": [
+			"Jeux basés sur une grille, construits sur des classes abstraites communes.",
+			"Sauvegarde automatique des scores et de l'état actuel du jeu.",
+			"Structure guidée par le framework, Angular étant utilisé comme couche d’orchestration, avec les \"signals\" Angular pour la propagation des changements."
+		],
+		"after": "Le projet se concentre moins sur les jeux individuels que sur la conception d’une architecture commune et l'application des principes de la programmation orientée objet."
+	},
+	"purpose": {
+		"title": "Objectif",
+		"mainContent": "Les objectifs principaux étaient :",
+		"keyPoints": [
+			"Explorer comment structurer une application multi-jeux sans dupliquer la logique.",
+			"Concevoir une base de jeu réutilisable plutôt que des implémentations ponctuelles.",
+			"Approfondir ma compréhension des principes de la programmation orientée objet."
+		],
+		"after": "PixelsMansion est volontairement orienté architecture : les jeux sont des fonctionnalités, pas le cœur du système."
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Fondation partagée : les jeux doivent réutiliser des abstractions communes.",
+			"Isolement : chaque jeu doit rester autonome."
+		]
+	},
+	"choices": [
+		{
+			"title": "Classes de base abstraites pour les jeux",
+			"mainContent": "Les comportements communs — comme la gestion du cycle de vie, la gestion des entrées et la mise en place du rendu — sont définis dans des classes de base abstraites. Les jeux individuels étendent ces bases et n’implémentent que la logique spécifique au jeu."
+		},
+		{
+			"title": "Séparation claire entre moteur et logique de jeu",
+			"mainContent": "L’application distingue clairement :",
+			"keyPoints": [
+				"Les préoccupations génériques du « moteur » (timing, entrées, orchestration du rendu).",
+				"Les règles et l’état propres à chaque jeu."
+			],
+			"after": "Cela évite que le code des jeux n’embarque des préoccupations d’infrastructure et rend chaque jeu plus simple à comprendre."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Concevoir des abstractions qui restent utiles",
+			"mainContent": "Les premières abstractions risquaient d’être trop génériques. Elles ont été affinées de manière itérative, guidées par les besoins des jeux concrets plutôt que par une complétude théorique.",
+			"after": "Cela a permis de s’assurer que les abstractions justifiaient réellement leur existence."
+		},
+		{
+			"title": "Trouver l’équilibre entre cohérence et liberté créative",
+			"mainContent": "Les jeux ont besoin de liberté pour différer dans leurs mécaniques et leur comportement. Les classes de base définissent une structure et des contrats, sans imposer de détails d’implémentation."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Les bonnes abstractions émergent de l’usage réel, pas de l’anticipation.",
+			"La cohérence permet de passer à l’échelle, même sur de petits projets.",
+			"Séparer les préoccupations du moteur de la logique métier simplifie l’évolution.",
+			"Plus les classes remplissent une fonction précise et limitée, plus elles sont faciles à étendre.",
+			"Les optimisations prématurées peuvent rendre le système plus compliqué à maintenir et à faire évoluer."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "angular"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/pixelsmansion"
+		},
+		{
+			"svgKey": "live",
+			"url": "pixels-mansion.lois-kouninef.eu"
+		}
+	]
+}

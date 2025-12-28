@@ -1,0 +1,21 @@
+<div 
+	class="project-card__wrapper ${_project.index !== undefined
+		? _project.index % 2 !== 0 
+			? 'align-right'
+			: 'align-left' 
+		: ''
+	}">
+	<div class="project-card__container ${_project.index  === undefined
+		? 'project-card__standalone' 
+		: ''
+	}">
+		<div data-component="project-card-header"></div>
+		<div class="project-card__content">
+			<p data-component="project-card-presentation"></p>
+		</div>
+		<div class="project-card__links">
+			<p data-component="project-card-links"></p>
+			<p data-component="project-card-view-more"></p>
+		</div>
+	</div>
+</div>

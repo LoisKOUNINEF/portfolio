@@ -1,0 +1,91 @@
+{
+	"name": "PixelsMansion",
+	"tagline": "A small retro games playground built to deepen my understanding of object-oriented design.",
+	"imageSrc": "./assets/images/projects/pixels-mansion",
+	"presentation": {
+		"keyPoints": [
+			"Grid-based retro games with shared game abstractions.",
+			"Object-oriented architecture with polymorphic game logic.",
+			"Automatic save of scores and current game state.",
+			"Reusable UI components (including a custom typewriter effect)."
+		]
+	},
+	"popTagline": "Built as a sandbox to practice object-oriented design by implementing classic game mechanics.",
+	"overview": {
+		"mainContent": "PixelsMansion is a browser-based retro games application built with Angular. It serves as a container for multiple small games, sharing a common structure, navigation system, and rendering pipeline.",
+		"keyPointsTitle": "Main features",
+		"keyPoints": [
+			"Grid-based games built on shared abstract base classes",
+			"Automatic save of scores and current game state.",
+			"Framework-guided structure with Angular used as an orchestration layer, and Angular signals for change propagation."
+		],
+		"after": "The project focuses less on individual games and more on designing a scalable architecture and applying object-oriented programming principles."
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To explore how to structure a multi-game application without duplicating logic.",
+			"To design a reusable game foundation rather than one-off implementations.",
+			"To deepen my understanding of object-oriented programming principles."
+		],
+		"after": "PixelsMansion is intentionally architecture-driven: games are features, not the core of the system."
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Shared foundation: games must reuse common abstractions.",
+			"Isolation: each game should remain self-contained."
+		]
+	},
+	"choices": [
+		{
+			"title": "Abstract base classes for games",
+			"mainContent": "Common behaviors—such as lifecycle management, input handling, and rendering setup—are defined in abstract base classes. Individual games extend these bases and implement only game-specific logic."
+		},
+		{
+			"title": "Clear separation between engine and game logic",
+			"mainContent": "The application distinguishes between",
+			"keyPoints": [
+				"Generic \"engine\" concerns (timing, input, rendering orchestration)",
+				"Game-specific rules and state"
+			],
+			"after": "This prevents game code from leaking infrastructure concerns and keeps each game easier to reason about."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Designing abstractions that remain useful",
+			"mainContent": "Early abstractions risked becoming too generic. They were refined iteratively, driven by the needs of concrete games rather than theoretical completeness.",
+			"after": "This ensured abstractions earned their place."
+		},
+		{
+			"title": "Balancing consistency with creative freedom",
+			"mainContent": "Games need freedom to differ in mechanics and behavior. The base classes define structure and contracts, but avoid dictating implementation details."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Good abstractions emerge from real use, not anticipation.",
+			"Consistency enables scale, even in small projects.",
+			"Separating engine concerns from domain logic simplifies evolution.",
+			"The more narrowly focused a class's function, the easier it is to extend.",
+			"Premature optimisation can actually make a system harder to maintain and evolve."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "angular"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/pixelsmansion"
+		},
+		{
+			"svgKey": "live",
+			"url": "pixels-mansion.lois-kouninef.eu"
+		}
+	]
+}

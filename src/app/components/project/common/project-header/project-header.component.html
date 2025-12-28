@@ -1,0 +1,17 @@
+<div class="project-header__container">
+	<h2>${_config.name}</h2>
+	<div class="project-header__images">
+		<div class="project-header__screen-mock">
+			<div class="project-header__screen-mock-content">
+				<picture>
+					<source srcset="${_config.imageSrc}.avif" type="image/avif"/>
+					<source srcset="${_config.imageSrc}.webp" type="image/webp"/>
+					<img src="${_config.imageSrc}.jpg" alt="${_config.name} illustration picture"/>
+				</picture>
+			</div>
+			<div class="project-header__screen-mock-stand"></div>
+		</div>
+		<p class="svgs__container project-header__svgs" data-catalog="project-header-technos"></p>
+	</div>
+	<h3 class="project-header__tagline">${_config.tagline}</h3>
+</div>

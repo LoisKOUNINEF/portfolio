@@ -1,9 +1,7 @@
 {
   "meta" : {
-    "title": "Home",
+    "title": "Portfolio",
     "description": "Landing page"
   },
-  "title": "portfolio",
-  "ready": "You're all set !",
-  "enjoy": "Happy Coding 🎉"
+  "title": "portfolio"
 }

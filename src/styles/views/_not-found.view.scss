@@ -1,0 +1,51 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.not-found__container {
+  @include mixins.flex-center;
+  @include mixins.flex-column;
+}
+
+.not-found__content {
+  text-align: center;
+  font-family: $secondary-font;
+  @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
+  font-size: map.get($font-sizes, largest);
+  font-weight: bold;
+  padding: map.get($spacings, largest) 0;
+}
+
+.not-found__image-container {
+  padding: map.get($spacings, large) 0;
+  img {
+    border-radius: map.get($spacings, large);
+    @include mixins.themed(box-shadow, 0 4px 6px map.get($light-theme, text), 0 4px 6px map.get($light-theme, background));
+  } 
+}
+
+.not-found__back-btn {
+  background-color: inherit;
+  @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
+  font-size: map.get($font-sizes, large);
+  font-style: italic;
+  border-radius: map.get($spacings, largest);
+  text-decoration: underline; 
+  padding: map.get($spacings, small) map.get($spacings, large);
+  transition: font-size ease .3s;
+  &:hover {
+    @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
+    font-size: map.get($font-sizes, largest) - .3rem;
+  }
+  @media(hover: none) {
+    &:hover {
+      color: inherit;
+      font-size: map.get($font-sizes, large);
+    }
+  }
+}
+
+.not-found__back-btn-container {
+  margin-top: map.get($spacings, largest);
+  @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+}

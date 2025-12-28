@@ -1,0 +1,19 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.project__links {
+  width: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: map.get($spacings, largest);
+  a {
+    &:focus-visible {
+      @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+    }
+  }
+  @include mixins.respond-to(medium) {
+    font-size: map.get($font-sizes, medium);
+  }
+}

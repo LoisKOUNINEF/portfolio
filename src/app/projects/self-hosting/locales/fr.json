@@ -1,0 +1,127 @@
+{
+	"name": "Self-hosting",
+	"tagline": "Un environnement auto-hébergé axé sur le déploiement, les fondamentaux de sécurité et les opérations quotidiennes.",
+	"imageSrc": "./assets/images/projects/self-hosting",
+	"presentation": {
+		"keyPoints": [
+			"Mesures de sécurité essentielles (mises à jour automatiques, accès restreint, pare-feu, prévention des intrusions).",
+			"Reverse proxy avec renouvellement automatique des certificats TLS.",
+			"Services conteneurisés orchestrés avec Docker Swarm.",
+			"Service mail auto-hébergé pour les besoins des applications."
+		]
+	},
+	"popTagline": "Mis en place pour acquérir une expérience pratique du déploiement, des bases de la sécurité et des préoccupations opérationnelles quotidiennes dans un environnement auto-hébergé.",
+	"overview": {
+		"mainContent": "Ce projet couvre l’auto-hébergement de mes sites web et applications personnels, du déploiement à la maintenance. J'ai géré l'intégralité du système de bout en bout, sans les garanties d'une plateforme gérée.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Déploiement full-stack : hébergement de sites et d’applications personnels avec un contrôle complet.",
+			"Orchestration Docker : Swarm pour la gestion des conteneurs, secrets pour la gestion sécurisée des données sensibles.",
+			"Reverse proxy et routage : Traefik pour le routage HTTPS dynamique, avec Nginx utilisé dans les images pour les sites statiques.",
+			"Sécurité : désactivation de l’accès root, configuration d’UFW, fail2ban pour la protection contre les attaques par force brute.",
+			"Déploiements automatisés : mise en place d’un pipeline CI / CD réutilisable basé sur des scripts bash et des workflows GitHub.",
+			"Monitoring : Grafana et Prometheus pour suivre les performances du système."
+		],
+		"after": "Le résultat est une configuration flexible, capable de supporter plusieurs applications, d’évoluer avec mes besoins et de servir de terrain d’apprentissage concret pour les problématiques réelles de déploiement."
+	},
+	"purpose": {
+		"title": "Objectif",
+		"mainContent": "Les objectifs principaux étaient :",
+		"keyPoints": [
+			"Comprendre ce qui se passe réellement au-delà du développement local.",
+			"Déployer des applications sans dépendance à un fournisseur ni complexité cachée.",
+			"Construire une plateforme capable de supporter une variété de projets, de bases de données et de services.",
+			"Gagner en confiance dans l’exploitation de systèmes en production, même à petite échelle."
+		],
+		"after": "Il s’agissait autant d’un projet d’apprentissage que d’un projet pratique : je voulais supprimer l’effet « boîte noire » de l’hébergement et de l’infrastructure."
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"La transparence des coûts était essentielle : des dépenses mensuelles prévisibles et faibles.",
+			"Liberté des outils : aucune restriction sur les bases de données, les runtimes ou les architectures.",
+			"La maintenabilité plutôt que l’ingéniosité : des configurations simples, compréhensibles et débogables en autonomie.",
+			"Échelle personnelle : optimisé pour de petits projets, sans complexité d’entreprise prématurée."
+		],
+		"after": "Il s’agissait autant d’un projet d’apprentissage que d’un projet pratique : je voulais supprimer l’effet « boîte noire » de l’hébergement et de l’infrastructure."
+	},
+	"choices": [
+		{
+			"title": "Infrastructure auto-gérée plutôt que plateformes managées",
+			"mainContent": "J’ai volontairement évité les plateformes clés en main qui masquent les détails du déploiement. Bien que pratiques, elles limitent souvent la flexibilité et peuvent dissimuler des coûts ou des contraintes opérationnelles.",
+			"after": "Gérer ma propre infrastructure m’oblige à prendre des décisions explicites et me fournit un modèle mental plus clair du système."
+		},
+		{
+			"title": "Mise en place incrémentale et modulaire",
+			"mainContent": "Plutôt que de concevoir une infrastructure « parfaite » dès le départ, je l’ai construite de manière incrémentale :",
+			"keyPoints": [
+				"Commencer simple.",
+				"Ajouter des composants uniquement lorsqu’un besoin réel apparaît.",
+				"Refactoriser lorsque la complexité le justifie.",
+				"Comprendre les coûts réels de l’infrastructure cloud et les compromis entre contrôle total et services managés.",
+				"Apprendre à monitorer et dépanner des systèmes en production avec Grafana et Prometheus."
+			],
+			"after": "Cette approche reflète ma manière de concevoir l’architecture applicative et aide à garder la complexité opérationnelle sous contrôle."
+		},
+		{
+			"title": "Automatisation là où elle apporte de la valeur",
+			"mainContent": "J’ai automatisé les étapes répétitives et sujettes aux erreurs (déploiement, mises à jour, monitoring de base), tout en évitant la sur-automatisation. Lorsque l’automatisation apporte plus d’abstraction que de valeur, elle est différée.",
+			"after": "L’objectif est la confiance et la clarté, pas l’automatisation maximale."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Prévisibilité des coûts versus scalabilité",
+			"mainContent": "Les récits catastrophes du cloud proviennent souvent de systèmes qui scalent implicitement et facturent de manière imprévisible. Pour éviter cela, j’ai choisi des configurations à coûts fixes et prévisibles, en acceptant le scaling manuel comme compromis.",
+			"after": "Ce choix a réduit l’anxiété liée à l’expérimentation et rendu les décisions d’infrastructure plus réfléchies."
+		},
+		{
+			"title": "Déboguer sans filet de sécurité",
+			"mainContent": "Lorsqu’un problème survient sur une infrastructure auto-hébergée, il n’y a pas de support plateforme sur lequel s’appuyer. Les premiers incidents m’ont forcé à :",
+			"keyPoints": [
+				"Améliorer les logs et l’observabilité.",
+				"Adopter une approche méthodique pour diagnostiquer les pannes.",
+				"Privilégier des configurations simples, plus faciles à comprendre."
+			],
+			"after": "Cela a considérablement renforcé ma discipline opérationnelle."
+		},
+		{
+			"title": "Trouver l’équilibre entre apprentissage et fiabilité",
+			"mainContent": "Il est tentant de modifier constamment l’infrastructure pour tester de nouveaux outils. J’ai appris à distinguer :",
+			"keyPoints": [
+				"Les composants stables et éprouvés (qui restent inchangés).",
+				"Les parties expérimentales (où l’apprentissage est l’objectif)."
+			],
+			"after": "Cet équilibre permet de maintenir une production fiable tout en laissant de la place à l’exploration."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Les choix d’infrastructure influencent l’architecture applicative plus qu’on ne l’imagine.",
+			"La simplicité est un avantage compétitif en exploitation, surtout en solo.",
+			"Comprendre le déploiement et l’hébergement améliore les décisions de développement en amont.",
+			"La liberté des outils est précieuse, mais uniquement si elle s’accompagne de discipline et de contraintes claires."
+		],
+		"after": "Plus important encore, ce projet a renforcé ma préférence pour une compréhension des systèmes de bout en bout, plutôt que de dépendre d’abstractions opaques. Cet état d’esprit guide désormais la manière dont je conçois, développe et déploie l’ensemble de mes projets."
+	},
+	"technos": [
+		{
+			"svgKey": "linux"
+		},
+		{
+			"svgKey": "traefik"
+		},
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "bash"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": ""			
+		}
+	]
+}

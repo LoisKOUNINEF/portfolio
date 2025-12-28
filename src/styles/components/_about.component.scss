@@ -1,0 +1,69 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.about__wrapper {
+	@include mixins.wrapper;
+	padding-top: map.get($spacings, largest);
+	padding-left: map.get($spacings, large);
+	padding-bottom: 0;
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+	}
+}
+
+.about__container {
+	width: 100%;
+	@include mixins.container;
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.about__header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+  	font-size: map.get($font-sizes, largest);
+  }
+}
+
+.about__section {
+	h3 {
+		font-weight: bold;
+	}
+	p {
+		line-height: 1.8rem;
+	  max-width: 80ch;
+	  padding-top: map.get($spacings, small);
+	  padding-bottom: map.get($spacings, medium);
+	  padding-left: map.get($spacings, small);
+	  @include mixins.respond-to(medium) {
+	  	line-height: map.get($spacings, large);
+	  }
+	}
+}
+
+.about__content {
+	padding-top: map.get($spacings, largest);
+	text-align: left;
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, large);
+	}
+}
+
+.about__projects-disclaimer {
+	padding-top: map.get($spacings, largest);
+	padding-left: map.get($spacings, largest)*2;
+	p {
+		min-width: 100ch;
+		font-size: map.get($font-sizes, small);
+		font-style: italic;
+	}
+	@include mixins.respond-to(medium) {
+		padding-left: map.get($spacings, medium);
+		p {
+			min-width: auto;
+		}
+	}
+}

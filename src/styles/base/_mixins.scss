@@ -1,6 +1,69 @@
 @use "sass:map";
 @use "variables" as *;
 
+// custom mixins
+@mixin themed($property, $light-value, $dark-value) {
+  #{$property}: $light-value;
+  
+  .dark-theme & {
+    #{$property}: $dark-value;
+  }
+}
+
+@mixin card-shadow($color) {
+  @include themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, $color), 0.1), 0 10px 15px rgba(map.get($dark-theme, $color), 0.1));
+}
+
+@mixin wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: map.get($spacings, 'medium');
+  @include respond-to(medium) {
+    padding: 0;
+  }
+}
+
+@mixin container($color-identity: false) {
+  border-radius: map.get($spacings, medium);
+  padding: 0 map.get($spacings, medium);
+  @if $color-identity {
+    @include card-shadow($color-identity);
+  }
+  @include respond-to(medium) {
+    width: 100%;
+  }
+}
+
+@mixin header($color-identity: false) {
+  min-width: 40%;
+  line-height: map.get($spacings, largest);
+  text-align: left;
+  max-width: auto;
+  h2 {
+    font-family: $secondary-font;
+    font-weight: bold;
+    @include themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    @if $color-identity {
+      @include themed(border-bottom, 3px solid rgba(map.get($light-theme, $color-identity), .5), 3px solid rgba(map.get($dark-theme, $color-identity), .5));
+    }
+  }
+}
+
+@mixin tech-badges-title {
+  font-family: $secondary-font;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  opacity: .75;
+  border-radius: map.get($spacings, small);
+}
+
+@mixin tech-badges-underline {
+  @include themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, accent), .3), 0 4px 4px -4px rgba(map.get($dark-theme, accent), .3));
+}
+
+// nutin mixins
 @mixin flex-center {
   display: flex;
   justify-content: center;

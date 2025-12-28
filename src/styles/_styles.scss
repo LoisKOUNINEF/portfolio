@@ -20,19 +20,45 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 // Global styles
 :root {
+	font-size: 18px;
 	body {
-		background-color: $background-color;
-	  color: $text-color;
+		background-color: map.get($light-theme, background);
+  	color: map.get($light-theme, text);
 		min-height: 100vh;
+		width: 100%;
 		cursor: default;
 	  line-height: 1.6;
 		font-family: $primary-font;
-	  font-size: map.get($font-sizes, medium);
+		display: flex;
+		flex-direction: column;
+		// overflow-y: scroll;
+		// overflow-x: hidden;
+		scrollbar-gutter: stable;
+	}
+
+	main {
+		flex: 1;
+		margin-top: 5%;
+		@include mixins.respond-to(medium) {
+			margin-top: 25%;
+		}
+	}
+
+	body.dark-theme {
+	  background-color: map.get($dark-theme, background);
+	  color: map.get($dark-theme, text);
 	}
 
 	h1 {
-		font-size: map.get($font-sizes, largest);
-		font-family: $secondary-font;
+		font-family: $secondary-font;	
+		font-size: 4rem;
+		@include mixins.respond-to(medium) {
+			font-size: 2.5rem;
+		}
+	}
+	
+	p {
+	  max-width: 80ch;
 	}
 
 	a, button {
@@ -41,5 +67,39 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 	a {
 		text-decoration: none;
+		color: inherit;
+		[href^="http"]::after {
+	    content: "";
+	    display: inline-block;
+	    width: 1rem;
+	    height: 1rem;
+	    background-color: currentColor;
+	    mask-image: url(/assets/images/external-link.svg);
+	    mask-size: contain;
+	    mask-repeat: no-repeat;
+	  }
+	}
+
+	a:hover,
+	a:focus-visible {
+		text-decoration: underline;
+	}
+
+	@media(hover: none) {
+		a:hover {
+			text-decoration: none;
+		}
+		button:hover {
+			text-decoration: none;
+			background-color: inherit;
+			color: inherit;
+		}
+	}
+
+	.theme-transition {
+		transition: background-color ease-in-out .2s, border ease-in-out .2s;
+		-moz-transition: background-color ease-in-out .2s, border ease-in-out .2s;
+		-webkit-transition: background-color ease-in-out .2s, border ease-in-out .2s;
+		-o-transition: background-color ease-in-out .2s, border ease-in-out .2s;
 	}
 }

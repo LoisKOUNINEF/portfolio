@@ -1,6 +1,7 @@
 declare type CoreEventMap = {
   'navigate': string;
   'reload': string;
+  'language-changed': string;
   'view-mount': string;
   'view-render': string;
   'view-unmount': string;

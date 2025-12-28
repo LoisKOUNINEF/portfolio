@@ -1,0 +1,126 @@
+{
+	"name": "Paris 2024",
+	"tagline": "Un projet full-stack axé sur l'authentification, les paiements et les parcours utilisateur de bout en bout.",
+	"imageSrc": "./assets/images/projects/paris-2024",
+	"presentation": {
+		"keyPoints": [
+			"Flux d'authentification complet (inscription, vérification email, réinitialisation mot de passe). Accès basé sur les rôles (interfaces admin et staff).",
+			"Parcours d'achat avec persistance du panier et fusion à la connexion. Intégration Stripe pour des paiements sécurisés.",
+			"Génération de billets avec codes QR et envoi par email.",
+			"Base de données PostgreSQL avec requêtes personnalisées et utilisation d'ORM."
+		]
+	},
+	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",
+	"overview": {
+		"mainContent": "Paris 2024 est une application web full-stack construite autour des Jeux Olympiques de 2024. Le projet se concentre sur l’agrégation, l’exposition et la présentation de données structurées via une API backend et une application frontend conçue pour la clarté et l’utilisabilité.",
+		"keyPointsTitle": "Fonctionnalités principales",
+		"keyPoints": [
+			"API backend pour récupérer, normaliser et exposer des données structurées.",
+			"Contrats d’API clairs permettant une séparation nette entre frontend et backend.",
+			"Frontend centré sur la présentation des données et l’interaction utilisateur.",
+			"Déploiement de bout en bout avec une approche orientée production."
+		],
+		"after": "Le projet a servi à la fois de produit fonctionnel et de terrain d’apprentissage pour travailler de bout en bout sur un système complet : ingestion des données, logique backend, conception d’API, consommation côté frontend et déploiement. Même sans utilisateurs externes, le système était exploité comme si les pannes avaient de l'importance."
+	},
+	"purpose": {
+		"title": "Objectif",
+		"mainContent": "Les objectifs principaux étaient :",
+		"keyPoints": [
+			"Concevoir et implémenter une application full-stack complète à partir de zéro.",
+			"Pratiquer une séparation claire entre les responsabilités du backend et les préoccupations du frontend.",
+			"Mettre en œuvre des mesures de sécurité essentielles (prévention des injections SQL, chiffrement des données sensibles)."
+		],
+		"after": "Au-delà des fonctionnalités, le projet mettait l’accent sur la cohérence entre les couches : chaque partie du système devait rester compréhensible de manière isolée."
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Contrat clair entre frontend et backend : des API prévisibles plutôt qu’un couplage ad hoc.",
+			"Périmètre raisonnable : se concentrer sur les fonctionnalités clés plutôt que sur une couverture exhaustive.",
+			"Maintenabilité : un code qui reste lisible et modifiable à mesure que les besoins évoluent.",
+			"Approche orientée production : même en tant que projet personnel, le déploiement et la fiabilité comptaient."
+		]
+	},
+	"choices": [
+		{
+			"title": "Backend comme couche de données dédiée",
+			"mainContent": "Le backend est responsable de :",
+			"keyPoints": [
+				"La récupération et la normalisation des données.",
+				"L’exposition d’une API propre et stable.",
+				"L’encapsulation des règles métier."
+			],
+			"after": "Cela évite de faire fuiter la complexité des données dans le frontend et rend le système plus facile à faire évoluer ou à réutiliser."
+		},
+		{
+			"title": "Approche API-first",
+			"mainContent": "Le développement frontend a été guidé par des contrats d’API explicites plutôt que par des hypothèses implicites. Les endpoints ont été conçus en fonction des besoins du frontend, tout en restant suffisamment génériques pour éviter un couplage fort.",
+			"after": "Cela a réduit les frictions lors des itérations et rendu les flux de données plus faciles à raisonner."
+		},
+		{
+			"title": "Frontend centré sur la présentation et l’interaction",
+			"mainContent": "Le frontend est volontairement minimal :",
+			"keyPoints": [
+				"Consommer les réponses de l’API.",
+				"Gérer les interactions utilisateur.",
+				"Présenter les données de manière claire et prévisible."
+			],
+			"after": "La logique métier est maintenue autant que possible hors de la couche UI, ce qui améliore la testabilité et la lisibilité."
+		},
+		{
+			"title": "Frontières full-stack pragmatiques",
+			"mainContent": "Utilisation de Nx pour la gestion du monorepo, appliquant la séparation des modules via une architecture en bibliothèques et partageant les interfaces TypeScript entre le frontend et le backend.",
+			"after": "Cette fondation architecturale a permis un développement de fonctionnalités plus rapide tout en maintenant la sécurité des types sur l'ensemble de la stack."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Gérer des données évolutives ou imparfaites",
+			"mainContent": "Les jeux de données du monde réel sont rarement propres ou stables. Cela a nécessité une gestion défensive côté backend et des garanties claires sur ce sur quoi le frontend pouvait s’appuyer.",
+			"after": "La normalisation des données en amont a simplifié le reste du système."
+		},
+		{
+			"title": "Éviter la dérive entre frontend et backend",
+			"mainContent": "À mesure que les fonctionnalités évoluaient, il existait un risque que le frontend dépende de comportements backend non explicitement définis. Cela a été atténué en renforçant les contrats d’API et en étant explicite sur la forme des réponses.",
+			"after": "Cette discipline a réduit les régressions et simplifié le débogage."
+		},
+		{
+			"title": "Combiner confort de développement, sécurité et performances",
+			"mainContent": "L'utilisation d'un ORM a servi à renforcer la sécurité en prévenant les injections SQL, tout en facilitant les migrations.",
+			"after": "L'utilisation d'indexes et de requêtes SQL personnalisées a permis d'améliorer les performances des requêtes."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Les projets full-stack réussissent ou échouent aux frontières entre les couches.",
+			"Une API bien conçue simplifie tout ce qui est construit au-dessus.",
+			"Les données réelles révèlent rapidement — et utilement — les faiblesses de conception.",
+			"Des contrats clairs comptent davantage que la sophistication de la stack."
+		],
+		"after": "Ce projet a renforcé l’importance d’une réflexion globale sur les applications : non seulement sur le fonctionnement de chaque partie, mais aussi sur la manière dont les responsabilités sont réparties et communiquées à l’échelle du système."
+	},
+	"technos": [
+		{
+			"svgKey": "angular"
+		},
+		{
+			"svgKey": "nestjs"
+		},
+		{
+			"svgKey": "postgresql"
+		},
+		{
+			"svgKey": "nx"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/paris-2024"
+		},
+		{
+			"svgKey": "live",
+			"url": "studi-exam-jo.lois-kouninef.eu"
+		}
+	]
+}

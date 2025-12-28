@@ -1,6 +1,7 @@
 {
   "languages": [
-    "en"
+    "en",
+    "fr"
   ],
-  "defaultLanguage": "en"
+  "defaultLanguage": "fr"
 }

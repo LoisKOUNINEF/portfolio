@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.project-section__container {
+  line-height: map.get($spacings, large);
+  padding-left: map.get($spacings, large);
+  padding-bottom: map.get($spacings, medium);
+  h5 {
+    font-weight: bold;
+    padding: map.get($spacings, small) 0;
+  }
+  h6 {
+    font-weight: bold;
+    padding: map.get($spacings, small) 0;
+  }
+  @include mixins.respond-to(medium) {
+    padding-left: 0;
+  }
+}
+
+.project-section__main-content {
+  padding: map.get($spacings, smallest) 0;
+}
+
+.project-section__key-points {
+  padding-bottom: map.get($spacings, small);
+}

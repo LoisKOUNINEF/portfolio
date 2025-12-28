@@ -1,0 +1,178 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+@mixin navbar-shadow($color, $range, $opacity) {
+  @include mixins.themed(box-shadow, $range rgba(map.get($light-theme, $color), $opacity), $range rgba(map.get($dark-theme, $color), $opacity));
+}
+
+.navbar__container {
+  transition: all ease-in-out .3s allow-discrete;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  @include mixins.respond-to(medium) {
+  	min-width: auto;
+  	right: 0;
+    text-wrap: nowrap;
+  }
+
+  &.hidden {
+    opacity: 0;
+    transform: translate(0, -50%);
+    pointer-events: none;
+  }
+}
+
+// @starting-style {
+//   .navbar__anchors.open {
+//     opacity: 0;
+//   }
+// }
+
+.navbar__anchors {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: map.get($spacings, large);
+  @include mixins.respond-to(medium) {
+    transition: opacity 1s, display 1s allow-discrete;
+    opacity: 0;
+    gap: map.get($spacings, small);
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: map.get($spacings, largest)+1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: inherit;
+    backdrop-filter: blur(10px);
+    padding: map.get($spacings, medium) map.get($spacings, large);
+    border-radius: map.get($spacings, large);
+    @include mixins.themed(box-shadow, 0 8px 20px rgba(map.get($light-theme, primary), 0.2), 0 8px 20px rgba(map.get($dark-theme, primary), 0.2));
+  }
+
+  &.open {
+    display: flex;
+    opacity: 1;
+    animation: fade-in 1s;
+  }
+
+  .navbar__anchor {
+    text-wrap: nowrap;
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      color: inherit;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.3rem;
+      transition: color 0.2s, background 0.2s;
+
+      &.active {
+        @include navbar-shadow(primary, 1px .2rem .2rem, .5);
+        @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, primary));
+        @include mixins.themed(color, map.get($light-theme, primary),map.get($dark-theme, background));
+        &:focus-visible {
+          @include mixins.themed(outline, 2px solid rgba(map.get($light-theme, primary), .5), 2px solid rgba(map.get($dark-theme, primary), .5));
+        }
+      }
+      &:not(.active) {
+        &:hover {
+          @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, background));
+          @include mixins.themed(background-color, map.get($light-theme, background), map.get($dark-theme, text));
+        }
+        &:focus-visible {
+          @include mixins.themed(outline, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, text));
+        }
+      }
+      @media(hover: none) {
+        &:hover {
+          box-shadow: 0;
+        }
+      }
+    }
+  }
+}
+
+.navbar__home-anchor {
+  justify-self: flex-start;
+}
+
+.navbar__toggle-navbar {
+  display: none;
+  font-size: map.get($font-sizes, largest);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all ease 1s;
+  @include mixins.themed(color, map.get($light-theme, text),map.get($dark-theme, text));
+  @include mixins.respond-to(medium) {
+    display: block;
+  }
+  &.open {
+    rotate: -90deg;
+  }
+}
+
+.navbar__inner {
+  @include mixins.flex-between;
+  gap: map.get($spacings, medium);
+  @include mixins.themed(background, map.get($light-theme, background),map.get($dark-theme, background));
+  backdrop-filter: blur(10px);
+  padding: map.get($spacings, small) map.get($spacings, large);
+  border-radius: map.get($spacings, small);
+  @include navbar-shadow(primary, 0 6px 20px, 0.17);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  @include mixins.respond-to(medium) {
+    flex-direction: row-reverse;
+  }
+}
+
+.navbar__togglers-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 25%;
+  @include mixins.respond-to(medium) {
+    justify-content: flex-start;
+  }
+}
+
+.navbar__toggler {
+	background-color: inherit;
+	padding: 0 map.get($spacings, small);
+	border-radius: map.get($border-radius, medium);
+	&:hover, &:focus-visible {
+    @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+	}
+  &:focus-visible {
+    @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+  }
+	@media(hover: none) {
+		&:hover {
+			color: inherit;
+		}
+	}
+}
+
+// togglers
+.lang-toggler {
+	text-wrap: nowrap;
+  color: inherit;
+}
+
+.theme-toggler::before {
+	content: '🌙';
+}
+
+#theme-toggle:checked + label .theme-toggler::before {
+  content: '🔅';
+}
+
+// navbar toggler (mobile)
+.navbar__toggle-navbar::before {
+  content: '☰';
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }

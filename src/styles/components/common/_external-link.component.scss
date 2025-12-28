@@ -1,0 +1,45 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "svgs-common" as *;
+
+$external-path: '#{$base-folder}/external/';
+
+$external-svgs: (
+  'live': 'live',
+  'github': 'github',
+  'npm': 'npm',
+  'linkedin': 'linkedin'
+);
+
+@each $name, $file in $external-svgs {
+  .svg-#{$name} {
+    @include svg-background('#{$external-path}#{$file}.svg');
+  }
+}
+
+// dark theme adapt
+.dark-theme .svg-github::after {
+  filter: invert(1);
+}
+
+.svg-external {
+  &::after {
+    @include mixins.themed(box-shadow, 0 4px 4px -3px rgba(map.get($light-theme, accent), .5), 0 4px 4px -3px rgba(map.get($dark-theme, accent), .5));
+  }
+  &:hover::after {
+    cursor: pointer;
+    scale: 1.3;
+  }
+  &:focus-visible {
+    @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+    // padding-top: map.get($spacings, smallest);
+    padding-bottom: map.get($spacings, small);
+    border-radius: map.get($border-radius, medium);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+    }
+  }
+}

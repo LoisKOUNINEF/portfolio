@@ -1,4 +1,4 @@
-import { AnchorManager, Component, IAnchorConfig } from '../../../../core/index.js';
+import { AnchorManager, Component, ComponentProps, IAnchorConfig } from '../../../../core/index.js';
 
 /**
  * ```typescript
@@ -18,12 +18,13 @@ import { AnchorManager, Component, IAnchorConfig } from '../../../../core/index.
 */
 export class AnchorComponent extends Component<HTMLAnchorElement, IAnchorConfig> {
 
-  constructor(mountTarget: HTMLElement, config: IAnchorConfig) {
+  constructor(mountTarget: HTMLElement, config: IAnchorConfig, props?: ComponentProps) {
     super({
       mountTarget,
       tagName: config.tagName,
       config,
-      normalizeKeys: ['style', 'pipes', 'className']
+      normalizeKeys: ['style', 'pipes', 'className'],
+      props
     });
     new AnchorManager(config, this.element);
   }

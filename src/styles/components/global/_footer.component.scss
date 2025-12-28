@@ -1,0 +1,23 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.footer__container {
+	position: sticky;
+	bottom: 0;
+	padding: map.get($spacings, medium);
+	width: 100%;
+	@include mixins.rounded;
+}
+
+.footer__body {
+	font-family: $secondary-font;
+	padding: 0 map.get($spacings, large);
+	font-size: map.get($font-sizes, small);
+	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: -20%), color.scale(map.get($dark-theme, text), $lightness: -20%));
+	@include mixins.respond-to(medium) {
+		display: block;
+		text-align: center;
+	}
+}

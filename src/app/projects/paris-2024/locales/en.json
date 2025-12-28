@@ -1,0 +1,126 @@
+{
+	"name": "Paris 2024",
+	"tagline": "A full-stack project focused on authentication, payments, and end-to-end user flows.",
+	"imageSrc": "./assets/images/projects/paris-2024",
+	"presentation": {
+		"keyPoints": [
+			"Complete authentication flow (signup, email verification, password reset). Role-based access (admin and staff interfaces).",
+			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
+			"Ticket generation with QR codes and email delivery.",
+			"PostgreSQL database with custom queries and ORM usage."
+		]
+	},
+	"popTagline": "Developed to explore authentication, payment flows, and end-to-end application architecture in a full-stack context.",
+	"overview": {
+		"mainContent": "Paris 2024 is a full-stack web application built around the 2024 Olympic Games. The project focuses on aggregating, exposing, and presenting structured data through a backend API and a frontend application designed for clarity and usability.",
+		"keyPointsTitle": "Main features",
+		"keyPoints": [
+			"Backend API for fetching, normalizing, and exposing structured data.",
+			"Clear API contracts enabling clean frontend–backend separation.",
+			"Frontend focused on data presentation and user interaction",
+			"End-to-end deployment with a production-oriented mindset"
+		],
+		"after": "It served both as a functional product and as a way to work end-to-end on a complete system: data ingestion, backend logic, API design, frontend consumption, and deployment. Even without external users, the system was operated as if failures mattered."
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main objectives were:",
+		"keyPoints": [
+			"To design and implement a complete full-stack application from scratch.",
+			"To practice clean separation between backend responsibilities and frontend concerns.",
+			"To implement essential security measures (SQL injection prevention, sensitive data encryption)."
+		],
+		"after": "Beyond functionality, the project emphasized coherence across layers: each part of the system should remain understandable in isolation."
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Clear contract between frontend and backend: predictable APIs over ad-hoc coupling.",
+			"Reasonable scope: focus on core features rather than exhaustive coverage.",
+			"Maintainability: code that remains readable and modifiable as requirements evolve.",
+			"Production mindset: even as a personal project, deployment and reliability mattered"
+		]
+	},
+	"choices": [
+		{
+			"title": "Backend as a dedicated data layer",
+			"mainContent": "The backend is responsible for:",
+			"keyPoints": [
+				"Fetching and normalizing data.",
+				"Exposing a clean, stable API.",
+				"Encapsulating business rules."
+			],
+			"after": "This avoids leaking data complexity into the frontend and makes the system easier to evolve or reuse."
+		},
+		{
+			"title": "API-first approach",
+			"mainContent": "Frontend development was guided by explicit API contracts rather than implicit assumptions. Endpoints were designed around frontend needs, but kept generic enough to avoid tight coupling.",
+			"after": "This reduced friction during iteration and made data flow easier to reason about."
+		},
+		{
+			"title": "Frontend focused on presentation and interaction",
+			"mainContent": "The frontend is intentionally thin:",
+			"keyPoints": [
+				"Consume API responses.",
+				"Handle user interactions.",
+				"Present data clearly and predictably."
+			],
+			"after": "Business logic is kept out of the UI layer as much as possible, improving testability and readability."
+		},
+		{
+			"title": "Pragmatic full-stack boundaries",
+			"mainContent": "Used Nx for monorepo management, enforcing module boundaries through library architecture and sharing TypeScript interfaces between frontend and backend.",
+			"after": "This architectural foundation enabled faster feature development while maintaining type safety across the full stack."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Dealing with evolving or imperfect data",
+			"mainContent": "Real-world datasets are rarely clean or stable. This required defensive handling on the backend and clear guarantees on what the frontend could rely on.",
+			"after": "Normalizing data early simplified the rest of the system."
+		},
+		{
+			"title": "Avoiding frontend–backend drift",
+			"mainContent": "As features evolved, there was a risk of the frontend depending on backend behavior that was not explicitly defined. This was mitigated by tightening API contracts and being explicit about response shapes.",
+			"after": "This discipline reduced regressions and simplified debugging."
+		},
+		{
+			"title": "Combine smooth development, security and performances",
+			"mainContent": "Using an ORM as a way to reinforce security by preventing SQL injections, as well as facilitating migrations.",
+			"after": "Using indexes and custom SQL requests as a way to improve performances."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Full-stack projects succeed or fail at the boundaries between layers.",
+			"A well-designed API simplifies everything built on top of it.",
+			"Real data exposes design weaknesses quickly and usefully.",
+			"Clear contracts matter more than stack sophistication."
+		],
+		"after": "This project reinforced the importance of thinking holistically about applications: not just how each part works, but how responsibilities are divided and communicated across the system."
+	},
+	"technos": [
+		{
+			"svgKey": "angular"
+		},
+		{
+			"svgKey": "nestjs"
+		},
+		{
+			"svgKey": "postgresql"
+		},
+		{
+			"svgKey": "nx"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/paris-2024"
+		},
+		{
+			"svgKey": "live",
+			"url": "studi-exam-jo.lois-kouninef.eu"
+		}
+	]
+}

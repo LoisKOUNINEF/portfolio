@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.contact__wrapper {
+	@include mixins.wrapper;
+	padding-bottom: map.get($spacings, largest) * 3;
+	padding-top: map.get($spacings, largest);
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, largest) + 1;
+	}
+}
+
+.contact__container {
+	width: 100%;
+	@include mixins.container();
+	text-align: left;
+}
+
+.contact__header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+  	font-size: map.get($font-sizes, largest);
+  }
+}
+
+.contact__links {
+	padding: map.get($spacings, large) 0;
+	text-align: left;
+	vertical-align: center;;
+	p {
+		padding: map.get($spacings, small) 0;
+	}
+	a {
+  	&:focus-visible {
+  		padding-top: map.get($spacings, smallest);
+  		border-radius: map.get($border-radius, small);
+    	@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+  	}
+	}
+}
+
+.contact__icon {
+	font-size: map.get($font-sizes, large);
+}
+
+.contact__infos {
+	font-style: italic;
+	padding: map.get($spacings, large) 0;
+}

@@ -1,0 +1,128 @@
+{
+	"name": "Self-hosting",
+	"tagline": "A self-hosted environment focused on deployment, security fundamentals, and day-to-day operations.",
+	"imageSrc": "./assets/images/projects/self-hosting",
+	"presentation": {
+		"keyPoints": [
+			"Essential security measures scoped to realistic threats for a personal, internet-exposed service (automatic updates, restricted access, firewall, intrusion prevention).",
+			"Reverse proxy with automated TLS certificate renewal.",
+			"Containerized services orchestrated with Docker Swarm.",
+			"Self-hosted mail service for application needs.",
+			"Designed for small-scale, personal production use."
+		]
+	},
+	"popTagline": "Set up to gain hands-on experience with deployment, security basics, and everyday operational concerns in a self-hosted environment.",
+	"overview": {
+		"mainContent": "This project covers the self-hosting of my personal websites and applications, from deployment to maintenance. I operated the full system end-to-end, without managed platform guarantees.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"Full-stack deployment: host personal websites and apps with complete control.",
+			"Docker orchestration: Swarm for container management, secrets for secure data handling.",
+			"Reverse proxy & routing: Traefik for dynamic HTTPS routing, with Nginx used inside images for static sites.",
+			"Security: disable root access, configure UFW, fail2ban for brute-force protection.",
+			"Automated Deployments: Implemented a reusable CI / CD pipeline based on bash scripts & GitHub workflows.",
+			"Monitoring: Grafana + Prometheus for insights into system performance."
+		],
+		"after": "The result is a flexible setup that supports multiple applications, evolves with my needs, and serves as a practical learning ground for real-world deployment concerns."
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The primary goals were :",
+		"keyPoints": [
+			"To understand what actually happens beyond local development.",
+			"To deploy applications without vendor lock-in or hidden complexity.",
+			"Build a platform capable of supporting a variety of projects, databases, and services.",
+			"To gain confidence operating production systems, even at small scale."
+		],
+		"after": "This was as much a learning project as a practical one: I wanted to remove the “black box” aspect of hosting and infrastructure."
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Cost transparency was critical: predictable, low monthly expenses.",
+			"Freedom of tooling: no restriction on databases, runtimes, or architectures.",
+			"Maintainability over cleverness: simple setups that I can reason about and debug alone.",
+			"Personal scale: optimized for small projects, not premature enterprise complexity."
+		],
+		"after": "This was as much a learning project as a practical one: I wanted to remove the “black box” aspect of hosting and infrastructure."
+	},
+	"choices": [
+		{
+			"title": "Self-managed infrastructure over managed platforms",
+			"mainContent": "I deliberately avoided turnkey platforms that abstract away deployment details. While convenient, they often limit flexibility and can hide operational costs or constraints.",
+			"after": "Running my own setup forces explicit decisions and provides a clearer mental model of the system."
+		},
+		{
+			"title": "Incremental, modular setup",
+			"mainContent": "Rather than designing a “perfect” infrastructure upfront, I built it incrementally:",
+			"keyPoints": [
+				"Start simple.",
+				"Add components only when a real need appears.",
+				"Refactor when complexity justifies it.",
+				"Understanding the real costs of cloud infrastructure and the trade-offs of full control vs managed services.",
+				"How to monitor and troubleshoot live systems with Grafana and Prometheus."
+			],
+			"after": "This mirrors how I approach application architecture and helps keep operational complexity under control."
+		},
+		{
+			"title": "Automation where it pays off",
+			"mainContent": "I automated repetitive and error-prone steps (deployment, updates, basic monitoring) but avoided over-automation. If automation adds more abstraction than value, it is deferred.",
+			"after": "The goal is confidence and clarity, not maximal automation."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Cost predictability vs scalability",
+			"mainContent": "Cloud horror stories often come from systems that scale implicitly and bill unexpectedly. To avoid this, I chose setups with fixed, predictable costs, accepting manual scaling as a trade-off.",
+			"after": "This decision reduced anxiety around experimentation and made infrastructure decisions more deliberate."
+		},
+		{
+			"title": "Debugging without a safety net",
+			"mainContent": "When something breaks on self-hosted infrastructure, there is no platform support to fall back on. Early issues forced me to:",
+			"keyPoints": [
+				"Improve logging and observability.",
+				"Be systematic when diagnosing failures.",
+				"Favor simpler configurations that are easier to reason about."
+			],
+			"after": "This significantly improved my operational discipline."
+		},
+		{
+			"title": "Balancing learning with reliability",
+			"mainContent": "It is tempting to constantly tweak infrastructure to try new tools. I learned to separate:",
+			"keyPoints": [
+				"Stable, proven components (that stay untouched).",
+				"Experimental parts (where learning is the goal)."
+			],
+			"after": "This balance keeps production reliable while still allowing exploration."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Infrastructure choices shape application architecture more than expected.",
+			"Simplicity is a competitive advantage in operations, especially solo.",
+			"Understanding deployment and hosting improves development decisions upstream.",
+			"Tool freedom is valuable, but only if paired with discipline and clear constraints."
+		],
+		"after": "Most importantly, this project reinforced my preference for understanding systems end-to-end, rather than relying on opaque abstractions. That mindset now informs how I design, build, and deploy all my projects."
+	},
+	"technos": [
+		{
+			"svgKey": "linux"
+		},
+		{
+			"svgKey": "traefik"
+		},
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "bash"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": ""			
+		}
+	]
+}

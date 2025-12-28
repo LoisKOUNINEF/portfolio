@@ -3,6 +3,6 @@
     "title": "Page introuvable",
     "description": "Page 404"
   },
-  "content": "Cette page n'existe pas.",
-  "redirect": "Retourner à l'accueil."
+  "content": "On dirait que vous êtes perdu(e)...",
+  "redirect": "<- Faire demi-tour"
 }

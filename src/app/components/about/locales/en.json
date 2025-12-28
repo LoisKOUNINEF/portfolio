@@ -1,0 +1,10 @@
+{
+	"title": "About",
+	"background-title": "I care as much about user experience as I do about the quality of the technical foundations.",
+	"background": "My goal is to build software that is pleasant to use today and reasonable to maintain tomorrow. While I work with a variety of tools, I care most about mastering foundational concepts that guide maintainable and scalable design.",
+	"philosophy-title": "I approach each project with a pragmatic and thoughtful mindset.",
+	"philosophy": "Rather than applying tools or patterns out of habit or personal preferences, I focus on understanding real needs, contextual constraints, and the trade-offs involved. This approach allows me to design architectures that are simple, coherent, and able to evolve without unnecessary complexity.",
+	"interests-title": "I see quality as a continuous process.",
+	"interests": "It involves attention to detail, testing, and regularly questioning my technical decisions. I strive to continuously improve the way I design and maintain applications, while staying grounded in the practical limits and realities of software development.",
+  "projects-disclaimer": "The projects below are intentionally small in scope, with an emphasis on correctness, clarity, and operability over premature scale."
+}

@@ -1,0 +1,83 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.project-card__wrapper {
+  @include mixins.wrapper;
+
+  &.project-card__standalone {
+    justify-content: center;
+  }
+
+  &.align-left {
+    justify-content: flex-start;
+  }
+
+  &.align-right {
+    justify-content: flex-end;
+  }
+}
+
+.project-card__container {
+  width: 80%;
+  @include mixins.container(primary);
+  text-align: left;
+  gap: map.get($spacings, largest);
+
+  &.project-card__standalone {
+    width: 100%;
+    @include mixins.container(secondary);
+    @include mixins.header(secondary);
+    h2 {
+      font-size: map.get($font-sizes, largest);
+    }
+  }
+
+  @include mixins.respond-to(medium) {
+    display: block;
+    .project-header__svgs {
+      display: none;
+    }
+  }
+}
+
+.project-card__content {
+  padding: 0 map.get($spacings, medium);
+  @include mixins.respond-to(medium) {
+    padding: 0;
+  }
+}
+
+.project-card__links {
+  display: flex;
+  padding: map.get($spacings, medium);
+  gap: map.get($spacings, largest);
+  flex-wrap: nowrap;
+  @include mixins.respond-to(medium) {
+    padding: map.get($spacings, medium) 0;
+    justify-content: space-between;
+  }
+}
+
+.project-card__view-more {
+  font-family: $secondary-font;
+  font-size: 1.1rem;
+  padding: map.get($spacings, smallest) map.get($spacings, small);
+  @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 90%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 90%, rgba(map.get($dark-theme, accent), .7)));
+  @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
+  border-radius: map.get($border-radius, pill);
+  text-wrap: nowrap;
+  &:hover, &:focus-visible {
+    cursor: pointer;
+    @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 80%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 60%, rgba(map.get($dark-theme, accent), .7)));
+  }
+  &:focus-visible {
+    @include mixins.themed(outline, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));
+  }
+  @media(hover: none) {
+    &:hover {
+      @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 90%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 90%, rgba(map.get($dark-theme, accent), .7)));
+    }
+  }
+}
