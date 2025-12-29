@@ -13,9 +13,6 @@ post_job() {
   "$script_dir/docker-logout.sh"
 
   yaml_read_only
-
-  echo "Listing images:"
-  docker image ls | grep "ghcr.io/$REPO_LOWER"
 }
 
 post_job

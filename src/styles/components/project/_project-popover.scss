@@ -41,6 +41,12 @@
         padding: map.get($spacings, large);
       }
     }
+    .svg-external {
+      &:focus-visible {
+        padding-top: map.get($spacings, small);
+        padding-bottom: map.get($spacings, medium);
+      }
+    }
   }
   @include mixins.respond-to(medium) {
     padding: map.get($spacings, medium) 0;

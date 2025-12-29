@@ -10,7 +10,7 @@ export const displayProjectPop = (project: IProject) => {
   const pop = new PopoverView({
     template: projectPopoverTemplate(project),
     viewName: project.name,
-    children: projectPopoverChildren(project),
+    components: projectPopoverComponents(project),
     catalogs: projectPopoverCatalogs(project),
   })
   pop.render();
@@ -18,7 +18,7 @@ export const displayProjectPop = (project: IProject) => {
 
 const projectPopoverTemplate = (_project: IProject) => `__TEMPLATE_PLACEHOLDER__`;
 
-const projectPopoverChildren = (project: IProject): ComponentConfig[] => [
+const projectPopoverComponents = (project: IProject): ComponentConfig[] => [
   {
     selector: `${project.name}-popover-header`,
     factory: (el) => new ProjectHeaderComponent(el, {
