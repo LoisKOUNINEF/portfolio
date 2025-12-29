@@ -11,6 +11,7 @@ COPY ./config ./config
 COPY ./tools/builder ./tools/builder
 COPY ./tools/deployment ./tools/deployment
 COPY ./tools/utils ./tools/utils
+COPY ./public ./public
 RUN npm ci && \
     npm run build:prod
 
