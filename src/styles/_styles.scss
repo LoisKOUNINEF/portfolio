@@ -102,4 +102,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		-webkit-transition: background-color ease-in-out .2s, border ease-in-out .2s;
 		-o-transition: background-color ease-in-out .2s, border ease-in-out .2s;
 	}
+
+	[tabindex="-1"]:focus {
+	  outline: none;
+	}
 }

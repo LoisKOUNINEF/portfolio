@@ -8,7 +8,7 @@ export interface PopoverButton extends BaseButton {
 
 export interface PopoverOptions {
   template: string;
-  children?: ComponentConfig[];
+  components?: ComponentConfig[];
   catalogs?: CatalogConfig[];
   viewName?: string;
   onClose?: () => void;
@@ -21,23 +21,23 @@ export class PopoverView extends View {
   private _overlay: HTMLElement | null = null;
   private _buttonManager: ButtonManager;
   private _prevTitle: string | undefined;
-  private children: ComponentConfig[];
   private _catalogs: CatalogConfig[];
   private _focusTrap: FocusTrapHelper | null = null;
   private _focusTrapOptions: IFocusTrapOptions;
+  private _components: ComponentConfig[];
 
   constructor({
     template,
     buttons = [],
     onClose,
     viewName,
-    children = [],
+    components = [],
     catalogs = [],
     focusTrapOptions = {}
   }: PopoverOptions) {
     super({ template, tagName: 'div', mountTarget: 'body' });
     this._onClose = onClose;
-    this.children = children;
+    this._components = components;
     this._catalogs = catalogs;
     this._buttonManager = this.createButtonManager(buttons);
     this.setOptionalViewName(viewName);
@@ -47,7 +47,7 @@ export class PopoverView extends View {
 
   public childConfigs(): ComponentConfig[] {
     return [
-      ...this.children,
+      ...this._components,
       ...this.catalogConfigs()
     ];
   }
@@ -66,32 +66,20 @@ export class PopoverView extends View {
 
   public override render(): HTMLElement {
     document.body.classList.add('no-scroll');
-    const { wrapper, overlay } = this.createDomElements();
-    this._overlay = overlay;
 
-    this._focusTrap = new FocusTrapHelper({
-      container: wrapper,
-      overlay: this._overlay,
-      options: this._focusTrapOptions});
+    const { wrapper, overlay } = this.createPopoverDomElements();
+
+    this._focusTrap = this.createFocusTrap(wrapper, overlay);
     this._focusTrap.activate();
 
     AppEventBus.emit('popover-opened');
-    return this._overlay;
+    this._overlay = overlay;
+    return overlay;
   }
 
   public override destroy(): void {
-    if (this._overlay) {
-      const wrapper = this._overlay.querySelector('.popover-wrapper');
-      this._overlay.classList.remove('show');
-      wrapper?.classList.remove('show');
-
-      setTimeout(() => {
-        wrapper?.remove()
-        this._overlay?.remove();
-        this._overlay = null;
-      }, 250); // match transition duration
-      this._focusTrap?.deactivate();
-    }
+    this._overlay = PopoverDomHelper.removeDomElements(this._overlay);
+    this._focusTrap?.deactivate();
 
     document.body.classList.remove('no-scroll');
 
@@ -119,7 +107,7 @@ export class PopoverView extends View {
     );
   }
 
-  private createDomElements(): IPopoverDomElements {
+  private createPopoverDomElements(): IPopoverDomElements {
     const content = super.render();
     const { overlay, wrapper } = PopoverDomHelper.createDomElements(content, this._buttonManager);
 
@@ -128,6 +116,14 @@ export class PopoverView extends View {
     this.animateIn(wrapper);
 
     return { overlay, wrapper };
+  }
+
+  private createFocusTrap(wrapper: HTMLElement, overlay: HTMLElement): FocusTrapHelper {
+    return new FocusTrapHelper({
+      container: wrapper,
+      overlay: overlay,
+      options: this._focusTrapOptions
+    });
   }
 
   // Handles the close button (via data-event bound in appendCloseButton)

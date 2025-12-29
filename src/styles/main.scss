@@ -1,8 +1,5 @@
-// Libraries styles (snackbar, popover).
-@use "libs";
-
-// built-in classes
-@use "utilities";
+// Built-in classes & Libraries styles (snackbar, popover).
+@use "core";
 
 // global styles
 @use "styles";
