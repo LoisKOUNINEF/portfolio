@@ -1,6 +1,6 @@
 services:
-  ${PROJECT_LOWER}-${SERVICE_NAME}-${STACK_NAME}:
-    image: ghcr.io/${REPO_LOWER}-${SERVICE_NAME}:image-placeholder
+  ${SERVICE_NAME}-${STACK_NAME}:
+    image: ghcr.io/${REPO_LOWER}:image-placeholder
     networks:
       - traefik-public
       - default
