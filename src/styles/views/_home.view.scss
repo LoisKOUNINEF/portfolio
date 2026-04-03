@@ -4,4 +4,42 @@
 
 .home__container {}
 
-.home__main-projects {}
+.home__main-projects {
+  & > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    & > div {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .project-card__wrapper {
+      flex: 1;
+      box-sizing: border-box;
+      padding-block: map.get($spacings, small);
+    }
+
+    .project-card__container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .project-card__content {
+      flex: 1;
+    }
+
+    .project-header__container {
+      padding-block: map.get($spacings, small);
+    }
+
+    .project-header__images {
+      padding-bottom: 0;
+    }
+
+    .project-header__screen-mock {
+      margin-block: map.get($spacings, small);
+    }
+  }
+}
