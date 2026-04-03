@@ -92,7 +92,7 @@
 }
 
 .show-more__btn {
-  min-width: 33vw;
+  width: 33vw;
   font-family: $secondary-font;
   font-size: 1.1rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
