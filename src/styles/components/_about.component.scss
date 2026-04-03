@@ -51,19 +51,3 @@
 		padding-top: map.get($spacings, large);
 	}
 }
-
-.about__projects-disclaimer {
-	padding-top: map.get($spacings, largest);
-	padding-left: map.get($spacings, largest)*2;
-	p {
-		min-width: 100ch;
-		font-size: map.get($font-sizes, small);
-		font-style: italic;
-	}
-	@include mixins.respond-to(medium) {
-		padding-left: map.get($spacings, medium);
-		p {
-			min-width: auto;
-		}
-	}
-}

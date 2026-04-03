@@ -19,7 +19,7 @@ export class ProjectHeaderComponent extends Component {
   }
 
   // public childConfigs(): ComponentConfig[] {
-  //   // return this.getTechBadgesConfig();
+  //   return this.getTechBadgesConfig();
   // }
   //
   // private getTechBadgesConfig(): ComponentConfig[] {

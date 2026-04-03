@@ -5,6 +5,5 @@
 	"philosophy-title": "I approach each project with a pragmatic and thoughtful mindset.",
 	"philosophy": "Rather than applying tools or patterns out of habit or personal preferences, I focus on understanding real needs, contextual constraints, and the trade-offs involved. This approach allows me to design architectures that are simple, coherent, and able to evolve without unnecessary complexity.",
 	"interests-title": "I see quality as a continuous process.",
-	"interests": "It involves attention to detail, testing, and regularly questioning my technical decisions. I strive to continuously improve the way I design and maintain applications, while staying grounded in the practical limits and realities of software development.",
-  "projects-disclaimer": "The projects below are intentionally small in scope, with an emphasis on correctness, clarity, and operability over premature scale."
+	"interests": "It involves attention to detail, testing, and regularly questioning my technical decisions. I strive to continuously improve the way I design and maintain applications, while staying grounded in the practical limits and realities of software development."
 }
