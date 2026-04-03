@@ -5,6 +5,7 @@
 .home__container {}
 
 .home__main-projects {
+  width: 100%;
   & > [data-catalog],
   .home__additional-projects > [data-catalog] {
     display: grid;
