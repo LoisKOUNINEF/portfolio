@@ -11,12 +11,17 @@ import {
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private _visibleProjectsFolders: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
-  private _additionalProjectsFolders: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
+  private readonly _mediaQuery = window.matchMedia('(max-width: 1500px)');
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
     super({template, tagName: 'div'});
+    this._mediaQuery.addEventListener('change', () => this.forceRender());
+  }
+
+  private get _columnsCount(): number {
+    return this._mediaQuery.matches ? 2 : 3;
   }
 
   public childConfigs(): ComponentConfig[] {
@@ -53,7 +58,7 @@ export class HomeView extends View {
 
   private getMainProjectsCatalog(): ComponentConfig[] {
     return this.catalogConfig({
-      array: this._visibleProjectsFolders,
+      array: this._allProjects.slice(0, this._columnsCount),
       selector: 'main-projects-catalog',
       elementName: 'main-project',
       component: ProjectCardComponent,
@@ -62,17 +67,19 @@ export class HomeView extends View {
   }
 
   private getShowMoreBtnConfig(): ComponentConfig | null {
-    if (!this._additionalProjectsFolders.length) return null;
+    const additional = this._allProjects.slice(this._columnsCount);
+    if (!additional.length) return null;
     return {
       selector: 'show-more-btn',
-      factory: (el) => new ShowMoreComponent(el, this._additionalProjectsFolders.length)
+      factory: (el) => new ShowMoreComponent(el, additional.length)
     };
   }
 
   private getAdditionalProjectsCatalog(): ComponentConfig[] {
-    if (!this._additionalProjectsFolders.length) return [];
+    const additional = this._allProjects.slice(this._columnsCount);
+    if (!additional.length) return [];
     return this.catalogConfig({
-      array: this._additionalProjectsFolders,
+      array: additional,
       selector: 'additional-projects-catalog',
       elementName: 'additional-project',
       component: ProjectCardComponent,
