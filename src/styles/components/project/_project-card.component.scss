@@ -21,7 +21,7 @@
 
 .project-card__container {
   width: 80%;
-  min-height: 90vh;
+  min-height: 80vh;
   @include mixins.container(primary);
   text-align: left;
   gap: map.get($spacings, largest);

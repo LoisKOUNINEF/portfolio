@@ -5,7 +5,8 @@
 .home__container {}
 
 .home__main-projects {
-  [data-catalog] {
+  & > [data-catalog],
+  .home__additional-projects > [data-catalog] {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
