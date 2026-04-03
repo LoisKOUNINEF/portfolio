@@ -1,16 +1,18 @@
 import { ComponentConfig, View } from '../../../core/index.js';
-import {  
+import {
   AboutMeComponent,
   ContactComponent,
   HeroComponent,
   ProjectCardComponent,
+  ShowMoreComponent,
   TechStackComponent
 } from '../../components/index.js';
 
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private _mainProjectsFolders: ProjectFolderName[] = [ 'nutin', 'paris-2024', 'pixels-mansion' ];
+  private _visibleProjectsFolders: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
+  private _additionalProjectsFolders: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
@@ -22,14 +24,17 @@ export class HomeView extends View {
   }
 
   private getChildConfigs(): ComponentConfig[] {
+    const showMoreConfig = this.getShowMoreBtnConfig();
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
       ...this.getMainProjectsCatalog(),
+      ...(showMoreConfig ? [showMoreConfig] : []),
+      ...this.getAdditionalProjectsCatalog(),
       this.getStackConfig(),
       this.getSelfHostingProjectConfig(),
       this.getContactConfig(),
-    ]
+    ];
   }
 
   private getHeroConfig(): ComponentConfig {
@@ -48,9 +53,28 @@ export class HomeView extends View {
 
   private getMainProjectsCatalog(): ComponentConfig[] {
     return this.catalogConfig({
-      array: this._mainProjectsFolders,
+      array: this._visibleProjectsFolders,
       selector: 'main-projects-catalog',
       elementName: 'main-project',
+      component: ProjectCardComponent,
+      elementTag: 'article'
+    });
+  }
+
+  private getShowMoreBtnConfig(): ComponentConfig | null {
+    if (!this._additionalProjectsFolders.length) return null;
+    return {
+      selector: 'show-more-btn',
+      factory: (el) => new ShowMoreComponent(el, this._additionalProjectsFolders.length)
+    };
+  }
+
+  private getAdditionalProjectsCatalog(): ComponentConfig[] {
+    if (!this._additionalProjectsFolders.length) return [];
+    return this.catalogConfig({
+      array: this._additionalProjectsFolders,
+      selector: 'additional-projects-catalog',
+      elementName: 'additional-project',
       component: ProjectCardComponent,
       elementTag: 'article'
     });

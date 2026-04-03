@@ -5,14 +5,20 @@
 .home__container {}
 
 .home__main-projects {
-  & > div {
+  [data-catalog] {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
-    & > div {
+    & > article {
       display: flex;
       overflow: hidden;
+
+      & > div {
+        display: flex;
+        flex: 1;
+      }
     }
+
 
     .project-card__wrapper {
       flex: 1;
@@ -45,6 +51,47 @@
     .project-header__screen-mock {
       margin-block: map.get($spacings, small);
     }
+  }
+
+  .home__additional-projects {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+.show-more__wrapper {
+  display: flex;
+  justify-content: center;
+  padding: map.get($spacings, medium);
+
+  & > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.show-more__btn {
+  min-width: 33vw;
+  font-family: $secondary-font;
+  font-size: 1.1rem;
+  padding: map.get($spacings, smallest) map.get($spacings, small);
+  @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 90%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 90%, rgba(map.get($dark-theme, accent), .7)));
+  @include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+  border-radius: map.get($border-radius, pill);
+  cursor: pointer;
+
+  &:hover, &:focus-visible {
+    @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 80%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 60%, rgba(map.get($dark-theme, accent), .7)));
+  }
+  &:focus-visible {
+    @include mixins.themed(outline, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));
+  }
+  @include mixins.respond-to(medium) {
+    min-width: 80vw;
   }
 }
 
