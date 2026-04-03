@@ -20,10 +20,11 @@
 
     & > article {
       display: flex;
-      overflow: hidden;
+      //overflow: hidden;
 
       @include mixins.respond-to(medium) {
-        overflow-wrap: normal;
+        overflow: visible;
+        overflow-wrap: break-word;
       }
 
       & > div {
@@ -71,6 +72,8 @@
 
     &.open {
       display: block;
+      -webkit-animation: fadeIn .2s;
+      animation: fadeIn .2s;
     }
   }
 }
@@ -123,4 +126,13 @@
       min-width: auto;
     }
   }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

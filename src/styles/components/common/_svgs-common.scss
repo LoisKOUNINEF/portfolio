@@ -13,9 +13,7 @@ $base-folder: '/assets/images/svgs';
 .svgs__container {
   @include mixins.flex-center;
   gap: map.get($spacings, largest);
-  @include mixins.respond-to(medium) {
-    justify-content: flex-start;
-  }
+  justify-content: flex-start;
 }
 
 .base-svg {
