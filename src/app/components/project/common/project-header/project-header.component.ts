@@ -6,6 +6,7 @@ interface IProjectHeadConfig {
   imageSrc: string;
   tagline: string;
   technos: IProjectTechno[];
+  displayTechIcons?: boolean;
 }
 
 const templateFn = (_config: IProjectHeadConfig) => `__TEMPLATE_PLACEHOLDER__`;
@@ -18,16 +19,19 @@ export class ProjectHeaderComponent extends Component {
     this._headConfig = config;
   }
 
-  // public childConfigs(): ComponentConfig[] {
-  //   return this.getTechBadgesConfig();
-  // }
-  //
-  // private getTechBadgesConfig(): ComponentConfig[] {
-  //   return this.catalogConfig({
-  //     selector: `project-header-technos`,
-  //     array: this._headConfig.technos,
-  //     component: TechBadgeComponent,
-  //     elementName: `project-header-techno`
-  //   })
-  // }
+  public childConfigs(): ComponentConfig[] {
+    if (!this._headConfig.displayTechIcons) {
+      return [];
+    }
+    return this.getTechBadgesConfig();
+  }
+
+  private getTechBadgesConfig(): ComponentConfig[] {
+    return this.catalogConfig({
+      selector: `project-header-technos`,
+      array: this._headConfig.technos,
+      component: TechBadgeComponent,
+      elementName: `project-header-techno`
+    })
+  }
 }

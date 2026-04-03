@@ -1,4 +1,4 @@
-declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting';
+declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting' | 'run-for-the-bun';
 
 declare type TechSvgKey = FrontendSvgKey | BackendSvgKey | DatabaseSvgKey | ToolsSvgKey;
 

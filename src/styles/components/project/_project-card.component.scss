@@ -9,19 +9,10 @@
   &.project-card__standalone {
     justify-content: center;
   }
-
-  &.align-left {
-    justify-content: flex-start;
-  }
-
-  &.align-right {
-    justify-content: flex-end;
-  }
 }
 
 .project-card__container {
   width: 80%;
-  min-height: 80vh;
   @include mixins.container(primary);
   text-align: left;
   gap: map.get($spacings, largest);
@@ -53,6 +44,7 @@
 .project-card__links {
   display: flex;
   padding: map.get($spacings, medium);
+  padding-top: 0;
   gap: map.get($spacings, largest);
   flex-wrap: nowrap;
   @include mixins.respond-to(medium) {

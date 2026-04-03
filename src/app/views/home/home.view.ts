@@ -11,7 +11,7 @@ import {
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion',  /*'run-for-the-bun'*/];
   private readonly _mediaQuery = window.matchMedia('(max-width: 1500px)');
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
