@@ -3,6 +3,5 @@
     "title": "Portfolio",
     "description": "Landing page"
   },
-  "title": "portfolio",
-  "projects-disclaimer": "The projects below are intentionally small in scope, with an emphasis on correctness, clarity, and operability over premature scale."
+  "title": "portfolio"
 }
