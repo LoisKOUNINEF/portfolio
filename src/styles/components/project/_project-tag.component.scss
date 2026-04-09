@@ -3,17 +3,21 @@
 @use "mixins";
 
 $tag-colors: (
-  green: rgb(76 175 80),
-  blue: rgb(33 150 243),
+  green:  (bg: rgb(220 245 220), text: rgb(30 110 40)),
+  blue:   (bg: rgb(210 230 255), text: rgb(20 80 180)),
+  teal:   (bg: rgb(205 235 237), text: rgb(25 90 95)),
+  purple: (bg: rgb(235 220 255), text: rgb(90 30 170)),
+  orange: (bg: rgb(255 235 210), text: rgb(170 80 10)),
+  red:    (bg: rgb(255 220 218), text: rgb(170 30 20)),
 );
 
 @mixin tag-color($name) {
-  //@include mixins.themed(background, rgba(map.get($light-theme, text), .1), rgba(map.get($dark-theme, text), .1));
-  background: rgba(map.get($tag-colors, $name), .1);
-  color: rgba(map.get($tag-colors, $name), 2);
+  $pair: map.get($tag-colors, $name);
+  background: map.get($pair, bg);
+  color: map.get($pair, text);
 }
 
-@each $name, $color in $tag-colors {
+@each $name, $pair in $tag-colors {
   .project-tag__container-#{$name} {
     @include tag-color($name);
   }
