@@ -23,6 +23,7 @@
   	}
   	@include mixins.respond-to(medium) {
   		padding-bottom: map.get($spacings, smallest);
+		padding-left: 0;
   	}
 }
 
