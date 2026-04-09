@@ -5,10 +5,6 @@
 
 .project-card__wrapper {
   @include mixins.wrapper;
-
-  &.project-card__standalone {
-    justify-content: center;
-  }
 }
 
 .project-card__container {
@@ -57,13 +53,15 @@
   font-family: $secondary-font;
   font-size: 1.1rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 90%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 90%, rgba(map.get($dark-theme, accent), .7)));
+  @include mixins.themed(border, 2px solid rgba(map.get($light-theme, accent), 1), 3px solid rgba(map.get($dark-theme, accent), 1));
+  @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
   @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
-  border-radius: map.get($border-radius, pill);
+  border-radius: map.get($border-radius, large);
   text-wrap: nowrap;
   &:hover, &:focus-visible {
     cursor: pointer;
-    @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 80%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 60%, rgba(map.get($dark-theme, accent), .7)));
+    @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .1));
+    @include mixins.themed(color, rgba(map.get($light-theme, accent), 1), rgba(map.get($dark-theme, accent), 1));
   }
   &:focus-visible {
     @include mixins.themed(outline, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));

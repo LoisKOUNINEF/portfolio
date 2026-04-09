@@ -1,7 +1,7 @@
 import { ComponentConfig, View } from '../../../core/index.js';
 import {
   AboutMeComponent,
-  ContactComponent,
+  ContactComponent, EmptyComponent,
   HeroComponent,
   ProjectCardComponent, ProjectsDisclaimerComponent,
   ShowMoreComponent,
@@ -11,7 +11,7 @@ import {
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion',  /*'run-for-the-bun'*/];
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion',  'run-for-the-bun',  'run-for-the-bun',  'run-for-the-bun',  'run-for-the-bun',  'run-for-the-bun'];
   private readonly _mediaQuery = window.matchMedia('(max-width: 1500px)');
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
@@ -29,13 +29,12 @@ export class HomeView extends View {
   }
 
   private getChildConfigs(): ComponentConfig[] {
-    const showMoreConfig = this.getShowMoreBtnConfig();
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
       this.getDisclaimerConfig(),
       ...this.getMainProjectsCatalog(),
-      ...(showMoreConfig ? [showMoreConfig] : []),
+      this.getShowMoreBtnConfig(),
       ...this.getAdditionalProjectsCatalog(),
       this.getStackConfig(),
       this.getSelfHostingProjectConfig(),
@@ -74,11 +73,17 @@ export class HomeView extends View {
     });
   }
 
-  private getShowMoreBtnConfig(): ComponentConfig | null {
+  private getShowMoreBtnConfig(): ComponentConfig {
+    const selector = 'show-more-btn';
     const additional = this._allProjects.slice(this._columnsCount);
-    if (!additional.length) return null;
+    if (!additional.length) {
+      return {
+        selector: selector,
+        factory: (el) => new EmptyComponent(el)
+      }
+    }
     return {
-      selector: 'show-more-btn',
+      selector: selector,
       factory: (el) => new ShowMoreComponent(el, additional.length)
     };
   }
