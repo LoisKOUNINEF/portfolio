@@ -49,12 +49,20 @@
     font-family: $secondary-font;
     font-weight: bold;
     @include themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    @include respond-to(medium) {
+      min-width: 100%;
+    }
   }
   .project-header__title {
     display: flex;
     justify-content: space-between;
     @if $color-identity {
       @include themed(border-bottom, 3px solid rgba(map.get($light-theme, $color-identity), .5), 3px solid rgba(map.get($dark-theme, $color-identity), .5));
+    }
+    @include respond-to(medium) {
+      flex-wrap: wrap;
+      //justify-content: center;
+      align-items: center;
     }
   }
 }

@@ -20,6 +20,10 @@
   display: flex;
   align-self: center;
   gap: map.get($spacings, small);
+  @include mixins.respond-to(medium) {
+    flex-wrap: wrap;
+    padding-bottom: map.get($spacings, smallest);
+  }
 }
 
 .project-header__images {

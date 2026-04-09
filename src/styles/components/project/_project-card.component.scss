@@ -8,15 +8,16 @@
 }
 
 .project-card__container {
-  width: auto;
+  width: 100%;
   @include mixins.container(primary);
   text-align: left;
   gap: map.get($spacings, largest);
 
   &.project-card__standalone {
-    width: 100%;
     @include mixins.container(secondary);
     @include mixins.header(secondary);
+    width: 100%;
+    justify-content: flex-start;
     h2 {
       font-size: map.get($font-sizes, largest);
     }

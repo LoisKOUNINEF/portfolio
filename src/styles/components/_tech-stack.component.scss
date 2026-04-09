@@ -51,6 +51,9 @@
   min-width: 40%;
   gap: map.get($spacings, small);
   font-size: map.get($font-sizes, small);
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, small);
+	}
 }
 
 .tech-stack__badges-title-main {
@@ -67,6 +70,7 @@
 }
 
 [class*="tech-stack__badge-catalog"] {
+	justify-content: flex-start;
 	padding-top: map.get($spacings, medium);
 	.svg-tech-label {
 	  padding-top: map.get($spacings, small);
@@ -77,7 +81,7 @@
 	}
 	> * {
 		@include mixins.respond-to(medium) {
-			flex: 1;
+			flex-grow: 0;
 		}
 	}
 	@include mixins.respond-to(medium) {
@@ -92,6 +96,7 @@
 		padding-left: 4rem;
 		@include mixins.respond-to(medium) {
 			padding-left: 0;
+			flex-basis: 20%;
 		}
 	}
 	.svg-tech-label {

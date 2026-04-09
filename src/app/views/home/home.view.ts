@@ -11,8 +11,8 @@ import {
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', 'nutin'];
-  private readonly _columnsCount: number = 3;
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', /*'run-for-the-bun'*/];
+  private readonly _mainProjectsCount = 3;
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
@@ -60,7 +60,7 @@ export class HomeView extends View {
 
   private getMainProjectsCatalog(): ComponentConfig[] {
     return this.catalogConfig({
-      array: this._allProjects.slice(0, this._columnsCount),
+      array: this._allProjects.slice(0, this._mainProjectsCount),
       selector: 'main-projects-catalog',
       elementName: 'main-project',
       component: ProjectCardComponent,
@@ -70,7 +70,7 @@ export class HomeView extends View {
 
   private getShowMoreBtnConfig(): ComponentConfig {
     const selector = 'show-more-btn';
-    const additional = this._allProjects.slice(this._columnsCount);
+    const additional = this._allProjects.slice(this._mainProjectsCount);
     if (!additional.length) {
       return {
         selector: selector,
@@ -84,7 +84,7 @@ export class HomeView extends View {
   }
 
   private getAdditionalProjectsCatalog(): ComponentConfig[] {
-    const additional = this._allProjects.slice(this._columnsCount);
+    const additional = this._allProjects.slice(this._mainProjectsCount);
     if (!additional.length) return [];
     return this.catalogConfig({
       array: additional,

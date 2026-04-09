@@ -2,7 +2,16 @@
 	"name": "Paris 2024",
 	"tagline": "A full-stack project focused on authentication, payments, and end-to-end user flows.",
 	"imageSrc": "./assets/images/projects/paris-2024",
-	"tags": [],
+	"tags": [
+		{
+			"name": "Personal",
+			"color": "teal"
+		},
+		{
+			"name": "Personal",
+			"color": "orange"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 			"Complete authentication flow (signup, email verification, password reset). Role-based access (admin and staff interfaces).",
