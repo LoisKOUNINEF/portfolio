@@ -32,7 +32,8 @@
 }
 
 .project-card__content {
-  padding: 0 map.get($spacings, medium);
+  padding-left: map.get($spacings, medium);
+  padding-bottom: map.get($spacings, medium);
   @include mixins.respond-to(medium) {
     padding: 0;
   }
