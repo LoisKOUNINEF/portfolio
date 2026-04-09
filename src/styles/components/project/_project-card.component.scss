@@ -68,7 +68,8 @@
   }
   @media(hover: none) {
     &:hover {
-      @include mixins.themed(background, linear-gradient(180deg, map.get($light-theme, background), 90%, rgba(map.get($light-theme, accent), .7)), linear-gradient(180deg, map.get($dark-theme, background), 90%, rgba(map.get($dark-theme, accent), .7)));
+      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+      @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
     }
   }
 }

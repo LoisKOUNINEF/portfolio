@@ -11,18 +11,12 @@ import {
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion'];
-  private readonly _mediaQuery = window.matchMedia('(max-width: 1500px;min-width:100px;)');
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', 'nutin'];
+  private readonly _columnsCount: number = 3;
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
     super({template, tagName: 'div'});
-    this._mediaQuery.addEventListener('change', () => this.forceRender());
-  }
-
-  private get _columnsCount(): number {
-    // return this._mediaQuery.matches ? 2 : 3;
-    return 3;
   }
 
   public childConfigs(): ComponentConfig[] {

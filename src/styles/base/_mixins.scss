@@ -44,7 +44,7 @@
   min-width: 40%;
   line-height: map.get($spacings, largest);
   text-align: left;
-  max-width: auto;
+  width: auto;
   h2 {
     font-family: $secondary-font;
     font-weight: bold;
