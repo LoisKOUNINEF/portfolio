@@ -2,6 +2,7 @@
 	"name": "PixelsMansion",
 	"tagline": "Un petit terrain de jeu rétro construit pour approfondir ma compréhension de la conception orientée objet.",
 	"imageSrc": "./assets/images/projects/pixels-mansion",
+	"tags": [],
 	"presentation": {
 		"keyPoints": [
 			"Jeux rétro sur grille avec abstractions de jeu partagées.",

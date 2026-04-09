@@ -1,0 +1,31 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+$tag-colors: (
+  green: rgb(76 175 80),
+  blue: rgb(33 150 243),
+);
+
+@mixin tag-color($name) {
+  //@include mixins.themed(background, rgba(map.get($light-theme, text), .1), rgba(map.get($dark-theme, text), .1));
+  background: rgba(map.get($tag-colors, $name), .1);
+  color: rgba(map.get($tag-colors, $name), 2);
+}
+
+@each $name, $color in $tag-colors {
+  .project-tag__container-#{$name} {
+    @include tag-color($name);
+  }
+}
+
+[class*="project-tag__container"] {
+  border-radius: map.get($border-radius, pill);
+  line-height: 1;
+  padding: 2px map.get($spacings, small);
+}
+
+.project-tag__text {
+  font-size: map.get($font-sizes, smallest);
+  color: inherit;
+}

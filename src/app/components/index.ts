@@ -6,4 +6,3 @@ export * from './hero/hero.component.js';
 export * from './about/about.component.js';
 export * from './contact/contact.component.js';
 export * from './tech-stack/tech-stack.component.js';
-export * from './project/show-more/show-more.component.js';

@@ -2,6 +2,7 @@
 	"name": "Run for the Bun",
 	"tagline": "A clicker where you run instead of clicking",
 	"imageSrc": "./assets/images/projects/run-for-the-bun",
+	"tags": [],
 	"presentation": {
 		"keyPoints": [
 			"Lore"

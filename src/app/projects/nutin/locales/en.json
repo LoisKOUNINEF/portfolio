@@ -2,6 +2,16 @@
 	"name": "nutin",
 	"tagline": "A lightweight frontend toolkit built as a learning exercise to validate my understanding of SPA fundamentals.",
 	"imageSrc": "./assets/images/projects/nutin",
+	"tags": [
+		{
+			"name": "Personal",
+			"color": "blue"
+		},
+		{
+			"name": "Personal",
+			"color": "green"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 		"DOM-based components and views (no virtual DOM).",

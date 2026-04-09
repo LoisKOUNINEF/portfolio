@@ -28,12 +28,12 @@ export class ProjectCardComponent extends Component {
   }
 
   private getHeaderConfig(): ComponentConfig {
-    const { name, imageSrc, tagline, technos } = {...this._project};
+    const { name, imageSrc, tagline, technos, tags } = {...this._project};
     return {
       selector: `project-card-header`,
       factory: (el) => new ProjectHeaderComponent(
         el,
-        { name, imageSrc, tagline, technos }
+        { name, imageSrc, tagline, technos, tags }
       )
     }
   }

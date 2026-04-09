@@ -16,6 +16,12 @@
   }
 }
 
+.project-header__tags {
+  display: flex;
+  align-self: center;
+  gap: map.get($spacings, small);
+}
+
 .project-header__images {
   display: flex;
   justify-content: space-between;

@@ -1,11 +1,12 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { TechBadgeComponent } from '../../../index.js';
+import {ProjectTagComponent, TechBadgeComponent} from '../../../index.js';
 
 interface IProjectHeadConfig {
   name: string;
   imageSrc: string;
   tagline: string;
   technos: IProjectTechno[];
+  tags: IProjectTag[];
   displayTechIcons?: boolean;
 }
 
@@ -20,10 +21,12 @@ export class ProjectHeaderComponent extends Component {
   }
 
   public childConfigs(): ComponentConfig[] {
+    const configs = this.getTagsConfig();
     if (!this._headConfig.displayTechIcons) {
-      return [];
+      return configs;
     }
-    return this.getTechBadgesConfig();
+    configs.push(...this.getTechBadgesConfig());
+    return configs
   }
 
   private getTechBadgesConfig(): ComponentConfig[] {
@@ -32,6 +35,15 @@ export class ProjectHeaderComponent extends Component {
       array: this._headConfig.technos,
       component: TechBadgeComponent,
       elementName: `project-header-techno`
+    })
+  }
+
+  private getTagsConfig(): ComponentConfig[] {
+    return this.catalogConfig({
+      selector: `project-header-tags`,
+      array: this._headConfig.tags,
+      component: ProjectTagComponent,
+      elementName: `project-header-tag`
     })
   }
 }

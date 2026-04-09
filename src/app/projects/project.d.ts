@@ -12,6 +12,7 @@ declare type LinkSvgKey = 'github' | 'live' | 'npm' | 'linkedin';
 declare interface IProjectBase {
   id: number;
   name: string;
+  tags: IProjectTag[];
   tagline: string;
   imageSrc: string;
   presentation: IProjectSection;
@@ -44,4 +45,9 @@ declare interface IProjectTechno {
 declare interface IProjectLink {
   svgKey: LinkSvgKey;
   url: string;
+}
+
+declare interface IProjectTag {
+  name: string;
+  color: string;
 }

@@ -26,6 +26,7 @@ const projectPopoverComponents = (project: IProject): ComponentConfig[] => [
       imageSrc: project.imageSrc,
       tagline: project.popTagline,
       technos: project.technos,
+      tags: project.tags,
       displayTechIcons: true,
     })
   },
