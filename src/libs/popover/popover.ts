@@ -65,7 +65,7 @@ export class PopoverView extends View {
   }
 
   public override render(): HTMLElement {
-    document.body.classList.add('no-scroll');
+    document.documentElement.classList.add('no-scroll');
 
     const { wrapper, overlay } = this.createPopoverDomElements();
 
@@ -81,7 +81,7 @@ export class PopoverView extends View {
     this._overlay = PopoverDomHelper.removeDomElements(this._overlay);
     this._focusTrap?.deactivate();
 
-    document.body.classList.remove('no-scroll');
+    document.documentElement.classList.remove('no-scroll');
 
     if (this._prevTitle) document.title = this._prevTitle;
 

@@ -3,9 +3,8 @@
 @use "variables" as *;
 
 /* Prevent scroll when popover is active */
-.no-scroll {
+html.no-scroll {
   overflow: hidden;
-  height: 100%;
 }
 
 .popover-overlay {  
