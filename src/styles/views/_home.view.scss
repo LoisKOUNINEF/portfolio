@@ -12,10 +12,6 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
-    @include mixins.respond-to(large) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     @include mixins.respond-to(medium) {
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
