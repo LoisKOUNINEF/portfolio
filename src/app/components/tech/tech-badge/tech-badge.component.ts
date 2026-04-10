@@ -42,5 +42,6 @@ export class TechBadgeComponent extends Component {
 
   private displayDetails(config: ITechDetails): void {
     if (!config.tagline) return;
+    console.debug('here')
   }
 }
