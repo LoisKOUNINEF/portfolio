@@ -5,7 +5,7 @@ interface IProjectHeadConfig {
   name: string;
   imageSrc: string;
   tagline: string;
-  technos: IProjectTechno[];
+  technos: ITechBase[];
   tags: IProjectTag[];
   displayTechIcons?: boolean;
 }

@@ -32,7 +32,7 @@ $tag-colors: (
 }
 
 @each $name, $pair in $tag-colors {
-  .project-tag__container-#{$name} {
+  .project-tag__container-#{"" + $name} {
     @include tag-color($name);
   }
 }

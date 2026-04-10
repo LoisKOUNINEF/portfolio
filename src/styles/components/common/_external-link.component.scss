@@ -9,7 +9,8 @@ $external-svgs: (
   'live': 'live',
   'github': 'github',
   'npm': 'npm',
-  'linkedin': 'linkedin'
+  'linkedin': 'linkedin',
+  'three-dots': 'three-dots',
 );
 
 @each $name, $file in $external-svgs {

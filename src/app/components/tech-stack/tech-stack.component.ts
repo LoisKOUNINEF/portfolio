@@ -1,5 +1,5 @@
 import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import { TechBadgeComponent } from '../index.js';
+import {ButtonComponent, TechBadgeComponent} from '../index.js';
 
 interface ITechStackKeys {
   frontend: TechSvgKey[],
@@ -25,11 +25,22 @@ export class TechStackComponent extends Component {
 
   public childConfigs(): ComponentConfig[] {
     return [
+      this.getThreeDotsBadge(),
       ...this.getFrontendBadges(),
       ...this.getBackendBadges(),
       ...this.getToolsBadges(),
       ...this.getDatabaseBadges(),
     ];
+  }
+
+  private getThreeDotsBadge(): ComponentConfig {
+    return {
+      selector: 'dots',
+      factory: (el) => new ButtonComponent(el, {
+        className: 'base-svg svg-three-dots',
+        callback: ()=> {}
+      })
+    }
   }
 
   private getFrontendBadges(): ComponentConfig[] {
