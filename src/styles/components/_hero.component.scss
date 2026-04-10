@@ -6,6 +6,9 @@
 .hero__wrapper {
 	@include mixins.wrapper;
 	min-height: 90svh;
+	@include mixins.respond-to(medium) {
+		min-height: 100svh;
+	}
 }
 
 .hero__container {

@@ -49,5 +49,7 @@ declare interface IProjectLink {
 
 declare interface IProjectTag {
   i18nKey: string;
-  color: string;
+  color?: string;
+  // color: green, blue, teal. purple, orange, red, pink, yellow, cyan, indigo, lime, brown, grey
+  // default: grey
 }
