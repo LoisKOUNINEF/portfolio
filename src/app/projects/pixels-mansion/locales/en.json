@@ -6,6 +6,10 @@
 		{
 			"i18nKey": "personal",
 			"color": "teal"
+		},
+		{
+			"i18nKey": "oop",
+			"color": "yellow"
 		}
 	],
 	"presentation": {

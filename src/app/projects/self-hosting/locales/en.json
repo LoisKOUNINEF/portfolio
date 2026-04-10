@@ -43,8 +43,7 @@
 			"Freedom of tooling: no restriction on databases, runtimes, or architectures.",
 			"Maintainability over cleverness: simple setups that I can reason about and debug alone.",
 			"Personal scale: optimized for small projects, not premature enterprise complexity."
-		],
-		"after": "This was as much a learning project as a practical one: I wanted to remove the “black box” aspect of hosting and infrastructure."
+		]
 	},
 	"choices": [
 		{

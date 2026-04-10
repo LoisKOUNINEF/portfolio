@@ -42,8 +42,7 @@
 			"Liberté des outils : aucune restriction sur les bases de données, les runtimes ou les architectures.",
 			"La maintenabilité plutôt que l’ingéniosité : des configurations simples, compréhensibles et débogables en autonomie.",
 			"Échelle personnelle : optimisé pour de petits projets, sans complexité d’entreprise prématurée."
-		],
-		"after": "Il s’agissait autant d’un projet d’apprentissage que d’un projet pratique : je voulais supprimer l’effet « boîte noire » de l’hébergement et de l’infrastructure."
+		]
 	},
 	"choices": [
 		{
