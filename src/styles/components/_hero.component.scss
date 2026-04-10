@@ -5,7 +5,7 @@
 
 .hero__wrapper {
 	@include mixins.wrapper;
-	min-height: 90vh;
+	min-height: 90svh;
 }
 
 .hero__container {
@@ -83,7 +83,7 @@
 	padding: map.get($spacings, small) map.get($spacings, large);
 	font-size: map.get($font-sizes, large);
 	text-align: left;
-	border-radius: map.get($border-radius, pill);
+	border-radius: map.get($border-radius, large);
 	&:hover {
 		@include mixins.themed(background-color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: -20%));
 		cursor: pointer;

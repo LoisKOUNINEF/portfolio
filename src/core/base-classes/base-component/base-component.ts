@@ -74,7 +74,7 @@ interface CatalogConfig extends ComponentOptions {
   ```
 */
   protected catalogConfig(config: CatalogConfig): ComponentConfig[] {
-    return CatalogHelper.generateCatalog(config);
+    return CatalogHelper.generateCatalog(config, this.element);
   }
 
   protected parseDataAttributes(): void {

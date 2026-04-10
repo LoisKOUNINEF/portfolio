@@ -1,9 +1,9 @@
-declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting';
+declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting' | 'run-for-the-bun';
 
 declare type TechSvgKey = FrontendSvgKey | BackendSvgKey | DatabaseSvgKey | ToolsSvgKey;
 
-type FrontendSvgKey = 'typescript' | 'angular' | 'vuejs' | 'sass' | 'html';
-type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails';
+type FrontendSvgKey = 'typescript' | 'angular' | 'vuejs' | 'sass' | 'html' | 'tailwind';
+type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails' | 'golang';
 type DatabaseSvgKey = 'postgresql' | 'mysql' | 'typeorm';
 type ToolsSvgKey = 'git' | 'docker' | 'jest' | 'linux' | 'traefik' | 'bash';
 
@@ -12,6 +12,7 @@ declare type LinkSvgKey = 'github' | 'live' | 'npm' | 'linkedin';
 declare interface IProjectBase {
   id: number;
   name: string;
+  tags: IProjectTag[];
   tagline: string;
   imageSrc: string;
   presentation: IProjectSection;
@@ -44,4 +45,9 @@ declare interface IProjectTechno {
 declare interface IProjectLink {
   svgKey: LinkSvgKey;
   url: string;
+}
+
+declare interface IProjectTag {
+  i18nKey: string;
+  color: string;
 }

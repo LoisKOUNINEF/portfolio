@@ -17,7 +17,6 @@
 	font-size: map.get($font-sizes, small);
 	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: -20%), color.scale(map.get($dark-theme, text), $lightness: -20%));
 	@include mixins.respond-to(medium) {
-		display: block;
-		text-align: center;
+		padding-left: 0;
 	}
 }

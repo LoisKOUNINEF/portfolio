@@ -13,8 +13,10 @@ $base-folder: '/assets/images/svgs';
 .svgs__container {
   @include mixins.flex-center;
   gap: map.get($spacings, largest);
+  justify-content: flex-start;
   @include mixins.respond-to(medium) {
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: map.get($spacings, medium);
   }
 }
 

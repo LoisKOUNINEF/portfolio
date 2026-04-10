@@ -4,54 +4,56 @@
 
 .tech-stack__wrapper {
 	@include mixins.wrapper;
-	margin: map.get($spacings, small) 0;
 }
 
 .tech-stack__container {
-	width: 70%;
+	width: 100%;
 	@include mixins.container(accent);
 }
 
 .tech-stack__header {
+	width:100%;
 	@include mixins.header(accent);
-	@include mixins.flex-center;
-	justify-content: space-around;
 	padding-top: map.get($spacings, large);
-  padding-bottom: map.get($spacings, medium);
+	padding-left: map.get($spacings, large);
+	padding-right: map.get($spacings, large);
 	h2 {
-  	font-size: map.get($font-sizes, largest);
-  }
-  @include mixins.respond-to(medium) {
-  	padding-bottom: map.get($spacings, smallest);
-  }
+  		font-size: map.get($font-sizes, largest);
+		@include mixins.themed(border-bottom, 3px solid rgba(map.get($light-theme, accent), .5), 3px solid rgba(map.get($dark-theme, accent), .5));
+  	}
+  	@include mixins.respond-to(medium) {
+  		padding-bottom: map.get($spacings, smallest);
+		padding-left: 0;
+  	}
 }
 
 .tech-stack__badges {
 	gap: 1rem;
 	text-wrap: nowrap;
 	padding-bottom: map.get($spacings, small);
+	padding-left: map.get($spacings, largest);
 	font-size: 1.1rem;
 	&.underline {
-		@include mixins.tech-badges-underline;
+		//@include mixins.tech-badges-underline;
 	}
-	@include mixins.flex-center;
-	@include mixins.flex-column;
 	@include mixins.respond-to(medium) {
 		padding-top: map.get($spacings, large);
 		padding-bottom: map.get($spacings, medium);
+		padding-left: map.get($spacings, small);
+		text-wrap: wrap;
 	}
 }
 
 [class*="tech-stack__badges-title"] {
 	@include mixins.tech-badges-title;
 	@include mixins.tech-badges-underline;
+	padding-top: map.get($spacings, largest);
   min-width: 40%;
-  flex-basis: 100%;
-	@include mixins.flex-center;
   gap: map.get($spacings, small);
   font-size: map.get($font-sizes, small);
-  padding: 0 map.get($spacings, small);
-	padding-top: map.get($spacings, small);
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, small);
+	}
 }
 
 .tech-stack__badges-title-main {
@@ -68,9 +70,10 @@
 }
 
 [class*="tech-stack__badge-catalog"] {
-	display: flex;
-	justify-self: flex-start;
+	justify-content: flex-start;
+	padding-top: map.get($spacings, medium);
 	.svg-tech-label {
+	  padding-top: map.get($spacings, small);
 	  font-weight: 700;
 	  letter-spacing: 0.15em;
 	  opacity: 0.75;
@@ -78,13 +81,11 @@
 	}
 	> * {
 		@include mixins.respond-to(medium) {
-			flex: 1;
+			flex-grow: 0;
 		}
 	}
 	@include mixins.respond-to(medium) {
 		width: 90vw;
-		display: flex;
-		flex-wrap: wrap;
 	}
 	.svg-tech-item { }
 }
@@ -92,6 +93,11 @@
 .tech-stack__badge-catalog {
 	> * {
 		width: 3rem;
+		padding-left: 4rem;
+		@include mixins.respond-to(medium) {
+			padding-left: 0;
+			flex-basis: 20%;
+		}
 	}
 	.svg-tech-label {
 	  font-size: 0.8rem;
@@ -104,7 +110,11 @@
 }
 
 .tech-stack__badge-catalog-tools {
-	padding-bottom: map.get($spacings, small);
+	padding-bottom: map.get($spacings, medium);
+	padding-left: 2.5rem;
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+	}
 	> * {
 		width: 3rem;
 		@include mixins.respond-to(medium) {

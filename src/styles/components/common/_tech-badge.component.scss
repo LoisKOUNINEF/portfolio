@@ -29,7 +29,8 @@ $tech-badge-svgs: (
   'html': 'html',
   'typeorm': 'typeorm',
   'mysql': 'mysql',
-  'express': 'express'
+  'express': 'express',
+  'tailwind': 'tailwind'
 );
 
 @each $name, $file in $tech-badge-svgs {

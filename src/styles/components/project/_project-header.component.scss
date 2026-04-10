@@ -16,6 +16,16 @@
   }
 }
 
+.project-header__tags {
+  display: flex;
+  align-self: center; // flex-end ?
+  gap: map.get($spacings, small);
+  @include mixins.respond-to(medium) {
+    flex-wrap: wrap;
+    padding-bottom: map.get($spacings, smallest);
+  }
+}
+
 .project-header__images {
   display: flex;
   justify-content: space-between;
@@ -25,7 +35,7 @@
   @include mixins.respond-to(medium) {
     @include mixins.flex-center;
     flex-direction: column;
-    padding-bottom: map.get($spacings, large);
+    padding-bottom: map.get($spacings, medium);
     .project-header__svgs {
       padding-left: 0;
     }
@@ -35,6 +45,7 @@
 .project-header__tagline {
   font-family: $secondary-font; 
   padding-left: map.get($spacings, medium);
+  padding-top: map.get($spacings, medium);
   font-size: 1.1rem;
   font-style: italic;
   @include mixins.respond-to(medium) {

@@ -1,0 +1,46 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+$tag-colors: (
+  green:  (bg: rgb(220 245 220), text: rgb(30 110 40)), // green
+  blue:   (bg: rgb(210 230 255), text: rgb(20 80 180)), // blue
+  teal:   (bg: rgb(205 235 237), text: rgb(25 90 95)),  // teal
+  purple: (bg: rgb(235 220 255), text: rgb(90 30 170)), // purple
+  orange: (bg: rgb(255 235 210), text: rgb(170 80 10)), // orange
+  red:    (bg: rgb(255 220 218), text: rgb(170 30 20)), // red
+);
+
+@mixin tag-color($name) {
+  $pair: map.get($tag-colors, $name);
+  @if $pair {
+    background: map.get($pair, bg);
+    color: map.get($pair, text);
+  }
+  @else {
+    $pair: map.get($tag-colors, blue);
+    background: map.get($pair, bg);
+    color: map.get($pair, text);
+  }
+}
+
+@each $name, $pair in $tag-colors {
+  .project-tag__container-#{$name} {
+    @include tag-color($name);
+  }
+}
+
+[class*="project-tag__container"] {
+  border-radius: map.get($border-radius, pill);
+  line-height: 1;
+  padding: 2px map.get($spacings, small);
+  display: flex;
+  align-items: center;
+}
+
+.project-tag__text {
+  font-size: map.get($font-sizes, smallest);
+  //font-style: italic;
+  //font-weight: bold;
+  color: inherit;
+}

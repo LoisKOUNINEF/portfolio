@@ -1,16 +1,18 @@
 import { ComponentConfig, View } from '../../../core/index.js';
-import {  
+import {
   AboutMeComponent,
-  ContactComponent,
+  ContactComponent, EmptyComponent,
   HeroComponent,
-  ProjectCardComponent,
+  ProjectCardComponent, ProjectsDisclaimerComponent,
+  ShowMoreComponent,
   TechStackComponent
 } from '../../components/index.js';
 
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private _mainProjectsFolders: ProjectFolderName[] = [ 'nutin', 'paris-2024', 'pixels-mansion' ];
+  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', /*'run-for-the-bun'*/];
+  private readonly _mainProjectsCount = 3;
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
@@ -25,11 +27,14 @@ export class HomeView extends View {
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
+      this.getDisclaimerConfig(),
       ...this.getMainProjectsCatalog(),
+      this.getShowMoreBtnConfig(),
+      ...this.getAdditionalProjectsCatalog(),
       this.getStackConfig(),
       this.getSelfHostingProjectConfig(),
       this.getContactConfig(),
-    ]
+    ];
   }
 
   private getHeroConfig(): ComponentConfig {
@@ -46,11 +51,45 @@ export class HomeView extends View {
     }
   }
 
+  private getDisclaimerConfig(): ComponentConfig {
+    return {
+      selector: 'projects-disclaimer',
+      factory: (el) => new ProjectsDisclaimerComponent(el)
+    }
+  }
+
   private getMainProjectsCatalog(): ComponentConfig[] {
     return this.catalogConfig({
-      array: this._mainProjectsFolders,
+      array: this._allProjects.slice(0, this._mainProjectsCount),
       selector: 'main-projects-catalog',
       elementName: 'main-project',
+      component: ProjectCardComponent,
+      elementTag: 'article'
+    });
+  }
+
+  private getShowMoreBtnConfig(): ComponentConfig {
+    const selector = 'show-more-btn';
+    const additional = this._allProjects.slice(this._mainProjectsCount);
+    if (!additional.length) {
+      return {
+        selector: selector,
+        factory: (el) => new EmptyComponent(el)
+      }
+    }
+    return {
+      selector: selector,
+      factory: (el) => new ShowMoreComponent(el, additional.length)
+    };
+  }
+
+  private getAdditionalProjectsCatalog(): ComponentConfig[] {
+    const additional = this._allProjects.slice(this._mainProjectsCount);
+    if (!additional.length) return [];
+    return this.catalogConfig({
+      array: additional,
+      selector: 'additional-projects-catalog',
+      elementName: 'additional-project',
       component: ProjectCardComponent,
       elementTag: 'article'
     });

@@ -2,6 +2,12 @@
 	"name": "PixelsMansion",
 	"tagline": "A small retro games playground built to deepen my understanding of object-oriented design.",
 	"imageSrc": "./assets/images/projects/pixels-mansion",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 			"Grid-based retro games with shared game abstractions.",

@@ -5,7 +5,6 @@
 .project-section__container {
   line-height: map.get($spacings, large);
   padding-left: map.get($spacings, large);
-  padding-bottom: map.get($spacings, medium);
   h5 {
     font-weight: bold;
     padding: map.get($spacings, small) 0;

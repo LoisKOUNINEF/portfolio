@@ -1,0 +1,65 @@
+{
+	"name": "Run for the Bun",
+	"tagline": "A clicker where you run instead of clicking",
+	"imageSrc": "./assets/images/projects/run-for-the-bun",
+	"tags": [],
+	"presentation": {
+		"keyPoints": [
+			"Lore"
+		]
+	},
+	"popTagline": "Run to increase production and earn production time.",
+	"overview": {
+		"mainContent": "",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"Rankings"
+		],
+		"after": ""
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "Add fun to self-care.",
+		"keyPoints": [
+			""
+		],
+		"after": ""
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Run on both iOS and Android"
+		],
+		"after": ""
+	},
+	"choices": [
+		{
+			"title": "",
+			"mainContent": "",
+			"after": "This keeps modules loosely connected and makes execution flow easy to trace."
+		}
+	],
+	"challenges": [
+		{
+			"title": "",
+			"mainContent": "",
+			"after": "This keeps modules loosely connected and makes execution flow easy to trace."
+		}
+	],
+	"learned": {
+		"mainContent": "",
+		"keyPoints": [],
+		"after": ""
+	},
+	"technos": [
+		{
+			"svgKey": ""
+		}
+	],
+	"links": [
+		{
+			"svgKey": "",
+			"url": ""
+		}
+	]
+}

@@ -1,6 +1,11 @@
 @use "sass:map";
 @use "variables" as *;
 
+// project tag mixin
+//@mixin tag-color($name) {
+//  background-color: map.get($tag-colors, $name);
+//}
+
 // custom mixins
 @mixin themed($property, $light-value, $dark-value) {
   #{$property}: $light-value;
@@ -39,13 +44,25 @@
   min-width: 40%;
   line-height: map.get($spacings, largest);
   text-align: left;
-  max-width: auto;
+  width: auto;
   h2 {
     font-family: $secondary-font;
     font-weight: bold;
     @include themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    @include respond-to(medium) {
+      min-width: 100%;
+    }
+  }
+  .project-header__title {
+    display: flex;
+    justify-content: space-between;
     @if $color-identity {
       @include themed(border-bottom, 3px solid rgba(map.get($light-theme, $color-identity), .5), 3px solid rgba(map.get($dark-theme, $color-identity), .5));
+    }
+    @include respond-to(medium) {
+      flex-wrap: wrap;
+      //justify-content: center;
+      align-items: center;
     }
   }
 }

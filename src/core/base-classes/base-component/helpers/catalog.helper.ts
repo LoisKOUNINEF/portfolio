@@ -36,11 +36,11 @@ type CatalogItemConfig<T = any> =
   ```
 */
 export class CatalogHelper {
-  public static generateCatalog(config: CatalogConfig): ComponentConfig[] {
+  public static generateCatalog(config: CatalogConfig, scope: Element = document.documentElement): ComponentConfig[] {
     if (!config.array || config.array.length < 1) return [];
 
     const componentConfigs: ComponentConfig[] = [];
-    const containers = document.querySelectorAll(`[data-catalog="${config.selector}"]`);
+    const containers = scope.querySelectorAll(`[data-catalog="${config.selector}"]`);
 
     containers.forEach((container) => {
       if (!container || !(container instanceof HTMLElement) || (container.firstElementChild)) return;

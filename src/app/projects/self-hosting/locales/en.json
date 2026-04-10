@@ -118,11 +118,5 @@
 		{
 			"svgKey": "bash"
 		}
-	],
-	"links": [
-		{
-			"svgKey": "github",
-			"url": ""			
-		}
 	]
 }
