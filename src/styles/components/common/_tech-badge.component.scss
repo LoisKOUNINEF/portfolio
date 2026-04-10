@@ -30,7 +30,8 @@ $tech-badge-svgs: (
   'typeorm': 'typeorm',
   'mysql': 'mysql',
   'express': 'express',
-  'tailwind': 'tailwind'
+  'tailwind': 'tailwind',
+  'sqlite': 'sqlite'
 );
 
 @each $name, $file in $tech-badge-svgs {
