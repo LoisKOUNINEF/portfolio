@@ -15,12 +15,12 @@
 		"mainContent": "Ce projet couvre l’auto-hébergement de mes sites web et applications personnels, du déploiement à la maintenance. J'ai géré l'intégralité du système de bout en bout, sans les garanties d'une plateforme gérée.",
 		"keyPointsTitle": "Fonctionnalités principales :",
 		"keyPoints": [
-			"Déploiement full-stack : hébergement de sites et d’applications personnels avec un contrôle complet.",
-			"Orchestration Docker : Swarm pour la gestion des conteneurs, secrets pour la gestion sécurisée des données sensibles.",
-			"Reverse proxy et routage : Traefik pour le routage HTTPS dynamique, avec Nginx utilisé dans les images pour les sites statiques.",
-			"Sécurité : désactivation de l’accès root, configuration d’UFW, fail2ban pour la protection contre les attaques par force brute.",
-			"Déploiements automatisés : mise en place d’un pipeline CI / CD réutilisable basé sur des scripts bash et des workflows GitHub.",
-			"Monitoring : Grafana et Prometheus pour suivre les performances du système."
+			"Déploiement full-stack: hébergement de sites et d’applications personnels avec un contrôle complet.",
+			"Orchestration Docker: Swarm pour la gestion des conteneurs, secrets pour la gestion sécurisée des données sensibles.",
+			"Reverse proxy et routage: Traefik pour le routage HTTPS dynamique, avec Nginx utilisé dans les images pour les sites statiques.",
+			"Sécurité: désactivation de l’accès root, configuration d’UFW, fail2ban pour la protection contre les attaques par force brute.",
+			"Déploiements automatisés: mise en place d’un pipeline CI / CD réutilisable basé sur des scripts bash et des workflows GitHub.",
+			"Monitoring: Grafana et Prometheus pour suivre les performances du système."
 		],
 		"after": "Le résultat est une configuration flexible, capable de supporter plusieurs applications, d’évoluer avec mes besoins et de servir de terrain d’apprentissage concret pour les problématiques réelles de déploiement."
 	},
@@ -38,10 +38,10 @@
 	"constraints": {
 		"title": "Contraintes",
 		"keyPoints": [
-			"La transparence des coûts était essentielle : des dépenses mensuelles prévisibles et faibles.",
-			"Liberté des outils : aucune restriction sur les bases de données, les runtimes ou les architectures.",
-			"La maintenabilité plutôt que l’ingéniosité : des configurations simples, compréhensibles et débogables en autonomie.",
-			"Échelle personnelle : optimisé pour de petits projets, sans complexité d’entreprise prématurée."
+			"La transparence des coûts était essentielle: des dépenses mensuelles prévisibles et faibles.",
+			"Liberté des outils: aucune restriction sur les bases de données, les runtimes ou les architectures.",
+			"La maintenabilité plutôt que l’ingéniosité: des configurations simples, compréhensibles et débogables en autonomie.",
+			"Échelle personnelle: optimisé pour de petits projets, sans complexité d’entreprise prématurée."
 		]
 	},
 	"choices": [

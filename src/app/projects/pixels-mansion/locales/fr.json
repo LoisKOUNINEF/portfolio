@@ -33,19 +33,19 @@
 	},
 	"purpose": {
 		"title": "Objectif",
-		"mainContent": "Les objectifs principaux étaient :",
+		"mainContent": "Les objectifs principaux étaient:",
 		"keyPoints": [
 			"Explorer comment structurer une application multi-jeux sans dupliquer la logique.",
 			"Concevoir une base de jeu réutilisable plutôt que des implémentations ponctuelles.",
 			"Approfondir ma compréhension des principes de la programmation orientée objet."
 		],
-		"after": "PixelsMansion est volontairement orienté architecture : les jeux sont des fonctionnalités, pas le cœur du système."
+		"after": "PixelsMansion est volontairement orienté architecture: les jeux sont des fonctionnalités, pas le cœur du système."
 	},
 	"constraints": {
 		"title": "Contraintes",
 		"keyPoints": [
-			"Fondation partagée : les jeux doivent réutiliser des abstractions communes.",
-			"Isolement : chaque jeu doit rester autonome."
+			"Fondation partagée: les jeux doivent réutiliser des abstractions communes.",
+			"Isolement: chaque jeu doit rester autonome."
 		]
 	},
 	"choices": [
