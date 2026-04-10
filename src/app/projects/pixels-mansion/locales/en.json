@@ -4,12 +4,8 @@
 	"imageSrc": "./assets/images/projects/pixels-mansion",
 	"tags": [
 		{
-			"name": "Personal",
-			"color": "red"
-		},
-		{
-			"name": "Personal",
-			"color": "purple"
+			"i18nKey": "personal",
+			"color": "teal"
 		}
 	],
 	"presentation": {

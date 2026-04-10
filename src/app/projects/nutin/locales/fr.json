@@ -2,7 +2,16 @@
 	"name": "nutin",
 	"tagline": "Une boîte à outils frontend légère construite pour valider ma compréhension des fondements des SPAs.",
 	"imageSrc": "./assets/images/projects/nutin",
-	"tags": [],
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "tool",
+			"color": "orange"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 			"Composants et vues basés sur le DOM (pas de DOM virtuel).",

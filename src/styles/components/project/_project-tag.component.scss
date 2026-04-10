@@ -34,6 +34,8 @@ $tag-colors: (
   border-radius: map.get($border-radius, pill);
   line-height: 1;
   padding: 2px map.get($spacings, small);
+  display: flex;
+  align-items: center;
 }
 
 .project-tag__text {

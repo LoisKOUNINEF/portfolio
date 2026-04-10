@@ -4,12 +4,12 @@
 	"imageSrc": "./assets/images/projects/nutin",
 	"tags": [
 		{
-			"name": "Personal",
-			"color": "blue"
+			"i18nKey": "personal",
+			"color": "teal"
 		},
 		{
-			"name": "Personal",
-			"color": "green"
+			"i18nKey": "tool",
+			"color": "orange"
 		}
 	],
 	"presentation": {

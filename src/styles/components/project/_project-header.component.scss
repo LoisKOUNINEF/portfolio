@@ -18,7 +18,7 @@
 
 .project-header__tags {
   display: flex;
-  align-self: center;
+  align-self: center; // flex-end ?
   gap: map.get($spacings, small);
   @include mixins.respond-to(medium) {
     flex-wrap: wrap;
