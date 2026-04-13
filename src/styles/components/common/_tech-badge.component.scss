@@ -31,7 +31,8 @@ $tech-badge-svgs: (
   'mysql': 'mysql',
   'express': 'express',
   'tailwind': 'tailwind',
-  'sqlite': 'sqlite'
+  'sqlite': 'sqlite',
+  'java': 'java'
 );
 
 @each $name, $file in $tech-badge-svgs {
@@ -43,7 +44,9 @@ $tech-badge-svgs: (
 // dark theme adapt
 .dark-theme .svg-nx::after,
 .dark-theme .svg-handlebars::after,
-.dark-theme .svg-express::after {
+.dark-theme .svg-express::after,
+.dark-theme .svg-java::after,
+.dark-theme .svg-mysql::after {
   filter: invert(1);
 }
 

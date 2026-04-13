@@ -5,6 +5,7 @@ interface ITechBadge extends CatalogItemConfig {
   svgKey?: TechSvgKey;
   value?: TechSvgKey;
   label: string;
+
 }
 
 const labels: Record<string, string> = {
@@ -43,7 +44,7 @@ export class TechBadgeComponent extends Component {
       this._config = config;
   }
 
-  private displayDetails(config: ITechDetails): void {
+  private displayDetails = (config: ITechDetails): void => {
     if (!this._config.details) return;
     console.debug(this._config.details.tagline)
   }

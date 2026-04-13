@@ -4,7 +4,7 @@ import { AnchorComponent, TechBadgeComponent } from '../index.js';
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class HeroComponent extends Component {
-  private _mainStackKeys: TechSvgKey[] = [ 'typescript', 'angular', 'nestjs', 'postgresql' ];
+  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nestjs', 'postgresql', 'jest' ];
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});

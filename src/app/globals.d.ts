@@ -22,7 +22,7 @@ declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'se
 declare type TechSvgKey = FrontendSvgKey | BackendSvgKey | DatabaseSvgKey | ToolsSvgKey;
 
 type FrontendSvgKey = 'typescript' | 'angular' | 'vuejs' | 'sass' | 'html' | 'tailwind';
-type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails' | 'golang';
+type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails' | 'golang' | 'java';
 type DatabaseSvgKey = 'postgresql' | 'mysql' | 'typeorm' | 'sqlite';
 type ToolsSvgKey = 'git' | 'docker' | 'jest' | 'linux' | 'traefik' | 'bash';
 

@@ -38,7 +38,7 @@ $tag-colors: (
 }
 
 [class*="project-tag__container"] {
-  border-radius: map.get($border-radius, pill);
+  border-radius: map.get($border-radius, largest);
   line-height: 1;
   padding: 2px map.get($spacings, small);
   display: flex;
