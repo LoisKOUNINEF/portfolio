@@ -12,11 +12,12 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    & > article:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      justify-self: center;
-      width: 50%;
-    }
+    // Center if single item - not sure yet
+    //& > article:last-child:nth-child(odd) {
+    //  grid-column: 1 / -1;
+    //  justify-self: center;
+    //  width: 50%;
+    //}
 
     @include mixins.respond-to(medium) {
       grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -62,6 +63,9 @@
       gap: map.get($spacings, small);
       padding-left: map.get($spacings, largest);
       padding-right: map.get($spacings, largest);
+      @include mixins.respond-to(medium) {
+        padding: 0;
+      }
     }
 
     .project-card__view-more {
@@ -80,7 +84,6 @@
 
     .project-header__screen-mock {
       margin-block: map.get($spacings, small);
-      width: 100%;
     }
   }
 
