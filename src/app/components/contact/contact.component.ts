@@ -10,7 +10,7 @@ export class ContactComponent extends Component {
 
   public override render(): HTMLElement {
     const link = document.getElementById('resume-link') as HTMLAnchorElement;
-    link.href = `./assets/resumes/resume-${I18nService.currentLanguage}.pdf`;
+    link.href = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
     return super.render();
   }
 }
