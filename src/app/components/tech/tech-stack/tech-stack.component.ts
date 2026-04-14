@@ -1,5 +1,5 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import { TechBadgeComponent } from '../index.js';
+import { AppEventBus, Component, ComponentConfig } from '../../../../core/index.js';
+import {ButtonComponent, TechBadgeComponent} from '../../index.js';
 
 interface ITechStackKeys {
   frontend: TechSvgKey[],
@@ -12,9 +12,9 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechStackComponent extends Component {
   private _keys: ITechStackKeys = {
-    frontend: [ 'typescript', 'angular', 'vuejs', 'sass', 'tailwind'  ],
-    backend: [ 'nestjs', 'nodejs', 'golang', 'rails' ],
-    database: [ 'postgresql', 'mysql', 'typeorm' ],
+    frontend: [ 'typescript', 'angular', 'vuejs', 'tailwind', 'sass'  ],
+    backend: [ 'nodejs', 'golang', 'java', 'nestjs', 'rails' ],
+    database: [ 'postgresql', 'mysql', 'sqlite' ],
     tools: [ 'git', 'docker', 'jest', 'linux', 'traefik', 'bash' ],
   };
 
@@ -25,11 +25,22 @@ export class TechStackComponent extends Component {
 
   public childConfigs(): ComponentConfig[] {
     return [
+      this.getThreeDotsBadge(),
       ...this.getFrontendBadges(),
       ...this.getBackendBadges(),
       ...this.getToolsBadges(),
       ...this.getDatabaseBadges(),
     ];
+  }
+
+  private getThreeDotsBadge(): ComponentConfig {
+    return {
+      selector: 'dots',
+      factory: (el) => new ButtonComponent(el, {
+        className: 'base-svg svg-three-dots',
+        callback: ()=> {}
+      })
+    }
   }
 
   private getFrontendBadges(): ComponentConfig[] {

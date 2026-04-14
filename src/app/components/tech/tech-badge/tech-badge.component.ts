@@ -1,9 +1,11 @@
 import { AppPipeRegistry, CatalogItemConfig, Component } from '../../../../core/index.js';
+import {notify} from "../../../../libs/index.js";
 
 interface ITechBadge extends CatalogItemConfig {
   svgKey?: TechSvgKey;
   value?: TechSvgKey;
   label: string;
+
 }
 
 const labels: Record<string, string> = {
@@ -14,9 +16,10 @@ const labels: Record<string, string> = {
   nodejs: 'NodeJs',
   nestjs: 'NestJs',
   vuejs: 'VueJs',
+  sqlite: 'SQLite',
 }
 
-const getLabel = (config: CatalogItemConfig<IProjectTechno | string>): string => {
+const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
   let label = '';
   if ('value' in config && typeof config.value === 'string') {
     label = labels[config.value] 
@@ -29,13 +32,20 @@ const getLabel = (config: CatalogItemConfig<IProjectTechno | string>): string =>
   return label;
 }
 
-const templateFn = (_config: CatalogItemConfig<ITechBadge>) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: CatalogItemConfig<ITech>) => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechBadgeComponent extends Component {
-  constructor(mountTarget: HTMLElement, config: CatalogItemConfig<IProjectTechno | string>) {
+  private _config: CatalogItemConfig<ITech>;
+  constructor(mountTarget: HTMLElement, config: CatalogItemConfig<ITech>) {
     const label = getLabel(config);
     super({ templateFn, mountTarget, config: { 
       ...config, label 
     }});
+      this._config = config;
+  }
+
+  private displayDetails = (config: ITechDetails): void => {
+    if (!this._config.details) return;
+    console.debug(this._config.details.tagline)
   }
 }

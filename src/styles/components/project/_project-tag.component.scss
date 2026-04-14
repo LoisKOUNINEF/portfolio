@@ -9,6 +9,13 @@ $tag-colors: (
   purple: (bg: rgb(235 220 255), text: rgb(90 30 170)), // purple
   orange: (bg: rgb(255 235 210), text: rgb(170 80 10)), // orange
   red:    (bg: rgb(255 220 218), text: rgb(170 30 20)), // red
+  pink:   (bg: rgb(255 218 235), text: rgb(170 20 90)), // pink
+  yellow: (bg: rgb(255 248 200), text: rgb(140 100 0)), // yellow
+  cyan:   (bg: rgb(205 245 250), text: rgb(0 110 130)), // cyan
+  indigo: (bg: rgb(220 220 255), text: rgb(50 30 160)), // indigo
+  lime:   (bg: rgb(225 250 200), text: rgb(60 120 10)), // lime
+  brown:  (bg: rgb(240 225 210), text: rgb(120 60 20)), // brown
+  grey:   (bg: rgb(225 225 228), text: rgb(70 70 80)),  // grey
 );
 
 @mixin tag-color($name) {
@@ -18,20 +25,20 @@ $tag-colors: (
     color: map.get($pair, text);
   }
   @else {
-    $pair: map.get($tag-colors, blue);
+    $pair: map.get($tag-colors, grey);
     background: map.get($pair, bg);
     color: map.get($pair, text);
   }
 }
 
 @each $name, $pair in $tag-colors {
-  .project-tag__container-#{$name} {
+  .project-tag__container-#{"" + $name} {
     @include tag-color($name);
   }
 }
 
 [class*="project-tag__container"] {
-  border-radius: map.get($border-radius, pill);
+  border-radius: map.get($border-radius, largest);
   line-height: 1;
   padding: 2px map.get($spacings, small);
   display: flex;

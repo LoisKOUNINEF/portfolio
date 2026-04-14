@@ -45,10 +45,10 @@
 	"constraints": {
 		"title": "Contraintes",
 		"keyPoints": [
-			"Contrat clair entre frontend et backend : des API prévisibles plutôt qu’un couplage ad hoc.",
-			"Périmètre raisonnable : se concentrer sur les fonctionnalités clés plutôt que sur une couverture exhaustive.",
-			"Maintenabilité : un code qui reste lisible et modifiable à mesure que les besoins évoluent.",
-			"Approche orientée production : même en tant que projet personnel, le déploiement et la fiabilité comptaient."
+			"Contrat clair entre frontend et backend: des API prévisibles plutôt qu’un couplage ad hoc.",
+			"Périmètre raisonnable: se concentrer sur les fonctionnalités clés plutôt que sur une couverture exhaustive.",
+			"Maintenabilité: un code qui reste lisible et modifiable à mesure que les besoins évoluent.",
+			"Approche orientée production: même en tant que projet d'études, le déploiement et la fiabilité comptaient."
 		]
 	},
 	"choices": [

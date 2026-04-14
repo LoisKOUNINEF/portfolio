@@ -48,7 +48,7 @@
 			"Clear contract between frontend and backend: predictable APIs over ad-hoc coupling.",
 			"Reasonable scope: focus on core features rather than exhaustive coverage.",
 			"Maintainability: code that remains readable and modifiable as requirements evolve.",
-			"Production mindset: even as a personal project, deployment and reliability mattered"
+			"Production mindset: even as a study project, deployment and reliability mattered"
 		]
 	},
 	"choices": [

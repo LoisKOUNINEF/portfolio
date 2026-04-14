@@ -46,10 +46,10 @@
 	"constraints": {
 		"title": "Contraintes",
 		"keyPoints": [
-			"Dépendances minimales : éviter de tirer de larges écosystèmes pour des besoins simples.",
-			"Architecture explicite : pas de magie cachée ni de conventions implicites.",
-			"Approche centrée sur le DOM : travailler avec la plateforme, pas autour.",
-			"Lisibilité à long terme : un code qui reste compréhensible des mois plus tard."
+			"Dépendances minimales: éviter de tirer de larges écosystèmes pour des besoins simples.",
+			"Architecture explicite: pas de magie cachée ni de conventions implicites.",
+			"Approche centrée sur le DOM: travailler avec la plateforme, pas autour.",
+			"Lisibilité à long terme: un code qui reste compréhensible des mois plus tard."
 		],
 		"after": "Chaque fonctionnalité devait justifier son existence."
 	},
