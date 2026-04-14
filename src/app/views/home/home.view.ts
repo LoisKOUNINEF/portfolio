@@ -12,7 +12,7 @@ const template = `__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
   private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', /*'run-for-the-bun'*/];
-  private readonly _mainProjectsCount = 3;
+  private readonly _mainProjectsCount = 2;
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
