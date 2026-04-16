@@ -1,10 +1,9 @@
 import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import { AnchorComponent, TechBadgeComponent } from '../index.js';
+import { AnchorComponent, BulletPointComponent } from '../index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class HeroComponent extends Component {
-  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nestjs', 'postgresql', 'docker' ];
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});
@@ -13,17 +12,21 @@ export class HeroComponent extends Component {
 
   public childConfigs(): ComponentConfig[] {
     return [
-      ...this.getTechBadges(),
-      this.getProjectsAnchor()
+      this.getProjectsAnchor(),
+      ...this.getKeyCompetences()
     ]
   }
 
-  private getTechBadges(): ComponentConfig[] {
+  private getKeyCompetences(): ComponentConfig[] {
+    const i18nKeys: any[] = [];
+    for (let i = 0; i < 3; i++) {
+      i18nKeys.push(`hero.key-competence-${i+1}`)
+    }
     return this.catalogConfig({
-      array: this._mainStackKeys,
-      selector: 'hero-main-stack',
-      component: TechBadgeComponent,
-      elementName: 'hero-tech-badge'
+      array: i18nKeys,
+      selector: 'hero-key-competences',
+      component: BulletPointComponent,
+      elementName: 'hero-key-competence'
     })
   }
 
@@ -35,15 +38,5 @@ export class HeroComponent extends Component {
         i18nKey: 'hero.cta' 
       })
     }
-  }
-
-  private scrollToProjects() {
-    const projectAnchor = document.getElementById('main-projects');
-    projectAnchor?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  private scrollToTechnos() {
-    const projectAnchor = document.getElementById('tech-stack');
-    projectAnchor?.scrollIntoView({ behavior: 'smooth' });
   }
 }
