@@ -1,6 +1,8 @@
 { 
 "main-title": "Loïs, développeur web fullstack",
-"value-prop": "Je conçois des expériences utilisateur réfléchies et des bases de code pensées pour être comprises, testées et maintenues.",
-"main-stack": "Stack favori:",
+"value-prop": "Je conçois des applications claires, fiables et faites pour durer.",
+  "key-competence-1": "\uD83E\uDDE9 Applications full-stack auto-hébergées",
+  "key-competence-2": "⚙\uFE0F Docker & CI/CD",
+  "key-competence-3": "\uD83E\uDDE0 Culture système & infrastructure",
 "cta": "↓ voir les projets ↓"
 }

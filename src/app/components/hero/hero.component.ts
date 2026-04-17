@@ -1,5 +1,5 @@
 import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import { AnchorComponent, TechBadgeComponent } from '../index.js';
+import {AnchorComponent, BulletPointComponent, TechBadgeComponent} from '../index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -13,6 +13,7 @@ export class HeroComponent extends Component {
 
   public childConfigs(): ComponentConfig[] {
     return [
+      ...this.getKeyCompetences(),
       ...this.getTechBadges(),
       this.getProjectsAnchor()
     ]
@@ -27,6 +28,20 @@ export class HeroComponent extends Component {
     })
   }
 
+  private getKeyCompetences(): ComponentConfig[] {
+    const jsonNamePattern = (i: number) => `hero.key-competence-${i}`;
+    const i18nKeys: any[] = [];
+    for (let i = 0; i < 3; i++) {
+      i18nKeys.push(jsonNamePattern(i+1));
+    }
+    return this.catalogConfig({
+      array: i18nKeys,
+      selector: 'hero-key-competences',
+      component: BulletPointComponent,
+      elementName: 'hero-key-competence'
+    })
+  }
+
   private getProjectsAnchor(): ComponentConfig {
     return {
       selector: 'projects-anchor',
@@ -35,11 +50,6 @@ export class HeroComponent extends Component {
         i18nKey: 'hero.cta' 
       })
     }
-  }
-
-  private scrollToProjects() {
-    const projectAnchor = document.getElementById('main-projects');
-    projectAnchor?.scrollIntoView({ behavior: 'smooth' });
   }
 
   private scrollToTechnos() {

@@ -4,14 +4,21 @@
 			<h1 data-i18n="hero.main-title"></h1>
 		</div>
 		<div class="hero__value-prop">
-			<p data-i18n="hero.value-prop"></p>
+			<p data-event="click:scrollToTechnos" data-i18n="hero.value-prop"></p>
 		</div>
-		<div class="hero__main-stack">
-			<p class="hero__main-stack-title" data-i18n="hero.main-stack"></p>
-			<p data-event="click:scrollToTechnos" class="svgs__container hero__main-stack-icons" data-catalog="hero-main-stack"></p>
+		<div class="hero__key-competences-container">
+			<div class="hero__key-competences">
+				<p data-i18n="hero.key-competence-1"></p>
+				<p data-i18n="hero.key-competence-2"></p>
+				<p data-i18n="hero.key-competence-3"></p>
+				<p class="hero__key-competences underline"></p>
+			</div>
+			<div data-event="click:scrollToTechnos">
+				<span data-catalog="hero-main-stack" class="svgs__container hero__main-stack-icons"></span>
+			</div>
 		</div>
 		<div class="hero__cta-container">
-			<p class="hero__cta u-pre-wrap" data-event="click:scrollToProjects"><span data-component="projects-anchor"></span></p>
+			<p class="hero__cta u-pre-wrap"><span data-component="projects-anchor"></span></p>
 		</div>
 	</div>
 </div>
