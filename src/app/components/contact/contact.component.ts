@@ -4,18 +4,16 @@ import { BaseCardComponent } from '../common/index.js';
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class ContactComponent extends Component {
-  private _resumeLink = '';
+  private _resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-    AppEventBus.subscribe('language-changed', () => this.render());
+    AppEventBus.subscribe('language-changed', () => this.forceRender());
   }
 
-  // public override forceRender(): HTMLElement {
-  //   // const link = document.getElementById('resume-link') as HTMLAnchorElement;
-  //   // link.href = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
-  //   this._resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
-  //   return super.render();
-  // }
+  protected override forceRender(): void {
+    this._resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
+    super.forceRender();
+  }
 
   public childConfigs(): ComponentConfig[] {
     return [

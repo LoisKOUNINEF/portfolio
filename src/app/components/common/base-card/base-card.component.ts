@@ -1,4 +1,4 @@
-import {AppEventBus, Component, ComponentProps, I18nService} from '../../../../core/index.js';
+import { Component, ComponentProps } from '../../../../core/index.js';
 
 export interface IBaseCardConfig {
   icon: string;
@@ -27,14 +27,7 @@ export class BaseCardComponent extends Component<HTMLElement, IBaseCardConfig> {
     const extraClasses = className?.split(' ').filter(Boolean) ?? [];
     this.element.classList.add('base-card', ...extraClasses);
     this.setLinkAttributes();
-    AppEventBus.subscribe('language-changed', () => this.render());
   }
-
-  // public override render(): HTMLElement {
-  //   const link = document.getElementById('resume-link') as HTMLAnchorElement;
-  //   link.href = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
-  //   return super.render();
-  // }
 
   private setLinkAttributes(): void {
     if (!this.config.href) return;
