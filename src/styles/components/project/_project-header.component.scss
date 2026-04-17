@@ -20,6 +20,7 @@
   padding-left: map.get($spacings, medium);
   display: flex;
   align-self: flex-end;
+  padding-bottom: map.get($spacings, smallest);
   gap: map.get($spacings, small);
   @include mixins.respond-to(medium) {
     flex-wrap: wrap;
