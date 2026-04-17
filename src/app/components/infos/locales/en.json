@@ -1,6 +1,9 @@
 {
   "title": "Infos",
-  "location": "Based in Alpes de Haute Provence, France.",
-  "languages": "French, English (C1), German (B2).",
-  "open-to": "Open to remote-first roles, or hybrid opportunities in Aix-en-Provence or Marseille."
+  "location-label": "Based in",
+  "location-subtext": "Alpes-de-Haute-Provence, France",
+  "availability-label": "Availability",
+  "availability-subtext": "Remote-first / Aix-en-Provence / Marseille",
+  "languages-label": "Languages",
+  "languages-subtext": "French (native), English (C1), German (B2)"
 }
