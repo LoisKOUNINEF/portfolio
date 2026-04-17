@@ -19,11 +19,12 @@
 .project-header__tags {
   padding-left: map.get($spacings, medium);
   display: flex;
-  align-self: flex-end; // flex-end ?
+  align-self: flex-end;
   gap: map.get($spacings, small);
   @include mixins.respond-to(medium) {
     flex-wrap: wrap;
     padding-bottom: map.get($spacings, smallest);
+    padding-left: 0;
   }
 }
 
