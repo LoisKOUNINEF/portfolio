@@ -1,0 +1,35 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.infos__wrapper {
+  @include mixins.wrapper;
+  padding-bottom: map.get($spacings, largest) * 3;
+  padding-top: map.get($spacings, large);
+  padding-left: map.get($spacings, large);
+  @include mixins.respond-to(medium) {
+    padding-top: map.get($spacings, largest);
+    padding-left: 0;
+  }
+}
+
+.infos__container {
+  width: 100%;
+  @include mixins.container();
+  text-align: left;
+}
+
+.infos__header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    font-size: map.get($font-sizes, largest);
+  }
+}
+
+.infos__content {
+  font-style: italic;
+  padding: map.get($spacings, large) 0;
+  //opacity: .85;
+}

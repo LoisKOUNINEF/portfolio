@@ -2,7 +2,7 @@ import { ComponentConfig, View } from '../../../core/index.js';
 import {
   AboutMeComponent,
   ContactComponent, EmptyComponent,
-  HeroComponent,
+  HeroComponent, InfosComponent,
   ProjectCardComponent, ProjectsDisclaimerComponent,
   ShowMoreComponent,
   TechStackComponent
@@ -34,9 +34,9 @@ export class HomeView extends View {
       this.getStackConfig(),
       this.getSelfHostingProjectConfig(),
       this.getContactConfig(),
-    ];
+      this.getInfosConfig(),
+    ]
   }
-
   private getHeroConfig(): ComponentConfig {
     return {
       selector: 'hero',
@@ -115,6 +115,13 @@ export class HomeView extends View {
     return {
       selector: 'contact',
       factory: (el) => new ContactComponent(el)
+    }
+  }
+
+  private getInfosConfig(): ComponentConfig {
+    return {
+      selector: 'infos',
+      factory: (el) => new InfosComponent(el)
     }
   }
 }

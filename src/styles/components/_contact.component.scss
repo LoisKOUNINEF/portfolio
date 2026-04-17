@@ -4,7 +4,6 @@
 
 .contact__wrapper {
 	@include mixins.wrapper;
-	padding-bottom: map.get($spacings, largest) * 3;
 	padding-top: map.get($spacings, largest);
 	padding-left: map.get($spacings, large);
 	@include mixins.respond-to(medium) {
@@ -29,12 +28,14 @@
 }
 
 .contact__links {
+	width: 50%;
 	padding: map.get($spacings, large) 0;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: 1fr;
 	gap: map.get($spacings, medium);
 	@include mixins.respond-to(small) {
 		grid-template-columns: 1fr;
+		width: 100%;
 	}
 }
 

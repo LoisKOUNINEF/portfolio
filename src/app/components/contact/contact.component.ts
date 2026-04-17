@@ -1,6 +1,4 @@
 import {AppEventBus, Component, ComponentConfig, I18nService} from '../../../core/index.js';
-import {notify} from "../../../libs/index.js";
-import {Language} from "../../../core/services/i18n/languages.js";
 import {ExternalLinkComponent} from "../common/index.js";
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
@@ -29,15 +27,5 @@ export class ContactComponent extends Component {
         url: 'github.com/LoisKOUNINEF/'
       })
     }
-  }
-
-  private resumeDownloaded = (): void => {
-    const messages: Record<Language, string> = {
-      fr: 'CV Téléchargé',
-      en: 'Resume Downloaded'
-    };
-    const currentLang = I18nService.currentLanguage;
-    const message = messages[currentLang] || messages['fr'];
-    notify(message!, { type: 'success' });
   }
 }
