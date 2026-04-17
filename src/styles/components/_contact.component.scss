@@ -30,50 +30,93 @@
 
 .contact__links {
 	padding: map.get($spacings, large) 0;
-	text-align: left;
-	vertical-align: center;;
-	p {
-		padding: map.get($spacings, small) 0;
-	}
-	a {
-  	&:focus-visible {
-  		padding-top: map.get($spacings, smallest);
-  		border-radius: map.get($border-radius, small);
-    	@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
-  	}
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: map.get($spacings, medium);
+	@include mixins.respond-to(small) {
+		grid-template-columns: 1fr;
 	}
 }
 
-.contact__icon {
+.contact__link-card {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: map.get($spacings, medium);
+	padding: map.get($spacings, medium);
+	border-radius: map.get($border-radius, large);
+	text-decoration: none;
+	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
+	@include mixins.themed(background, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.04));
+	@include mixins.themed(border, 1px solid rgba(map.get($light-theme, primary), 0.2), 1px solid rgba(map.get($dark-theme, primary), 0.15));
+	@include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, primary), 0.08), 0 1px 3px rgba(0, 0, 0, 0.3));
+
+	&:hover {
+		transform: translateY(-2px);
+		@include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, primary), 0.14), 0 6px 16px rgba(0, 0, 0, 0.45));
+		@include mixins.themed(border-color, rgba(map.get($light-theme, primary), 0.45), rgba(map.get($dark-theme, primary), 0.35));
+	}
+
+	&:focus-visible {
+		outline-offset: 2px;
+		@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+	}
+}
+
+.contact__link-card__icon {
 	font-size: map.get($font-sizes, large);
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	.base-svg {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&::after {
+			padding: map.get($spacings, smallest);
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
+}
+
+.contact__link-card__content {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.contact__link-card__label {
+	font-weight: 700;
+	font-size: map.get($font-sizes, medium);
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: map.get($border-radius, large);
+	}
+}
+
+.contact__link-card__subtext {
+	font-size: map.get($font-sizes, small);
+	font-weight: 400;
+	opacity: 0.65;
+
+	&:empty {
+		display: none;
+	}
 }
 
 .contact__infos {
 	font-style: italic;
 	padding: map.get($spacings, large) 0;
-}
-
-.contact__github-container {
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-end;
-	.svg-external {
-		&:hover::after {
-			scale: 1;
-		}
-	}
-}
-
-.contact__github {
-	padding-left: map.get($spacings, smallest);
-	&:hover {
-		cursor: pointer;
-		text-decoration: underline;
-	}
-	@media(hover: none) {
-		&:hover {
-			cursor: default;
-			text-decoration: none;
-		}
-	}
+	opacity: .85;
 }

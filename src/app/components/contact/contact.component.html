@@ -4,38 +4,42 @@
 			<h2 data-i18n="contact.title"></h2>
 		</div>
 		<div class="contact__links">
-			<p>
-				<a href="mailto:loiskouninef@gmail.com">
-					<span class="contact__icon">✉️ </span>
-					<span data-i18n="contact.email"></span>
-				</a>
-			</p>
-			<p class="c-external-link">
-				<a href="https://www.linkedin.com/in/lo%C3%AFs-kouninef/" target="_blank">
-					<span class="contact__icon">🤝 </span>
-					<span data-i18n="contact.linkedin"></span>
-				</a>
-			</p>
-			<p class="contact__github-container">
-				<span data-component="github-icon"></span>
-				<span  class="c-external-link">
-					<a href="https://github.com/LoisKOUNINEF/" target="_blank">
-						<span data-i18n="contact.github" class="contact__github"></span>
-					</a>
+			<a class="contact__link-card" href="mailto:loiskouninef@gmail.com">
+				<span class="contact__link-card__icon">✉️</span>
+				<span class="contact__link-card__content">
+					<span class="contact__link-card__label" data-i18n="contact.email"></span>
+					<span class="contact__link-card__subtext" data-i18n="contact.email-subtext"></span>
 				</span>
-			</p>
-			<p class="c-download-link">
-				<a data-event="click:resumeDownloaded" id="resume-link" download="loïs-kouninef-resume.pdf" target="_self">
-					<span class="contact__icon">📥 </span>
-					<span data-i18n="contact.resume"></span>
-				</a>
-			</p>
+			</a>
+			<a class="contact__link-card c-external-link" href="https://www.linkedin.com/in/lo%C3%AFs-kouninef/" target="_blank">
+				<span class="contact__link-card__icon">🤝</span>
+				<span class="contact__link-card__content">
+					<span class="contact__link-card__label" data-i18n="contact.linkedin"></span>
+					<span class="contact__link-card__subtext" data-i18n="contact.linkedin-subtext"></span>
+				</span>
+			</a>
+			<div class="contact__link-card">
+				<span class="contact__link-card__icon" data-component="github-icon"></span>
+				<span class="contact__link-card__content">
+					<a href="https://github.com/LoisKOUNINEF/" target="_blank" class="c-external-link contact__link-card__label">
+						<span data-i18n="contact.github"></span>
+					</a>
+					<span class="contact__link-card__subtext" data-i18n="contact.github-subtext"></span>
+				</span>
+			</div>
+			<a class="contact__link-card c-download-link" data-event="click:resumeDownloaded" id="resume-link" download="loïs-kouninef-resume.pdf" target="_self">
+				<span class="contact__link-card__icon">📥</span>
+				<span class="contact__link-card__content">
+					<span class="contact__link-card__label" data-i18n="contact.resume"></span>
+					<span class="contact__link-card__subtext" data-i18n="contact.resume-subtext"></span>
+				</span>
+			</a>
 		</div>
 		<div class="contact__infos">
 			<p><span>📍 </span><span data-i18n="contact.location"></span></p>
 			<p><span>✔️ </span><span data-i18n="contact.open-to"></span></p>
 			<br/>
-			<p><span>🗨️ </span></span><span data-i18n="contact.languages"></span></p></p>
+			<p><span>🗨️ </span><span data-i18n="contact.languages"></span></p>
 		</div>
 	</div>
 </div>

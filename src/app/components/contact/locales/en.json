@@ -1,10 +1,11 @@
 {
 	"title": "Contact",
-	"email": "Email me",
+	"email": "Email",
+	"email-subtext": "Get in touch",
 	"linkedin": "LinkedIn",
+	"github": "GitHub",
 	"resume": "Download résumé",
 	"location": "Based in Alpes de Haute Provence, France.",
 	"languages": "French, English (C1), German (B2).",
-	"open-to": "Open to remote-first roles, or hybrid opportunities in Aix-en-Provence or Marseille.",
-	"github": "GitHub"
+	"open-to": "Open to remote-first roles, or hybrid opportunities in Aix-en-Provence or Marseille."
 }
