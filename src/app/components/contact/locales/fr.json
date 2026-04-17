@@ -3,5 +3,9 @@
 	"email": "Par Email",
 	"linkedin": "LinkedIn",
 	"github": "GitHub",
-	"resume": "Télécharger CV"
+	"resume": "Télécharger CV",
+	"email-subtext": "Get in touch",
+	"linkedin-subtext": "Let’s connect",
+	"github-subtext": "Discover my projects",
+	"resume-subtext": "Take a closer look"
 }

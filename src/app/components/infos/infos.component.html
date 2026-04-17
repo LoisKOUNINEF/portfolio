@@ -1,30 +1,12 @@
 <div class="infos__wrapper">
-    <div class="infos__container">
-        <div class="infos__header">
-            <h2 data-i18n="infos.title"></h2>
-        </div>
-        <div class="infos__items">
-            <div class="infos__item-card">
-                <span class="infos__item-card__icon">📍</span>
-                <span class="infos__item-card__content">
-                    <span class="infos__item-card__label" data-i18n="infos.location-label"></span>
-                    <span class="infos__item-card__subtext" data-i18n="infos.location-subtext"></span>
-                </span>
-            </div>
-            <div class="infos__item-card">
-                <span class="infos__item-card__icon">✔️</span>
-                <span class="infos__item-card__content">
-                    <span class="infos__item-card__label" data-i18n="infos.availability-label"></span>
-                    <span class="infos__item-card__subtext" data-i18n="infos.availability-subtext"></span>
-                </span>
-            </div>
-            <div class="infos__item-card">
-                <span class="infos__item-card__icon">🗨️</span>
-                <span class="infos__item-card__content">
-                    <span class="infos__item-card__label" data-i18n="infos.languages-label"></span>
-                    <span class="infos__item-card__subtext" data-i18n="infos.languages-subtext"></span>
-                </span>
-            </div>
-        </div>
-    </div>
+	<div class="infos__container">
+		<div class="infos__header">
+			<h2 data-i18n="infos.title"></h2>
+		</div>
+		<div class="infos__items">
+			<span data-component="location-card"></span>
+			<span data-component="availability-card"></span>
+			<span data-component="languages-card"></span>
+		</div>
+	</div>
 </div>

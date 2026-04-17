@@ -37,42 +37,8 @@
   @include mixins.respond-to(small) {
     width: 100%;
   }
-}
 
-.infos__item-card {
-  display: flex;
-  align-items: center;
-  gap: map.get($spacings, medium);
-  padding: map.get($spacings, medium);
-  border-radius: map.get($border-radius, large);
-  @include mixins.themed(background, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.04));
-  @include mixins.themed(border, 1px solid rgba(map.get($light-theme, primary), 0.2), 1px solid rgba(map.get($dark-theme, primary), 0.15));
-  @include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, primary), 0.08), 0 1px 3px rgba(0, 0, 0, 0.3));
-}
-
-.infos__item-card__icon {
-  font-size: map.get($font-sizes, large);
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.infos__item-card__content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.infos__item-card__label {
-  font-weight: 700;
-  font-size: map.get($font-sizes, medium);
-}
-
-.infos__item-card__subtext {
-  font-size: map.get($font-sizes, small);
-  font-weight: 400;
-  opacity: 0.65;
+  [data-component] {
+    display: contents;
+  }
 }
