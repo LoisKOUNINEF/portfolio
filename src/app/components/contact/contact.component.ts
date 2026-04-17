@@ -56,7 +56,7 @@ export class ContactComponent extends Component {
           href: `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`,
           download: 'loïs-kouninef-resume.pdf',
           target: '_self'
-        }, { className: 'contact__resume-card' })
+        }, { className: 'contact__link-card contact__resume-card' })
       },
     ];
   }

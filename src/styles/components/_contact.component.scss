@@ -52,6 +52,14 @@
 		transform: translateY(-2px);
 		@include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, primary), 0.14), 0 6px 16px rgba(0, 0, 0, 0.45));
 		@include mixins.themed(border-color, rgba(map.get($light-theme, primary), 0.45), rgba(map.get($dark-theme, primary), 0.35));
+
+		.base-card__label,
+		.base-card__subtext {
+			text-decoration: underline;
+		}
+		.base-card__icon {
+			text-decoration: none!important;
+		}
 	}
 
 	&:focus-visible {
@@ -60,6 +68,7 @@
 	}
 
 	.base-card__icon {
+		text-decoration: none;
 		.base-svg {
 			position: relative;
 			z-index: 1;
@@ -91,4 +100,11 @@
 	opacity: .85;
 }
 
-.contact__resume-card {}
+.contact__resume-card {
+	@include mixins.themed(border, 1px solid rgba(map.get($light-theme, primary), 0.5), 1px solid rgba(map.get($dark-theme, primary), 0.4));
+	@include mixins.themed(background, rgba(map.get($light-theme, primary), 0.06), rgba(map.get($dark-theme, primary), 0.08));
+
+	.base-card__label {
+		@include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+	}
+}
