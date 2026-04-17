@@ -20,3 +20,10 @@
 		padding-left: 0;
 	}
 }
+
+.footer__credits {
+	line-height: map.get($spacings, large);
+	@include mixins.respond-to(medium) {
+		@include mixins.flex-column;
+	}
+}

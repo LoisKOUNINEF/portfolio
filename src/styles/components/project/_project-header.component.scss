@@ -9,7 +9,7 @@
   flex-direction: column;
   padding: map.get($spacings, large) map.get($spacings, large);
   h2 {
-    font-size: map.get($font-sizes, large);
+    font-size: map.get($font-sizes, large);text-wrap: wrap;
   }
   @include mixins.respond-to(medium) {
     padding-left: 0;
@@ -17,6 +17,7 @@
 }
 
 .project-header__tags {
+  padding-left: map.get($spacings, medium);
   display: flex;
   align-self: center; // flex-end ?
   gap: map.get($spacings, small);
@@ -29,7 +30,7 @@
 .project-header__images {
   display: flex;
   justify-content: space-between;
-  .project-header__svgs {
+  .project-header__svgs {display: flex; flex-wrap: wrap;
     padding-left: map.get($spacings, large);
   }
   @include mixins.respond-to(medium) {
