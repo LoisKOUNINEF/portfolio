@@ -30,7 +30,7 @@ export interface BaseComponentOptions {
 export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
   private _children: BaseComponent[] = [];
   protected element: T;
-  protected eventListeners: Array<[string, EventListener]> = [];
+  protected eventListeners: Array<[EventTarget, string, EventListener]> = [];
   private _options: ComponentOptions;
 
   constructor({
@@ -51,7 +51,7 @@ export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
   }
 
   public destroy(): void {
-    EventHelper.destroyEvents(this.element, this.eventListeners);
+    EventHelper.destroyEvents(this.eventListeners);
     ChildrenHelper.destroyChildren(this._children);
     this.element.remove();
   }
@@ -83,6 +83,8 @@ interface CatalogConfig extends ComponentOptions {
   }
 
   protected autoBindEvents(): void {
+    EventHelper.destroyEvents(this.eventListeners);
+    this.eventListeners.length = 0;
     EventHelper.bindEvents(this, this.element, this.eventListeners);
   }
 
