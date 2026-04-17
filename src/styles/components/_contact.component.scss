@@ -52,3 +52,28 @@
 	font-style: italic;
 	padding: map.get($spacings, large) 0;
 }
+
+.contact__github-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	.svg-external {
+		&:hover::after {
+			scale: 1;
+		}
+	}
+}
+
+.contact__github {
+	padding-left: map.get($spacings, smallest);
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	@media(hover: none) {
+		&:hover {
+			cursor: default;
+			text-decoration: none;
+		}
+	}
+}
