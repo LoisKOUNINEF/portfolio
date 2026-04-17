@@ -1,6 +1,6 @@
 {
-	"name": "nutin",
-	"tagline": "Une boîte à outils frontend légère construite pour valider ma compréhension des fondements des SPAs.",
+	"name": "Mini Framework Frontend - nutin",
+	"tagline": "Un outil frontend léger, sans dépendance runtime.",
 	"imageSrc": "./assets/images/projects/nutin",
 	"tags": [
 		{

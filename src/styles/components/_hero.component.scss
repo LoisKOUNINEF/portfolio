@@ -5,7 +5,10 @@
 
 .hero__wrapper {
 	@include mixins.wrapper;
-	min-height: 100svh;
+	min-height: 90svh;
+	//@include mixins.respond-to(medium) {
+	//	min-height: 100svh;
+	//}
 }
 
 .hero__container {
@@ -26,6 +29,7 @@
 }
 
 .hero__value-prop {
+	padding-top: map.get($spacings, largest);
 	padding-left: map.get($spacings, largest);
 	font-size: map.get($font-sizes, largest);
 	max-width: 50ch;
@@ -33,7 +37,7 @@
 	@include mixins.respond-to(medium) {
 		font-size: map.get($font-sizes, large);
 		padding-left: 0;
-		padding-bottom: map.get($spacings, smallest);
+		padding-top: map.get($spacings, large);
 	}
 }
 
@@ -45,27 +49,55 @@
 	align-items: flex-start;
 	@include mixins.respond-to(medium) {
 		padding-left: 0;
+		padding-top: map.get($spacings, large);
 	}
 }
 
 .hero__key-competences {
+	padding-left: map.get($spacings, largest);
 	max-width: 70ch;
 	font-family: $secondary-font;
 	font-weight: 700;
 	letter-spacing: 0.1rem;
+	line-height: 2rem;
 	opacity: .85;
 	border-radius: map.get($spacings, small);
-	@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .3));
+	p:nth-last-child(1) {
+		@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .3));
+	};
 	@include mixins.respond-to(medium) {
 		font-size: map.get($font-sizes, small);
-
+		padding-left: 0;
 	}
 }
+
+.hero__main-stack-icons {
+	padding-left: map.get($spacings, largest);
+	padding-top: map.get($spacings, largest);
+		.svg-tech-label {
+			font-size: 0.7rem;
+		}
+		.base-svg {
+			&::after {
+				padding: .8rem;
+			}
+		}
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+		.svgs__container {
+			padding-left: map.get($spacings, small);
+		}
+	}
+	 &:hover {
+		 cursor: pointer;
+	 }
+ }
 
 .hero__cta-container {
 	padding-left: map.get($spacings, largest);
 	@include mixins.respond-to(medium) {
 		padding: 0;
+		padding-top: map.get($spacings, large);
 	}
 }
 

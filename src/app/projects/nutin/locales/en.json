@@ -1,6 +1,6 @@
 {
-	"name": "nutin",
-	"tagline": "A lightweight frontend toolkit built as a learning exercise to validate my understanding of SPA fundamentals.",
+	"name": "Mini Framework Frontend - nutin",
+	"tagline": "A lightweight frontend toolkit, with no runtime dependencies.",
 	"imageSrc": "./assets/images/projects/nutin",
 	"tags": [
 		{

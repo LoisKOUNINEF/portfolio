@@ -1,5 +1,5 @@
 {
-	"name": "PixelsMansion",
+	"name": "Games in TypeScript - PixelsMansion",
 	"tagline": "A small retro games playground built to deepen my understanding of object-oriented design.",
 	"imageSrc": "./assets/images/projects/pixels-mansion",
 	"tags": [

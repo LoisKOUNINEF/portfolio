@@ -17,6 +17,7 @@ const labels: Record<string, string> = {
   nestjs: 'NestJs',
   vuejs: 'VueJs',
   sqlite: 'SQLite',
+  golang: 'Go',
 }
 
 const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
