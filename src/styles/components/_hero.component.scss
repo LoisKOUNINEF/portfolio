@@ -71,9 +71,29 @@
 	}
 }
 
-.hero__main-stack-icons {
+.hero__main-stack {
 	padding-left: map.get($spacings, largest);
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+	}
+}
+
+.hero__main-stack-title {
 	padding-top: map.get($spacings, largest);
+	font-family: $secondary-font;
+	font-weight: 700;
+	letter-spacing: 0.15rem;
+	opacity: .65;
+	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +10%), color.scale(map.get($dark-theme, text), $lightness: +40%));
+	border-radius: map.get($spacings, small);
+	@include mixins.respond-to(medium) {
+		padding-left: map.get($spacings, smallest);
+	}
+}
+
+.hero__main-stack-icons {
+	padding-top: map.get($spacings, small);
+	padding-left: map.get($spacings, largest);
 		.svg-tech-label {
 			font-size: 0.7rem;
 		}
@@ -83,7 +103,7 @@
 			}
 		}
 	@include mixins.respond-to(medium) {
-		padding-left: 0;
+		padding-left: map.get($spacings, small);
 		.svgs__container {
 			padding-left: map.get($spacings, small);
 		}

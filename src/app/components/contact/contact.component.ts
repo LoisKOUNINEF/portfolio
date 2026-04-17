@@ -1,6 +1,7 @@
-import { AppEventBus, Component, I18nService } from '../../../core/index.js';
+import {AppEventBus, Component, ComponentConfig, I18nService} from '../../../core/index.js';
 import {notify} from "../../../libs/index.js";
 import {Language} from "../../../core/services/i18n/languages.js";
+import {ExternalLinkComponent} from "../common/index.js";
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -14,6 +15,20 @@ export class ContactComponent extends Component {
     const link = document.getElementById('resume-link') as HTMLAnchorElement;
     link.href = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
     return super.render();
+  }
+
+  public childConfigs(): ComponentConfig[] {
+    return [this.getGithubLinkConfig()];
+  }
+
+  private getGithubLinkConfig(): ComponentConfig {
+    return {
+      selector: 'github-icon',
+      factory: (el) => new ExternalLinkComponent(el, {
+        svgKey: 'github',
+        url: 'github.com/LoisKOUNINEF/'
+      })
+    }
   }
 
   private resumeDownloaded = (): void => {
