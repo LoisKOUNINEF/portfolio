@@ -4,7 +4,7 @@
 
 .contact__wrapper {
 	@include mixins.wrapper;
-	padding-top: map.get($spacings, largest);
+	padding-top: 3rem;
 	padding-left: map.get($spacings, large);
 	@include mixins.respond-to(medium) {
 		padding-top: map.get($spacings, largest) + 1;

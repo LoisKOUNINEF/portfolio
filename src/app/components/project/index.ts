@@ -7,4 +7,4 @@ export * from './common/project-links/project-links.component.js';
 export * from './common/project-tag/project-tag.component.js';
 
 export * from './show-more/show-more.component.js';
-export * from './projects-disclaimer/projects-disclaimer.component.js';
+export * from './projects-header/projects-header.component.js';

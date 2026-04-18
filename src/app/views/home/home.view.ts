@@ -3,7 +3,7 @@ import {
   AboutMeComponent,
   ContactComponent, EmptyComponent,
   HeroComponent, InfosComponent,
-  ProjectCardComponent, ProjectsDisclaimerComponent,
+  ProjectCardComponent, ProjectsHeaderComponent,
   ShowMoreComponent,
   TechStackComponent
 } from '../../components/index.js';
@@ -54,7 +54,7 @@ export class HomeView extends View {
   private getDisclaimerConfig(): ComponentConfig {
     return {
       selector: 'projects-disclaimer',
-      factory: (el) => new ProjectsDisclaimerComponent(el)
+      factory: (el) => new ProjectsHeaderComponent(el)
     }
   }
 

@@ -10,12 +10,18 @@
 .project-card__container {
   width: 100%;
   @include mixins.container(primary);
+  @include mixins.header(primary);
   text-align: left;
   gap: map.get($spacings, largest);
 
   &.project-card__standalone {
     @include mixins.container(secondary);
-    @include mixins.header(secondary);
+    padding-left: 0;
+    //box-shadow: none;
+    .project-header__title {
+      border-bottom: 0;
+    }
+    padding-top: 3rem;
     width: 100%;
     justify-content: flex-start;
     h2 {
