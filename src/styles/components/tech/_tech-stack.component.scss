@@ -109,3 +109,12 @@
 .tech-stack__badge-catalog-tools {
 	padding-bottom: map.get($spacings, medium);
 }
+
+.tech-stack__subtitle {
+	padding-top: map.get($spacings, small);
+	//padding-left: map.get($spacings, largest);
+	font-style: italic;
+	//font-family: $secondary-font;
+	opacity: .75;
+	font-size: .9rem;
+}
