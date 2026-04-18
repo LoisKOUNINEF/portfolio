@@ -27,7 +27,7 @@
 		"keyPoints": [
 			"Jeux basés sur une grille, construits sur des classes abstraites communes.",
 			"Sauvegarde automatique des scores et de l'état actuel du jeu.",
-			"Structure guidée par le framework, Angular étant utilisé comme couche d’orchestration, avec les \"signals\" Angular pour la propagation des changements."
+			"Structure guidée par le framework, Angular étant utilisé comme couche d’orchestration, avec les 'signals' Angular pour la propagation des changements."
 		],
 		"after": "Le projet se concentre moins sur les jeux individuels que sur la conception d’une architecture commune et l'application des principes de la programmation orientée objet."
 	},

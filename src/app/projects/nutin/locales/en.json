@@ -18,7 +18,7 @@
 		"Router and event bus for navigation and state flow.",
 		"Explicit event-driven updates (no automatic change detection).",
 		"Not intended to replace frameworks; intentionally limited in scope.",
-		"Optimized for personal projects."
+		"Used to build this portfolio."
 		]
 	},
 	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own minimal toolkit.",

@@ -47,7 +47,7 @@
 
 .project-header__tagline {
   font-family: $secondary-font; 
-  padding-left: map.get($spacings, medium);
+  //padding-left: map.get($spacings, medium);
   padding-top: map.get($spacings, medium);
   font-size: 1.1rem;
   font-style: italic;

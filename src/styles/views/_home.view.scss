@@ -7,6 +7,7 @@
 
 .home__main-projects {
   width: 100%;
+  padding-top: 3rem;
   & > [data-catalog],
   .home__additional-projects > [data-catalog] {
     display: grid;
@@ -21,6 +22,7 @@
 
     @include mixins.respond-to(medium) {
       grid-template-columns: repeat(1, minmax(0, 1fr));
+      padding-top: 0;
     }
 
     & > article {
@@ -94,9 +96,13 @@
     display: none;
 
     &.open {
+      padding-top: map.get($spacings, large);
       display: block;
       -webkit-animation: fadeIn .2s;
       animation: fadeIn .2s;
+      @include mixins.respond-to(medium) {
+        padding-top: 0;
+      }
     }
   }
 }
@@ -142,17 +148,27 @@
   }
 }
 
-.projects-disclaimer {
+.projects-header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  padding-left: map.get($spacings, largest);
+  h2 {
+    font-size: map.get($font-sizes, largest);
+    padding-left: map.get($spacings, smallest);
+  }
   padding-top: map.get($spacings, largest);
   padding-bottom: map.get($spacings, large);
-  padding-left: map.get($spacings, largest)*2;
   p {
     min-width: 100ch;
     font-size: map.get($font-sizes, small);
     font-style: italic;
+    padding-left: map.get($spacings, largest);
   }
   @include mixins.respond-to(medium) {
-    padding-left: map.get($spacings, medium);
+    padding-left: map.get($spacings, small);
+    padding-top: 0;
+    padding-bottom: 0;
     p {
       min-width: auto;
     }

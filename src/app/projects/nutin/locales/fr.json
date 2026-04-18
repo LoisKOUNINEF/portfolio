@@ -18,7 +18,7 @@
 			"Router et bus d'événements pour la navigation et le flux d'état.",
 			"Mises à jour explicites pilotées par événements (pas de détection automatique des changements).",
 			"N'a pas vocation à remplacer les frameworks; volontairement limité en portée.",
-			"Optimisé pour des projets personnels."
+			"Utilisé pour développer ce portfolio."
 		]
 	},
 	"popTagline": "Une boîte à outils frontend minimaliste construite pour explorer l'architecture SPA, le rendu et le flux d'état.",

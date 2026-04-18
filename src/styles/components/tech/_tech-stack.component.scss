@@ -5,8 +5,9 @@
 .tech-stack__wrapper {
 	@include mixins.wrapper;
 	padding-left: map.get($spacings, large);
+	padding-top: map.get($spacings, largest) * 2;
 	@include mixins.respond-to(medium) {
-		padding-left:0;
+		padding-left: 0;
 	}
 }
 
@@ -18,7 +19,6 @@
 .tech-stack__header {
 	width:100%;
 	@include mixins.header;
-	padding-top: map.get($spacings, large);
 	padding-right: map.get($spacings, large);
 	h2 {
   		font-size: map.get($font-sizes, largest);
@@ -111,10 +111,14 @@
 }
 
 .tech-stack__subtitle {
-	padding-top: map.get($spacings, small);
-	//padding-left: map.get($spacings, largest);
+	padding-top: map.get($spacings, smallest);
+	//padding-left: map.get($spacings, medium);
 	font-style: italic;
-	//font-family: $secondary-font;
+	font-family: $secondary-font;
 	opacity: .75;
 	font-size: .9rem;
+	@include mixins.respond-to(medium) {
+		font-size: .8rem;
+		padding-left: 0;
+	}
 }
