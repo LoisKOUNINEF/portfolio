@@ -17,10 +17,10 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 export class NavbarComponent extends Component<HTMLHeadingElement> {
   private readonly _anchorHrefs: IAnchorConfig[] = [
     { href: '#hero', i18nKey: 'navbar.hero', className: `${NavToggleHelper.toggleClasses.active}` },
-    { href: '#about', i18nKey: 'navbar.about' },
     { href: '#main-projects', i18nKey: 'navbar.main-projects' },
-    { href: '#tech-stack', i18nKey: 'navbar.tech-stack' },
     { href: '#infrastructure', i18nKey: 'navbar.infrastructure' },
+    { href: '#about', i18nKey: 'navbar.about' },
+    { href: '#tech-stack', i18nKey: 'navbar.tech-stack' },
     { href: '#contact', i18nKey: 'navbar.contact' },
   ];
 

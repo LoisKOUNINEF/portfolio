@@ -1,7 +1,7 @@
 {
-	"title": "Technos",
+	"title": "Tech Stack",
 	"frontend-title": "Frontend",
 	"backend-title": "Backend",
-	"tools-title": "Tooling & Practices",
+	"tools-title": "Infra & Deployment",
 	"database-title": "Database"
 }

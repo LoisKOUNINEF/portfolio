@@ -4,22 +4,24 @@
 
 .tech-stack__wrapper {
 	@include mixins.wrapper;
+	padding-left: map.get($spacings, large);
+	@include mixins.respond-to(medium) {
+		padding-left:0;
+	}
 }
 
 .tech-stack__container {
 	width: 100%;
-	@include mixins.container(accent);
+	@include mixins.container;
 }
 
 .tech-stack__header {
 	width:100%;
-	@include mixins.header(accent);
+	@include mixins.header;
 	padding-top: map.get($spacings, large);
-	padding-left: map.get($spacings, large);
 	padding-right: map.get($spacings, large);
 	h2 {
   		font-size: map.get($font-sizes, largest);
-		@include mixins.themed(border-bottom, 3px solid rgba(map.get($light-theme, accent), .5), 3px solid rgba(map.get($dark-theme, accent), .5));
   	}
   	@include mixins.respond-to(medium) {
   		padding-bottom: map.get($spacings, smallest);
@@ -58,11 +60,6 @@
 
 .tech-stack__badges-title-main {
   font-size: map.get($font-sizes, medium);
-}
-
-.tech-stack__badges-title-tools {
-  font-size: map.get($font-sizes, smallest);
-  letter-spacing: 0.125rem;
 }
 
 .tech-stack__icon {
@@ -111,22 +108,4 @@
 
 .tech-stack__badge-catalog-tools {
 	padding-bottom: map.get($spacings, medium);
-	padding-left: 2.5rem;
-	@include mixins.respond-to(medium) {
-		padding-left: 0;
-	}
-	> * {
-		width: 3rem;
-		@include mixins.respond-to(medium) {
-			flex-basis: 20%;
-		}
-	}
-	.svg-tech-label {
-	  font-size: 0.7rem;
-	}
-  .base-svg {
-		&::after {
-	    padding: .8rem;
-	  }
-	}
 }
