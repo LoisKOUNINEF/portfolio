@@ -5,6 +5,7 @@
 
 .project-card__wrapper {
   @include mixins.wrapper;
+  padding-top: 0;
 }
 
 .project-card__container {
@@ -27,10 +28,15 @@
     h2 {
       font-size: map.get($font-sizes, largest);
     }
+    @include mixins.respond-to(medium) {
+      padding-top: map.get($spacings, medium);
+      padding-left: map.get($spacings, medium);
+    }
   }
 
   @include mixins.respond-to(medium) {
     display: block;
+    padding-top: 0;
     .project-header__svgs {
       display: none;
     }

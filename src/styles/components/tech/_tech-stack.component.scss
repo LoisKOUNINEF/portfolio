@@ -7,7 +7,8 @@
 	padding-left: map.get($spacings, large);
 	padding-top: 3rem;
 	@include mixins.respond-to(medium) {
-		padding-left:0;
+		padding-top: map.get($spacings, medium);
+		padding-left: 0;
 	}
 }
 

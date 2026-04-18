@@ -22,6 +22,7 @@
 
     @include mixins.respond-to(medium) {
       grid-template-columns: repeat(1, minmax(0, 1fr));
+      padding-top: 0;
     }
 
     & > article {
@@ -161,7 +162,9 @@
     padding-left: map.get($spacings, largest);
   }
   @include mixins.respond-to(medium) {
-    padding-left: map.get($spacings, medium);
+    padding-left: map.get($spacings, small);
+    padding-top: 0;
+    padding-bottom: 0;
     p {
       min-width: auto;
     }
