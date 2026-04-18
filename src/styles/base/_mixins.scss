@@ -54,6 +54,7 @@
     }
   }
   .project-header__title {
+    padding-top:  map.get($spacings, small);
     display: flex;
     justify-content: space-between;
     @if $color-identity {

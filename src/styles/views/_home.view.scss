@@ -96,9 +96,13 @@
     display: none;
 
     &.open {
+      padding-top: map.get($spacings, large);
       display: block;
       -webkit-animation: fadeIn .2s;
       animation: fadeIn .2s;
+      @include mixins.respond-to(medium) {
+        padding-top: 0;
+      }
     }
   }
 }

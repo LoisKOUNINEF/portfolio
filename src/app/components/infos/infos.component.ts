@@ -14,7 +14,8 @@ export class InfosComponent extends Component {
       {
         selector: 'location-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '📍',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/pin.svg',
           labelKey: 'infos.location-label',
           subtextKey: 'infos.location-subtext',
         })
@@ -22,7 +23,8 @@ export class InfosComponent extends Component {
       {
         selector: 'availability-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '✔️',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/calendar.svg',
           labelKey: 'infos.availability-label',
           subtextKey: 'infos.availability-subtext',
         })
@@ -30,7 +32,8 @@ export class InfosComponent extends Component {
       {
         selector: 'languages-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '🗨️',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/dialog.svg',
           labelKey: 'infos.languages-label',
           subtextKey: 'infos.languages-subtext',
         })

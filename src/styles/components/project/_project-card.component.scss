@@ -20,16 +20,16 @@
     padding-left: 0;
     //box-shadow: none;
     .project-header__title {
-      border-bottom: 0;
+      @include mixins.themed(border-bottom, 0, 0);
     }
-    padding-top: 3rem;
+    padding-top: map.get($spacings, largest) * 2;
     width: 100%;
     justify-content: flex-start;
     h2 {
       font-size: map.get($font-sizes, largest);
     }
     @include mixins.respond-to(medium) {
-      padding-top: map.get($spacings, medium);
+      padding-top: map.get($spacings, large);
       padding-left: map.get($spacings, medium);
     }
   }
@@ -44,7 +44,6 @@
 }
 
 .project-card__content {
-  padding-left: map.get($spacings, medium);
   padding-bottom: map.get($spacings, medium);
   @include mixins.respond-to(medium) {
     padding: 0;

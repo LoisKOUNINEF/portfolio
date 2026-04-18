@@ -28,7 +28,7 @@
 	height: 1.5rem;
 	object-fit: contain;
 
-	.dark-theme & {
+	.dark-theme &[src*="github"] {
 		filter: invert(1);
 	}
 }

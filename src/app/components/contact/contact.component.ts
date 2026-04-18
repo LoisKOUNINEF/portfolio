@@ -20,7 +20,8 @@ export class ContactComponent extends Component {
       {
         selector: 'email-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '✉️',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/envelope.svg',
           labelKey: 'contact.email',
           subtextKey: 'contact.email-subtext',
           href: 'mailto:loiskouninef@gmail.com',
@@ -29,7 +30,8 @@ export class ContactComponent extends Component {
       {
         selector: 'linkedin-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '🤝',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/handshake.svg',
           labelKey: 'contact.linkedin',
           subtextKey: 'contact.linkedin-subtext',
           href: 'https://www.linkedin.com/in/lo%C3%AFs-kouninef/',
@@ -50,7 +52,8 @@ export class ContactComponent extends Component {
       {
         selector: 'resume-card',
         factory: (el) => new BaseCardComponent(el, {
-          icon: '📥',
+          icon: '',
+          iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
           labelKey: 'contact.resume',
           subtextKey: 'contact.resume-subtext',
           href: `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`,

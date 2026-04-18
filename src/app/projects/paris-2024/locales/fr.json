@@ -17,7 +17,7 @@
 			"Flux d'authentification complet (inscription, vérification email, réinitialisation mot de passe). Accès basé sur les rôles (interfaces admin et staff).",
 			"Parcours d'achat avec persistance du panier et fusion à la connexion. Intégration Stripe pour des paiements sécurisés.",
 			"Génération de billets avec codes QR et envoi par email.",
-			"Base de données PostgreSQL avec requêtes personnalisées et utilisation d'ORM."
+			"Base de données PostgreSQL avec index et optimisation des requêtes."
 		]
 	},
 	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",
