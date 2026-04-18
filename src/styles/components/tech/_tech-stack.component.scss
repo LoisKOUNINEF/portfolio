@@ -114,9 +114,11 @@
 .tech-stack__subtitle {
 	padding-top: map.get($spacings, smallest);
 	padding-left: map.get($spacings, medium);
-	//padding-left: map.get($spacings, largest);
 	font-style: italic;
-	//font-family: $secondary-font;
+	font-family: $secondary-font;
 	opacity: .75;
 	font-size: .9rem;
+	@include mixins.respond-to(medium) {
+		font-size: .8rem;
+	}
 }
