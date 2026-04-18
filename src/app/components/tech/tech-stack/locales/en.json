@@ -1,5 +1,6 @@
 {
 	"title": "Tech Stack",
+	"subtitle": "Core technologies used in production",
 	"frontend-title": "Frontend",
 	"backend-title": "Backend",
 	"tools-title": "Infra & Deployment",

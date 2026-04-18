@@ -1,5 +1,6 @@
 {
 	"title": "Stack Technique",
+	"subtitle": "Technologies principales utilisées en production",
 	"frontend-title": "Frontend",
 	"backend-title": "Backend",
 	"tools-title": "Infra & Déploiement",
