@@ -56,7 +56,7 @@ a.contact__link-card {
 
 		.base-card__label,
 		.base-card__subtext {
-			text-decoration: underline;
+			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
 		}
 	}
 

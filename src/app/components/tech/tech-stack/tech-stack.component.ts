@@ -12,10 +12,10 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechStackComponent extends Component {
   private _keys: ITechStackKeys = {
-    frontend: [ 'typescript', 'angular', 'vuejs', 'tailwind', 'sass'  ],
-    backend: [ 'nodejs', 'golang', 'java', 'nestjs', 'rails' ],
+    frontend: [ 'angular', 'vuejs', 'tailwind', 'sass'  ],
+    backend: [ 'nodejs', 'golang', 'nestjs', 'rails' ],
     database: [ 'postgresql', 'mysql', 'sqlite' ],
-    tools: [ 'git', 'docker', 'jest', 'linux', 'traefik', 'bash' ],
+    tools: [ 'docker', 'linux', 'traefik', 'bash' ],
   };
 
   constructor(mountTarget: HTMLElement) {

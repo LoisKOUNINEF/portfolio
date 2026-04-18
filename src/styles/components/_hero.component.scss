@@ -30,7 +30,7 @@
 
 .hero__value-prop {
 	padding-top: map.get($spacings, largest);
-	padding-left: map.get($spacings, largest);
+	padding-left: map.get($spacings, smallest);
 	font-size: map.get($font-sizes, largest);
 	max-width: 50ch;
 	@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));

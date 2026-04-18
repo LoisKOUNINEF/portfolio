@@ -4,7 +4,7 @@ import {AnchorComponent, BulletPointComponent, TechBadgeComponent} from '../inde
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class HeroComponent extends Component {
-  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nestjs', 'postgresql', 'docker' ];
+  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nodejs', 'golang', 'postgresql', 'docker' ];
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});
