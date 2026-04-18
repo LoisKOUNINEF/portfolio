@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "build": "node tools/builder/builder.js",
