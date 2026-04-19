@@ -15,21 +15,29 @@
 
 .base-card__icon {
 	font-size: map.get($font-sizes, large);
-	width: 2rem;
-	height: 2rem;
+	width: 4rem;
+	height: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
+	@include mixins.respond-to(medium) {
+		width: 3rem;
+		height: 3rem;
+	}
 }
 
 .base-card__icon-img {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 3rem;
+	height: 3rem;
 	object-fit: contain;
 
 	.dark-theme &[src*="github"] {
 		filter: invert(1);
+	}
+	@include mixins.respond-to(medium) {
+		width: 2.25rem;
+		height: 2.25rem;
 	}
 }
 
