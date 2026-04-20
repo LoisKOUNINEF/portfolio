@@ -17,7 +17,7 @@
 		"DOM-based components and views (no virtual DOM).",
 		"Router and event bus for navigation and state flow.",
 		"Explicit event-driven updates (no automatic change detection).",
-		"Not intended to replace frameworks; intentionally limited in scope.",
+		"Designed for focused use cases, with a deliberately small and explicit feature set.",
 		"Used to build this portfolio and the framework's website."
 		]
 	},

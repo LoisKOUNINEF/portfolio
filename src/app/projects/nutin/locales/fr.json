@@ -17,7 +17,7 @@
 			"Composants et vues basés sur le DOM (pas de DOM virtuel).",
 			"Router et bus d'événements pour la navigation et le flux d'état.",
 			"Mises à jour explicites pilotées par événements (pas de détection automatique des changements).",
-			"N'a pas vocation à remplacer les frameworks; volontairement limité en portée.",
+			"Conçu pour des cas d’usage ciblés, avec un ensemble de fonctionnalités volontairement restreint et explicite.",
 			"Utilisé pour développer ce portfolio et le site du framework."
 		]
 	},
