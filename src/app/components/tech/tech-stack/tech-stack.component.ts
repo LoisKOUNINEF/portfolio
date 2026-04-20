@@ -14,7 +14,7 @@ export class TechStackComponent extends Component {
   private _keys: ITechStackKeys = {
     frontend: [ 'angular', 'vuejs', 'tailwind', 'sass'  ],
     backend: [ 'nodejs', 'golang', 'nestjs', 'rails' ],
-    database: [ 'postgresql', 'mysql', 'sqlite' ],
+    database: [ 'postgresql', 'sqlite', 'mysql' ],
     tools: [ 'docker', 'linux', 'traefik', 'bash' ],
   };
 
