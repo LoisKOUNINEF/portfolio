@@ -46,7 +46,8 @@
 }
 
 .project-header__tagline {
-  font-family: $secondary-font; 
+  font-family: $secondary-font;
+  max-width: 60ch;
   //padding-left: map.get($spacings, medium);
   padding-top: map.get($spacings, medium);
   font-size: 1.1rem;

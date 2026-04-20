@@ -14,7 +14,7 @@
 	],
 	"presentation": {
 		"keyPoints": [
-			"Complete authentication flow (signup, email verification, password reset). Role-based access (admin and staff interfaces).",
+			"Complete authentication flow (signup, email verification, password reset). Role-based access (RBAC), dashboard admin.",
 			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
 			"Ticket generation with QR codes and email delivery.",
 			"PostgreSQL database with indexation and query optimisation."
