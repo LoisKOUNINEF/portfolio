@@ -132,7 +132,7 @@
   text-wrap: nowrap;
   &:hover, &:focus-visible {
     cursor: pointer;
-    @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .1));
+    @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .25));
     @include mixins.themed(color, rgba(map.get($light-theme, accent), 1), rgba(map.get($dark-theme, accent), 1));
   }
   &:focus-visible {
