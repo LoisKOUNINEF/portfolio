@@ -17,7 +17,7 @@
 			"Complete authentication flow (signup, email verification, password reset). Role-based access (admin and staff interfaces).",
 			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
 			"Ticket generation with QR codes and email delivery.",
-			"PostgreSQL database with index and query optimisation."
+			"PostgreSQL database with indexation and query optimisation."
 		]
 	},
 	"popTagline": "Developed to explore authentication, payment flows, and end-to-end application architecture in a full-stack context.",

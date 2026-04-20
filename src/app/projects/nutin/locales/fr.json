@@ -18,19 +18,19 @@
 			"Router et bus d'événements pour la navigation et le flux d'état.",
 			"Mises à jour explicites pilotées par événements (pas de détection automatique des changements).",
 			"N'a pas vocation à remplacer les frameworks; volontairement limité en portée.",
-			"Utilisé pour développer ce portfolio."
+			"Utilisé pour développer ce portfolio et le site du framework."
 		]
 	},
-	"popTagline": "Une boîte à outils frontend minimaliste construite pour explorer l'architecture SPA, le rendu et le flux d'état.",
+	"popTagline": "Un framework frontend minimaliste construit pour explorer l'architecture SPA, le rendu et le flux d'état.",
 	"overview": {
 		"mainContent": "nutin est un toolkit frontend léger que j’ai conçu pour créer de petites applications monopage maintenables, sans dépendre d’un framework complet. Il fournit uniquement les briques essentielles — routage, gestion des événements, rendu des vues et quelques utilitaires de confort — tout en restant proche du DOM et des API web standards. Il est conçu pour des projets personnels et de petites applications où le contrôle, la clarté et une faible surcharge priment sur l’exhaustivité fonctionnelle.",
 		"keyPointsTitle": "Fonctionnalités principales :",
 		"keyPoints": [
 			"Base SPA légère avec routage, bus d’événements et vues basées sur le DOM.",
 			"Architecture événementielle permettant un faible couplage entre les modules.",
-			"Dépendances minimales et contrôle explicite du flux d’exécution.",
+			"Pas de dépendances runtime et contrôle explicite du flux d’exécution.",
 			"Build personnalisé et outils de test légers.",
-			"Utilisé pour développer ce portfolio et le site web du toolkit."
+			"Fonctionnalités additionnelles: support i18n, pipes & guards, client HTTP."
 		],
 		"after": "TypeScript a été intentionnellement utilisé à la place de JavaScript: le typage fort a réduit les erreurs d'implémentation pendant le développement, tandis que les interfaces fournissent une documentation claire et applicable pour l'API publique."
 	},
