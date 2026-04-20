@@ -1,6 +1,6 @@
 import { Component, ComponentProps } from '../../../../core/index.js';
 
-export interface IBaseCardConfig {
+export interface IInfoCardConfig {
   icon: string;
   labelKey: string;
   subtextKey: string;
@@ -11,10 +11,10 @@ export interface IBaseCardConfig {
   iconSrc?: string;
 }
 
-const templateFn = (_config: IBaseCardConfig) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: IInfoCardConfig) => `__TEMPLATE_PLACEHOLDER__`;
 
-export class BaseCardComponent extends Component<HTMLElement, IBaseCardConfig> {
-  constructor(mountTarget: HTMLElement, config: IBaseCardConfig, props?: ComponentProps) {
+export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
+  constructor(mountTarget: HTMLElement, config: IInfoCardConfig, props?: ComponentProps) {
     const { className, ...restProps } = props ?? {};
     super({
       templateFn,
@@ -25,7 +25,7 @@ export class BaseCardComponent extends Component<HTMLElement, IBaseCardConfig> {
       props: restProps,
     });
     const extraClasses = className?.split(' ').filter(Boolean) ?? [];
-    this.element.classList.add('base-card', ...extraClasses);
+    this.element.classList.add('info-card', ...extraClasses);
     this.setLinkAttributes();
   }
 

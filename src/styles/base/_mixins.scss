@@ -45,7 +45,7 @@
   line-height: map.get($spacings, largest);
   text-align: left;
   width: auto;
-  h2 {
+  h2, h3 {
     font-family: $secondary-font;
     font-weight: bold;
     @include themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));

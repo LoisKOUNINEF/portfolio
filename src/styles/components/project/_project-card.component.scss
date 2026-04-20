@@ -25,7 +25,7 @@
     padding-top: map.get($spacings, largest) * 2;
     width: 100%;
     justify-content: flex-start;
-    h2 {
+    h3 {
       font-size: map.get($font-sizes, largest);
     }
     @include mixins.respond-to(medium) {

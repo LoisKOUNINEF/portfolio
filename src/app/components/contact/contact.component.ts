@@ -1,5 +1,5 @@
 import {AppEventBus, Component, ComponentConfig, I18nService} from '../../../core/index.js';
-import { BaseCardComponent } from '../common/index.js';
+import { InfoCardComponent } from '../common/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -19,7 +19,7 @@ export class ContactComponent extends Component {
     return [
       {
         selector: 'email-card',
-        factory: (el) => new BaseCardComponent(el, {
+        factory: (el) => new InfoCardComponent(el, {
           icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/envelope.svg',
           labelKey: 'contact.email',
@@ -29,7 +29,7 @@ export class ContactComponent extends Component {
       },
       {
         selector: 'linkedin-card',
-        factory: (el) => new BaseCardComponent(el, {
+        factory: (el) => new InfoCardComponent(el, {
           icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/handshake.svg',
           labelKey: 'contact.linkedin',
@@ -40,7 +40,7 @@ export class ContactComponent extends Component {
       },
       {
         selector: 'github-card',
-        factory: (el) => new BaseCardComponent(el, {
+        factory: (el) => new InfoCardComponent(el, {
           icon: '',
           iconSrc: '/assets/images/svgs/external/github.svg',
           labelKey: 'contact.github',
@@ -51,7 +51,7 @@ export class ContactComponent extends Component {
       },
       {
         selector: 'resume-card',
-        factory: (el) => new BaseCardComponent(el, {
+        factory: (el) => new InfoCardComponent(el, {
           icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
           labelKey: 'contact.resume',

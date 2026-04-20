@@ -54,18 +54,33 @@ a.contact__link-card {
 		@include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, primary), 0.14), 0 6px 16px rgba(0, 0, 0, 0.45));
 		@include mixins.themed(border-color, rgba(map.get($light-theme, primary), 0.45), rgba(map.get($dark-theme, primary), 0.35));
 
-		.base-card__label,
-		.base-card__subtext {
+		.info-card__label,
+		.info-card__subtext {
 			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
 		}
 	}
+
+	@media (hover: none) {
+  	&:hover { 
+			text-decoration: none;
+			transform: translateY(-0px);
+			@include mixins.themed(box-shadow, 0,0);
+			@include mixins.themed(border-color, rgba(map.get($light-theme, background), 0.45), rgba(map.get($dark-theme, background), 0.35));
+
+			.info-card__label,
+			.info-card__subtext {
+				@include mixins.themed(color, inherit, inherit);
+			}
+  	}
+  }
 
 	&:focus-visible {
 		outline-offset: 2px;
 		@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
 	}
 
-	.base-card__icon {
+
+	.info-card__icon {
 		.base-svg {
 			position: relative;
 			z-index: 1;
@@ -81,7 +96,7 @@ a.contact__link-card {
 		}
 	}
 
-	.base-card__label {
+	.info-card__label {
 		&::after {
 			content: "";
 			position: absolute;
@@ -98,7 +113,7 @@ a.contact__link-card {
 }
 
 .contact__resume-card {
-	.base-card__label {
+	.info-card__label {
 		@include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
 	}
 }
