@@ -30,7 +30,7 @@ export class HeroComponent extends Component {
 
   private getKeyCompetences(): ComponentConfig[] {
     const jsonNamePattern = (i: number) => `hero.key-competence-${i}`;
-    const i18nKeys: any[] = [];
+    const i18nKeys: string[] = [];
     for (let i = 0; i < 3; i++) {
       i18nKeys.push(jsonNamePattern(i+1));
     }

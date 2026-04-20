@@ -1,11 +1,11 @@
 {
 	"title": "A Propos",
 	"pitch-headline": "Développement de bout en bout",
-	"pitch-subtext": "Je conçois des applications full-stack en mettant l’accent sur la clarté et la fiabilité. Mon objectif est de construire des systèmes cohérents, où chaque couche soutient les autres plutôt que d’être optimisée isolément.",
+	"pitch-subtext": "Ma relation avec le logiciel remonte à Ubuntu 10.04 en 2010. J'ai évolué aux côtés des outils open-source, et j'emporte cet état d'esprit dans tout ce que je construis aujourd'hui: une attention portée à la clarté et à la fiabilité. Mon objectif est de construire des systèmes cohérents, où chaque couche soutient les autres plutôt que d’être optimisée isolément.",
 	"architecture-title": "Architecture pragmatique",
 	"architecture": "Je pars des contraintes —besoins utilisateurs, contexte opérationnel, périmètre du projet— plutôt que des outils ou des tendances. Cette approche favorise des architectures plus simples et des systèmes qui restent faciles à analyser à mesure qu’ils évoluent.",
 	"systems-title": "Systèmes & exploitation",
 	"systems": "J’intègre le déploiement et les fondamentaux de la sécurité dès la phase de conception. L’objectif est de construire des applications fiables, dont le comportement reste prévisible en conditions réelles.",
 	"background-title": "Parcours précédent",
-	"background": "Avant de me reconvertir dans le développement logiciel, j’ai travaillé pendant 20 ans dans l’hôtellerie-restauration, dont plusieurs années à des postes de management. Cette expérience a façonné ma manière de travailler: gestion de contraintes en temps réel, priorisation sous pression. Cela m'a aussi appris à aller à l'essentiel et à trouver l’équilibre entre solutions idéales et réalité du terrain."
+	"background": "Avant de m'orienter vers le développement logiciel, j’ai travaillé pendant 20 ans dans l’hôtellerie-restauration, dont plusieurs années à des postes de management. Cette expérience a façonné ma manière de travailler: gestion de contraintes en temps réel, priorisation sous pression. Cela m'a aussi appris à aller à l'essentiel et à trouver l’équilibre entre solutions idéales et réalité du terrain."
 }
