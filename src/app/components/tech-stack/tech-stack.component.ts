@@ -1,5 +1,5 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../../core/index.js';
-import {ButtonComponent, ITechBadgeConfig, TechBadgeComponent} from '../../index.js';
+import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
+import { TechBadgeComponent } from '../index.js';
 
 interface ITechStackKeys {
   frontend: TechSvgKey[],
