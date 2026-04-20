@@ -1,1 +1,5 @@
-{ "default": "TechBadge works !"}
+{
+  "primary": "Maîtrise",
+  "secondary": "Utilisation régulière",
+  "tertiary": "Connaissance fonctionnelle"
+}

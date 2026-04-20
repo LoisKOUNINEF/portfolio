@@ -1,7 +1,8 @@
-<span class="svg-tech-item" data-event="click:displayDetails:${_config.details}">
+<span class="svg-tech-item">
   <span
     title="${_config.label}" 
-    class="base-svg svg-${_config.svgKey ?? _config.value} ${_config.details ? 'u-pointer' : ''}"
+    class="base-svg svg-${_config.svgKey ?? _config.value}"
   ></span>
   <span class="svg-tech-label u-font-smallest u-italic">${_config.label}</span>
+  <span data-i18n="tech-badge.${_config.proficiency}" class="svg-tech-proficiency ${_config.proficiency ? '' : 'u-hide'}"></span>
 </span>

@@ -67,7 +67,9 @@
 }
 
 [class*="tech-stack__badge-catalog"] {
+	width: 100%;
 	justify-content: flex-start;
+	align-items: flex-start;
 	padding-top: map.get($spacings, medium);
 	.svg-tech-label {
 	  padding-top: map.get($spacings, small);
@@ -85,6 +87,7 @@
 		width: 90vw;
 	}
 	.svg-tech-item { }
+	.svg-tech-proficiency { }
 }
 
 .tech-stack__badge-catalog {

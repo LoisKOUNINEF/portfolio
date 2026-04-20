@@ -1,11 +1,13 @@
 import { AppPipeRegistry, CatalogItemConfig, Component } from '../../../../core/index.js';
-import {notify} from "../../../../libs/index.js";
 
 interface ITechBadge extends CatalogItemConfig {
   svgKey?: TechSvgKey;
   value?: TechSvgKey;
   label: string;
+}
 
+export interface ITechBadgeConfig extends ITech {
+  displayProficiency?: boolean;
 }
 
 const labels: Record<string, string> = {
@@ -18,6 +20,26 @@ const labels: Record<string, string> = {
   vuejs: 'VueJs',
   sqlite: 'SQLite',
   golang: 'Go',
+}
+
+const proficiencies: Record<string, string> = {
+  angular: 'primary',
+  typescript: 'primary',
+  postgresql: 'primary',
+  mysql: 'tertiary',
+  typeorm: 'secondary',
+  nodejs: 'primary',
+  nestjs: 'primary',
+  vuejs: 'secondary',
+  sqlite: 'secondary',
+  golang: 'secondary',
+  tailwind: 'secondary',
+  sass: 'secondary',
+  rails: 'tertiary',
+  docker: 'primary',
+  linux: 'primary',
+  traefik: 'tertiary',
+  bash: 'secondary',
 }
 
 const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
@@ -33,20 +55,28 @@ const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
   return label;
 }
 
-const templateFn = (_config: CatalogItemConfig<ITech>) => `__TEMPLATE_PLACEHOLDER__`;
+const getProficiency = (config: CatalogItemConfig<ITechBase | string>): string | undefined => {
+  if (!('displayProficiency' in config)) return;
+  let proficiency: string | undefined;
+  if ('value' in config && typeof config.value === 'string' ) {
+    proficiency = proficiencies[config.value]! ;
+  }
+  else if ('svgKey' in config) {
+    proficiency = proficiencies[config.svgKey]!;
+  }
+  return proficiency;
+}
+
+const templateFn = (_config: CatalogItemConfig<ITechBadge>) => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechBadgeComponent extends Component {
   private _config: CatalogItemConfig<ITech>;
-  constructor(mountTarget: HTMLElement, config: CatalogItemConfig<ITech>) {
+  constructor(mountTarget: HTMLElement, config: CatalogItemConfig<ITechBadgeConfig>) {
     const label = getLabel(config);
+    const proficiency = getProficiency(config);
     super({ templateFn, mountTarget, config: { 
-      ...config, label 
+      ...config, label, proficiency 
     }});
       this._config = config;
-  }
-
-  private displayDetails = (config: ITechDetails): void => {
-    if (!this._config.details) return;
-    console.debug(this._config.details.tagline)
   }
 }
