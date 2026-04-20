@@ -6,7 +6,7 @@ import { ChildrenHelper } from './helpers/children.helper.js';
 import { CatalogHelper, CatalogConfig } from './helpers/catalog.helper.js';
 import { Component, ComponentOptions } from '../index.js';
 import { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
-export { CatalogItemConfig, CatalogConfig } from './helpers/catalog.helper.js';
+export { CatalogItemConfig, CatalogConfig, CatalogItemPrimitive } from './helpers/catalog.helper.js';
 
 /**```typescript
  * export interface ComponentConfig {

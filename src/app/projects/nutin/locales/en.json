@@ -17,20 +17,20 @@
 		"DOM-based components and views (no virtual DOM).",
 		"Router and event bus for navigation and state flow.",
 		"Explicit event-driven updates (no automatic change detection).",
-		"Not intended to replace frameworks; intentionally limited in scope.",
-		"Used to build this portfolio."
+		"Designed for focused use cases, with a deliberately small and explicit feature set.",
+		"Used to build this portfolio and the framework's website."
 		]
 	},
-	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own minimal toolkit.",
+	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own mini-framework.",
 	"overview": {
 		"mainContent": "nutin is a lightweight frontend toolkit I built to create small, maintainable single-page applications without relying on a full framework. It provides just the essentials—routing, event handling, view rendering, and a few quality-of-life utilities, while staying close to the DOM and standard web APIs. It is designed for personal projects and small applications where control, clarity, and low overhead matter more than feature completeness.",
 		"keyPointsTitle": "Main features:",
 		"keyPoints": [
 			"Lightweight SPA foundation with routing, event bus, and DOM-based views.",
 			"Event-driven architecture enabling loose coupling between modules.",
-			"Minimal dependencies and explicit control over execution flow.",
+			"No runtime dependencies and explicit control over execution flow.",
 			"Custom build and lightweight testing tooling.",
-			"Used to build this portfolio and the toolkit's website."
+			"Built-in additional features: i18n support, pipes & guards, HTTP client."
 		],
 		"after": "TypeScript was intentionally used instead of JavaScript: strong typing reduced implementation errors during development, while interfaces provide clear, enforceable documentation for the public API."
 	},

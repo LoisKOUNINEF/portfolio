@@ -57,3 +57,14 @@ $tech-badge-svgs: (
 }
 
 .svg-tech-label {}
+
+.svg-tech-proficiency {
+  min-width: 10ch;
+  font-size: 0.65rem;
+  text-wrap: wrap;
+  opacity: .4;
+  text-align: center;
+  @include mixins.respond-to(medium) {
+    min-width: auto;
+  }
+}

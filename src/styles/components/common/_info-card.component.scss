@@ -2,7 +2,7 @@
 @use "variables" as *;
 @use "mixins";
 
-.base-card {
+.info-card {
 	display: flex;
 	align-items: center;
 	gap: map.get($spacings, medium);
@@ -13,38 +13,46 @@
 	@include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, primary), 0.08), 0 1px 3px rgba(0, 0, 0, 0.3));
 }
 
-.base-card__icon {
+.info-card__icon {
 	font-size: map.get($font-sizes, large);
-	width: 2rem;
-	height: 2rem;
+	width: 4rem;
+	height: 4rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 0;
+	@include mixins.respond-to(medium) {
+		width: 3rem;
+		height: 3rem;
+	}
 }
 
-.base-card__icon-img {
-	width: 1.5rem;
-	height: 1.5rem;
+.info-card__icon-img {
+	width: 3rem;
+	height: 3rem;
 	object-fit: contain;
 
 	.dark-theme &[src*="github"] {
 		filter: invert(1);
 	}
+	@include mixins.respond-to(medium) {
+		width: 2.25rem;
+		height: 2.25rem;
+	}
 }
 
-.base-card__content {
+.info-card__content {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 }
 
-.base-card__label {
+.info-card__label {
 	font-weight: 700;
 	font-size: map.get($font-sizes, medium);
 }
 
-.base-card__subtext {
+.info-card__subtext {
 	font-size: map.get($font-sizes, small);
 	font-weight: 400;
 	opacity: 0.65;

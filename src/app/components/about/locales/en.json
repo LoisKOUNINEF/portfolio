@@ -1,9 +1,11 @@
 {
 	"title": "About",
-	"background-title": "I care as much about user experience as I do about the quality of the technical foundations.",
-	"background": "My goal is to build software that is pleasant to use today and reasonable to maintain tomorrow. While I work with a variety of tools, I care most about mastering foundational concepts that guide maintainable and scalable design.",
-	"philosophy-title": "I approach each project with a pragmatic and thoughtful mindset.",
-	"philosophy": "Rather than applying tools or patterns out of habit or personal preferences, I focus on understanding real needs, contextual constraints, and the trade-offs involved. This approach allows me to design architectures that are simple, coherent, and able to evolve without unnecessary complexity.",
-	"interests-title": "I see quality as a continuous process.",
-	"interests": "It involves attention to detail, testing, and regularly questioning my technical decisions. I strive to continuously improve the way I design and maintain applications, while staying grounded in the practical limits and realities of software development."
+	"pitch-headline": "End-to-end development",
+	"pitch-subtext": "I build full-stack applications with a focus on clarity and reliability. I aim to design systems that are coherent end-to-end, where each layer supports the others rather than being optimized in isolation.",
+	"architecture-title": "Pragmatic architecture",
+	"architecture": "I start from constraints —user needs, operational context, project scope— rather than tools or trends. This tends to favor simpler architectures and systems that remain easy to reason about as they evolve.",
+	"systems-title": "Systems & operations",
+	"systems": "I consider deployment and security fundamentals as part of the design process. The goal is to build reliable applications with a predictable behavior under real conditions.",
+	"background-title": "Previous career",
+	"background": "Before moving into software development, I spent 20 years in hospitality and catering, including management roles. That experience shaped the way I work: handling real-time constraints, prioritizing under pressure. Moreover, it reinforced a pragmatic mindset: balancing ideal solutions with what is actually viable in practice."
 }
