@@ -120,6 +120,7 @@
 }
 
 .show-more__btn {
+  transition: all ease-in-out .2s;
   font-family: $secondary-font;
   font-style: italic;
   font-size: 1.1rem;
@@ -128,11 +129,15 @@
   @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
   border-radius: map.get($border-radius, large);
   text-wrap: nowrap;
+  @include mixins.themed(border, 1px solid rgba(map.get($light-theme, background), 0.45), 1px solid rgba(map.get($dark-theme, background), 0.35));
   &:hover, &:focus-visible {
     cursor: pointer;
     text-decoration: underline;
     @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .25));
     @include mixins.themed(color, rgba(map.get($light-theme, accent), 1), rgba(map.get($dark-theme, accent), 1));
+    transform: translateY(-2px);
+    @include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, accent), 0.14), 0 6px 16px rgba(map.get($dark-theme, accent), 0.14));
+    @include mixins.themed(border, 1px solid rgba(map.get($light-theme, accent), 0.45), 1px solid rgba(map.get($dark-theme, accent), 0.35));
   }
   &:focus-visible {
     @include mixins.themed(outline, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));
@@ -141,6 +146,10 @@
     &:hover {
       @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
       @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
+      text-decoration: none;
+      transform: translateY(-0px);
+      @include mixins.themed(box-shadow, 0,0);
+      @include mixins.themed(border-color, rgba(map.get($light-theme, background), 0.45), rgba(map.get($dark-theme, background), 0.35));
     }
   }
   @include mixins.respond-to(medium) {

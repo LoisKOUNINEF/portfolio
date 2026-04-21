@@ -76,6 +76,7 @@
 }
 
 .project-card__view-more {
+  transition: all ease-in-out .2s;
   font-family: $secondary-font;
   font-size: 1.1rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
