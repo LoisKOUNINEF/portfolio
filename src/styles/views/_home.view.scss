@@ -3,25 +3,25 @@
 @use "mixins";
 @use "sass:color";
 
-.home__container {}
+.home__container {
+    width: 100%;
+}
+
+.home__sections {
+  width: 70%;
+  @include mixins.respond-to(medium) {
+    width: 100%;
+  }
+}
 
 .home__main-projects {
-  width: 100%;
   padding-top: 3rem;
   & > [data-catalog],
   .home__additional-projects > [data-catalog] {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    // Center if single item - not sure yet
-    //& > article:last-child:nth-child(odd) {
-    //  grid-column: 1 / -1;
-    //  justify-self: center;
-    //  width: 50%;
-    //}
+    grid-template-columns: repeat(1, minmax(0, 1fr));
 
     @include mixins.respond-to(medium) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
       padding-top: 0;
     }
 
@@ -97,41 +97,40 @@
     display: none;
 
     &.open {
-      padding-top: map.get($spacings, large);
       display: block;
       -webkit-animation: fadeIn .2s;
       animation: fadeIn .2s;
-      @include mixins.respond-to(medium) {
-        padding-top: 0;
-      }
     }
   }
 }
 
 .show-more__wrapper {
-  display: flex;
-  justify-content: center;
-  padding: map.get($spacings, medium);
+  padding-left: map.get($spacings, largest);
+  padding-top: map.get($spacings, small);
+  @include mixins.respond-to(medium) {
+    @include mixins.flex-center;
+  }
 
   & > div {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    @include mixins.respond-to(medium) {
+      @include mixins.flex-center;
+    }
   }
 }
 
 .show-more__btn {
-  width: 33vw;
   font-family: $secondary-font;
+  font-style: italic;
   font-size: 1.1rem;
-  padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(border, 2px solid rgba(map.get($light-theme, accent), 1), 3px solid rgba(map.get($dark-theme, accent), 1));
+  padding: map.get($spacings, smallest) map.get($spacings, medium);
   @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
   @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
   border-radius: map.get($border-radius, large);
   text-wrap: nowrap;
   &:hover, &:focus-visible {
     cursor: pointer;
+    text-decoration: underline;
     @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .25));
     @include mixins.themed(color, rgba(map.get($light-theme, accent), 1), rgba(map.get($dark-theme, accent), 1));
   }
@@ -145,11 +144,11 @@
     }
   }
   @include mixins.respond-to(medium) {
-    min-width: 80vw;
+    // min-width: 80vw;
   }
 }
 
-.projects-header {
+.projects-catalog-header {
   @include mixins.header;
   flex-direction: column;
   align-items: center;

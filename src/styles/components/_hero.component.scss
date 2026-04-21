@@ -114,9 +114,9 @@
  }
 
 .hero__cta-container {
-	padding-left: map.get($spacings, largest);
+	padding-left: map.get($spacings, large);
 	@include mixins.respond-to(medium) {
-		padding: 0;
+		padding-left: 0;
 		padding-top: map.get($spacings, large);
 	}
 }

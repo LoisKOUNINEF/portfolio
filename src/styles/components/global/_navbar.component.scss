@@ -32,11 +32,11 @@
 // }
 
 .navbar__anchors {
-  width: 100%;
+  width: 70%;
   display: flex;
-  justify-content: space-between;
-  gap: map.get($spacings, large);
+  gap: map.get($spacings, largest)*1.5;
   @include mixins.respond-to(medium) {
+    width: 100%;
     transition: opacity .3s, display .3s allow-discrete;
     opacity: 0;
     gap: map.get($spacings, small);
@@ -50,8 +50,7 @@
     background-color: inherit;
     backdrop-filter: blur(10px);
     padding: map.get($spacings, medium) map.get($spacings, large);
-    border-radius: map.get($spacings, large);
-    @include mixins.themed(box-shadow, 0 8px 20px rgba(map.get($light-theme, primary), 0.2), 0 8px 20px rgba(map.get($dark-theme, primary), 0.2));
+    border-radius: map.get($spacings, large); 
   }
 
   &.open {
@@ -71,7 +70,6 @@
       transition: color 0.2s, background 0.2s;
 
       &.active {
-        @include navbar-shadow(primary, 1px .2rem .2rem, .5);
         @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, primary));
         @include mixins.themed(color, map.get($light-theme, primary),map.get($dark-theme, background));
         &:focus-visible {

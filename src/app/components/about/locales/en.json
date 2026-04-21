@@ -1,7 +1,7 @@
 {
 	"title": "About",
-	"pitch-headline": "End-to-end development",
-	"pitch-subtext": "My relationship with software goes back to Ubuntu 10.04 in 2010. I've grown alongside open-source tooling, and I carry that mindset into everything I build today: a focus on clarity and reliability. I aim to design systems that are coherent end-to-end, where each layer supports the others rather than being optimized in isolation.",
+	"pitch-headline": "Systems approach",
+	"pitch-subtext": "I started using CLI tools with Ubuntu 10.04, in 2010. I've grown alongside open-source tooling, and I carry that mindset into everything I build today: a focus on clarity and reliability. I aim to design systems that are coherent end-to-end, where each layer supports the others rather than being optimized in isolation.",
 	"architecture-title": "Pragmatic architecture",
 	"architecture": "I start from constraints —user needs, operational context, project scope— rather than tools or trends. This tends to favor simpler architectures and systems that remain easy to reason about as they evolve.",
 	"systems-title": "Systems & operations",

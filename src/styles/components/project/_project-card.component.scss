@@ -22,7 +22,7 @@
     .project-header__title {
       @include mixins.themed(border-bottom, 0, 0);
     }
-    padding-top: map.get($spacings, largest) * 2;
+    padding-top: map.get($spacings, largest)*2;
     width: 100%;
     justify-content: flex-start;
     h3 {
@@ -31,6 +31,19 @@
     @include mixins.respond-to(medium) {
       padding-top: map.get($spacings, large);
       padding-left: map.get($spacings, medium);
+    }
+
+    .project-card__links {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: map.get($spacings, medium);
+      padding-right: map.get($spacings, largest );
+      padding-top: 0;
+      gap: map.get($spacings, largest);
+      flex-wrap: nowrap;
+      @include mixins.respond-to(medium) {
+        padding: map.get($spacings, medium) 0;
+      }
     }
   }
 

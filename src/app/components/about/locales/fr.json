@@ -1,7 +1,7 @@
 {
 	"title": "A Propos",
-	"pitch-headline": "Développement de bout en bout",
-	"pitch-subtext": "Ma relation avec le logiciel remonte à Ubuntu 10.04 en 2010. J'ai évolué aux côtés des outils open-source, et j'emporte cet état d'esprit dans tout ce que je construis aujourd'hui: une attention portée à la clarté et à la fiabilité. Mon objectif est de construire des systèmes cohérents, où chaque couche soutient les autres plutôt que d’être optimisée isolément.",
+	"pitch-headline": "Approche systémique",
+	"pitch-subtext": "C’est avec Ubuntu 10.04, en 2010, que j’ai commencé à utiliser les outils en ligne de commande. J'ai évolué aux côtés des outils open-source, dont je retiens un état d’esprit que j’applique aujourd’hui: une attention particulière portée à la clarté et à la fiabilité. Mon objectif est de construire des systèmes cohérents, où chaque couche soutient les autres plutôt que d’être optimisée isolément.",
 	"architecture-title": "Architecture pragmatique",
 	"architecture": "Je pars des contraintes —besoins utilisateurs, contexte opérationnel, périmètre du projet— plutôt que des outils ou des tendances. Cette approche favorise des architectures plus simples et des systèmes qui restent faciles à analyser à mesure qu’ils évoluent.",
 	"systems-title": "Systèmes & exploitation",

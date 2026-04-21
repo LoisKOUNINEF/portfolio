@@ -62,7 +62,7 @@ $tech-badge-svgs: (
   min-width: 10ch;
   font-size: 0.65rem;
   text-wrap: wrap;
-  opacity: .4;
+  opacity: .5;
   text-align: center;
   @include mixins.respond-to(medium) {
     min-width: auto;
