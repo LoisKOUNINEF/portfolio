@@ -110,7 +110,7 @@
 		"keyPoints": [
 			"Une architecture explicite passe mieux à l’échelle que des abstractions astucieuses.",
 			"Rester proche des API de la plateforme améliore à la fois le débogage et la confiance.",
-			"Les contraintes sont essentielles pour éviter qu’un toolkit ne devienne un framework."
+			"Un périmètre bien défini aide à maintenir un bon équilibre entre KISS et DRY."
 		],
 		"after": "Plus important encore, nutin a grandement amélioré mes capacités de déboguage et affiné ma capacité à évaluer les outils de manière pragmatique : choisir la solution la plus simple qui répond entièrement au problème, et rien de plus."
 	},

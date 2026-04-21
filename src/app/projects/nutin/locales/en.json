@@ -110,7 +110,7 @@
 		"keyPoints": [
 			"Explicit architecture scales better than clever abstractions.",
 			"Staying close to platform APIs improves both debugging and confidence.",
-			"Constraints are essential to prevent a toolkit from becoming a framework."
+			"A well-defined scope helps maintain a good balance between KISS and DRY."
 		],
 		"after": "Most importantly, nutin improved drastically my debugging skills and sharpened my ability to evaluate tooling pragmatically: choosing the simplest solution that fully serves the problem, and no more."
 	},
