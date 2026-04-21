@@ -36,8 +36,8 @@ export class ShowMoreComponent extends Component {
   private getButtonText(): string {
     const t = I18nService.getTranslationObject<ShowMoreTranslations>('show-more');
     return this._isOpen
-      ? (t?.less ?? 'show less')
-      : `+ ${this._count} ${t?.more ?? 'more...'}`;
+      ? (t?.less ?? 'Show Less')
+      : `+ ${this._count} ${t?.more ?? 'More...'}`;
   }
 
   private onToggle(): void {
