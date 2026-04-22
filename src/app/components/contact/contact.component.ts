@@ -4,18 +4,14 @@ import { InfoCardComponent } from '../common/index.js';
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class ContactComponent extends Component {
-  private _resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
     AppEventBus.subscribe('language-changed', () => this.forceRender());
   }
 
-  protected override forceRender(): void {
-    this._resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
-    super.forceRender();
-  }
-
   public childConfigs(): ComponentConfig[] {
+    const resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
+    const downloadedPdfName = I18nService.currentLanguage === 'en' ? `Lois_Kouninef_Resume_Web_Developer.pdf` : `Lois_Kouninef_CV_Developpeur_Web.pdf`;
     return [
       {
         selector: 'email-card',
@@ -56,8 +52,8 @@ export class ContactComponent extends Component {
           iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
           labelKey: 'contact.resume',
           subtextKey: 'contact.resume-subtext',
-          href: `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`,
-          download: 'loïs-kouninef-resume.pdf',
+          href: resumeLink,
+          download: downloadedPdfName,
           target: '_self'
         }, { className: 'contact__link-card contact__resume-card' })
       },
