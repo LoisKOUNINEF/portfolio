@@ -80,23 +80,23 @@
   font-family: $secondary-font;
   font-size: 1.1rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(border, 2px solid rgba(map.get($light-theme, accent), 1), 3px solid rgba(map.get($dark-theme, accent), 1));
+  @include mixins.themed(border, 2px solid rgba(map.get($light-theme, primary), 1), 3px solid rgba(map.get($dark-theme, primary), 1));
   @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-  @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
+  @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
   border-radius: map.get($border-radius, large);
   text-wrap: nowrap;
   &:hover, &:focus-visible {
     cursor: pointer;
-    @include mixins.themed(background, rgba(map.get($light-theme, accent), .1), rgba(map.get($dark-theme, accent), .25));
-    @include mixins.themed(color, rgba(map.get($light-theme, accent), 1), rgba(map.get($dark-theme, accent), 1));
+    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .25));
+    @include mixins.themed(color, rgba(map.get($light-theme, primary), 1), rgba(map.get($dark-theme, primary), 1));
   }
   &:focus-visible {
-    @include mixins.themed(outline, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));
+    @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
   }
   @media(hover: none) {
     &:hover {
       @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-      @include mixins.themed(color, color.scale(map.get($light-theme, accent), $lightness: -20%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
+      @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
     }
   }
 }
