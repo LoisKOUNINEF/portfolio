@@ -34,7 +34,7 @@ const proficiencies: Record<string, string> = {
   sqlite: 'secondary',
   golang: 'secondary',
   tailwind: 'secondary',
-  sass: 'secondary',
+  sass: 'primary',
   rails: 'tertiary',
   docker: 'primary',
   linux: 'primary',

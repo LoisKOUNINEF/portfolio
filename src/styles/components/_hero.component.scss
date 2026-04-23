@@ -63,7 +63,7 @@
 	opacity: .85;
 	border-radius: map.get($spacings, small);
 	p:nth-last-child(1) {
-		@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .3));
+		@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .5));
 	};
 	@include mixins.respond-to(medium) {
 		font-size: map.get($font-sizes, small);
