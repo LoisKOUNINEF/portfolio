@@ -123,6 +123,6 @@ a.contact__link-card {
 
 .contact__resume-card {
 	.info-card__label {
-		@include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
+		@include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
 	}
 }
