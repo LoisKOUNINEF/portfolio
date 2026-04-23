@@ -122,11 +122,11 @@
 }
 
 .hero__cta {
-	// transition: all ease-in-out .2s;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.22s ease;
 	width: fit-content;
 	@include mixins.themed(background-color, map.get($light-theme, accent), map.get($dark-theme, accent));
 	@include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, background));
-		@include mixins.themed(border, 2px solid map.get($light-theme, accent), 2px solid map.get($dark-theme, accent));
 	margin-top: map.get($spacings, largest);
 	padding: map.get($spacings, small) map.get($spacings, large);
 	font-size: map.get($font-sizes, large);
@@ -134,27 +134,30 @@
 	border-radius: map.get($border-radius, large);
 	transition: all ease-in-out .2s;
 	&:hover {
-		@include mixins.themed(background-color, color.scale(map.get($light-theme, accent), $lightness: -10%), color.scale(map.get($dark-theme, accent), $lightness: +10%));
-		@include mixins.themed(border-color, rgba(map.get($light-theme, primary), 0.45), rgba(map.get($dark-theme, primary), 0.35));
-		@include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, primary), 0.14), 0 6px 16px rgba(map.get($dark-theme, primary), 0.14));
+	  transform: translateY(-2px) scale(1.03);
+	  box-shadow: 0 4px 8px -2px rgba(0,0,0,0.12),
+              0 1px 2px -1px rgba(0,0,0,0.08);
 		cursor: pointer;
 		a {
 			text-decoration: none;
 		}
 	}
+	&:active {
+  	transform: translateY(-4px) scale(1.01);
+	}
 	a {
 		&:focus-visible {
 			outline: none;
 			text-decoration: none;
-      @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
-      font-style: italic;
+      @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
 		}
 	}
 	@media(hover: none) {
 		&:hover {
-			@include mixins.themed(background-color, map.get($light-theme, accent), map.get($dark-theme, accent));
 			@include mixins.themed(box-shadow, 0,0);
-			@include mixins.themed(border-color, rgba(map.get($light-theme, background), 0.45), rgba(map.get($dark-theme, background), 0.35));
+			a {
+				text-decoration: none;
+			}
 		}
 	}
 }

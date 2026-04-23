@@ -32,9 +32,11 @@ $external-svgs: (
     cursor: pointer;
     scale: 1.3;
   }
+  &:active::after {
+    scale: 1.1;
+  }
   &:focus-visible {
     @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
-    // padding-top: map.get($spacings, smallest);
     padding-bottom: map.get($spacings, small);
     border-radius: map.get($border-radius, medium);
   }

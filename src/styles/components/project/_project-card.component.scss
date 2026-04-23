@@ -80,23 +80,27 @@
   font-family: $secondary-font;
   font-size: 1.1rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(border, 2px solid color.scale(map.get($light-theme, primary), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +10%));
+  @include mixins.themed(border, 2px solid color.scale(map.get($light-theme, secondary), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, secondary), $lightness: +10%));
   @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-  @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -10%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
+  @include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
   border-radius: map.get($border-radius, large);
   text-wrap: nowrap;
+  outline: 2px solid transparent;
   &:hover, &:focus-visible {
     cursor: pointer;
-    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .25));
-    @include mixins.themed(color, rgba(map.get($light-theme, primary), 1), rgba(map.get($dark-theme, primary), 1));
+    @include mixins.themed(background, rgba(map.get($light-theme, secondary), .1), rgba(map.get($dark-theme, secondary), .2));
+    @include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +20%));
+  }
+  &:hover {
+    @include mixins.themed(border-color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +20%));
   }
   &:focus-visible {
-    @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+    @include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, secondary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, secondary), $lightness: +20%));
   }
   @media(hover: none) {
     &:hover {
       @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-      @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
+      @include mixins.themed(color, color.scale(map.get($light-theme, secondary), $lightness: -20%), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
     }
   }
 }

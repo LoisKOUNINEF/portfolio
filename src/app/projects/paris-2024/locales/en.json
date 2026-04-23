@@ -18,7 +18,7 @@
 			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
 			"Ticket generation with QR codes and email delivery.",
 			"PostgreSQL database with indexation and query optimisation.",
-			"Sensitive data encryption, backups, controlled API access."
+			"Sensitive data encryption, controlled API access, rate limiting / load balancing."
 		]
 	},
 	"popTagline": "Developed to explore authentication, payment flows, and end-to-end application architecture in a full-stack context.",

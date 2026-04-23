@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "variables" as *;
 @use "mixins";
+@use "sass:color";
 
 .contact__wrapper {
 	@include mixins.wrapper;
@@ -59,6 +60,9 @@ a.contact__link-card {
 			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
 		}
 	}
+	&:active {
+		transform: translateY(1px);
+	}
 
 	@media (hover: none) {
   	&:hover { 
@@ -75,8 +79,13 @@ a.contact__link-card {
   }
 
 	&:focus-visible {
+		text-decoration: none;
 		outline-offset: 2px;
 		@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+		.info-card__label,
+		.info-card__subtext {
+			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+		}
 	}
 
 
@@ -114,6 +123,6 @@ a.contact__link-card {
 
 .contact__resume-card {
 	.info-card__label {
-		@include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+		@include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
 	}
 }

@@ -18,7 +18,7 @@
 			"Parcours d'achat avec persistance du panier et fusion à la connexion. Intégration Stripe pour des paiements sécurisés.",
 			"Génération de billets avec codes QR et envoi par email.",
 			"Base de données PostgreSQL avec indexation et optimisation des requêtes.",
-			"Chiffrement des données sensibles, sauvegardes, accès API contrôlé."
+			"Chiffrement des données sensibles, accès API contrôlé, rate limiting / load balancing."
 		]
 	},
 	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",

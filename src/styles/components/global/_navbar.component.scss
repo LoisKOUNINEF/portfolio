@@ -72,6 +72,9 @@
       &.active {
         @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, primary));
         @include mixins.themed(color, map.get($light-theme, primary),map.get($dark-theme, background));
+        &:hover {
+          cursor: default;
+        }
         &:focus-visible {
           @include mixins.themed(outline, 2px solid rgba(map.get($light-theme, primary), .5), 2px solid rgba(map.get($dark-theme, primary), .5));
         }

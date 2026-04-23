@@ -16,6 +16,12 @@
 	padding: 0 map.get($spacings, large);
 	font-size: map.get($font-sizes, small);
 	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: -20%), color.scale(map.get($dark-theme, text), $lightness: -20%));
+	a {
+  	border-radius: map.get($border-radius, small);
+	  &:focus-visible {
+	    @include mixins.themed(outline, 1px solid color.scale(map.get($light-theme, accent), $lightness: -40%), 1px solid color.scale(map.get($dark-theme, accent), $lightness: +20%));
+	  }
+	}
 	@include mixins.respond-to(medium) {
 		padding-left: 0;
 	}
@@ -26,4 +32,8 @@
 	@include mixins.respond-to(medium) {
 		@include mixins.flex-column;
 	}
+}
+
+.footer__built-with {
+  @include mixins.themed(color, map.get($light-theme, accent), color.scale(map.get($dark-theme, accent), $lightness: +10%));
 }
