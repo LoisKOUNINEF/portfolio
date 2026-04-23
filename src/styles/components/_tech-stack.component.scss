@@ -17,7 +17,7 @@
 }
 
 .tech-stack__header {
-	width:100%;
+	width: 100%;
 	@include mixins.header;
 	padding-right: map.get($spacings, large);
 	h2 {
@@ -35,9 +35,6 @@
 	padding-bottom: map.get($spacings, small);
 	padding-left: map.get($spacings, largest);
 	font-size: 1.1rem;
-	&.underline {
-		//@include mixins.tech-badges-underline;
-	}
 	@include mixins.respond-to(medium) {
 		padding-top: map.get($spacings, large);
 		padding-bottom: map.get($spacings, medium);

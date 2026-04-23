@@ -78,7 +78,7 @@
 }
 
 @mixin tech-badges-underline {
-  @include themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, accent), .3), 0 4px 4px -4px rgba(map.get($dark-theme, accent), .3));
+  @include themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, accent), .3), 0 4px 4px -4px rgba(map.get($dark-theme, accent), .5));
 }
 
 // nutin mixins
