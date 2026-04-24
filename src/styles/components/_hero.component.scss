@@ -139,7 +139,7 @@
 	transition: all ease-in-out .2s;
   outline: 2px solid transparent;
   &:hover, &:focus-visible {
-    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), 1));
+    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .9));
     @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -10%), map.get($dark-theme, background));
   }
 	&:hover {
