@@ -31,6 +31,16 @@ export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
     if (this.config.callback) {
       this.element.addEventListener('click', this.config.callback);
     }
+    if (!this.config.href && this.config.callback) {
+      this.element.setAttribute('role', 'button');
+      this.element.setAttribute('tabindex', '0');
+      this.element.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.config.callback!();
+        }
+      });
+    }
   }
 
   private setLinkAttributes(): void {
