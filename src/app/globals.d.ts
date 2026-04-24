@@ -28,16 +28,6 @@ type ToolsSvgKey = 'git' | 'docker' | 'jest' | 'linux' | 'traefik' | 'bash';
 
 declare type LinkSvgKey = 'github' | 'live' | 'npm' | 'linkedin';
 
-declare interface ITechBase {
+declare interface ITech {
   svgKey: TechSvgKey;
-}
-
-declare interface ITech extends ITechBase{
-  details?: ITechDetails;
-}
-
-declare interface ITechDetails {
-  rating: number;
-  tagline: string;
-  keyPoints: string[];
 }
