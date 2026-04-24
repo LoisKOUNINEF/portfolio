@@ -43,9 +43,16 @@
 		display: contents;
 	}
 }
-
 a.contact__link-card {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.contact__link-card {
 	position: relative;
+	cursor: pointer;
 	text-decoration: none;
 	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
 

@@ -9,6 +9,7 @@ export interface IInfoCardConfig {
   download?: string;
   id?: string;
   iconSrc?: string;
+  callback?: () => void;
 }
 
 const templateFn = (_config: IInfoCardConfig) => `__TEMPLATE_PLACEHOLDER__`;
@@ -27,6 +28,9 @@ export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
     const extraClasses = className?.split(' ').filter(Boolean) ?? [];
     this.element.classList.add('info-card', ...extraClasses);
     this.setLinkAttributes();
+    if (!this.config.href && this.config.callback) {
+      this.element.addEventListener('click', this.config.callback);
+    }
   }
 
   private setLinkAttributes(): void {
