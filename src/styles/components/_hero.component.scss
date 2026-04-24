@@ -63,7 +63,7 @@
 	opacity: .85;
 	border-radius: map.get($spacings, small);
 	p:nth-last-child(1) {
-		@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .3));
+		@include mixins.themed(border-bottom, 1px solid rgba(map.get($light-theme, accent), .3), 1px solid rgba(map.get($dark-theme, accent), .5));
 	};
 	@include mixins.respond-to(medium) {
 		font-size: map.get($font-sizes, small);
@@ -122,22 +122,32 @@
 }
 
 .hero__cta {
+	letter-spacing: 0.05em;
+	// font-family: $secondary-font;
+	font-size: map.get($font-sizes, large);
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
             box-shadow 0.22s ease;
 	width: fit-content;
-	@include mixins.themed(background-color, map.get($light-theme, accent), map.get($dark-theme, accent));
-	@include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, background));
+	border: 2px solid;
+	@include mixins.themed(background-color, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
+	@include mixins.themed(color, map.get($light-theme, text), color.scale(map.get($dark-theme, primary), $lightness: 0%));
+	@include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
 	margin-top: map.get($spacings, largest);
 	padding: map.get($spacings, small) map.get($spacings, large);
-	font-size: map.get($font-sizes, large);
 	text-align: left;
 	border-radius: map.get($border-radius, large);
 	transition: all ease-in-out .2s;
+  outline: 2px solid transparent;
+  &:hover, &:focus-visible {
+    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .9));
+    @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -10%), map.get($dark-theme, background));
+  }
 	&:hover {
+    cursor: pointer;
+    @include mixins.themed(border-color, map.get($light-theme, primary), color.scale(map.get($dark-theme, primary), $lightness: +20%));
 	  transform: translateY(-2px) scale(1.03);
 	  box-shadow: 0 4px 8px -2px rgba(0,0,0,0.12),
               0 1px 2px -1px rgba(0,0,0,0.08);
-		cursor: pointer;
 		a {
 			text-decoration: none;
 		}
@@ -149,11 +159,14 @@
 		&:focus-visible {
 			outline: none;
 			text-decoration: none;
-      @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
+      @include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, accent));
+    	@include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, primary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +20%));
 		}
 	}
 	@media(hover: none) {
 		&:hover {
+      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+      @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
 			@include mixins.themed(box-shadow, 0,0);
 			a {
 				text-decoration: none;

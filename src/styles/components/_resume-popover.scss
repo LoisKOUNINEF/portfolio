@@ -1,0 +1,114 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.popover-wrapper:has(.resume-popover__wrapper) {
+	width: 32%;
+	height: auto;
+	max-height: 60%;
+
+	@include mixins.respond-to(medium) {
+		width: 90%;
+		max-height: 90%;
+	}
+}
+
+.resume-popover__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: map.get($spacings, large);
+	gap: map.get($spacings, medium);
+	text-align: center;
+
+	h3 {
+		font-size: map.get($font-sizes, large);
+		font-weight: 700;
+	}
+}
+
+.resume-popover__cards {
+	display: flex;
+	flex-direction: column;
+	gap: map.get($spacings, medium);
+	width: 100%;
+	padding-top: map.get($spacings, small);
+}
+
+a.resume-popover__card {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.resume-popover__card {
+	cursor: pointer;
+	text-decoration: none;
+	width: 75%;
+	align-self: center;
+	justify-content: space-between;
+	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
+
+	@include mixins.respond-to(medium) {
+		width: 100%;
+	}
+
+	.info-card__content {
+		text-align: center;
+		flex-grow:1;
+		@include mixins.respond-to(medium) {
+			padding-left: 0;
+		}
+	}
+	.info-card__icon {
+		align-self: center;
+	}
+
+	&:hover {
+		text-decoration: none;
+		transform: translateY(-2px);
+		@include mixins.themed(box-shadow, 0 6px 16px rgba(map.get($light-theme, primary), 0.14), 0 6px 16px rgba(map.get($dark-theme, primary), 0.14));
+		@include mixins.themed(border-color, rgba(map.get($light-theme, primary), 0.45), rgba(map.get($dark-theme, primary), 0.35));
+
+		.info-card__label,
+		.info-card__subtext {
+			@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +20%), color.scale(map.get($dark-theme, text), $lightness: -10%));
+		}
+	}
+
+	&:active {
+		transform: translateY(1px);
+	}
+
+	@media (hover: none) {
+		&:hover {
+			transform: translateY(0);
+			@include mixins.themed(box-shadow, 0, 0);
+			@include mixins.themed(border-color, rgba(map.get($light-theme, background), 0.45), rgba(map.get($dark-theme, background), 0.35));
+
+			.info-card__label,
+			.info-card__subtext {
+				@include mixins.themed(color, inherit, inherit);
+			}
+		}
+	}
+
+	&:focus-visible {
+		text-decoration: none;
+		outline-offset: 2px;
+		@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+
+		.info-card__label,
+		.info-card__subtext {
+			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+		}
+	}
+}
+
+.resume-mono-card {
+	.info-card__icon-img {
+		filter: grayscale(1);
+	}
+}

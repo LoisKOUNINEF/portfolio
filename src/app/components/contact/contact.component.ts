@@ -1,5 +1,6 @@
-import {AppEventBus, Component, ComponentConfig, I18nService} from '../../../core/index.js';
+import {AppEventBus, Component, ComponentConfig} from '../../../core/index.js';
 import { InfoCardComponent } from '../common/index.js';
+import { displayResumePop } from './resume-popover/resume-popover.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -10,8 +11,6 @@ export class ContactComponent extends Component {
   }
 
   public childConfigs(): ComponentConfig[] {
-    const resumeLink = `./assets/resumes/resume-lois-kouninef-${I18nService.currentLanguage}.pdf`;
-    const downloadedPdfName = I18nService.currentLanguage === 'en' ? `Lois_Kouninef_Resume_Web_Developer.pdf` : `Lois_Kouninef_CV_Developpeur_Web.pdf`;
     return [
       {
         selector: 'email-card',
@@ -52,9 +51,7 @@ export class ContactComponent extends Component {
           iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
           labelKey: 'contact.resume',
           subtextKey: 'contact.resume-subtext',
-          href: resumeLink,
-          download: downloadedPdfName,
-          target: '_self'
+          callback: () => displayResumePop(),
         }, { className: 'contact__link-card contact__resume-card' })
       },
     ];

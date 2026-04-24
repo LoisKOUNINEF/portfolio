@@ -66,6 +66,9 @@ html.no-scroll {
   cursor: pointer;
   padding: 0 1rem;
   @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
   &:focus-visible {
     @include mixins.themed(outline, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, text));
   }

@@ -78,18 +78,16 @@ export class PopoverView extends View {
   }
 
   public override destroy(): void {
-    this._overlay = PopoverDomHelper.removeDomElements(this._overlay);
     this._focusTrap?.deactivate();
-
-    document.documentElement.classList.remove('no-scroll');
-
     if (this._prevTitle) document.title = this._prevTitle;
 
-    super.destroy();
-
-    if (typeof this._onClose === 'function') {
-      this._onClose();
-    }
+    this._overlay = PopoverDomHelper.removeDomElements(this._overlay, () => {
+      document.documentElement.classList.remove('no-scroll');
+      super.destroy();
+      if (typeof this._onClose === 'function') {
+        this._onClose();
+      }
+    });
   }
 
   private setOptionalViewName(viewName: string | undefined): void {

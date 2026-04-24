@@ -34,7 +34,7 @@ const proficiencies: Record<string, string> = {
   sqlite: 'secondary',
   golang: 'secondary',
   tailwind: 'secondary',
-  sass: 'secondary',
+  sass: 'primary',
   rails: 'tertiary',
   docker: 'primary',
   linux: 'primary',
@@ -42,7 +42,7 @@ const proficiencies: Record<string, string> = {
   bash: 'secondary',
 }
 
-const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
+const getLabel = (config: CatalogItemConfig<ITech | string>): string => {
   let label = '';
   if ('value' in config && typeof config.value === 'string') {
     label = labels[config.value] 
@@ -55,7 +55,7 @@ const getLabel = (config: CatalogItemConfig<ITechBase | string>): string => {
   return label;
 }
 
-const getProficiency = (config: CatalogItemConfig<ITechBase | string>): string | undefined => {
+const getProficiency = (config: CatalogItemConfig<ITech | string>): string | undefined => {
   if (!('displayProficiency' in config)) return;
   let proficiency: string | undefined;
   if ('value' in config && typeof config.value === 'string' ) {

@@ -3,6 +3,35 @@
 @use "mixins";
 @use "sass:color";
 
+@mixin view-more-btn($color) {
+  transition: all ease-in-out .2s;
+  font-size: 1.2rem;
+  padding: map.get($spacings, smallest) map.get($spacings, small);
+  @include mixins.themed(border, 2px solid color.scale(map.get($light-theme, $color), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, $color), $lightness: +10%));
+  @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+  @include mixins.themed(color, map.get($light-theme, $color), color.scale(map.get($dark-theme, $color), $lightness: +10%));
+  border-radius: map.get($border-radius, large);
+  text-wrap: nowrap;
+  outline: 2px solid transparent;
+  &:hover, &:focus-visible {
+    cursor: pointer;
+    @include mixins.themed(background, rgba(map.get($light-theme, $color), .1), rgba(map.get($dark-theme, $color), .2));
+    @include mixins.themed(color, map.get($light-theme, $color), color.scale(map.get($dark-theme, $color), $lightness: +20%));
+  }
+  &:hover {
+    @include mixins.themed(border-color, map.get($light-theme, $color), color.scale(map.get($dark-theme, $color), $lightness: +20%));
+  }
+  &:focus-visible {
+    @include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, $color), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, $color), $lightness: +20%));
+  }
+  @media(hover: none) {
+    &:hover {
+      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+      @include mixins.themed(color, color.scale(map.get($light-theme, $color), $lightness: -20%), color.scale(map.get($dark-theme, $color), $lightness: +10%));
+    }
+  }
+}
+
 .project-card__wrapper {
   @include mixins.wrapper;
   padding-top: 0;
@@ -10,15 +39,14 @@
 
 .project-card__container {
   width: 100%;
-  @include mixins.container(primary);
-  @include mixins.header(primary);
+  @include mixins.container(secondary);
+  @include mixins.header(secondary);
   text-align: left;
   gap: map.get($spacings, largest);
 
   &.project-card__standalone {
-    @include mixins.container(secondary);
+    @include mixins.container(primary);
     padding-left: 0;
-    //box-shadow: none;
     .project-header__title {
       @include mixins.themed(border-bottom, 0, 0);
     }
@@ -27,6 +55,7 @@
     justify-content: flex-start;
     h3 {
       font-size: map.get($font-sizes, largest);
+      @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
     }
     @include mixins.respond-to(medium) {
       padding-top: map.get($spacings, large);
@@ -44,6 +73,10 @@
       @include mixins.respond-to(medium) {
         padding: map.get($spacings, medium) 0;
       }
+    }
+
+    .project-card__view-more {
+      @include view-more-btn(secondary);
     }
   }
 
@@ -76,31 +109,5 @@
 }
 
 .project-card__view-more {
-  transition: all ease-in-out .2s;
-  font-family: $secondary-font;
-  font-size: 1.1rem;
-  padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(border, 2px solid color.scale(map.get($light-theme, secondary), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, secondary), $lightness: +10%));
-  @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-  @include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
-  border-radius: map.get($border-radius, large);
-  text-wrap: nowrap;
-  outline: 2px solid transparent;
-  &:hover, &:focus-visible {
-    cursor: pointer;
-    @include mixins.themed(background, rgba(map.get($light-theme, secondary), .1), rgba(map.get($dark-theme, secondary), .2));
-    @include mixins.themed(color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +20%));
-  }
-  &:hover {
-    @include mixins.themed(border-color, map.get($light-theme, secondary), color.scale(map.get($dark-theme, secondary), $lightness: +20%));
-  }
-  &:focus-visible {
-    @include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, secondary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, secondary), $lightness: +20%));
-  }
-  @media(hover: none) {
-    &:hover {
-      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-      @include mixins.themed(color, color.scale(map.get($light-theme, secondary), $lightness: -20%), color.scale(map.get($dark-theme, secondary), $lightness: +10%));
-    }
-  }
+  @include view-more-btn(primary);
 }

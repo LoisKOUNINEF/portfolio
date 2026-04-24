@@ -4,7 +4,7 @@
 
 .project-header__container {
   width: 100%;
-  @include mixins.header(primary);
+  @include mixins.header(secondary);
   display: flex;
   flex-direction: column;
   padding: map.get($spacings, large) map.get($spacings, large);
