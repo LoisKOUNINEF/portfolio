@@ -42,6 +42,7 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         href: colorHref,
         download: colorFilename,
         callback: () => downloadStarted(),
+        target: '_self',
       }, { className: 'resume-popover__card' })
     },
     {
@@ -54,6 +55,7 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         href: monoHref,
         download: monoFilename,
         callback: () => downloadStarted(),
+        target: '_self',
       }, { className: 'resume-popover__card resume-mono-card' })
     },
   ];
