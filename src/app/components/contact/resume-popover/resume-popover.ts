@@ -1,6 +1,7 @@
-import { ComponentConfig, I18nService } from '../../../../core/index.js';
-import { PopoverView } from '../../../../libs/index.js';
+import { AppEventBus, ComponentConfig, I18nService } from '../../../../core/index.js';
+import {notify, PopoverView} from '../../../../libs/index.js';
 import { InfoCardComponent } from '../../common/index.js';
+import {Language} from "../../../../core/services/i18n/languages.js";
 
 const resumePopoverTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -11,6 +12,17 @@ export const displayResumePop = () => {
     components: resumePopoverComponents(lang),
   });
   pop.render();
+};
+
+const downloadStarted = (): void => {
+  const messages: Record<Language, string> = {
+    fr: 'Téléchargement lancé',
+    en: 'Download started',
+  };
+  const currentLang = I18nService.currentLanguage;
+  const message = messages[currentLang] || messages['fr'] || 'Download started';
+  notify(message);
+  AppEventBus.emit('popover-close')
 };
 
 const resumePopoverComponents = (lang: string): ComponentConfig[] => {
@@ -30,6 +42,7 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         href: colorHref,
         download: colorFilename,
         target: '_self',
+        callback: () => downloadStarted(),
       }, { className: 'resume-popover__card' })
     },
     {
@@ -42,7 +55,8 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         href: monoHref,
         download: monoFilename,
         target: '_self',
-      }, { className: 'resume-popover__card' })
+        callback: () => downloadStarted(),
+      }, { className: 'resume-popover__card resume-mono-card' })
     },
   ];
 };

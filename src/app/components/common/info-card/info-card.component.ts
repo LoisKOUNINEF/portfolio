@@ -28,7 +28,7 @@ export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
     const extraClasses = className?.split(' ').filter(Boolean) ?? [];
     this.element.classList.add('info-card', ...extraClasses);
     this.setLinkAttributes();
-    if (!this.config.href && this.config.callback) {
+    if (this.config.callback) {
       this.element.addEventListener('click', this.config.callback);
     }
   }
