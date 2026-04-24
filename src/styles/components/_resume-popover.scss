@@ -48,20 +48,22 @@ a.resume-popover__card {
 	text-decoration: none;
 	width: 75%;
 	align-self: center;
+	justify-content: space-between;
 	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
 
 	@include mixins.respond-to(medium) {
 		width: 100%;
-		align-self: center;
-		//justify-content: center;
 	}
 
 	.info-card__content {
 		text-align: center;
-		//padding-left: map.get($spacings, smallest);
+		flex-grow:1;
 		@include mixins.respond-to(medium) {
 			padding-left: 0;
 		}
+	}
+	.info-card__icon {
+		align-self: flex-start;
 	}
 
 	&:hover {

@@ -41,7 +41,6 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         subtextKey: 'resume-popover.color-subtext',
         href: colorHref,
         download: colorFilename,
-        target: '_self',
         callback: () => downloadStarted(),
       }, { className: 'resume-popover__card' })
     },
@@ -54,7 +53,6 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
         subtextKey: 'resume-popover.mono-subtext',
         href: monoHref,
         download: monoFilename,
-        target: '_self',
         callback: () => downloadStarted(),
       }, { className: 'resume-popover__card resume-mono-card' })
     },
