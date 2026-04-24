@@ -24,16 +24,17 @@ export class PopoverDomHelper {
     return { wrapper, overlay };
   }
 
-  public static removeDomElements(overlay: HTMLElement | null): null {
+  public static removeDomElements(overlay: HTMLElement | null, onRemoved?: () => void): null {
     if (overlay) {
       const wrapper = overlay.querySelector('.popover-wrapper');
       overlay.classList.remove('show');
       wrapper?.classList.remove('show');
 
       setTimeout(() => {
-        wrapper?.remove()
+        wrapper?.remove();
         overlay?.remove();
-      }, 250); // match transition duration
+        onRemoved?.();
+      }, 300); // match transition duration
     }
     return null;
   }
