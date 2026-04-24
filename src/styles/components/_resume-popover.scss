@@ -52,12 +52,13 @@ a.resume-popover__card {
 
 	@include mixins.respond-to(medium) {
 		width: 100%;
-		align-self: auto;
+		align-self: center;
+		//justify-content: center;
 	}
 
 	.info-card__content {
 		text-align: center;
-		padding-left: 3rem;
+		//padding-left: map.get($spacings, smallest);
 		@include mixins.respond-to(medium) {
 			padding-left: 0;
 		}
