@@ -4,8 +4,9 @@ import { I18nHelper } from './helpers/i18n.helper.js';
 import { PipeHelper } from './helpers/pipe.helper.js';
 import { ChildrenHelper } from './helpers/children.helper.js';
 import { CatalogHelper, CatalogConfig } from './helpers/catalog.helper.js';
-import { Component, ComponentOptions } from '../index.js';
+import { Component, ComponentOptions, AppEventBus } from '../../index.js';
 import { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
+// import {AppEventBus} from "../../services/index.js";
 export { CatalogItemConfig, CatalogConfig, CatalogItemPrimitive } from './helpers/catalog.helper.js';
 
 /**```typescript
@@ -95,5 +96,11 @@ interface CatalogConfig extends ComponentOptions {
   protected forceRender(): void {
     this.element.innerHTML = SecurityHelper.sanitizeTemplate(this._options.template, this._options.trustLevel);
     this.render();
+  }
+
+  protected listenToRenderEvents(events: EventKey[], force: boolean = false): void {
+    events.forEach((event: EventKey) => {
+      AppEventBus.subscribe(event, () => force ? this.forceRender() : this.render());
+    })
   }
 }
