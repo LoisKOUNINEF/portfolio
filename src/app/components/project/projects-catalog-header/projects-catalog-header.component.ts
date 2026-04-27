@@ -5,6 +5,6 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 export class ProjectsCatalogHeaderComponent extends Component {
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-      AppEventBus.subscribe('language-changed', () => this.render())
+    this.listenToRenderEvents(['language-changed']);
   }
 }

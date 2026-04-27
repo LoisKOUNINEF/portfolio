@@ -15,7 +15,7 @@ export class ProjectCardComponent extends Component {
 
     this._project = project;
     this._initialConfig = config;
-    AppEventBus.subscribe('language-changed', () => this.forceRender());
+    this.listenToRenderEvents(['language-changed'], true);
   }
 
   public childConfigs(): ComponentConfig[] {

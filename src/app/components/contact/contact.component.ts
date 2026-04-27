@@ -7,7 +7,7 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 export class ContactComponent extends Component {
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-    AppEventBus.subscribe('language-changed', () => this.forceRender());
+    this.listenToRenderEvents(['language-changed'], true);
   }
 
   public childConfigs(): ComponentConfig[] {

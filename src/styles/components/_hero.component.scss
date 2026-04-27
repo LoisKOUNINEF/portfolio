@@ -165,7 +165,7 @@
 	}
 	@media(hover: none) {
 		&:hover {
-      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+      @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), rgba(map.get($dark-theme, background), 1));
       @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
 			@include mixins.themed(box-shadow, 0,0);
 			a {

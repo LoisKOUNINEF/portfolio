@@ -8,7 +8,7 @@ export class HeroComponent extends Component {
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});
-    AppEventBus.subscribe('language-changed', () => this.render());
+    this.listenToRenderEvents(['language-changed']);
   }
 
   public childConfigs(): ComponentConfig[] {

@@ -1,4 +1,4 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
+import { Component, ComponentConfig } from '../../../core/index.js';
 import { TechBadgeComponent } from '../index.js';
 
 interface ITechStackKeys {

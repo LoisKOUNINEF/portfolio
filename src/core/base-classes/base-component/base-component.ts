@@ -6,7 +6,6 @@ import { ChildrenHelper } from './helpers/children.helper.js';
 import { CatalogHelper, CatalogConfig } from './helpers/catalog.helper.js';
 import { Component, ComponentOptions, AppEventBus } from '../../index.js';
 import { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
-// import {AppEventBus} from "../../services/index.js";
 export { CatalogItemConfig, CatalogConfig, CatalogItemPrimitive } from './helpers/catalog.helper.js';
 
 /**```typescript

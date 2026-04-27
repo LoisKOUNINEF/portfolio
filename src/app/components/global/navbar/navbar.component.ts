@@ -26,7 +26,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'header'});
-    AppEventBus.subscribe('language-changed', () => this.render());
+    this.listenToRenderEvents(['language-changed']);
     window.addEventListener('scroll', () => this.scrollHelper());
     NavToggleHelper.setupAnchorListeners();
   }
