@@ -29,7 +29,7 @@ export class DomHelper {
     const isEmpty = (el: HTMLElement): boolean => {
       const attrName = el.dataset.optional?.trim();
 
-      if (attrName && attrName !== "") {
+      if (attrName && attrName !== "" && attrName !== "undefined") {
         const attrValue = el.getAttribute(attrName);
         return !attrValue || attrValue.trim() === "" || attrValue === "undefined";
       }
