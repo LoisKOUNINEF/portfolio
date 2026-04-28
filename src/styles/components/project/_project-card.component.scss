@@ -7,7 +7,7 @@
   transition: all ease-in-out .2s;
   font-size: 1.2rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
-  @include mixins.themed(border, 2px solid color.scale(map.get($light-theme, $color), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, $color), $lightness: +10%));
+  @include mixins.themed(border, 3px solid color.scale(map.get($light-theme, $color), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, $color), $lightness: +10%));
   @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
   @include mixins.themed(color, map.get($light-theme, $color), color.scale(map.get($dark-theme, $color), $lightness: +10%));
   border-radius: map.get($border-radius, large);
@@ -79,7 +79,7 @@
     }
 
     .project-card__view-more {
-      @include view-more-btn(secondary);
+      @include view-more-btn(primary);
     }
   }
 

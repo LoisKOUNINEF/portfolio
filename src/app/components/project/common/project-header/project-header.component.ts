@@ -1,5 +1,5 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent} from '../../../index.js';
+import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent} from '../../../index.js';
 
 interface IProjectHeadConfig {
   name: string;
@@ -23,10 +23,11 @@ export class ProjectHeaderComponent extends Component {
   public childConfigs(): ComponentConfig[] {
     const configs = this.getTagsConfig();
     if (!this._headConfig.displayTechIcons) {
-      return configs;
+      configs.push(this.getTechStringConfig());
+    } else {
+      configs.push(...this.getTechBadgesConfig());
     }
-    configs.push(...this.getTechBadgesConfig());
-    return configs
+    return configs;
   }
 
   private getTechBadgesConfig(): ComponentConfig[] {
@@ -45,5 +46,12 @@ export class ProjectHeaderComponent extends Component {
       component: ProjectTagComponent,
       elementName: `project-header-tag`
     })
+  }
+
+  private getTechStringConfig(): ComponentConfig {
+    return {
+      selector: 'project-header-tech-string',
+      factory: (el) => new TechStringComponent(el, this._headConfig.technos)
+    }
   }
 }

@@ -142,12 +142,3 @@
   height: 100%;
   @include mixins.bg-cover;
 }
-
-.project-header__technos-string {
-  font-family: $secondary-font;
-  font-size: map.get($font-sizes, smallest);
-  font-style: italic;
-  letter-spacing: 0.15em;
-  padding-top: map.get($spacings, small);
-  opacity: .8;
-}

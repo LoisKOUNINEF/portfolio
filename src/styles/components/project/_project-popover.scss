@@ -26,6 +26,7 @@
   }
   h4 {
     font-family: $secondary-font;
+    font-weight: bold;
     font-size: 1.05rem;
     padding: map.get($spacings, medium) 0;
   }

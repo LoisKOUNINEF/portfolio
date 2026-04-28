@@ -1,16 +1,6 @@
-import { AppPipeRegistry, CatalogItemConfig, Component } from '../../../../core/index.js';
+import { AppPipeRegistry, CatalogItemConfig } from "../../../../core/index.js";
 
-interface ITechBadge extends CatalogItemConfig {
-  svgKey?: TechSvgKey;
-  value?: TechSvgKey;
-  label: string;
-}
-
-export interface ITechBadgeConfig extends ITech {
-  displayProficiency?: boolean;
-}
-
-const labels: Record<string, string> = {
+export const labels: Record<string, string> = {
   typescript: 'TypeScript',
   postgresql: 'PostgreSQL',
   mysql: 'MySQL',
@@ -22,7 +12,7 @@ const labels: Record<string, string> = {
   golang: 'Go',
 }
 
-const proficiencies: Record<string, string> = {
+export const proficiencies: Record<string, string> = {
   angular: 'primary',
   typescript: 'primary',
   postgresql: 'primary',
@@ -42,7 +32,7 @@ const proficiencies: Record<string, string> = {
   bash: 'secondary',
 }
 
-const getLabel = (config: CatalogItemConfig<ITech | string>): string => {
+export const getLabel = (config: CatalogItemConfig<ITech | string> | ITech[] | ITech): string => {
   let label = '';
   if ('value' in config && typeof config.value === 'string') {
     label = labels[config.value] 
@@ -52,10 +42,13 @@ const getLabel = (config: CatalogItemConfig<ITech | string>): string => {
     label = labels[config.svgKey] 
     ?? AppPipeRegistry.apply('capitalize', config.svgKey);
   }
+  else if (Array.isArray(config)) {
+    label = config.map((conf: ITech) => getLabel(conf as ITech)).join(' - ');
+  }
   return label;
 }
 
-const getProficiency = (config: CatalogItemConfig<ITech | string>): string | undefined => {
+export const getProficiency = (config: CatalogItemConfig<ITech | string>): string | undefined => {
   if (!('displayProficiency' in config)) return;
   let proficiency: string | undefined;
   if ('value' in config && typeof config.value === 'string' ) {
@@ -65,18 +58,4 @@ const getProficiency = (config: CatalogItemConfig<ITech | string>): string | und
     proficiency = proficiencies[config.svgKey]!;
   }
   return proficiency;
-}
-
-const templateFn = (_config: CatalogItemConfig<ITechBadge>) => `__TEMPLATE_PLACEHOLDER__`;
-
-export class TechBadgeComponent extends Component {
-  private _config: CatalogItemConfig<ITech>;
-  constructor(mountTarget: HTMLElement, config: CatalogItemConfig<ITechBadgeConfig>) {
-    const label = getLabel(config);
-    const proficiency = getProficiency(config);
-    super({ templateFn, mountTarget, config: { 
-      ...config, label, proficiency 
-    }});
-      this._config = config;
-  }
 }
