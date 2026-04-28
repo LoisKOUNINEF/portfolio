@@ -17,4 +17,5 @@
 		<p class="svgs__container project-header__svgs" data-catalog="project-header-technos"></p>
 	</div>
 	<h4 class="project-header__tagline">${_config.tagline}</h4>
+	<p data-pipe="capitalizeAll" class="project-header__technos-string ${_config.displayTechIcons ? 'u-hide' : ''}">${_config.technos.map(s => s.svgKey.toString()).join(' - ')}</p>
 </div>

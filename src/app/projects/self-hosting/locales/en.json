@@ -1,14 +1,14 @@
 {
-	"name": "Self-hosting",
-	"tagline": "A self-hosted environment focused on deployment, security fundamentals, and day-to-day operations.",
+	"name": "Systems & Infrastructure",
+	"tagline": "Self-hosted production environment — deployment, security, and day-to-day operations for internet-exposed services.",
 	"imageSrc": "./assets/images/projects/self-hosting",
 	"presentation": {
 		"keyPoints": [
+			"Managing deployment, networking, and security concerns together, ensuring predictable behavior in a real-world environment.",
 			"Essential security measures scoped to realistic threats for a personal, internet-exposed service (automatic updates, restricted access, firewall, intrusion prevention).",
 			"Reverse proxy with automated TLS certificate renewal.",
 			"Containerized services orchestrated with Docker Swarm.",
-			"Self-hosted mail service for application needs.",
-			"Designed for small-scale, personal production use."
+			"Self-hosted mail service for application needs."
 		]
 	},
 	"popTagline": "Set up to gain hands-on experience with deployment, security basics, and everyday operational concerns in a self-hosted environment.",
@@ -109,10 +109,10 @@
 			"svgKey": "linux"
 		},
 		{
-			"svgKey": "traefik"
+			"svgKey": "docker"
 		},
 		{
-			"svgKey": "docker"
+			"svgKey": "traefik"
 		},
 		{
 			"svgKey": "bash"

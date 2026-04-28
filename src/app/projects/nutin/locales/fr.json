@@ -1,6 +1,6 @@
 {
-	"name": "Mini-Framework Frontend - nutin",
-	"tagline": "Un outil frontend léger, sans dépendance runtime.",
+	"name": "Mini-Framework Frontend | nutin",
+	"tagline": "Conçu et développé un framework frontend minimal pour explorer les compromis explicites en matière d’architecture.",
 	"imageSrc": "./assets/images/projects/nutin",
 	"tags": [
 		{
@@ -14,10 +14,10 @@
 	],
 	"presentation": {
 		"keyPoints": [
+			"Conçu autour de mises à jour explicites pilotées par les événements, échangeant la commodité des frameworks contre la prévisibilité et le contrôle.",
 			"Composants et vues basés sur le DOM (pas de DOM virtuel).",
 			"Router et bus d'événements pour la navigation et le flux d'état.",
-			"Mises à jour explicites pilotées par événements (pas de détection automatique des changements).",
-			"Conçu pour des cas d’usage ciblés, avec un ensemble de fonctionnalités volontairement restreint et explicite.",
+			"Développé pour des cas d’usage ciblés, avec un ensemble de fonctionnalités volontairement restreint et explicite.",
 			"Utilisé pour développer ce portfolio et le site du framework."
 		]
 	},
@@ -122,10 +122,10 @@
 			"svgKey": "nodejs"
 		},
 		{
-			"svgKey": "handlebars"
+			"svgKey": "sass"
 		},
 		{
-			"svgKey": "sass"
+			"svgKey": "handlebars"
 		}
 	],
 	"links": [

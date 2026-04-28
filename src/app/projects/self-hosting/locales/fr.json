@@ -1,9 +1,10 @@
 {
-	"name": "Self-hosting",
-	"tagline": "Un environnement auto-hébergé axé sur le déploiement, les fondamentaux de sécurité et les opérations quotidiennes.",
+	"name": "Systèmes & Infrastructure",
+	"tagline": "Auto-hébergement en production — déploiement, sécurité et opérations quotidiennes pour des services exposés sur Internet.",
 	"imageSrc": "./assets/images/projects/self-hosting",
 	"presentation": {
 		"keyPoints": [
+			"Gestion conjointe des aspects déploiement, réseau et sécurité, pour un comportement prévisible en environnement réel.",
 			"Mesures de sécurité essentielles (mises à jour automatiques, accès restreint, pare-feu, prévention des intrusions).",
 			"Reverse proxy avec renouvellement automatique des certificats TLS.",
 			"Services conteneurisés orchestrés avec Docker Swarm.",
@@ -108,10 +109,10 @@
 			"svgKey": "linux"
 		},
 		{
-			"svgKey": "traefik"
+			"svgKey": "docker"
 		},
 		{
-			"svgKey": "docker"
+			"svgKey": "traefik"
 		},
 		{
 			"svgKey": "bash"

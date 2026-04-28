@@ -1,6 +1,6 @@
 {
-	"name": "Games in TypeScript - PixelsMansion",
-	"tagline": "A small retro games playground built to deepen my understanding of object-oriented design.",
+	"name": "Games in TypeScript | PixelsMansion",
+	"tagline": "A modular retro games platform built to design and validate reusable object-oriented game architectures.",
 	"imageSrc": "./assets/images/projects/pixels-mansion",
 	"tags": [
 		{
@@ -14,10 +14,10 @@
 	],
 	"presentation": {
 		"keyPoints": [
-			"Grid-based retro games with shared game abstractions.",
-			"Object-oriented architecture with polymorphic game logic.",
-			"Automatic save of scores and current game state.",
-			"Reusable UI components (including a custom typewriter effect)."
+			"Designed to support multiple game implementations on a shared architecture, requiring consistent abstractions across different game rules and behaviors.",
+			"Built a shared game engine architecture for grid-based games, enabling reuse of core mechanics across multiple implementations.",
+			"Implemented polymorphic game logic, allowing different games to extend a common abstraction layer while preserving consistent behavior.",
+			"Implemented a state management system handling game persistence across sessions."
 		]
 	},
 	"popTagline": "Built as a sandbox to practice object-oriented design by implementing classic game mechanics.",

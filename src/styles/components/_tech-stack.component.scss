@@ -71,7 +71,6 @@
 	.svg-tech-label {
 	  padding-top: map.get($spacings, small);
 	  font-weight: 700;
-	  letter-spacing: 0.15em;
 	  opacity: 0.75;
 	  font-style: normal;
 	}
@@ -112,7 +111,6 @@
 
 .tech-stack__subtitle {
 	padding-top: map.get($spacings, smallest);
-	//padding-left: map.get($spacings, medium);
 	font-style: italic;
 	font-family: $secondary-font;
 	opacity: .75;

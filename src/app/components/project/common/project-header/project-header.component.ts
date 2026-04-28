@@ -1,5 +1,5 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import {ProjectTagComponent, TechBadgeComponent} from '../../../index.js';
+import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent} from '../../../index.js';
 
 interface IProjectHeadConfig {
   name: string;
