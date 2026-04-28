@@ -42,7 +42,7 @@
   @include mixins.container(secondary);
   @include mixins.header(secondary);
   text-align: left;
-  gap: map.get($spacings, largest);
+  gap: map.get($spacings, large);
 
   &.project-card__standalone {
     @include mixins.container(primary);
@@ -56,6 +56,9 @@
     h3 {
       font-size: map.get($font-sizes, largest);
       @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+      @include mixins.respond-to(medium) {
+        line-height: 2.5rem;
+      }
     }
     @include mixins.respond-to(medium) {
       padding-top: map.get($spacings, large);
@@ -83,6 +86,7 @@
   @include mixins.respond-to(medium) {
     display: block;
     padding-top: 0;
+    gap: map.get($spacings, medium);
     .project-header__svgs {
       display: none;
     }

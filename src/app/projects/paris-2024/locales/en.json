@@ -1,6 +1,6 @@
 {
-	"name": "Fullstack App - Paris 2024",
-	"tagline": "A full-stack project focused on authentication, payments, end-to-end user flows.",
+	"name": "Fullstack App | Paris 2024",
+	"tagline": "Fullstack e-ticket platform handling authentication, payments, and secure user flows in production-like conditions.",
 	"imageSrc": "./assets/images/projects/paris-2024",
 	"tags": [
 		{
@@ -14,9 +14,9 @@
 	],
 	"presentation": {
 		"keyPoints": [
+			"Designed to handle secure payment flows and user state consistency across sessions",
 			"Complete authentication flow (signup, email verification, password reset). Role-based access (RBAC), dashboard admin.",
 			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
-			"Ticket generation with QR codes and email delivery.",
 			"PostgreSQL database with indexation and query optimisation.",
 			"Sensitive data encryption, controlled API access, rate limiting / load balancing."
 		]

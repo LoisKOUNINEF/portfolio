@@ -1,5 +1,3 @@
-import {Language} from "../../core/services/i18n/languages.js";
-import {I18nService} from "../../core/index.js";
 import {SecurityHelper} from "../../core/base-classes/base-component/helpers/security.helper.js";
 
 export type NotifyOptions = {

@@ -30,12 +30,13 @@
 
 .hero__value-prop {
 	padding-top: map.get($spacings, largest);
+	padding-bottom: map.get($spacings, medium);
 	padding-left: map.get($spacings, smallest);
-	font-size: map.get($font-sizes, largest);
+	font-size: 1.75rem;
 	max-width: 50ch;
 	@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
 	@include mixins.respond-to(medium) {
-		font-size: map.get($font-sizes, large);
+		font-size: 1.25rem;
 		padding-left: 0;
 		padding-top: map.get($spacings, large);
 	}
@@ -165,7 +166,7 @@
 	}
 	@media(hover: none) {
 		&:hover {
-      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
+      @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), rgba(map.get($dark-theme, background), 1));
       @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
 			@include mixins.themed(box-shadow, 0,0);
 			a {

@@ -1,4 +1,4 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
+import { Component, ComponentConfig } from '../../../core/index.js';
 import { TechBadgeComponent } from '../index.js';
 
 interface ITechStackKeys {
@@ -20,7 +20,7 @@ export class TechStackComponent extends Component {
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});
-    AppEventBus.subscribe('language-changed', () => this.render());
+    this.listenToRenderEvents(['language-changed']);
   }
 
   public childConfigs(): ComponentConfig[] {

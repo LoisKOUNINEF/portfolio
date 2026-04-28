@@ -17,8 +17,8 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 export class NavbarComponent extends Component<HTMLHeadingElement> {
   private readonly _anchorHrefs: IAnchorConfig[] = [
     { href: '#hero', i18nKey: 'navbar.hero', className: `${NavToggleHelper.toggleClasses.active}` },
-    { href: '#main-projects', i18nKey: 'navbar.main-projects' },
     { href: '#infrastructure', i18nKey: 'navbar.infrastructure' },
+    { href: '#main-projects', i18nKey: 'navbar.main-projects' },
     { href: '#about', i18nKey: 'navbar.about' },
     { href: '#tech-stack', i18nKey: 'navbar.tech-stack' },
     { href: '#contact', i18nKey: 'navbar.contact' },
@@ -26,7 +26,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'header'});
-    AppEventBus.subscribe('language-changed', () => this.render());
+    this.listenToRenderEvents(['language-changed']);
     window.addEventListener('scroll', () => this.scrollHelper());
     NavToggleHelper.setupAnchorListeners();
   }

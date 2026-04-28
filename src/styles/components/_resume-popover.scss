@@ -28,12 +28,17 @@
 	}
 }
 
+.resume-popover__title {
+	padding-top: map.get($spacings, medium);
+}
+
 .resume-popover__cards {
 	display: flex;
 	flex-direction: column;
 	gap: map.get($spacings, medium);
 	width: 100%;
 	padding-top: map.get($spacings, small);
+	padding-bottom: map.get($spacings, medium);
 }
 
 a.resume-popover__card {

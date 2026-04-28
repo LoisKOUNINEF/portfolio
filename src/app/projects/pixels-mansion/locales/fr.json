@@ -1,6 +1,6 @@
 {
-	"name": "Jeux en TypeScript - PixelsMansion",
-	"tagline": "Un petit terrain de jeu rétro construit pour approfondir ma compréhension de la conception orientée objet.",
+	"name": "Jeux en TypeScript | PixelsMansion",
+	"tagline": "Une plateforme de jeux rétro modulaire conçue pour concevoir et valider des architectures de jeu orientées objet réutilisables.",
 	"imageSrc": "./assets/images/projects/pixels-mansion",
 	"tags": [
 		{
@@ -14,10 +14,10 @@
 	],
 	"presentation": {
 		"keyPoints": [
-			"Jeux rétro sur grille avec abstractions de jeu partagées.",
-			"Architecture orientée objet avec logique de jeu polymorphe.",
-			"Sauvegarde automatique des scores et de l'état actuel du jeu.",
-			"Composants UI réutilisables (incluant un effet machine à écrire personnalisé)."
+			"Conçu pour supporter plusieurs implémentations de jeux sur une architecture partagée, nécessitant des abstractions cohérentes entre différentes règles et comportements de jeu.",
+			"Construit une architecture partagée de moteur de jeu pour les jeux basés sur une grille, permettant la réutilisation des mécaniques principales à travers plusieurs implémentations.",
+			"Mis en œuvre une logique de jeu polymorphe, permettant à différents jeux d’étendre une couche d’abstraction commune tout en préservant un comportement cohérent.",
+			"Implémenté un système de gestion d’état assurant la persistance du jeu entre les sessions."
 		]
 	},
 	"popTagline": "Construit comme un bac à sable pour pratiquer la conception orientée objet en implémentant des mécaniques de jeu classiques.",

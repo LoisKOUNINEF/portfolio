@@ -56,9 +56,12 @@ $tech-badge-svgs: (
   align-items: center;
 }
 
-.svg-tech-label {}
+.svg-tech-label {
+  font-family: $secondary-font;
+  letter-spacing: 0.15em;
+}
 
-.svg-tech-proficiency {
+[class*="svg-tech-proficiency"] {
   min-width: 10ch;
   font-size: 0.65rem;
   text-wrap: wrap;
@@ -67,4 +70,9 @@ $tech-badge-svgs: (
   @include mixins.respond-to(medium) {
     min-width: auto;
   }
+}
+
+.svg-tech-proficiency__primary {
+  opacity: .9;
+  @include mixins.themed(color, rgba(map.get($light-theme, secondary), 1), rgba(map.get($dark-theme, secondary), 1))
 }
