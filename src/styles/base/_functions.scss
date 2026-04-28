@@ -7,3 +7,11 @@
 		@return $number / ($number * 0 + 1);
 	}
 }
+
+@function theme($key, $mode: light) {
+  @if $mode == light {
+    @return map.get($light-theme, $key);
+  } @else {
+    @return map.get($dark-theme, $key);
+  }
+}
