@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "variables" as *;
 @use "mixins";
+@use "sass:color";
 @use "svgs-common" as *;
 
 $tech-badges-path: '#{$base-folder}/tech-badges/';
@@ -74,5 +75,5 @@ $tech-badge-svgs: (
 
 .svg-tech-proficiency__primary {
   opacity: .9;
-  @include mixins.themed(color, rgba(map.get($light-theme, secondary), 1), rgba(map.get($dark-theme, secondary), 1))
+  @include mixins.themed(color, rgba(map.get($light-theme, secondary), .8), color.scale(map.get($dark-theme, secondary), $lightness: +20%))
 }
