@@ -3,6 +3,7 @@
 		<h3>${_config.name}</h3>
 		<div data-optional class="project-header__tags" data-catalog="project-header-tags"></div>
 	</div>
+	<p data-pipe="capitalizeAll" class="project-header__technos-string ${_config.displayTechIcons ? 'u-hide' : ''}">${_config.technos.slice(0,3).map(s => s.svgKey.toString()).join(' - ')}</p>
 	<div class="project-header__images ${_config.displayTechIcons ? '' : 'u-hide'}">
 		<div class="project-header__screen-mock">
 			<div class="project-header__screen-mock-content">
@@ -17,5 +18,4 @@
 		<p class="svgs__container project-header__svgs" data-catalog="project-header-technos"></p>
 	</div>
 	<h4 class="project-header__tagline">${_config.tagline}</h4>
-	<p data-pipe="capitalizeAll" class="project-header__technos-string ${_config.displayTechIcons ? 'u-hide' : ''}">${_config.technos.map(s => s.svgKey.toString()).join(' - ')}</p>
 </div>

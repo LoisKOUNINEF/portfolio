@@ -97,6 +97,7 @@
 	padding-left: map.get($spacings, largest);
 		.svg-tech-label {
 			font-size: 0.7rem;
+			letter-spacing: 0;
 		}
 		.base-svg {
 			&::after {

@@ -148,11 +148,6 @@
   font-size: map.get($font-sizes, smallest);
   font-style: italic;
   letter-spacing: 0.15em;
-  padding-left: map.get($spacings, medium);
   padding-top: map.get($spacings, small);
   opacity: .8;
-  @include mixins.respond-to(medium) {
-    padding-left: 0;
-    letter-spacing: 0.15em;
-  }
 }
