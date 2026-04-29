@@ -31,8 +31,8 @@ html.no-scroll {
   @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, text));
   @include mixins.themed(box-shadow, (0 2px 2px rgba(map.get($light-theme, text), .2)), (0 2px 2px rgba(map.get($dark-theme, text), .2)));
   border-radius: 1rem;
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   transform: scale(0.95);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
