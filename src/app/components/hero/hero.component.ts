@@ -15,7 +15,7 @@ export class HeroComponent extends Component {
     return [
       ...this.getKeyCompetences(),
       ...this.getTechBadges(),
-      this.getProjectsAnchor()
+      this.getCtaAnchor()
     ]
   }
 
@@ -42,11 +42,11 @@ export class HeroComponent extends Component {
     })
   }
 
-  private getProjectsAnchor(): ComponentConfig {
+  private getCtaAnchor(): ComponentConfig {
     return {
-      selector: 'projects-anchor',
+      selector: 'hero-cta',
       factory: (el) => new AnchorComponent(el, { 
-        href: '#main-projects', 
+        href: '#infrastructure', 
         i18nKey: 'hero.cta' 
       })
     }
