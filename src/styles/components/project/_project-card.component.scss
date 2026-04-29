@@ -43,8 +43,8 @@
 
 .project-card__container {
   width: 100%;
-  @include mixins.container(secondary);
-  @include mixins.header(secondary);
+  @include mixins.container(primary);
+  @include mixins.header(primary);
   text-align: left;
   gap: map.get($spacings, large);
 

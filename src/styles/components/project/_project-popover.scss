@@ -20,6 +20,18 @@
   text-align: left;
   min-width: 100%;
   padding-left: map.get($spacings, medium);
+  .project-header__container {
+    .project-header__title {
+      @include mixins.themed(border-bottom, 3px solid map.get($light-theme, primary), 3px solid map.get($dark-theme, primary));
+      h3 {
+        font-size: map.get($font-sizes, largest);
+        @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+        @include mixins.respond-to(medium) {
+          line-height: 2.5rem;
+        }
+      }
+    }
+  }
 
   .project-header__tagline {
     max-width: 50ch;

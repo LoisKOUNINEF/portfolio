@@ -55,10 +55,8 @@
 
 .project-header__tagline {
   font-family: $secondary-font;
-  max-width: 60ch;
   padding-top: map.get($spacings, medium);
   font-size: 1.1rem;
-  font-style: italic;
   @include mixins.respond-to(medium) {
     padding-left: 0;
   }

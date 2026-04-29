@@ -70,8 +70,8 @@
       transition: color 0.2s, background 0.2s;
 
       &.active {
-        @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, primary));
-        @include mixins.themed(color, map.get($light-theme, primary),map.get($dark-theme, background));
+        @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, text));
+        @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, background));
         &:hover {
           cursor: default;
         }
@@ -81,8 +81,8 @@
       }
       &:not(.active) {
         &:hover {
-          @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, background));
-          @include mixins.themed(background-color, map.get($light-theme, background), map.get($dark-theme, text));
+          @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
+          @include mixins.themed(background-color, map.get($light-theme, background), map.get($dark-theme, primary));
         }
         &:focus-visible {
           @include mixins.themed(outline, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, text));

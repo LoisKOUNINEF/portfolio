@@ -82,8 +82,10 @@
 .hero__main-stack-title {
 	padding-top: map.get($spacings, largest);
 	font-family: $secondary-font;
+	font-size: .8rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
 	font-weight: 700;
-	letter-spacing: 0.15rem;
 	opacity: .65;
 	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +10%), color.scale(map.get($dark-theme, text), $lightness: +40%));
 	border-radius: map.get($spacings, small);
