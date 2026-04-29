@@ -41,13 +41,12 @@
 
 .project-card__container {
   width: 100%;
-  @include mixins.container(primary);
+  @include mixins.container(text);
   @include mixins.header(primary);
   text-align: left;
   gap: map.get($spacings, large);
 
   &.project-card__standalone {
-    @include mixins.container(primary);
     padding-left: 0;
     .project-header__title {
       @include mixins.themed(border-bottom, 0, 0);
