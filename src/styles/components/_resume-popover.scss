@@ -4,13 +4,13 @@
 @use "sass:color";
 
 .popover-wrapper:has(.resume-popover__wrapper) {
-	width: 32%;
+	width: 50%;
 	height: auto;
 	max-height: 60%;
 
 	@include mixins.respond-to(medium) {
-		width: 90%;
-		max-height: 90%;
+		width: 100%;
+		max-height: 80%;
 	}
 }
 

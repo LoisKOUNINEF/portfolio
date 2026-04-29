@@ -1,8 +1,8 @@
 { 
 	"hero": "Accueil",
-	"main-projects": "Projets",
-	"tech-stack": "Technologies",
 	"infrastructure": "Systèmes & Infrastructure",
+	"main-projects": "Projets",
+	"tech-stack": "Stack Technique",
 	"about": "A Propos",
 	"contact": "Contact"
 }
