@@ -6,23 +6,22 @@
 @mixin view-more-btn($color) {
   cursor: pointer;
   transition: all ease-in-out .2s;
+  transition: background ease-in-out .2s;
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: .01rem;
   padding: map.get($spacings, smallest) map.get($spacings, small);
   @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-    @include mixins.themed(color, color.scale(map.get($light-theme, $color), $lightness: -5%), color.scale(map.get($dark-theme, $color), $lightness: -10%));
+    @include mixins.themed(color, map.get($light-theme, $color), map.get($dark-theme, $color));
   border-radius: map.get($border-radius, medium);
   text-wrap: nowrap;
   @include mixins.themed(outline, 3px solid transparent, 2px solid transparent);
   &:hover, &:focus-visible {
     text-decoration: underline;
-    @include mixins.themed(background, rgba(map.get($light-theme, $color), .1), rgba(map.get($dark-theme, $color), .15));
-    @include mixins.themed(color, color.scale(map.get($light-theme, $color), $lightness: -10%), color.scale(map.get($dark-theme, $color), $lightness: -20%));
+    @include mixins.themed(color, color.scale(map.get($light-theme, $color), $lightness: +20%), color.scale(map.get($dark-theme, $color), $lightness: +20%));
   }
   &:hover {
     transform: translateY(-2px);
-    @include mixins.themed(box-shadow, 0 4px 12px rgba(map.get($light-theme, primary),0.15), 0 4px 12px rgba(map.get($dark-theme, primary),0.15));
   }
   &:focus-visible {
     @include mixins.themed(outline, 3px solid color.scale(map.get($light-theme, $color), $lightness: -10%), 2px solid color.scale(map.get($dark-theme, $color), $lightness: -20%));
@@ -30,8 +29,7 @@
   @media(hover: none) {
     &:hover {
       text-decoration: none;
-      @include mixins.themed(background, rgba(map.get($light-theme, background), 1), rgba(map.get($dark-theme, background), 1));
-      @include mixins.themed(color, color.scale(map.get($light-theme, $color), $lightness: -5%), color.scale(map.get($dark-theme, $color), $lightness: -10%));
+      @include mixins.themed(color, map.get($light-theme, $color), map.get($dark-theme, $color));
     }
   }
 }

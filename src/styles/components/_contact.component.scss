@@ -64,7 +64,7 @@ a.contact__link-card {
 
 		.info-card__label,
 		.info-card__subtext {
-			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+			@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +20%), color.scale(map.get($dark-theme, text), $lightness: -10%));
 		}
 	}
 	&:active {
