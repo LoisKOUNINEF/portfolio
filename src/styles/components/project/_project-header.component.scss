@@ -33,8 +33,15 @@
 .project-header__images {
   display: flex;
   justify-content: space-between;
-  .project-header__svgs {display: flex; flex-wrap: wrap;
+  .project-header__svgs {
+    display: flex;
+    flex-wrap: wrap;
     padding-left: map.get($spacings, large);
+    @include mixins.respond-to(medium) {
+      .svg-tech-label {
+        letter-spacing: 0;
+      }
+    }
   }
   @include mixins.respond-to(medium) {
     @include mixins.flex-center;

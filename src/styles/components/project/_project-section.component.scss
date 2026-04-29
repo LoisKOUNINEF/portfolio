@@ -3,23 +3,20 @@
 @use "mixins";
 
 .project-section__container {
+  max-width: 100%;
   line-height: map.get($spacings, large);
-  padding-left: map.get($spacings, large);
-  h5 {
-    font-weight: bold;
-    padding: map.get($spacings, small) 0;
-  }
-  h6 {
+  padding: 0 map.get($spacings, large);
+  h5, h6, h7 {
     font-weight: bold;
     padding: map.get($spacings, small) 0;
   }
   @include mixins.respond-to(medium) {
-    padding-left: 0;
+    padding: 0;
   }
 }
 
 .project-section__main-content {
-  padding: map.get($spacings, smallest) 0;
+  padding: map.get($spacings, large) 0;
 }
 
 .project-section__key-points {
