@@ -10,6 +10,9 @@
     font-weight: bold;
     padding: map.get($spacings, small) 0;
   }
+  h6, h7 {
+    padding-top: map.get($spacings, medium);
+  }
   @include mixins.respond-to(medium) {
     padding: 0;
   }

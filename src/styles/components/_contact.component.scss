@@ -43,6 +43,7 @@
 		display: contents;
 	}
 }
+
 a.contact__link-card {
 	text-decoration: none;
 	&:hover {
@@ -86,12 +87,12 @@ a.contact__link-card {
   }
 
 	&:focus-visible {
-		text-decoration: none;
+		text-decoration: none!important;
 		outline-offset: 2px;
 		@include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
 		.info-card__label,
 		.info-card__subtext {
-			@include mixins.themed(color, map.get($light-theme, accent), map.get($dark-theme, accent));
+			@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +20%), color.scale(map.get($dark-theme, text), $lightness: -10%));
 		}
 	}
 
