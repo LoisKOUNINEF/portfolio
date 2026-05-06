@@ -18,22 +18,23 @@
   width: 100%;
   display: flex;
   h3 {
+    width: 100%;
     font-size: map.get($font-sizes, large);
     text-wrap: wrap;
+  }
+  @include mixins.respond-to(medium) {
+    flex-wrap: wrap;
   }
 }
 
 .project-header__tags {
   display: flex;
-  justify-content: flex-end;
+  align-self: flex-end;
   padding-left: map.get($spacings, medium);
   padding-bottom: map.get($spacings, smallest);
   gap: map.get($spacings, small);
 
   @include mixins.respond-to(medium) {
-    align-self: flex-end;
-    flex-direction: column;
-    padding-bottom: map.get($spacings, smallest);
     padding-left: 0;
   }
 }

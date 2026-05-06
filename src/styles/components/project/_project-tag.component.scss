@@ -47,5 +47,6 @@ $tag-colors: (
 
 .project-tag__text {
   font-size: map.get($font-sizes, smallest);
+  font-weight: 500;
   color: inherit;
 }
