@@ -1,5 +1,5 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import {AnchorComponent, BulletPointComponent, TechBadgeComponent} from '../index.js';
+import { Component, ComponentConfig } from '../../../core/index.js';
+import { BulletPointComponent, ButtonComponent, TechBadgeComponent } from '../index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -45,11 +45,17 @@ export class HeroComponent extends Component {
   private getCtaAnchor(): ComponentConfig {
     return {
       selector: 'hero-cta',
-      factory: (el) => new AnchorComponent(el, { 
-        href: '#infrastructure', 
-        i18nKey: 'hero.cta' 
+      factory: (el) => new ButtonComponent(el, {
+        i18nKey: 'hero.cta',
+        callback: () => this.scrollToWork(),
+        className: 'hero__cta u-pre-wrap'
       })
     }
+  }
+
+  private scrollToWork() {
+    const projectAnchor = document.getElementById('infrastructure');
+    projectAnchor?.scrollIntoView({ behavior: 'smooth' });
   }
 
   private scrollToTechnos() {

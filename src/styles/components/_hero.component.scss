@@ -154,20 +154,14 @@
     @include mixins.themed(border-color, map.get($light-theme, primary), color.scale(map.get($dark-theme, primary), $lightness: +20%));
 	  box-shadow: 0 4px 8px -2px rgba(0,0,0,0.12),
               0 1px 2px -1px rgba(0,0,0,0.08);
-		a {
-			text-decoration: none;
-		}
 	}
 	&:active {
   	transform: translateX(-3px);
 	}
-	a {
-		&:focus-visible {
-			outline: none;
-			text-decoration: none;
-      @include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, text));
-    	@include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, primary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +20%));
-		}
+	&:focus-visible {
+		outline: none;
+		text-decoration: none;
+    @include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, primary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +20%));
 	}
 	@media(hover: none) {
 		&:hover {
