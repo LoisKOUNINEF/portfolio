@@ -61,6 +61,9 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+		@include mixins.respond-to(medium) {
+			justify-content: center;
+		}
   }
 	img {
 		transition: scale .3s, box-shadow .3s;
@@ -68,11 +71,11 @@
 		max-width: 20rem;
 		align-self: flex-end;
 		border-radius: 1rem;
-  	@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.4), 0 10px 15px rgba(map.get($dark-theme, text), 0.4));
+  	@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.4), 0 10px 15px rgba(map.get($dark-theme, text), 0.3));
   	&:hover {
   		cursor: pointer;
   		scale: 1.1;
-  		@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.6), 0 10px 15px rgba(map.get($dark-theme, text), 0.6));
+  		@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.6), 0 10px 15px rgba(map.get($dark-theme, text), 0.4));
   	}
   	@media(hover: none) {
 			&:hover {
@@ -96,12 +99,11 @@
 
 .popover-wrapper:has(.image-popover__wrapper) {
 	@include mixins.flex-center;
-	width: 60%;
-	max-height: 90%;
+	width: 55%;
+	height: auto;
 
 	@include mixins.respond-to(medium) {
 		width: 100%;
-		max-height: 60%;
 	}
 }
 
