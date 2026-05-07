@@ -9,3 +9,4 @@ export * from './contact/contact.component.js';
 export * from './infos/infos.component.js';
 export * from './tech-stack/tech-stack.component.js';
 export * from './common/tech/tech-string/tech-string.component.js';
+export * from './other-things/other-things.component.js';

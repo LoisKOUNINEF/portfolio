@@ -121,18 +121,20 @@
       a {
         padding: .5rem .5rem;
         border: 2px solid;
-        @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, primary));
-        @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
-        @include mixins.themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
+        @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
+        @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
+        @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
 
         &:hover, &:focus-visible {
-          @include mixins.themed(background, map.get($light-theme, primary), map.get($dark-theme, background));
-          @include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, primary));
+          @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .9));
+          @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -10%), map.get($dark-theme, background));
+          @include mixins.themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
         }
         @media(hover: none) {
           &:hover {
-            @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, primary));
-            @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
+            @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
+            @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
+            @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
           }
         }
         @include mixins.respond-to(medium) {
