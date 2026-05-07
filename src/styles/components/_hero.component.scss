@@ -132,7 +132,7 @@
 	width: fit-content;
 	border: 2px solid;
 	@include mixins.themed(background-color, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
-	@include mixins.themed(color, map.get($light-theme, text), color.scale(map.get($dark-theme, primary), $lightness: 0%));
+	@include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
 	@include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
 	margin-top: map.get($spacings, largest);
 	padding: map.get($spacings, small) map.get($spacings, large);

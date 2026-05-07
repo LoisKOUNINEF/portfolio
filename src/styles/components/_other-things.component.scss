@@ -1,0 +1,131 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.other-things__wrapper {
+	@include mixins.wrapper;
+	padding-top: map.get($spacings, largest) * 2;
+	padding-left: map.get($spacings, large);
+	padding-bottom: 0;
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+	}
+}
+
+.other-things__container {
+	width: 100%;
+	@include mixins.container;
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.other-things__header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+  	font-size: map.get($font-sizes, largest);
+  }
+}
+
+.other-things__section {
+	width: 100%;
+	display: grid;
+  grid-template-columns: 2fr 1fr;
+	h3 {
+		font-weight: bold;
+	}
+	p {
+		line-height: 1.8rem;
+	  padding-top: map.get($spacings, small);
+	  padding-bottom: map.get($spacings, medium);
+	  padding-left: map.get($spacings, medium);
+	  @include mixins.respond-to(medium) {
+	  	line-height: map.get($spacings, large);
+			padding-left: 0;
+	  }
+	}
+	@include mixins.respond-to(medium) {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.other-things__image-wrapper {
+	width: 100%;
+	display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: map.get($spacings, largest);
+  picture {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+	img {
+		transition: scale .3s, box-shadow .3s;
+		width: 100%;
+		max-width: 20rem;
+		align-self: flex-end;
+		border-radius: 1rem;
+  	@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.4), 0 10px 15px rgba(map.get($dark-theme, text), 0.4));
+  	&:hover {
+  		cursor: pointer;
+  		scale: 1.1;
+  		@include mixins.themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, text), 0.6), 0 10px 15px rgba(map.get($dark-theme, text), 0.6));
+  	}
+  	@media(hover: none) {
+			&:hover {
+				scale: 1;
+			}
+		}
+	}
+	@include mixins.respond-to(medium) {
+		padding-left: 0;
+  	padding-top: map.get($spacings, large);
+	}
+}
+
+.other-things__content {
+	padding-top: map.get($spacings, largest);
+	text-align: left;
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, large);
+	}
+}
+
+.popover-wrapper:has(.image-popover__wrapper) {
+	@include mixins.flex-center;
+	width: 60%;
+	max-height: 90%;
+
+	@include mixins.respond-to(medium) {
+		width: 100%;
+		max-height: 60%;
+	}
+}
+
+.image-popover__wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  picture {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  	align-items: center;
+  }
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		object-fit: fill;
+		display: block;		
+		border-radius: 1rem;
+		align-self: center;
+	}
+}

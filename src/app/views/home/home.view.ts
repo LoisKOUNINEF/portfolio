@@ -3,6 +3,7 @@ import {
   AboutMeComponent,
   ContactComponent, EmptyComponent,
   HeroComponent, InfosComponent,
+  OtherThingsComponent,
   ProjectCardComponent, ProjectsCatalogHeaderComponent,
   ShowMoreComponent,
   TechStackComponent
@@ -35,6 +36,7 @@ export class HomeView extends View {
       this.getSelfHostingProjectConfig(),
       this.getContactConfig(),
       this.getInfosConfig(),
+      this.getOtherThingsConfig()
     ]
   }
   private getHeroConfig(): ComponentConfig {
@@ -122,6 +124,13 @@ export class HomeView extends View {
     return {
       selector: 'infos',
       factory: (el) => new InfosComponent(el)
+    }
+  }
+
+  private getOtherThingsConfig(): ComponentConfig {
+    return {
+      selector: 'other-things',
+      factory: (el) => new OtherThingsComponent(el)
     }
   }
 }
