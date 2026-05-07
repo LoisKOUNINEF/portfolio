@@ -165,8 +165,7 @@
 		&:focus-visible {
 			outline: none;
 			text-decoration: none;
-      @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
-      @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, primary));
+      @include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, text));
     	@include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, primary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +20%));
 		}
 	}
