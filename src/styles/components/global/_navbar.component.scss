@@ -138,6 +138,11 @@
         @include mixins.respond-to(medium) {
           padding: .3rem .3rem;
         }
+        &.active {
+          @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, background));
+          @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
+          @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, background));
+        }
       }
     }
   }

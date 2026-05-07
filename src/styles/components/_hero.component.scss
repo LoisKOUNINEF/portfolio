@@ -150,6 +150,7 @@
   }
 	&:hover {
     cursor: pointer;
+    transform: translateX(+6px);
     @include mixins.themed(border-color, map.get($light-theme, primary), color.scale(map.get($dark-theme, primary), $lightness: +20%));
 	  box-shadow: 0 4px 8px -2px rgba(0,0,0,0.12),
               0 1px 2px -1px rgba(0,0,0,0.08);
@@ -164,12 +165,14 @@
 		&:focus-visible {
 			outline: none;
 			text-decoration: none;
-      @include mixins.themed(color, map.get($light-theme, background), map.get($dark-theme, accent));
+      @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
+      @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, primary));
     	@include mixins.themed(outline, 2px solid color.scale(map.get($light-theme, primary), $lightness: -20%), 2px solid color.scale(map.get($dark-theme, primary), $lightness: +20%));
 		}
 	}
 	@media(hover: none) {
 		&:hover {
+    	transform: translateX(+0px);
       @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), rgba(map.get($dark-theme, background), 1));
       @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
 			@include mixins.themed(box-shadow, 0,0);
