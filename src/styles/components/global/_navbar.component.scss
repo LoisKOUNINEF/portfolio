@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "variables" as *;
 @use "mixins";
+@use "sass:color";
 
 @mixin navbar-shadow($color, $range, $opacity) {
   @include mixins.themed(box-shadow, $range rgba(map.get($light-theme, $color), $opacity), $range rgba(map.get($dark-theme, $color), $opacity));
@@ -61,6 +62,15 @@
 
   .navbar__anchor {
     text-wrap: nowrap;
+    pointer-events: none;
+    &:hover {
+      transform: translateY(-2px);
+    }
+    @media(hover: none) {
+      &:hover {
+        transform: translateY(-0px);
+      }
+    }
     a {
       text-decoration: none;
       font-weight: bold;
@@ -74,12 +84,14 @@
         @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
         &:hover {
           cursor: default;
+          transform: none;
         }
         &:focus-visible {
           @include mixins.themed(outline, 2px solid rgba(map.get($light-theme, primary), .5), 2px solid rgba(map.get($dark-theme, primary), .5));
         }
       }
       &:not(.active) {
+        pointer-events: auto;
         &:hover {
           @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
         }
@@ -90,6 +102,41 @@
       @media(hover: none) {
         &:hover {
           box-shadow: 0;
+        }
+      }
+    }
+  }
+
+// Navbar 'cta' (contact)
+  div:last-child {
+    div:last-child {
+      &:hover {
+        transform: translateY(-2px);
+      }
+      @media(hover: none) {
+        &:hover {
+          transform: translateY(-0px);
+        }
+      }
+      a {
+        padding: .5rem .5rem;
+        border: 2px solid;
+        @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), color.scale(map.get($dark-theme, primary), $lightness: +20%));
+        @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
+        @include mixins.themed(border-color, color.scale(map.get($light-theme, primary), $lightness: +10%), color.scale(map.get($dark-theme, primary), $lightness: +20%));
+
+        &:hover, &:focus-visible {
+          @include mixins.themed(background, color.scale(map.get($light-theme, primary), $lightness: +10%), map.get($dark-theme, background));
+          @include mixins.themed(color, map.get($light-theme, background), color.scale(map.get($dark-theme, primary), $lightness: +20%));
+        }
+        @media(hover: none) {
+          &:hover {
+            @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, primary));
+            @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, background));
+          }
+        }
+        @include mixins.respond-to(medium) {
+          padding: .3rem .3rem;
         }
       }
     }
@@ -123,7 +170,7 @@
   backdrop-filter: blur(10px);
   padding: map.get($spacings, small) map.get($spacings, large);
   border-radius: map.get($spacings, small);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, scale 0.3s ease;
   @include mixins.respond-to(medium) {
     flex-direction: row-reverse;
   }
@@ -159,6 +206,33 @@
 .lang-toggler {
 	text-wrap: nowrap;
   color: inherit;
+  text-transform: lowercase;
+  font-family: $secondary-font;
+  font-size: 1.1rem;
+  &:hover {
+    scale: 1.2;
+    transform: translateY(-2px);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+      transform: translateY(-0px)
+    }
+  }
+}
+
+.theme-toggler {
+  font-size: 1.1rem;
+  &:hover {
+    scale: 1.2;
+    transform: translateY(-2px);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+      transform: translateY(-0px);
+    }
+  }
 }
 
 .theme-toggler::before {
