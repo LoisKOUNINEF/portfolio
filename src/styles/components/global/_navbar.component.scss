@@ -72,16 +72,18 @@
       }
     }
     a {
+      border-bottom: 2px solid;
       text-decoration: none;
       font-weight: bold;
       color: inherit;
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.3rem;
+      padding: 0.5rem 0.4rem;
       transition: color 0.2s, background 0.2s, border 0.2s;
       @include mixins.themed(background-color, map.get($light-theme, background),map.get($dark-theme, background));
+      @include mixins.themed(border-color, map.get($light-theme, background),map.get($dark-theme, background));
 
       &.active {
         @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
+        @include mixins.themed(border-color, map.get($light-theme, secondary),map.get($dark-theme, secondary));
         &:hover {
           cursor: default;
           transform: none;
@@ -144,6 +146,7 @@
           @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, background));
           @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
           @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, background));
+          @include mixins.themed(border-bottom, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, secondary));
         }
       }
     }

@@ -1,5 +1,5 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent} from '../../../index.js';
+import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent, PictureComponent} from '../../../index.js';
 
 interface IProjectHeadConfig {
   name: string;
@@ -26,6 +26,7 @@ export class ProjectHeaderComponent extends Component {
       configs.push(this.getTechStringConfig());
     } else {
       configs.push(...this.getTechBadgesConfig());
+      configs.push(this.getPictureConfig())
     }
     return configs;
   }
@@ -54,4 +55,17 @@ export class ProjectHeaderComponent extends Component {
       factory: (el) => new TechStringComponent(el, this._headConfig.technos)
     }
   }
+
+  private getPictureConfig(): ComponentConfig {
+    return {
+      selector: 'project-header-picture',
+      factory: (el) => new PictureComponent(el, {
+        imageSrc: this._headConfig.imageSrc,
+        imageAlt: `${this._headConfig.name} illustration picture`,
+      },
+      {
+        className: 'project-header__screen-mock-content'
+      })
+    
+  }}
 }
