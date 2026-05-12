@@ -91,6 +91,9 @@
         &:focus-visible {
           @include mixins.themed(outline, 2px solid rgba(map.get($light-theme, primary), .5), 2px solid rgba(map.get($dark-theme, primary), .5));
         }
+        @include mixins.respond-to(medium) {
+          @include mixins.themed(border-color, map.get($light-theme, background),map.get($dark-theme, background));
+        }
       }
       &:not(.active) {
         pointer-events: auto;
@@ -147,6 +150,9 @@
           @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
           @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, background));
           @include mixins.themed(border-bottom, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, secondary));
+          @include mixins.respond-to(medium) {
+            @include mixins.themed(border-color, map.get($light-theme, background),map.get($dark-theme, background));
+          }
         }
       }
     }

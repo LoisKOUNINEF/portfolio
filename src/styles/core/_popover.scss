@@ -58,7 +58,8 @@ html.no-scroll {
 }
 
 .popover-close-button {
-  position: absolute;
+  position: absolute; 
+  z-index: 2;
   top: 0.5rem;
   right: 0.75rem;
   background: none;
