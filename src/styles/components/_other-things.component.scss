@@ -197,13 +197,22 @@
 	font-size: 1.5rem;
 	line-height: 1;
 
-	@include mixins.themed(background, rgba(map.get($light-theme, background), .2), rgba(map.get($dark-theme, background), .2));
+	@include mixins.themed(background, rgba(map.get($light-theme, background), .2), rgba(map.get($dark-theme, text), .2));
+
+	@include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, background));
 	
 	transition: background .2s ease-in-out, scale .2s ease-in-out;
 
 	&:hover {
 		scale: 1.1;
-		@include mixins.themed(background, rgba(map.get($light-theme, background), .6 ), rgba(map.get($dark-theme, background), .6 ));
+		@include mixins.themed(background, rgba(map.get($light-theme, background), .6 ), rgba(map.get($dark-theme, text), .6 ));
+	}
+
+	@media (hover: none) {
+		&:hover {
+			scale: 1;
+			@include mixins.themed(background, rgba(map.get($light-theme, background), .2), rgba(map.get($dark-theme, text), .2));
+		}
 	}
 
 	&--prev {
