@@ -18,7 +18,7 @@ export const proficiencies: Record<string, string> = {
   postgresql: 'primary',
   mysql: 'tertiary',
   typeorm: 'secondary',
-  nodejs: 'primary',
+  nodejs: 'secondary',
   nestjs: 'primary',
   vuejs: 'secondary',
   sqlite: 'secondary',

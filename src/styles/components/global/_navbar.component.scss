@@ -63,14 +63,6 @@
   .navbar__anchor {
     text-wrap: nowrap;
     pointer-events: none;
-    &:hover {
-      transform: translateY(-2px);
-    }
-    @media(hover: none) {
-      &:hover {
-        transform: translateY(-0px);
-      }
-    }
     a {
       border-bottom: 2px solid;
       text-decoration: none;
@@ -99,6 +91,7 @@
         pointer-events: auto;
         &:hover {
           @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+          @include mixins.themed(border-color, map.get($light-theme, primary),map.get($dark-theme, primary));
         }
         &:focus-visible {
           @include mixins.themed(outline, 2px solid map.get($light-theme, secondary), 2px solid map.get($dark-theme, text));
@@ -106,7 +99,7 @@
       }
       @media(hover: none) {
         &:hover {
-          box-shadow: 0;
+          @include mixins.themed(border-color, map.get($light-theme, background),map.get($dark-theme, background));
         }
       }
     }
@@ -115,17 +108,10 @@
 // Navbar 'cta' (contact)
   div:last-child {
     div:last-child {
-      &:hover {
-        transform: translateY(-2px);
-      }
-      @media(hover: none) {
-        &:hover {
-          transform: translateY(-0px);
-        }
-      }
       a {
         padding: .5rem .5rem;
         border: 2px solid;
+        border-radius: map.get($border-radius, large);
         @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
         @include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
         @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
@@ -146,6 +132,7 @@
           padding: .3rem .3rem;
         }
         &.active {
+          border-radius: 0;
           @include mixins.themed(background, map.get($light-theme, background), map.get($dark-theme, background));
           @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
           @include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, background));

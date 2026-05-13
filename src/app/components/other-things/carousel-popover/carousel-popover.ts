@@ -18,25 +18,25 @@ const carouselImagesSrc = () => {
   })
 }
 
-export const displayImagePop = () => {
+export const displayCarouselPop = () => {
   const pop = new PopoverView({
-    template: imagePopoverTemplate(),
-    components: imagePopoverComponents(),
-    catalogs: imagePopoverCatalogs(),
+    template: carouselPopoverTemplate(),
+    components: carouselPopoverComponents(),
+    catalogs: carouselPopoverCatalogs(),
   });
   pop.render();
   updateSlides();
 }
 
-const imagePopoverTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
+const carouselPopoverTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
 
-const imagePopoverComponents = (): ComponentConfig[] => [
+const carouselPopoverComponents = (): ComponentConfig[] => [
   {
     selector: 'prev-button',
     factory: (el) => new ButtonComponent(el, {
       textContent: '‹',
       callback: () => displayPrev(),
-      className: 'image-carousel__button image-carousel__button--prev'
+      className: 'carousel__button carousel__button--prev'
     }),
   },
   {
@@ -44,18 +44,18 @@ const imagePopoverComponents = (): ComponentConfig[] => [
     factory: (el) => new ButtonComponent(el, {
       textContent: '›',
       callback: () => displayNext(),
-      className: 'image-carousel__button image-carousel__button--next',
+      className: 'carousel__button carousel__button--next',
     }),
   }
 ];
 
-const imagePopoverCatalogs = (): CatalogConfig[] => [
+const carouselPopoverCatalogs = (): CatalogConfig[] => [
   {
     selector: `carousel-pictures`,
     component: PictureComponent,
     array: carouselImagesSrc(),
     elementName: `carousel-picture`,
-    props: { className: 'image-carousel__slide' }
+    props: { className: 'carousel__slide' }
   },
 ];
 
@@ -69,7 +69,7 @@ function getSlides(): Element[] {
 function updateSlides() {
   const slides = getSlides();
   slides.forEach((slide, i) => {
-    slide.querySelector('.image-carousel__slide')?.classList.toggle('active', i === currentIndex);
+    slide.querySelector('.carousel__slide')?.classList.toggle('active', i === currentIndex);
   });
 }
 

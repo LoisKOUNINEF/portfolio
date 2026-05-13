@@ -1,5 +1,5 @@
 import { Component, ComponentConfig } from '../../../core/index.js';
-import { displayImagePop } from './image-popover/image-popover.js';
+import { displayCarouselPop } from './carousel-popover/carousel-popover.js';
 import { PictureComponent } from '../index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
@@ -22,7 +22,7 @@ export class OtherThingsComponent extends Component {
     }]
   }
 
-  private _displayImagePop = (): void => {
-    displayImagePop();
+  private _displayCarouselPop = (): void => {
+    displayCarouselPop();
   }
 }

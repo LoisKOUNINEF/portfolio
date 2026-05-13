@@ -1,4 +1,4 @@
-import { AppPipeRegistry, CatalogItemConfig, Component } from '../../../../../core/index.js';
+import { CatalogItemConfig, Component } from '../../../../../core/index.js';
 import { getLabel, getProficiency,  } from '../tech-metadata.helper.js';
 
 interface ITechBadge extends CatalogItemConfig {

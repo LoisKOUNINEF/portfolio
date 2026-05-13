@@ -1,22 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <!-- Hide SEO fallback (#seo-fallback) before rendering -->
+    <script>document.documentElement.classList.add('js-loaded')</script>
     <meta charset="UTF-8">
-    <meta name="description" content="Profesionnal portfolio: Loïs Kouninef, FullStack Web Developer." >
+    <meta name="description" content="Professional portfolio: Loïs Kouninef, FullStack Web Developer." >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO meta -->
+    <title>Loïs Kouninef — Fullstack Web Developer</title>
+    <meta name="description" content="Professional portfolio of Loïs Kouninef, Fullstack Web Developer. Projects, skills and contact." />
+    <link rel="canonical" href="https://lois-kouninef.eu/" />
+
+    <!-- Control the SERP snippet: Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lois-kouninef.eu/" />
+    <meta property="og:title" content="Loïs Kouninef — Fullstack Web Developer" />
+    <meta property="og:description" content="Professional portfolio of Loïs Kouninef, Fullstack Web Developer. Projects, skills and contact." />
+    <meta property="og:image" content="https://lois-kouninef.eu/assets/images/og-cover.jpg" />
+    <!-- og:image should be ~1200×630 px -->
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Loïs Kouninef — Fullstack Web Developer" />
+    <meta name="twitter:description" content="Professional portfolio of Loïs Kouninef, Fullstack Web Developer. Projects, skills and contact." />
+    <meta name="twitter:image" content="https://lois-kouninef.eu/og-cover.jpg" />
+
+    <!-- Structured data — Person + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://lois-kouninef.eu/#website",
+          "url": "https://lois-kouninef.eu/",
+          "name": "Loïs Kouninef — Portfolio"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://lois-kouninef.eu/#person",
+          "name": "Loïs Kouninef",
+          "url": "https://lois-kouninef.eu/",
+          "jobTitle": "Fullstack Web Developer",
+          "sameAs": [
+            "https://github.com/LoisKOUNINEF/",
+            "https://www.linkedin.com/in/loïs-kouninef/"
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://lois-kouninef.eu/#webpage",
+          "url": "https://lois-kouninef.eu/",
+          "name": "Loïs Kouninef — Fullstack web Developer",
+          "description": "Professional portfolio of Loïs Kouninef, Fullstack Web Developer.",
+          "isPartOf": { "@id": "https://lois-kouninef.eu/#website" },
+          "about": { "@id": "https://lois-kouninef.eu/#person" }
+        }
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/main.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <title>Loïs Kouninef - Portfolio</title>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Loïs Kouninef - Portfolio - Fullstack Web Developer",
-        "url": "https://lois-kouninef.eu/"
-      }
-    </script>
   </head>
   <body>
+
+    <!-- Static SEO Fallback -->
+    <div id="seo-fallback" aria-hidden="true">
+      <section>
+        <h1>Loïs Kouninef</h1>
+        <h2>Fullstack Web Developer</h2>
+        <p>I design and deploy reliable, self-hosted systems under real-world constraints.</p>
+        <p>🧩 Self-hosted full-stack apps</p>
+        <p>⚙️ Containerized deployment pipelines</p>
+        <p>🧠 Infrastructure & system design</p>
+      </section>
+      <section>
+        <h2>Systems & Infrastructure</h2>
+        <p>Self-hosted production environment — deployment, security, and day-to-day operations for internet-exposed services.</p>
+        <h2>Projects</h2>
+        <h3>Mini-Framework Frontend | nutin</h3>
+        <p>Designed and built a minimal frontend framework to explore explicit architecture trade-offs.</p>
+        <h3>Fullstack App - e-ticket service</h3>
+        <p>Fullstack e-ticket platform handling authentication, payments, and secure user flows in production-like conditions.</p>
+      </section>
+      <footer>© 2026 Loïs Kouninef - Built with nutin</footer>
+    </div>
+    <!--  -->
+
     <main id="app"></main>
   </body>
 </html>

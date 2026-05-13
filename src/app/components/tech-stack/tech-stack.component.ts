@@ -12,9 +12,9 @@ const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechStackComponent extends Component {
   private _keys = {
-    frontend: [ 'angular', 'vuejs', 'sass', 'tailwind'  ].map(str => ({ svgKey: str, displayProficiency: true })),
-    backend: [ 'nodejs', 'golang', 'nestjs', 'rails' ].map(str => ({ svgKey: str, displayProficiency: true })),
-    database: [ 'postgresql', 'sqlite', 'mysql' ].map(str => ({ svgKey: str, displayProficiency: true })),
+    frontend: [  'angular', 'typescript', 'sass', 'tailwind'  ].map(str => ({ svgKey: str, displayProficiency: true })),
+    backend: [ 'nestjs', 'golang' ].map(str => ({ svgKey: str, displayProficiency: true })),
+    database: [ 'postgresql', 'sqlite' ].map(str => ({ svgKey: str, displayProficiency: true })),
     tools: [ 'docker', 'linux', 'traefik', 'bash' ].map(str => ({ svgKey: str, displayProficiency: true })),
   };
 

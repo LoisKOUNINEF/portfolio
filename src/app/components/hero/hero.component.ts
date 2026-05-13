@@ -4,7 +4,7 @@ import { BulletPointComponent, ButtonComponent, TechBadgeComponent } from '../in
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
 export class HeroComponent extends Component {
-  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nodejs', 'golang', 'postgresql', 'docker' ];
+  private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nestjs', 'postgresql', 'docker' ];
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'section'});

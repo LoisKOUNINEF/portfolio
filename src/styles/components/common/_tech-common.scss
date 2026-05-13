@@ -59,7 +59,8 @@ $tech-badge-svgs: (
 
 .svg-tech-label {
   font-family: $secondary-font;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
+  font-size: map.get($font-sizes, smallest);
 }
 
 [class*="svg-tech-proficiency"] {

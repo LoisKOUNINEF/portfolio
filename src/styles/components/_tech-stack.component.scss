@@ -73,6 +73,9 @@
 	  font-weight: 700;
 	  opacity: 0.75;
 	  font-style: normal;
+	  @include mixins.respond-to(medium) {
+	  	font-size: map.get($font-sizes, smallest)!important;
+		}
 	}
 	> * {
 		@include mixins.respond-to(medium) {
