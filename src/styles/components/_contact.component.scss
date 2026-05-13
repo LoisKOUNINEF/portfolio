@@ -76,7 +76,7 @@ a.contact__link-card {
   	&:hover { 
 			text-decoration: none;
 			transform: translateY(-0px);
-			@include mixins.themed(box-shadow, 0,0);
+			@include mixins.themed(box-shadow, none, none);
 			@include mixins.themed(border-color, rgba(map.get($light-theme, background), 0.45), rgba(map.get($dark-theme, background), 0.35));
 
 			.info-card__label,
