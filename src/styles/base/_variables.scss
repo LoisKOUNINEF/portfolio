@@ -9,19 +9,27 @@ $secondary-color: rgb(200 70 50);
 $accent-color: rgb(60 130 135);
 
 $light-theme: (
-  background: rgb(245 240 233),
-  text: rgb(40 30 20),
-  primary: rgb(200 140 40),
-  secondary: rgb(170, 85, 50),
-  accent: rgb(60 130 135)
+  background: rgb(245 240 233),  // #F5F0E9
+  text: rgb(40 30 20),           // #281E14
+  primary: rgb(200 140 40),      // #C88C28
+  secondary: rgb(170 85 50),     // #AA5532
+  accent: rgb(60 130 135),       // #3C8287
+  surface: rgb(235 228 218),     // #EBE4DA
+  text-muted: rgb(130 110 90),   // #826E5A
+  disabled-bg: rgb(225 216 204),  // #E1D8CC
+  disabled-text: rgb(170 156 140), // #AA9C8C
 );
 
 $dark-theme: (
-  background: rgb(8, 5, 3),
-  text: rgb(228 214 167),
-  primary: rgb(233 180 76),
-  secondary: rgb(191, 95, 55),
-  accent: rgb(80 162 167)
+  background: rgb(8 5 3),          // #080503
+  text: rgb(228 214 167),          // #E4D6A7
+  primary: rgb(233 180 76),        // #E9B44C
+  secondary: rgb(191 95 55),       // #BF5F37
+  accent: rgb(80 162 167),         // #50A2A7
+  surface: rgb(28 22 16),          // #1C1610
+  text-muted: rgb(160 140 110),    // #A08C6E
+  disabled-bg: rgb(48 40 32),       // #302820
+  disabled-text: rgb(120 108 90),  // #786C5A
 );
 
 // snackbar colours
