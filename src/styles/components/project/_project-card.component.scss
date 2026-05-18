@@ -51,6 +51,7 @@
   margin-bottom: map.get($spacings, largest);
 
   &.project-card__standalone {
+    width: 100%;
     border-color: transparent;
     margin-bottom: map.get($spacings, largest)*1.5;
     .project-header__title {
@@ -64,14 +65,6 @@
     .project-card__view-more {
       display: none;
     }
-    // width: 100%;
-    // justify-content: flex-start;
-    // h3 {
-    //   @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
-    //   @include mixins.respond-to(medium) {
-    //     line-height: 2.5rem;
-    //   }
-    // }
     @include mixins.respond-to(medium) {
       padding-top: map.get($spacings, large);
       padding-left: map.get($spacings, medium);

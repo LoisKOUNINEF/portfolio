@@ -4,7 +4,7 @@
 @use "sass:color";
 
 .show-more__wrapper {
-  padding-left: map.get($spacings, largest);
+  padding-bottom: map.get($spacings, largest);
   @include mixins.respond-to(medium) {
     @include mixins.flex-center;
     padding-left: 0;

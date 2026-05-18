@@ -6,6 +6,7 @@
 	@include mixins.wrapper;
 	padding-left: map.get($spacings, large);
 	padding-top: map.get($spacings, largest) * 2;
+	padding-bottom: map.get($spacings, largest);
 	@include mixins.respond-to(medium) {
 		padding-left: 0;
 	}

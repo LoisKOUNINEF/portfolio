@@ -6,7 +6,7 @@
 	@include mixins.wrapper;
 	padding-top: map.get($spacings, largest) * 2;
 	padding-left: map.get($spacings, large);
-	padding-bottom: 0;
+	padding-bottom: map.get($spacings, largest);
 	@include mixins.respond-to(medium) {
 		padding-left: 0;
 	}
@@ -52,6 +52,7 @@
 }
 
 .other-things__image-wrapper {
+	margin-top: -10%;
 	width: 100%;
 	display: flex;
   justify-content: flex-end;
@@ -86,6 +87,7 @@
 	@include mixins.respond-to(medium) {
 		padding-left: 0;
   	padding-top: map.get($spacings, large);
+  	margin-top: 0;
 	}
 }
 

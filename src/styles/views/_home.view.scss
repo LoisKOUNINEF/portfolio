@@ -3,6 +3,17 @@
 @use "mixins";
 @use "sass:color";
 
+.home__separator {
+  display: inline-block;
+  width: 50%;
+  margin-left: 25%;
+  height: 15px;
+  @include mixins.themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, primary), 1), 0 4px 4px -4px rgba(map.get($dark-theme, primary), 1));
+  @include mixins.respond-to(medium) {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
 .home__container {
   width: 100%;
   padding-left: map.get($spacings, largest);
