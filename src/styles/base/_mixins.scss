@@ -25,12 +25,9 @@
   }
 }
 
-@mixin container($color-identity: false) {
+@mixin container() {
   border-radius: map.get($spacings, medium);
   padding: 0 map.get($spacings, medium);
-  @if $color-identity {
-    @include card-shadow($color-identity);
-  }
   @include respond-to(medium) {
     width: 100%;
   }

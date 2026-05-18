@@ -3,6 +3,11 @@
 @use "mixins";
 @use "sass:color";
 
+#hero {
+
+    padding-bottom: map.get($spacings, largest)*2;
+}
+
 .hero__wrapper {
 	@include mixins.wrapper;
 	min-height: 90svh;
@@ -86,8 +91,8 @@
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
 	font-weight: 700;
-	opacity: .65;
-	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +10%), color.scale(map.get($dark-theme, text), $lightness: +40%));
+
+	@include mixins.themed(color, map.get($light-theme, text-muted), map.get($dark-theme, text-muted));
 	border-radius: map.get($spacings, small);
 	@include mixins.respond-to(medium) {
 		padding-left: map.get($spacings, smallest);
@@ -95,6 +100,7 @@
 }
 
 .hero__main-stack-icons {
+	transition: ease-in-out .2s;
 	padding-top: map.get($spacings, small);
 	padding-left: map.get($spacings, largest);
 		.svg-tech-label {
@@ -102,6 +108,9 @@
 			letter-spacing: 0;
 		}
 		.base-svg {
+			transition: ease-in-out .2s;
+			border-radius: map.get($border-radius, large);
+			border-bottom: 2px solid transparent;
 			&::after {
 				padding: .8rem;
 			}
@@ -112,10 +121,24 @@
 			padding-left: map.get($spacings, small);
 		}
 	}
-	 &:hover {
-		 cursor: pointer;
-	 }
- }
+	&:hover {
+		cursor: pointer;
+		scale: 1.01;
+		transform: translateY(-2px);
+		.base-svg {
+			@include mixins.themed(border-color, map.get($light-theme, text), map.get($dark-theme, text))
+		}
+	}
+	@media(hover:none) {
+	 	&:hover {
+			scale: 1;
+			transform: translateY(0px);
+			.base-svg {
+				border-color: transparent;
+			}
+	 	}
+	}
+}
 
 .hero__cta-container {
 	padding-left: map.get($spacings, large);
@@ -131,9 +154,9 @@
 	font-weight: 600;
 	width: fit-content;
 	border: 2px solid;
-	@include mixins.themed(background-color, rgba(map.get($light-theme, primary), .9), map.get($dark-theme, background));
-	@include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, primary));
-	@include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, primary));
+	@include mixins.themed(background-color, map.get($light-theme, primary), map.get($dark-theme, primary));
+	@include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, background));
+	@include mixins.themed(border-color, map.get($light-theme, background), map.get($dark-theme, background));
 	margin-top: map.get($spacings, largest);
 	padding: map.get($spacings, small) map.get($spacings, large);
 	text-align: left;
@@ -145,13 +168,13 @@
 		padding: map.get($spacings, small) map.get($spacings, small);
 	}
   &:hover, &:focus-visible {
-    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .9));
-    @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -10%), map.get($dark-theme, background));
+    @include mixins.themed(background, rgba(map.get($light-theme, primary), .1), rgba(map.get($dark-theme, primary), .1));
+    @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
   }
 	&:hover {
     cursor: pointer;
     transform: translateX(+6px);
-    @include mixins.themed(border-color, map.get($light-theme, primary), color.scale(map.get($dark-theme, primary), $lightness: +20%));
+    @include mixins.themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
 	  box-shadow: 0 4px 8px -2px rgba(0,0,0,0.12),
               0 1px 2px -1px rgba(0,0,0,0.08);
 	}
@@ -166,8 +189,8 @@
 	@media(hover: none) {
 		&:hover {
     	transform: translateX(+0px);
-      @include mixins.themed(background, rgba(map.get($light-theme, primary), .9), rgba(map.get($dark-theme, background), 1));
-      @include mixins.themed(color, color.scale(map.get($light-theme, primary), $lightness: -20%), color.scale(map.get($dark-theme, primary), $lightness: +10%));
+			@include mixins.themed(background-color, map.get($light-theme, primary), map.get($dark-theme, primary));
+			@include mixins.themed(color, map.get($light-theme, text), map.get($dark-theme, background));
 			@include mixins.themed(box-shadow, none, none);
 			a {
 				text-decoration: none;

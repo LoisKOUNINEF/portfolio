@@ -5,6 +5,7 @@
 .popover-wrapper:has(.project-popover__wrapper) {
   width: 80%;
   height: 90%;
+  @include mixins.themed(background, map.get($light-theme, surface), map.get($dark-theme, surface));
 
   @include mixins.respond-to(medium) {
     width: 100%;

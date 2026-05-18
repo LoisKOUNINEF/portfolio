@@ -22,13 +22,13 @@ export const proficiencies: Record<string, string> = {
   nestjs: 'primary',
   vuejs: 'secondary',
   sqlite: 'secondary',
-  golang: 'secondary',
-  tailwind: 'secondary',
+  golang: 'professional',
+  tailwind: 'professional',
   sass: 'primary',
   rails: 'tertiary',
   docker: 'primary',
   linux: 'primary',
-  traefik: 'tertiary',
+  traefik: 'secondary',
   bash: 'secondary',
 }
 

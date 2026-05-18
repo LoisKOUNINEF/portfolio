@@ -8,9 +8,10 @@
 	gap: map.get($spacings, medium);
 	padding: map.get($spacings, medium);
 	border-radius: map.get($border-radius, large);
-	@include mixins.themed(background, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.04));
+	
+  @include mixins.themed(background, map.get($light-theme, surface), map.get($dark-theme, surface));
 	@include mixins.themed(border, 1px solid rgba(map.get($light-theme, primary), 0.2), 1px solid rgba(map.get($dark-theme, primary), 0.15));
-	@include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, primary), 0.08), 0 1px 3px rgba(0, 0, 0, 0.3));
+	@include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, text), 0.08), 0 1px 3px rgba(map.get($dark-theme, text), 0.3));
 }
 
 .info-card__icon {
