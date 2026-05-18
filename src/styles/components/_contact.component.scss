@@ -5,10 +5,10 @@
 
 .contact__wrapper {
 	@include mixins.wrapper;
-	padding-top: 3rem;
+	padding-top: map.get($spacings, largest)*1.5;
 	padding-left: map.get($spacings, large);
 	@include mixins.respond-to(medium) {
-		padding-top: map.get($spacings, medium);
+		padding-top: map.get($spacings, largest)*2;
 		padding-left: 0;
 	}
 }

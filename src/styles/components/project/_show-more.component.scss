@@ -5,11 +5,10 @@
 
 .show-more__wrapper {
   padding-left: map.get($spacings, largest);
-  padding-top: map.get($spacings, medium);
   @include mixins.respond-to(medium) {
     @include mixins.flex-center;
     padding-left: 0;
-    padding-top: map.get($spacings, large);
+    padding-top: map.get($spacings, medium);
   }
 
   & > div {

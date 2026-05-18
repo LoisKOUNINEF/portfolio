@@ -124,9 +124,9 @@
 	&:hover {
 		cursor: pointer;
 		scale: 1.01;
-		transform: translateY(-2px);
+		transform: translateY(-1px);
 		.base-svg {
-			@include mixins.themed(border-color, map.get($light-theme, text), map.get($dark-theme, text))
+			@include mixins.themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
 		}
 	}
 	@media(hover:none) {

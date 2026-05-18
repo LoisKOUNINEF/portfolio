@@ -46,21 +46,32 @@
   @include mixins.header(primary);
   text-align: left;
   gap: map.get($spacings, large);
+  border: 1px solid transparent;
+  @include mixins.themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
+  margin-bottom: map.get($spacings, largest);
 
   &.project-card__standalone {
-    padding-left: 0;
+    border-color: transparent;
+    margin-bottom: map.get($spacings, largest)*1.5;
     .project-header__title {
-      @include mixins.themed(border-bottom, 0, 0);
+      /*
+      Can't figure out where the extra space on top comes from
+      Negative margin until solved
+      */
+      margin-top: -(map.get($spacings, medium));
+      @include mixins.themed(border-color, transparent, transparent);
     }
-    width: 100%;
-    justify-content: flex-start;
-    h3 {
-      font-size: map.get($font-sizes, largest);
-      @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
-      @include mixins.respond-to(medium) {
-        line-height: 2.5rem;
-      }
+    .project-card__view-more {
+      display: none;
     }
+    // width: 100%;
+    // justify-content: flex-start;
+    // h3 {
+    //   @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    //   @include mixins.respond-to(medium) {
+    //     line-height: 2.5rem;
+    //   }
+    // }
     @include mixins.respond-to(medium) {
       padding-top: map.get($spacings, large);
       padding-left: map.get($spacings, medium);

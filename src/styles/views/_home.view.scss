@@ -4,11 +4,11 @@
 @use "sass:color";
 
 .home__container {
-    width: 100%;
-    padding-left: map.get($spacings, largest);
-    @include mixins.respond-to(medium) {
-      padding-left: 0;
-    }
+  width: 100%;
+  padding-left: map.get($spacings, largest);
+  @include mixins.respond-to(medium) {
+    padding-left: 0;
+  }
 }
 
 .home__sections {
@@ -19,7 +19,7 @@
 }
 
 .home__main-projects {
-  padding-top: 3rem;
+  padding-top: map.get($spacings, largest)*2;
   & > [data-catalog],
   .home__additional-projects > [data-catalog] {
     display: grid;

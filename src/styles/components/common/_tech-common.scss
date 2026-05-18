@@ -75,15 +75,14 @@ $tech-badge-svgs: (
 }
 
 .svg-tech-proficiency__primary {
-  opacity: .9;
-  @include mixins.themed(color, color.scale(map.get($light-theme, secondary), $lightness: +10%), color.scale(map.get($dark-theme, secondary), $lightness: +10%))
+  @include mixins.themed(color, map.get($light-theme, secondary), map.get($dark-theme, secondary));
 }
 
 .tech-string__main {
+  @include mixins.themed(color, map.get($light-theme, text-muted), map.get($dark-theme, text-muted));
   font-family: $secondary-font;
   font-size: map.get($font-sizes, smallest);
   font-style: italic;
   letter-spacing: 0.15em;
   padding-top: map.get($spacings, small);
-  opacity: .8;
 }
