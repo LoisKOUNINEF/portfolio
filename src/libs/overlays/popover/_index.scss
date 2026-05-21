@@ -32,7 +32,7 @@ html.no-scroll {
   overscroll-behavior: none;
   background: var(--background);
   color: var(--text);
-  box-shadow: 0 2px 2px color-mix(in srgb, var(--text), transparent 20%);
+  box-shadow: 0 2px 2px color-mix(in srgb, var(--text), transparent 80%);
   border-radius: 1rem;
   width: 100%;
   height: 100%;

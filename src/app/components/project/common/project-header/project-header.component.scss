@@ -92,10 +92,10 @@
   width: 100%;
   height: 85%; /* Screen portion */
   background: var(--background);
-  border: 2px solid color-mix(in srgb, var(--text), transparent 30%);
+  border: 2px solid color-mix(in srgb, var(--text), transparent 70%);
   border-radius: map.get($border-radius, medium);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--text), transparent 5%)
-              inset 0 1px 0 color-mix(in srgb, var(--text), transparent 80%);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--text), transparent 95%)
+              inset 0 1px 0 color-mix(in srgb, var(--text), transparent 20%);
   overflow: hidden;
 }
 
@@ -106,7 +106,7 @@
   left: 40%;
   width: 20%;
   height: 10%;
-  @include mixins.themed(background, rgba(map.get($light-theme, text), .2), rgba(map.get($dark-theme, text), .3));
+  background: color-mix(in srgb, var(--text), transparent 70%);
   clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
 }
 
@@ -119,7 +119,7 @@
   height: calc(85% - .8rem);
   border-radius: map.get($border-radius, small);
   overflow: hidden;
-  @include mixins.themed(background, rgba(map.get($light-theme, text), .1), rgba(map.get($dark-theme, text), .1));
+  background: color-mix(in srgb, var(--text), transparent 90%);
   @include mixins.themed(border, 1px solid rgba(map.get($light-theme, text), .2), 1px solid rgba(map.get($dark-theme, text), .2));
 }
 
@@ -140,7 +140,7 @@
   transform: translateX(-50%);
   width: 2px;
   height: 60%;
-  @include mixins.themed(background, rgba(map.get($light-theme, text), .2), rgba(map.get($dark-theme, text), .2))
+  background: color-mix(in srgb, var(--text), transparent 80%);
 }
 
 .project-header__screen-mock-stand::after {
@@ -150,7 +150,7 @@
   left: 20%;
   width: 60%;
   height: 2px;
-  @include mixins.themed(background, rgba(map.get($light-theme, text), .2), rgba(map.get($dark-theme, text), .2))
+  background: color-mix(in srgb, var(--text), transparent 80%);
 }
 
 .project-header__screen-mock figure,
