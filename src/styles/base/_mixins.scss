@@ -3,6 +3,7 @@
 @use "sass:color";
 
 // custom mixins
+// themed (edge cases)
 @mixin themed($property, $light-value, $dark-value) {
   #{$property}: $light-value;
   
@@ -10,6 +11,7 @@
     #{$property}: $dark-value;
   }
 }
+
 
 @mixin card-shadow($color) {
   @include themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, $color), 0.1), 0 10px 15px rgba(map.get($dark-theme, $color), 0.1));
@@ -42,11 +44,11 @@
     font-size: map.get($font-sizes, largest);
     font-family: $secondary-font;
     font-weight: bold;
-    @include themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    color: var(--primary);
   }
   .project-header__title {
     border-bottom: 3px solid transparent;
-    @include themed(border-color, map.get($light-theme, primary), map.get($dark-theme, primary));
+    border-color: var(--border);
   }
 }
 

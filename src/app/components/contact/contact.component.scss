@@ -1,0 +1,139 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.contact__wrapper {
+	@include mixins.wrapper;
+	padding-top: map.get($spacings, largest)*1.5;
+	padding-left: map.get($spacings, large);
+	padding-bottom: map.get($spacings, large);
+	@include mixins.respond-to(medium) {
+		padding-top: map.get($spacings, largest)*2;
+		padding-left: 0;
+	}
+}
+
+.contact__container {
+	width: 100%;
+	@include mixins.container();
+	text-align: left;
+}
+
+.contact__header {
+  @include mixins.header;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+  	font-size: map.get($font-sizes, largest);
+  }
+}
+
+.contact__links {
+	width: 80%;
+	padding: map.get($spacings, large) 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: map.get($spacings, medium);
+	@include mixins.respond-to(small) {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+
+	[data-component] {
+		display: contents;
+	}
+}
+
+a.contact__link-card {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.contact__link-card {
+	position: relative;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
+
+	&:hover {
+		text-decoration: none;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 4px color-mix(in srgb, var(--primary), transparent 14%);
+		border-color: var(--border);
+
+		.info-card__label,
+		.info-card__subtext {
+			color: var(--text-muted);
+		}
+	}
+	&:active {
+		transform: translateY(1px);
+	}
+
+	@media (hover: none) {
+  	&:hover { 
+			text-decoration: none;
+			transform: translateY(-0px);
+			box-shadow: none;
+			border-color: var(--background);
+
+			.info-card__label,
+			.info-card__subtext {
+				color: inherit;
+			}
+  	}
+  }
+
+	&:focus-visible {
+		text-decoration: none!important;
+		outline-offset: 2px;
+		outline: 2px solid var(--primary);
+		// @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
+		// .info-card__label,
+		// .info-card__subtext {
+		// 	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +20%), color.scale(map.get($dark-theme, text), $lightness: -10%));
+		// }
+	}
+
+
+	.info-card__icon {
+		.base-svg {
+			position: relative;
+			z-index: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&::after {
+				padding: map.get($spacings, smallest);
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+		}
+	}
+
+	.info-card__label {
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			border-radius: map.get($border-radius, large);
+		}
+	}
+}
+
+.contact__infos {
+	font-style: italic;
+	padding: map.get($spacings, large) 0;
+	opacity: .85;
+}
+
+.contact__resume-card {
+	.info-card__label {
+		color: var(--primary);
+		// @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
+	}
+}

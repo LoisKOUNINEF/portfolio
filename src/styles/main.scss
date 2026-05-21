@@ -1,12 +1,10 @@
-// Built-in classes & Libraries styles (snackbar, popover).
-@use "core";
+// libs - using partials to ensure proper stacking context for overlays
+@use "../libs";
 
 // global styles
 @use "styles";
 
 // custom classes
 @use "custom-classes";
-// components styles
-@use "components";
-// views styles
-@use "views";
+
+@use "svgs-common";

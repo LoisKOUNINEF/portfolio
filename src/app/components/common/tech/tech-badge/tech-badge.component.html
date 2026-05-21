@@ -4,5 +4,5 @@
     class="base-svg svg-${_config.svgKey ?? _config.value}"
   ></span>
   <span class="svg-tech-label">${_config.label}</span>
-  <span data-i18n="tech-badge.${_config.proficiency}" class="svg-tech-proficiency__${_config.proficiency}${_config.proficiency ? '' : ' u-hide'}"></span>
+  <span data-optional="${_config.proficiency}" data-i18n="tech-badge.${_config.proficiency}" class="svg-tech-proficiency__${_config.proficiency}"></span>
 </span>

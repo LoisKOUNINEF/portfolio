@@ -1,0 +1,225 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+@mixin navbar-shadow($color, $range, $opacity) {
+  @include mixins.themed(box-shadow, $range rgba(map.get($light-theme, $color), $opacity), $range rgba(map.get($dark-theme, $color), $opacity));
+}
+
+.navbar__container {
+  transition: all ease-in-out .2s allow-discrete;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  @include mixins.respond-to(medium) {
+  	min-width: auto;
+  	right: 0;
+    text-wrap: nowrap;
+  }
+
+  &.hidden {
+    opacity: 0;
+    transform: translate(0, -50%);
+    pointer-events: none;
+  }
+}
+
+// @starting-style {
+//   .navbar__anchors.open {
+//     opacity: 0;
+//   }
+// }
+
+.navbar__anchors {
+  width: 70%;
+  display: flex;
+  gap: map.get($spacings, largest)*1.5;
+  @include mixins.respond-to(medium) {
+    width: 100%;
+    opacity: 0;
+    gap: map.get($spacings, small);
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: map.get($spacings, largest)+1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: inherit;
+    backdrop-filter: blur(10px);
+    padding: map.get($spacings, medium) map.get($spacings, large);
+    border-radius: map.get($spacings, large); 
+  }
+
+  &.open {
+    display: flex;
+    opacity: 1;
+    animation: fade-in 1s;
+  }
+
+  .navbar__anchor {
+    text-wrap: nowrap;
+    pointer-events: none;
+    a {
+      transition: color .2s, background ease-in-out .2s, border-color .2s;
+      border-bottom: 2px solid;
+      text-decoration: none;
+      font-weight: 600;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      background: var(--background);
+      border-color: var(--background);
+
+      &.active {
+        color: var(--secondary);
+        border-color: var(--secondary);
+        &:hover {
+          cursor: default;
+          transform: none;
+        }
+        &:focus-visible {
+          outline: 2px solid var(--primary);
+        }
+        @include mixins.respond-to(medium) {
+          border-color: var(--background);
+        }
+      }
+      &:not(.active) {
+        pointer-events: auto;
+        &:hover {
+          color: var(--primary);
+          border-color: var(--primary);
+        }
+        &:focus-visible {
+          outline: 2px solid var(--secondary);
+        }
+      }
+      @media(hover: none) {
+        &:hover {
+          border-color: var(--background);
+        }
+      }
+    }
+  }
+
+// Navbar 'cta' (contact)
+  div:last-child {
+    div:last-child {
+      a {
+        font-weight: 700;
+        padding: .5rem .5rem;
+        @include mixins.respond-to(medium) {
+          padding: .3rem .3rem;
+        }
+      }
+    }
+  }
+}
+
+.navbar__home-anchor {
+  justify-self: flex-start;
+}
+
+.navbar__toggle-navbar {
+  display: none;
+  font-size: map.get($font-sizes, largest);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  @include mixins.respond-to(medium) {
+    display: block;
+  }
+  &.open {
+    rotate: -90deg;
+  }
+}
+
+.navbar__inner {
+  @include mixins.flex-between;
+  gap: map.get($spacings, medium);
+  background: var(--background);
+  backdrop-filter: blur(10px);
+  padding: map.get($spacings, small) map.get($spacings, large);
+  border-radius: map.get($spacings, small);
+  @include mixins.respond-to(medium) {
+    flex-direction: row-reverse;
+  }
+}
+
+.navbar__togglers-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 25%;
+  @include mixins.respond-to(medium) {
+    justify-content: flex-start;
+  }
+}
+
+.navbar__toggler {
+  transition: transform ease-in-out .2s, scale ease-in-out .2s;
+	background-color: inherit;
+	padding: 0 map.get($spacings, small);
+	border-radius: map.get($border-radius, medium);
+	&:hover, &:focus-visible {
+    color: var(--primary);
+	}
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+  }
+	@media(hover: none) {
+		&:hover {
+			color: inherit;
+		}
+	}
+}
+
+// togglers
+.lang-toggler {
+	text-wrap: nowrap;
+  color: inherit;
+  text-transform: lowercase;
+  font-family: $secondary-font;
+  font-size: 1.1rem;
+  &:hover {
+    scale: 1.2;
+    transform: translateY(-2px);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+      transform: translateY(-0px)
+    }
+  }
+}
+
+.theme-toggler {
+  font-size: 1.1rem;
+  &:hover {
+    scale: 1.2;
+    transform: translateY(-2px);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+      transform: translateY(-0px);
+    }
+  }
+}
+
+.theme-toggler::before {
+	content: '🌙';
+}
+
+#theme-toggle:checked + label .theme-toggler::before {
+  content: '🔅';
+}
+
+// navbar toggler (mobile)
+.navbar__toggle-navbar::before {
+  content: '☰';
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }

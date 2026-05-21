@@ -5,31 +5,49 @@
 $background-color: rgb(245 240 233);
 $text-color: rgb(40 30 20);
 $primary-color: rgb(200 140 40);
-$secondary-color: rgb(200 70 50);
+$secondary-color: rgb(170 85 50);
 $accent-color: rgb(60 130 135);
 
 $light-theme: (
-  background: rgb(245 240 233),  // #F5F0E9
-  text: rgb(40 30 20),           // #281E14
-  primary: rgb(200 140 40),      // #C88C28
-  secondary: rgb(170 85 50),     // #AA5532
-  accent: rgb(60 130 135),       // #3C8287
-  surface: rgb(235 228 218),     // #EBE4DA
-  text-muted: rgb(130 110 90),   // #826E5A
-  disabled-bg: rgb(225 216 204),  // #E1D8CC
-  disabled-text: rgb(170 156 140), // #AA9C8C
+	background: rgb(245 240 233),      // #F5F0E9
+	surface: rgb(235 228 218),         // #EBE4DA
+	text: rgb(40 30 20),               // #281E14
+	text-muted: rgb(130 110 90),       // #826E5A
+	primary: rgb(200 140 40),          // #C88C28
+	primary-hover: rgb(180 122 30),    // #B47A1E
+	secondary: rgb(170 85 50),         // #AA5532
+	secondary-hover: rgb(145 68 38),   // #914426
+	accent: rgb(60 130 135),           // #3C8287
+	success: rgb(72 140 88),           // #488C58
+	error: rgb(185 65 55),             // #B94137
+	warning: rgb(215 155 55),          // #D79B37
+	info: rgb(70 120 175),             // #4678AF
+	border: rgb(210 198 184),          // #D2C6B8
+	border-strong: rgb(170 150 128),   // #AA9680
+	overlay: rgb(20 15 10 / 60%),      // #140F0A99
+	disabled-bg: rgb(225 216 204),     // #E1D8CC
+	disabled-text: rgb(170 156 140),   // #AA9C8C
 );
 
 $dark-theme: (
-  background: rgb(8 5 3),          // #080503
-  text: rgb(228 214 167),          // #E4D6A7
-  primary: rgb(233 180 76),        // #E9B44C
-  secondary: rgb(191 95 55),       // #BF5F37
-  accent: rgb(80 162 167),         // #50A2A7
-  surface: rgb(28 22 16),          // #1C1610
-  text-muted: rgb(160 140 110),    // #A08C6E
-  disabled-bg: rgb(48 40 32),       // #302820
-  disabled-text: rgb(120 108 90),  // #786C5A
+	background: rgb(8 5 3),            // #080503
+	surface: rgb(28 22 16),            // #1C1610
+	text: rgb(228 214 167),            // #E4D6A7
+	text-muted: rgb(160 140 110),      // #A08C6E
+	primary: rgb(233 180 76),          // #E9B44C
+	primary-hover: rgb(245 196 104),   // #F5C468
+	secondary: rgb(191 95 55),         // #BF5F37
+	secondary-hover: rgb(214 118 76),  // #D6764C
+	accent: rgb(80 162 167),           // #50A2A7
+	success: rgb(92 170 110),          // #5CAA6E
+	error: rgb(220 90 78),             // #DC5A4E
+	warning: rgb(235 180 72),          // #EBB448
+	info: rgb(95 155 220),             // #5F9BDC
+	border: rgb(58 48 38),             // #3A3026
+	border-strong: rgb(92 78 62),      // #5C4E3E
+	overlay: rgb(0 0 0 / 72%),         // #000000B8
+	disabled-bg: rgb(48 40 32),        // #302820
+	disabled-text: rgb(120 108 90),    // #786C5A
 );
 
 // snackbar colours

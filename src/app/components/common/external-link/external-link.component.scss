@@ -1,0 +1,48 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "svgs-common" as *;
+
+$external-path: '#{$base-folder}/external/';
+
+$external-svgs: (
+  'live': 'live',
+  'github': 'github',
+  'npm': 'npm',
+  'linkedin': 'linkedin',
+  'three-dots': 'three-dots',
+);
+
+@each $name, $file in $external-svgs {
+  .svg-#{$name} {
+    @include svg-background('#{$external-path}#{$file}.svg');
+  }
+}
+
+// dark theme adapt
+.dark-theme .svg-github::after {
+  filter: invert(1);
+}
+
+.svg-external {
+  cursor: pointer;
+  &::after {
+    box-shadow: 0 4px 4px -3px color-mix(in srgb, var(--accent), transparent 50%);
+  }
+  &:hover::after {
+    transform: translateY(-2px);
+  }
+  &:active::after {
+    scale: 1.1;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    padding-bottom: map.get($spacings, small);
+    border-radius: map.get($border-radius, medium);
+  }
+  @media(hover: none) {
+    &:hover {
+      scale: 1;
+    }
+  }
+}

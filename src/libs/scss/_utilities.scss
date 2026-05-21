@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.u-hide {
+  @include mixins.hide;
+}
+
+.u-hide-on-medium {
+  @include mixins.respond-to(medium) {
+    @include mixins.hide;
+  }
+}
+
+.u-hide-on-small {
+  @include mixins.respond-to(small) {
+    @include mixins.hide;
+  }
+}
+
+.u-pre-wrap {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}

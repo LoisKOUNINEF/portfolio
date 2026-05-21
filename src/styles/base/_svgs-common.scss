@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+$base-folder: '/assets/images/svgs';
+
+@mixin svg-background($path) {
+  &::after {
+    background-image: url($path);
+  }
+}
+
+@mixin svgs-container($font-size: 1rem, $padding: 1rem) {
+  .svg-tech-label {
+    font-size: $font-size;
+  }
+  .base-svg {
+    &::after {
+      padding: $padding;
+    }
+  }
+}
+
+.svgs__container {
+  @include mixins.flex-center;
+  gap: map.get($spacings, largest);
+  justify-content: flex-start;
+  @include mixins.respond-to(medium) {
+    flex-wrap: wrap;
+    gap: map.get($spacings, medium);
+  }
+}
+
+.base-svg {
+	&::after {
+    padding: map.get($spacings, medium);
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: map.get($border-radius, large);
+    transition: scale ease .3s;
+    box-shadow: 0 4px 4px -3px color-mix(in srgb, var(--primary), transparent 50%);
+  }
+}

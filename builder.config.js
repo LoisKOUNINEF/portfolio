@@ -15,14 +15,14 @@ export default {
           'process.env.NODE_ENV': '"production"',
         },
 	},
-  sass: {
-    paths: [ 
-      'base', 
-      'core',
-      'components',
-      'views',
-    ], // in styles/
-  },
+  // sass: {
+  //   paths: [ 
+  //     'base', 
+  //     'core',
+  //     'components',
+  //     'views',
+  //   ], // in styles/
+  // },
   compression: {
     gzip: true,
     // BROTLI OPTIONAL

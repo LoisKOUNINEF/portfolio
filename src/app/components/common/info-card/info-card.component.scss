@@ -1,0 +1,63 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+.info-card {
+	display: flex;
+	align-items: center;
+	gap: map.get($spacings, medium);
+	padding: map.get($spacings, medium);
+	border-radius: map.get($border-radius, large);
+	background: var(--surface);
+  border: 1px solid var(--border);
+	@include mixins.themed(box-shadow, 0 1px 3px rgba(map.get($light-theme, text), 0.08), 0 1px 3px rgba(map.get($dark-theme, text), 0.3));
+}
+
+.info-card__icon {
+	font-size: map.get($font-sizes, large);
+	width: 4rem;
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	@include mixins.respond-to(medium) {
+		width: 3rem;
+		height: 3rem;
+	}
+}
+
+.info-card__icon-img {
+	width: 3rem;
+	height: 3rem;
+	object-fit: contain;
+
+	.dark-theme &[src*="github"] {
+		filter: invert(1);
+	}
+	@include mixins.respond-to(medium) {
+		width: 2.25rem;
+		height: 2.25rem;
+	}
+}
+
+.info-card__content {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.info-card__label {
+	font-weight: 700;
+	font-size: map.get($font-sizes, medium);
+}
+
+.info-card__subtext {
+	font-size: map.get($font-sizes, small);
+	font-weight: 400;
+	opacity: 0.65;
+
+	&:empty {
+		display: none;
+	}
+}

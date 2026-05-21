@@ -1,0 +1,119 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+@use "sass:color";
+
+.popover-wrapper:has(.resume-popover__wrapper) {
+	width: 50%;
+	height: auto;
+	max-height: 60%;
+
+	@include mixins.respond-to(medium) {
+		width: 100%;
+		max-height: 80%;
+	}
+}
+
+.resume-popover__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: map.get($spacings, large);
+	gap: map.get($spacings, medium);
+	text-align: center;
+
+	h3 {
+		font-size: map.get($font-sizes, large);
+		font-weight: 700;
+	}
+}
+
+.resume-popover__title {
+	padding-top: map.get($spacings, medium);
+}
+
+.resume-popover__cards {
+	display: flex;
+	flex-direction: column;
+	gap: map.get($spacings, medium);
+	width: 100%;
+	padding-top: map.get($spacings, small);
+	padding-bottom: map.get($spacings, medium);
+}
+
+a.resume-popover__card {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.resume-popover__card {
+	cursor: pointer;
+	text-decoration: none;
+	width: 75%;
+	align-self: center;
+	justify-content: space-between;
+	transition: transform map.get($transitions, fast), box-shadow map.get($transitions, fast), border-color map.get($transitions, fast);
+
+	@include mixins.respond-to(medium) {
+		width: 100%;
+	}
+
+	.info-card__content {
+		text-align: center;
+		flex-grow:1;
+		@include mixins.respond-to(medium) {
+			padding-left: 0;
+		}
+	}
+	.info-card__icon {
+		align-self: center;
+	}
+
+	&:hover {
+		text-decoration: none;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 4px color-mix(in srgb, var(--primary), transparent 14%);
+		border-color: var(--primary);
+
+		.info-card__label,
+		.info-card__subtext {
+			color: var(--text-muted);
+		}
+	}
+
+	&:active {
+		transform: translateY(1px);
+	}
+
+	@media (hover: none) {
+		&:hover {
+			transform: translateY(0);
+			box-shadow: none;
+			border-color: var(--background);
+
+			.info-card__label,
+			.info-card__subtext {
+				color: inherit;
+			}
+		}
+	}
+
+	&:focus-visible {
+		text-decoration: none!important;
+		outline-offset: 2px;
+		outline: 2px solid var(--primary);
+
+		.info-card__label,
+		.info-card__subtext {
+			color: var(--text);
+		}
+	}
+}
+
+.resume-mono-card {
+	.info-card__icon-img {
+		filter: grayscale(1);
+	}
+}
