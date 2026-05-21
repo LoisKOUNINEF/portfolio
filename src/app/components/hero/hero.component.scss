@@ -101,18 +101,19 @@
 	transition: ease-in-out .2s;
 	padding-top: map.get($spacings, small);
 	padding-left: map.get($spacings, largest);
-		.svg-tech-label {
-			font-size: 0.7rem;
-			letter-spacing: 0;
+	cursor: pointer;
+	.svg-tech-label {
+		font-size: 0.7rem;
+		letter-spacing: 0;
+	}
+  .base-svg {
+		transition: ease-in-out .2s;
+		border-radius: map.get($border-radius, large);
+		border-bottom: 2px solid transparent;
+		&::after {
+			padding: .8rem;
 		}
-		.base-svg {
-			transition: ease-in-out .2s;
-			border-radius: map.get($border-radius, large);
-			border-bottom: 2px solid transparent;
-			&::after {
-				padding: .8rem;
-			}
-		}
+	}
 	@include mixins.respond-to(medium) {
 		padding-left: map.get($spacings, small);
 		.svgs__container {
@@ -120,17 +121,16 @@
 		}
 	}
 	&:hover {
-		cursor: pointer;
-		scale: 1.01;
-		transform: translateY(-1px);
+		transform: translateY(-2px);
+		text-shadow: 1px 1px 1px var(--surface);
 		.base-svg {
 			border-color: var(--primary);
 		}
 	}
 	@media(hover:none) {
 	 	&:hover {
-			scale: 1;
 			transform: translateY(0px);
+			text-shadow: none;
 			.base-svg {
 				border-color: transparent;
 			}

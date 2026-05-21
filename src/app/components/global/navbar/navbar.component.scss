@@ -63,6 +63,7 @@
     text-wrap: nowrap;
     pointer-events: none;
     a {
+      transition: color ease-in-out .2s, border ease-in-out .2s;
       border-bottom: 2px solid;
       text-decoration: none;
       font-weight: 600;

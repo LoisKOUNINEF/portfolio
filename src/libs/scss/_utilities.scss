@@ -22,3 +22,19 @@
   white-space: pre-wrap;
   overflow-wrap: break-word;
 }
+
+.u-btn-disabled {
+  @include mixins.button-disabled;
+}
+
+.u-sr-only {
+  @include mixins.sr-only;
+}
+
+.u-clearfix {
+  @include mixins.clearfix;
+}
+
+.u-pointer {
+  @include mixins.cursor-pointer;
+}

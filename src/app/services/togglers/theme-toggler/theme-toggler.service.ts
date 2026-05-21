@@ -41,8 +41,14 @@ export class ThemeToggler extends Service<ThemeToggler> {
     localStorage.setItem(this._localStorageName, pref);
   }
 
-  private getThemeFromStorage() {
-    return localStorage.getItem(this._localStorageName) || this._lightTheme;
+  private getThemeFromStorage(): string {
+    return localStorage.getItem(this._localStorageName) || this.getSystemPreference() || this._lightTheme;
+  }
+
+  private getSystemPreference(): string {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? this._darkTheme
+      : this._lightTheme;
   }
 
 }
