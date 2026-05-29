@@ -14,13 +14,16 @@ export interface ITechBadgeConfig extends ITech {
 const templateFn = (_config: CatalogItemConfig<ITechBadge>) => `__TEMPLATE_PLACEHOLDER__`;
 
 export class TechBadgeComponent extends Component {
-  private _config: CatalogItemConfig<ITech>;
   constructor(mountTarget: HTMLElement, config: CatalogItemConfig<ITechBadgeConfig>) {
-    const label = getLabel(config);
-    const proficiency = getProficiency(config);
-    super({ templateFn, mountTarget, config: { 
-      ...config, label, proficiency 
-    }});
-      this._config = config;
+    super({ templateFn, mountTarget });
+    this.config = config;
+  }
+
+  override onBeforeRender() {
+    const label = getLabel(this.config);
+    const proficiency = getProficiency(this.config);
+    this.config = { 
+      ...this.config, label, proficiency 
+    };
   }
 }
