@@ -27,6 +27,9 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'header'});
     this.listenToRenderEvents(['language-changed']);
+  }
+
+  override onAfterRender() {
     window.addEventListener('scroll', () => this.scrollHelper());
     NavToggleHelper.setupAnchorListeners();
   }
@@ -41,7 +44,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
       selector: 'navbar-anchors',
       elementName: 'nav-anchor',
       component: AnchorComponent,
-      props:{ className: 'navbar__anchor' }
+      props: { className: 'navbar__anchor' }
     })
   }
 

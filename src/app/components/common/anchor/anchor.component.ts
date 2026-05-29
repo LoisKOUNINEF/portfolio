@@ -17,6 +17,7 @@ import { AnchorManager, Component, ComponentProps, IAnchorConfig } from '../../.
 ```
 */
 export class AnchorComponent extends Component<HTMLAnchorElement, IAnchorConfig> {
+  private _config: IAnchorConfig;
 
   constructor(mountTarget: HTMLElement, config: IAnchorConfig, props?: ComponentProps) {
     super({
@@ -26,6 +27,11 @@ export class AnchorComponent extends Component<HTMLAnchorElement, IAnchorConfig>
       normalizeKeys: ['style', 'pipes', 'className'],
       props
     });
-    new AnchorManager(config, this.element);
+    this._config = config;
+  }
+
+  protected override onAfterRender(): void {
+    this.element.innerHTML = '';  // clear before AnchorManager appends
+    new AnchorManager(this._config, this.element);
   }
 }

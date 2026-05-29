@@ -15,7 +15,7 @@ export class ProjectCardComponent extends Component {
 
     this._project = project;
     this._initialConfig = config;
-    this.listenToRenderEvents(['language-changed'], true);
+    this.listenToRenderEvents(['language-changed']);
   }
 
   public childConfigs(): ComponentConfig[] {
@@ -71,8 +71,7 @@ export class ProjectCardComponent extends Component {
     displayProjectPop(this._project);
   }
 
-  protected override forceRender(): void {
+  protected override onBeforeRender(): void {
     this._project = ProjectService.getProject(this._initialConfig);
-    super.forceRender();
   }
 }

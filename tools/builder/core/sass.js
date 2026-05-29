@@ -3,13 +3,17 @@ import * as fs from 'fs';
 import path from 'path';
 import { getFilesRecursive, isVerbose, print } from '../../utils/index.js';
 import { PATHS } from './paths.js';
+import builderConfig from '../../../builder.config.js';
 
-// global styles
-const stylesPath = path.join(PATHS.source, 'styles');
-const stylesInput = path.join(stylesPath, 'base');
-const libsInput = path.join(PATHS.source, 'libs');
 const stylesOutput = path.join(PATHS.tempSource, 'main.css');
-const pathsToLoad = [ stylesInput, libsInput ];
+
+// global styles (partials)
+const stylesPath = path.join(PATHS.source, 'styles');
+const scssOrigins = builderConfig.sass.paths;
+const scssPath = (origin) => path.join(stylesPath, origin);
+const stylesInput = scssOrigins.map(origin => scssPath(origin));
+const libsInput = path.join(PATHS.source, 'libs');
+const pathsToLoad = [ ...stylesInput, libsInput ];
 
 await sass.compileAsync(path.join(stylesPath, 'main.scss'), {
   loadPaths: [ ...pathsToLoad,  ],
@@ -22,7 +26,10 @@ await sass.compileAsync(path.join(stylesPath, 'main.scss'), {
 // features styles
 const appInput = path.join(PATHS.source, 'app');
 // const appOrigins = [ 'components', 'views', 'libs' ];
-const appStyles = [...getFilesRecursive(path.join(appInput, 'components'), 'scss'), ...getFilesRecursive(path.join(appInput, 'views'), 'scss')];
+const appStyles = [
+  ...getFilesRecursive(path.join(appInput, 'components'), 'scss'), 
+  ...getFilesRecursive(path.join(appInput, 'views'), 'scss')
+];
 
 for (const style of appStyles) {
   const result = await sass.compileAsync(style, {

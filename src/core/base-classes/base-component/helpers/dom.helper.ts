@@ -24,7 +24,7 @@ export class DomHelper {
     element.innerHTML = SecurityHelper.sanitizeTemplate(template, trustLevel);
     return element;
   }
-
+  
   public static cleanupOptionalContent(): void {
     const isEmpty = (el: HTMLElement): boolean => {
       if (el instanceof HTMLImageElement) {

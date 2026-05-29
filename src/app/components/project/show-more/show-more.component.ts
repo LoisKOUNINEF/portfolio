@@ -15,7 +15,7 @@ export class ShowMoreComponent extends Component {
   constructor(mountTarget: HTMLElement, count: number) {
     super({ templateFn, mountTarget });
     this._count = count;
-    this.listenToRenderEvents(['language-changed'], true);
+    this.listenToRenderEvents(['language-changed']);
   }
 
   public childConfigs(): ComponentConfig[] {

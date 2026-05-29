@@ -21,11 +21,6 @@ export interface ButtonContainerOptions {
   pipes?: string;
 }
 
-interface BaseButton extends IAttributesConfig {
-  callback: () => void;
-  label?: string;
-}
-
 interface ButtonContainerOptions {
   containerClassName?: string;
   containerStyles?: string;

@@ -11,7 +11,7 @@ export { CatalogItemConfig, CatalogConfig, CatalogItemPrimitive } from './helper
 /**```typescript
  * export interface ComponentConfig {
  *   selector: string;
- *   factory: (element: HTMLElement) => BaseComponent;
+ *   factory: (element: HTMLElement) => Component;
  * }
  * ```
  */ 
@@ -29,20 +29,19 @@ export interface BaseComponentOptions {
 
 export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
   private _children: BaseComponent[] = [];
+  private _isRendering = false;
   protected element: T;
   protected eventListeners: Array<[EventTarget, string, EventListener]> = [];
-  private _options: ComponentOptions;
+  private _busSubscriptions: Array<[EventKey, (data: any) => void]> = [];
+  protected trustLevel: TrustLevel | undefined;
 
   constructor({
-    template = '',
     mountTarget = '#app',
     tagName = 'div',
     trustLevel
   }: BaseComponentOptions) {
-    this._options = { template, mountTarget, tagName, trustLevel }
-    this.element = DomHelper.createElement<T>(tagName, template, trustLevel);
-    this.parseDataAttributes();
-    this.autoBindEvents();
+    this.trustLevel = trustLevel;
+    this.element = DomHelper.createElement<T>(tagName, '', trustLevel);
     DomHelper.mountElement(this.element, mountTarget);
   }
 
@@ -50,31 +49,55 @@ export abstract class BaseComponent<T extends HTMLElement = HTMLElement> {
     return [];
   }
 
+  public render(): HTMLElement {
+    if (this._isRendering) return this.element;
+    this._isRendering = true;
+
+    try {
+      this.onBeforeRender();
+      this.element.innerHTML = SecurityHelper.sanitizeTemplate(
+        this.generateTemplate(),
+        this.trustLevel
+      );
+      this.compose();
+      this.hydrate();
+      this.autoBindEvents()
+      this.onAfterRender();
+      return this.element;
+    } finally {
+      this._isRendering = false;
+    }
+  }
+
   public destroy(): void {
+    this.onBeforeDestroy();
     EventHelper.destroyEvents(this.eventListeners);
+    this._busSubscriptions.forEach(([event, callback]) => {
+      AppEventBus.off(event, callback);
+    });
+    this._busSubscriptions = [];
     ChildrenHelper.destroyChildren(this._children);
     this.element.remove();
+    this.onAfterDestroy();
   }
 
-  public render(): HTMLElement {
+  // Lifecycle hooks — override in subclasses as needed
+  protected onBeforeRender(): void {}
+  protected onAfterRender(): void {}
+  protected onBeforeDestroy(): void {}
+  protected onAfterDestroy(): void {}
+
+  protected generateTemplate(): string {
+    return '';
+  }
+
+  protected hydrate(): void {
+    this.parseDataAttributes();
+  }
+
+  protected compose(): void {
     this.addChildren();
-    DomHelper.cleanupOptionalContent()
-    return this.element;
-  }
-
-/**
- * ```typescript
-interface CatalogConfig extends ComponentOptions {
-  array: CatalogItemConfig[];
-  elementName: string;
-  elementTag?: keyof HTMLElementTagNameMap;
-  selector: string;
-  component: new (el: HTMLElement, data: any) => BaseComponent;
-};
-  ```
-*/
-  protected catalogConfig(config: CatalogConfig): ComponentConfig[] {
-    return CatalogHelper.generateCatalog(config, this.element);
+    DomHelper.cleanupOptionalContent();
   }
 
   protected parseDataAttributes(): void {
@@ -92,14 +115,21 @@ interface CatalogConfig extends ComponentOptions {
     ChildrenHelper.addChildren(this, this.element, this._children);
   }
 
-  protected forceRender(): void {
-    this.element.innerHTML = SecurityHelper.sanitizeTemplate(this._options.template, this._options.trustLevel);
-    this.render();
+  protected catalogConfig(config: CatalogConfig): ComponentConfig[] {
+    return CatalogHelper.generateCatalog(config, this.element);
   }
 
-  protected listenToRenderEvents(events: EventKey[], force: boolean = false): void {
+  protected listen<K extends EventKey>(
+    event: K,
+    callback: (data: EventMap[K]) => void
+  ): void {
+    AppEventBus.subscribe(event, callback);
+    this._busSubscriptions.push([event, callback]);
+  }
+
+  protected listenToRenderEvents(events: EventKey[]): void {
     events.forEach((event: EventKey) => {
-      AppEventBus.subscribe(event, () => force ? this.forceRender() : this.render());
-    })
+      this.listen(event, () => this.render());
+    });
   }
 }
