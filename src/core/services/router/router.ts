@@ -1,4 +1,4 @@
-import { View, AppEventBus } from '../../index.js';
+import { View, Navigation, Service } from '../../index.js';
 import { Routes, RouteConfig, RouteGuardsManager, GuardResult } from './helpers/route-guard-manager.helper.js';
 import { ViewRenderManager } from './helpers/view-render-manager.helper.js';
 import { NavigationManager } from './helpers/navigation-manager.helper.js';
@@ -16,13 +16,27 @@ export interface RouteMatch {
   params: Record<string, string>;
 }
 
-class Router {
+class Router extends Service<Router> {
   private _currentView: View | null = null;
   private _currentParams: Record<string, string> = {};
+  private onPopState = () => this.handlePopState();
+  private onNavigate = (data: { path: string }) => this.navigate(data.path);
+  private onReload = () => this.reload();
+  private _busSubscriptions: Array<() => void> = [];
 
   constructor(private routes: Routes) {
+    super();
     this.initializeEventListeners();
     this.navigate(NavigationManager.getCurrentPath());
+    this.registerCleanup(this.removeEventListeners);
+  }
+
+  public removeEventListeners(): void {
+    this._busSubscriptions.forEach((callback) => {
+      callback();
+    });
+    this._busSubscriptions = [];
+    window.removeEventListener('popstate', this.onPopState);
   }
 
   public async reload(): Promise<void> {
@@ -60,6 +74,7 @@ class Router {
     
     NavigationManager.updateMetaContent(this._currentView);
     NavigationManager.updateHistory(normalizedPath, currentPath, pushState);
+    window.scrollTo({ top:0 });
   }
 
   public getCurrentParams(): Record<string, string> {
@@ -71,9 +86,10 @@ class Router {
   }
 
   private initializeEventListeners(): void {
-    window.addEventListener('popstate', () => this.handlePopState());
-    AppEventBus.subscribe('navigate', (path: string) => this.navigate(path));
-    AppEventBus.subscribe('reload', () => this.reload());
+    window.addEventListener('popstate', this.onPopState);
+    const unsubOnNav = Navigation.onNavigate(this.onNavigate)
+    const unsubOnReload = Navigation.onReload(this.onReload);
+    this._busSubscriptions.push(unsubOnNav, unsubOnReload);
   }
 
   private handlePopState(): void {
@@ -141,4 +157,4 @@ class Router {
   }
 }
 
-export const AppRouter = (routes: Routes) => new Router(routes);
+export const AppRouter = (routes: Routes) => Router.getInstance(routes);

@@ -1,4 +1,4 @@
-import { View, AppEventBus } from '../../../index.js';
+import { View, Lifecycle } from '../../../index.js';
 
 /**
  * handles all view rendering.
@@ -8,7 +8,7 @@ export class ViewRenderManager {
     if (!currentView) return null;
     currentView.destroy();
     currentView.onExit();
-    this.emitEvent('view-unmount', currentView.viewName);
+    Lifecycle.viewUnmount(currentView.viewName);
     return null;
   }
 
@@ -25,11 +25,7 @@ export class ViewRenderManager {
     view.render();
     view.onEnter();
 
-    this.emitEvent('view-mount', view.viewName);
+    Lifecycle.viewMount(view.viewName);
     return view;
-  }
-
-  private static emitEvent(event: EventKey, viewName: string): void {
-    AppEventBus.emit(event, viewName);
   }
 }

@@ -35,7 +35,11 @@ export class I18n extends Service<I18n> {
     this._currentLanguage = lang;
     this.savePreferences();
     await this.loadTranslations(lang);
-    AppEventBus.emit('language-changed');
+    AppEventBus.emit('language-changed', { lang });
+  }
+
+  public onLanguageChange(callback: (payload: { lang: string }) => void) {
+    AppEventBus.subscribe('language-changed', callback);
   }
 
   public async loadTranslations(lang: Language): Promise<void> {

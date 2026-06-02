@@ -1,4 +1,4 @@
-import { AppEventBus, ComponentConfig, View } from '../../../core/index.js';
+import { Navigation, ComponentConfig, View } from '../../../core/index.js';
 import { ButtonComponent, PictureComponent } from '../../components/index.js';
 
 const template = `__TEMPLATE_PLACEHOLDER__`;
@@ -32,7 +32,7 @@ export class NotFoundView extends View {
   }
 
   private handleHome(): void {
-    AppEventBus.emit('navigate', '/');
+    Navigation.navigateTo('/');
   }
 
   private hideGlobals() {

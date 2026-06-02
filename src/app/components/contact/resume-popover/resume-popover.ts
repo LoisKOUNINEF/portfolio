@@ -1,4 +1,4 @@
-import { AppEventBus, ComponentConfig, I18nService } from '../../../../core/index.js';
+import { Overlays, ComponentConfig, I18nService } from '../../../../core/index.js';
 import {notify, PopoverView} from '../../../../libs/index.js';
 import { InfoCardComponent } from '../../common/index.js';
 import {Language} from "../../../../core/services/i18n/languages.js";
@@ -22,7 +22,7 @@ const downloadStarted = (): void => {
   const currentLang = I18nService.currentLanguage;
   const message = messages[currentLang] || messages['fr'] || 'Download started';
   notify(message);
-  AppEventBus.emit('popover-close')
+  Overlays.popoverClosed();
 };
 
 const resumePopoverComponents = (lang: string): ComponentConfig[] => {

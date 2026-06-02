@@ -1,4 +1,4 @@
-import { View, ButtonManager, BaseButton, ComponentConfig, AppPipeRegistry, CatalogConfig, AppEventBus } from '../../../core/index.js';
+import { View, ButtonManager, BaseButton, ComponentConfig, AppPipeRegistry, CatalogConfig, Overlays } from '../../../core/index.js';
 import { FocusTrapHelper, IFocusTrapOptions } from './helpers/focus-trap.helper.js';
 import { IPopoverDomElements, PopoverDomHelper } from './helpers/popover-dom.helper.js';
 
@@ -42,7 +42,7 @@ export class PopoverView extends View {
     this._buttonManager = this.createButtonManager(buttons);
     this.setOptionalViewName(viewName);
     this._focusTrapOptions = focusTrapOptions;
-    AppEventBus.subscribe('popover-close', () => this.destroy());
+    Overlays.onPopoverClosed(() => this.destroy())
   }
 
   public childConfigs(): ComponentConfig[] {
@@ -72,7 +72,7 @@ export class PopoverView extends View {
     this._focusTrap = this.createFocusTrap(wrapper, overlay);
     this._focusTrap.activate();
 
-    AppEventBus.emit('popover-opened');
+    Overlays.popoverOpened();
     this._overlay = overlay;
     return overlay;
   }
@@ -80,8 +80,6 @@ export class PopoverView extends View {
   public override destroy(): void {
     this._focusTrap?.deactivate();
     if (this._prevTitle) document.title = this._prevTitle;
-    this._overlay?.classList.remove('show');
-    this._overlay?.classList.add('hide');
 
     this._overlay = PopoverDomHelper.removeDomElements(this._overlay, () => {
       document.documentElement.classList.remove('no-scroll');

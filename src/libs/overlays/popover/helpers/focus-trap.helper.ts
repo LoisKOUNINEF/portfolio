@@ -1,4 +1,4 @@
-import { AppEventBus } from "../../../../core/index.js";
+import { Overlays } from "../../../../core/index.js";
 
 type KeyboardEventHandler = (event: KeyboardEvent) => void;
 
@@ -161,7 +161,7 @@ export class FocusTrapHelper {
       case 'Escape':
         if (this._options.escapeDeactivates) {
           event.preventDefault();
-          AppEventBus.emit('popover-close');
+          Overlays.popoverClosed();
           this.deactivate();
         }
         break;
@@ -189,7 +189,7 @@ export class FocusTrapHelper {
     this._overlay.addEventListener('click', (e: MouseEvent) => {
       if (e.target === this._overlay){ 
         event.stopPropagation();
-        AppEventBus.emit('popover-close');
+        Overlays.popoverClosed();
         this.deactivate();;
       }
     });
