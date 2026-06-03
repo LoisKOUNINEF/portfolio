@@ -1,6 +1,6 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { LanguageTogglerService } from '../../../../services/index.js';
-import { ButtonComponent } from '../../../index.js';
+import { languageTogglerService } from '../../../../services/index.js';
+import { ButtonComponent } from '../../../../../libs/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -21,6 +21,6 @@ export class LanguageTogglerComponent extends Component {
   }
 
   private async toggleLang(): Promise<void> {
-    await LanguageTogglerService.toggleLang();
+    await languageTogglerService.toggleLang();
   }
 }

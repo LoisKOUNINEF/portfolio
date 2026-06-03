@@ -1,5 +1,5 @@
 import { AppEventBus, Component, ComponentConfig, I18nService } from '../../../../core/index.js';
-import { ButtonComponent } from '../../index.js';
+import { ButtonComponent } from '../../../../libs/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 

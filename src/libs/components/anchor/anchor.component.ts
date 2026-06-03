@@ -1,4 +1,4 @@
-import { AnchorManager, Component, ComponentProps, IAnchorConfig } from '../../../../core/index.js';
+import { AnchorManager, Component, ComponentProps, IAnchorConfig } from '../../../core/index.js';
 
 /**
  * ```typescript

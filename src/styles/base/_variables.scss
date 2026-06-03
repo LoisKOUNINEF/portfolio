@@ -1,5 +1,11 @@
 @use "fonts";
 // colours (RGB)
+$snack-colors: (
+  success: rgb(76 175 80),
+  error: rgb(244 67 54),
+  info: rgb(200 140 40),
+  default: rgb(153 153 153),
+);
 
 // used in utils
 $background-color: rgb(245 240 233);
@@ -50,11 +56,6 @@ $dark-theme: (
 	disabled-text: rgb(120 108 90),    // #786C5A
 );
 
-// snackbar colours
-$snack-success: rgb(76 175 80);
-$snack-error: rgb(244 67 54);
-$snack-info: rgb(33 150 243);
-$snack-default: rgb(153 153 153);
 
 /* 
 	Variables used in utility classes

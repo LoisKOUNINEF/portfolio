@@ -2,7 +2,8 @@ import { AttributesHelper, IAttributesConfig } from "../helpers/attributes.helpe
 
 export interface BaseButton extends IAttributesConfig {
   callback: () => void;
-  label?: string;
+  ariaExpanded?: boolean;
+  ariaControls?: string;
 }
 
 export interface ButtonContainerOptions {
@@ -56,13 +57,9 @@ export class ButtonManager {
     container.style = this.containerOptions.containerStyles || '';
 
     this.buttons.forEach((config, index) => {
-      if (config.label) {
-        return this.createButtonWithCheckbox(config, index, container);
-      } else {
-        const button = this.createButton(config, index);
-        container.appendChild(button);
-        this.bindButtonCallback(config, index);
-      }
+      const button = this.createButton(config, index);
+      container.appendChild(button);
+      this.bindButtonCallback(config, index);
     });
 
     return container;
@@ -75,30 +72,18 @@ export class ButtonManager {
     }
   }
 
-  private createButtonWithCheckbox(config: BaseButton, index: number, container: HTMLElement): HTMLElement {
-    if (!config.label) return container;
-    const checkbox = document.createElement('input');
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('id', config.label);
-    checkbox.hidden = true;
-    container.appendChild(checkbox);
-    
-    const label = document.createElement('label');
-    label.setAttribute('for', config.label);
-        
-    const button = this.createButton(config, index);
-    label.appendChild(button);
-        
-    container.appendChild(label);
-    this.bindButtonCallback(config, index, checkbox);
-    return container;
-  }
-
   private createButton(config: BaseButton, index: number): HTMLElement {
     const button = document.createElement('button');
-    
-    AttributesHelper.setAttributes(button, config);
+    button.setAttribute('type', 'button');
 
+    if (config.ariaExpanded !== undefined) {
+      button.setAttribute('aria-expanded', String(config.ariaExpanded));
+    }
+    if (config.ariaControls) {
+      button.setAttribute('aria-controls', config.ariaControls);
+    }
+
+    AttributesHelper.setAttributes(button, config);
     this.setDataEvent(button, index);
 
     return button;
@@ -108,15 +93,12 @@ export class ButtonManager {
     button.setAttribute('data-event', `click:onButtonClick_${index}`);
   }
 
-  private bindButtonCallback(config: BaseButton, index: number, checkbox?: HTMLInputElement): void {
+  private bindButtonCallback(config: BaseButton, index: number): void {
     const methodName = `onButtonClick_${index}`;
-    
+
     this.component[methodName] = () => {
       if (typeof config.callback === 'function') {
         config.callback();
-        if (checkbox) {
-          checkbox.checked = !checkbox.checked;
-        }
       }
     };
   }

@@ -5,6 +5,7 @@ export interface IAttributesConfig {
   style?: string;
 // use regular pipe syntax for arguments / chaining
   pipes?: string;
+  ariaLabel?: string;
 }
 
 export class AttributesHelper {
@@ -12,6 +13,9 @@ export class AttributesHelper {
     this.setContent(element, config);
     this.setPipes(element, config);
     this.setStyle(element, config);
+    if (config.ariaLabel) {
+      element.setAttribute('aria-label', config.ariaLabel);
+    }
   }
 
   private static setContent(element: HTMLElement, config: IAttributesConfig): void {

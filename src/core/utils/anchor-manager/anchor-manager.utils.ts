@@ -1,4 +1,5 @@
 import { AttributesHelper, IAttributesConfig } from "../helpers/attributes.helper.js";
+import { I18nService } from "../../index.js";
 
 /**
  * ```typescript
@@ -9,6 +10,7 @@ interface IAttributesConfig {
   style?: string;
 // use regular pipe syntax for arguments / chaining
   pipes?: string;
+  ariaLabel?: string;
 }
 interface IAnchorConfig extends IAttributesConfig {
 // prefix href with '#' for internal anchor
@@ -36,21 +38,17 @@ export class AnchorManager {
   }
 
   private appendAnchorElement(target: HTMLElement): void {
-    const container = this.createAnchorContainer();
-    target.appendChild(container);
-  }
-
-  private createAnchorContainer(): HTMLSpanElement {
-    const container = document.createElement('span');
     const anchor = this.createAnchor();
-    container.appendChild(anchor);
-    return container;
+    target.appendChild(anchor);
   }
 
-  private createAnchor(): HTMLElement {
+  private createAnchor(): HTMLAnchorElement {
     const anchor = document.createElement('a');
     this.setAnchorRef(anchor);
     AttributesHelper.setAttributes(anchor, this.config);
+    if (this.config.target) {
+      this.addNewTabAriaLabel(anchor);
+    }
     this.handleClick(anchor);
     return anchor;
   }
@@ -59,7 +57,17 @@ export class AnchorManager {
     anchor.setAttribute('href', this.config.href);
     if (this.config.target) {
       anchor.setAttribute('target', this.config.target);
+      anchor.setAttribute('rel', 'noopener noreferrer');
     }
+  }
+
+  private addNewTabAriaLabel(anchor: HTMLAnchorElement): void {
+    const suffix = I18nService.translate('common.new-tab', '(opens in new tab)');
+    const baseLabel = anchor.getAttribute('aria-label')
+      || anchor.textContent
+      || (this.config.i18nKey ? I18nService.translate(this.config.i18nKey, '') : '')
+      || this.config.href;
+    anchor.setAttribute('aria-label', `${baseLabel} ${suffix}`.trim());
   }
 
   private handleClick(anchor: HTMLAnchorElement): void {
@@ -68,7 +76,7 @@ export class AnchorManager {
 
     const id = this.config.href.slice(1);
 
-    anchor?.addEventListener('click', (e) => {
+    anchor.addEventListener('click', (e) => {
       e.preventDefault();
       const target = document.getElementById(id);
       this.scrollToTarget(target);
@@ -77,11 +85,7 @@ export class AnchorManager {
   }
 
   private scrollToTarget(target: HTMLElement | null): void {
-    const targetPosition = target?.offsetTop;
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    })
+    target?.scrollIntoView({ behavior: 'smooth' });
   }
 
   private accessibilityFeatures(target: HTMLElement | null, id: string) {
@@ -93,7 +97,6 @@ export class AnchorManager {
     setTimeout(() => {
       target?.setAttribute('tabindex', '-1');
       target?.focus({ preventScroll: true });
-      // Remove tabindex after focus
       target?.addEventListener('blur', () => {
         target?.removeAttribute('tabindex');
       }, { once: true });
@@ -102,10 +105,16 @@ export class AnchorManager {
 
   private setAriaLive(target: HTMLElement | null, id: string): void {
     const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
     announcement.setAttribute('aria-live', 'polite');
-    announcement.className = 'sr-only';
-    announcement.textContent = `Navigated to ${ target?.textContent || id }`;
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'u-sr-only';
     document.body.appendChild(announcement);
-    setTimeout(() => document.body.removeChild(announcement), 1000);
+    // Delay content so AT registers the live region before it receives text.
+    // announcement.remove() is safe even if navigation already detached the element.
+    setTimeout(() => {
+      announcement.textContent = `Navigated to ${ target?.textContent || id }`;
+      setTimeout(() => announcement.remove(), 3000);
+    }, 100);
   }
 }

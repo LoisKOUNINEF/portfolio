@@ -1,6 +1,7 @@
 import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/index.js';
-import { AppEventBus, Component, ComponentConfig, ComponentProps } from '../../../../core/index.js';
-import { displayProjectPop, ProjectHeaderComponent, ProjectLinksComponent, ButtonComponent, ProjectSectionComponent } from '../../index.js';
+import { Component, ComponentConfig, ComponentProps } from '../../../../core/index.js';
+import { ButtonComponent } from '../../../../libs/index.js';
+import { displayProjectPop, ProjectHeaderComponent, ProjectLinksComponent, ProjectSectionComponent } from '../../index.js';
 
 const templateFn = (_project: ProjectConfigObject) => `__TEMPLATE_PLACEHOLDER__`;
 

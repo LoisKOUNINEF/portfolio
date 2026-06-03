@@ -1,6 +1,6 @@
-import { PopoverView } from "../../../../libs/index.js";
+import { PopoverView, ButtonComponent } from "../../../../libs/index.js";
 import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
-import { ButtonComponent, IPictureConfig, PictureComponent } from "../../common/index.js";
+import { IPictureConfig, PictureComponent } from "../../index.js";
 
 export interface IImagePopConfig extends IPictureConfig {
   viewName?: string;

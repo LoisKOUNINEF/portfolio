@@ -1,0 +1,86 @@
+@use "sass:map";
+@use "mixins";
+@use "variables" as *;
+
+$snack-colors: (
+  success: rgb(76 175 80),
+  error: rgb(244 67 54),
+  info: rgb(33 150 243),
+  default: rgb(153 153 153),
+) !default;
+
+// snackbar overlay config
+$snackbar-config: (
+  'padding': 0.75rem 1.5rem,
+  'border-radius': 0.5rem,
+  'gap': 1rem,
+  'stack-gap': 0.5rem,
+  'offset': 1rem,
+  'container-width': 350px,
+  'animation-duration': 0.3s,
+  'color-default': map.get($snack-colors, default),
+  'color-success': map.get($snack-colors, success),
+  'color-error': map.get($snack-colors, error),
+  'color-info': map.get($snack-colors, info),
+) !default;
+
+// Positioned containers — one per gravity direction
+// Items stack in column inside; no JS offset calculation needed.
+.snackbar-region__bottom,
+.snackbar-region__top {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: map.get($snackbar-config, 'stack-gap');
+  width: map.get($snackbar-config, 'container-width');
+  max-width: 90vw;
+  pointer-events: none;
+
+  .app-snackbar {
+    pointer-events: auto;
+  }
+}
+
+.snackbar-region__bottom {
+  bottom: map.get($snackbar-config, 'offset');
+  flex-direction: column-reverse; // new items appear at bottom, push existing ones up
+}
+
+.snackbar-region__top {
+  top: map.get($snackbar-config, 'offset');
+}
+
+.app-snackbar {
+  @include mixins.flex-center;
+  background: map.get($snackbar-config, 'color-default');
+  color: white;
+  padding: map.get($snackbar-config, 'padding');
+  border-radius: map.get($snackbar-config, 'border-radius');
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  gap: map.get($snackbar-config, 'gap');
+  width: 100%;
+  animation: snackbar-fade-in map.get($snackbar-config, 'animation-duration') ease;
+}
+
+.app-snackbar--success { background: map.get($snackbar-config, 'color-success'); }
+.app-snackbar--error   { background: map.get($snackbar-config, 'color-error'); }
+.app-snackbar--info    {
+  background: map.get($snackbar-config, 'color-info');
+  color: var(--background);
+}
+
+.app-snackbar button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@keyframes snackbar-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

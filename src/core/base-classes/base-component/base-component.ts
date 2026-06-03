@@ -4,8 +4,9 @@ import { I18nHelper } from './helpers/i18n.helper.js';
 import { PipeHelper } from './helpers/pipe.helper.js';
 import { ChildrenHelper } from './helpers/children.helper.js';
 import { CatalogHelper, CatalogConfig } from './helpers/catalog.helper.js';
-import { Component, ComponentOptions, AppEventBus } from '../../index.js';
+import { Component, AppEventBus } from '../../index.js';
 import { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
+export { SecurityHelper, TrustLevel } from './helpers/security.helper.js';
 export { CatalogItemConfig, CatalogConfig, CatalogItemPrimitive } from './helpers/catalog.helper.js';
 
 /**```typescript

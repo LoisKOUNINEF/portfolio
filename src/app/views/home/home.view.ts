@@ -1,7 +1,8 @@
 import { ComponentConfig, View } from '../../../core/index.js';
+import { EmptyComponent } from '../../../libs/index.js';
 import {
   AboutMeComponent,
-  ContactComponent, EmptyComponent,
+  ContactComponent,
   HeroComponent, InfosComponent,
   OtherThingsComponent,
   ProjectCardComponent, ProjectsCatalogHeaderComponent,

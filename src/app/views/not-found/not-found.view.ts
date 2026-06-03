@@ -1,5 +1,6 @@
 import { Navigation, ComponentConfig, View } from '../../../core/index.js';
-import { ButtonComponent, PictureComponent } from '../../components/index.js';
+import { ButtonComponent } from '../../../libs/index.js';
+import { PictureComponent } from '../../components/index.js';
 
 const template = `__TEMPLATE_PLACEHOLDER__`;
 

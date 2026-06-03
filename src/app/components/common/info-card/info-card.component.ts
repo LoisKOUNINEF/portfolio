@@ -50,6 +50,7 @@ export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
       this.element.addEventListener('click', this.config.callback);
     }
   }
+  
   private setTabNav() {
     if (!this.config.href && this.config.callback) {
       this.element.setAttribute('role', 'button');

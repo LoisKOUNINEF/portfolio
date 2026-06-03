@@ -1,8 +1,9 @@
-{ 
+{
 	"hero": "Accueil",
 	"infrastructure": "Systèmes & Infrastructure",
 	"main-projects": "Projets",
 	"tech-stack": "Stack Technique",
 	"about": "A Propos",
-	"contact": "Contact"
+	"contact": "Contact",
+	"toggle-label": "Afficher/masquer la navigation"
 }

@@ -1,2 +1,4 @@
-@forward "popover/popover";
-@forward "snackbar/snackbar";
+@forward "core/overlay-runtime";
+@forward "core/modal-overlay-runtime";
+@forward "modal/popover";
+@forward "passive/snackbar";

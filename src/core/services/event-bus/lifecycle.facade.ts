@@ -3,56 +3,56 @@ import { AppEventBus, IEventBus } from "./event-bus.js";
 class LifecycleFacade {
   constructor(private bus: IEventBus) {}
 
-  beforeRender() {
+  beforeRender(): void {
     this.bus.emit('before-render');
   }
 
-  onBeforeRender(callback: () => void) {
+  onBeforeRender(callback: () => void): () => void {
     this.bus.subscribe('before-render', callback);
     return () => this.bus.off('before-render', callback);
   }
 
-  afterRender() {
+  afterRender(): void {
     this.bus.emit('after-render');
   }
 
-  onAfterRender(callback: () => void) {
+  onAfterRender(callback: () => void): () => void {
     this.bus.subscribe('after-render', callback);
     return () => this.bus.off('after-render', callback);
   }
 
-  beforeDestroy() {
+  beforeDestroy(): void {
     this.bus.emit('before-destroy');
   }
 
-  onBeforeDestroy(callback: () => void) {
+  onBeforeDestroy(callback: () => void): () => void {
     this.bus.subscribe('before-destroy', callback);
     return () => this.bus.off('before-destroy', callback);
   }
 
-  afterDestroy() {
+  afterDestroy(): void {
     this.bus.emit('after-destroy');
   }
 
-  onAfterDestroy(callback: () => void) {
+  onAfterDestroy(callback: () => void): () => void {
     this.bus.subscribe('after-destroy', callback);
     return () => this.bus.off('after-destroy', callback);
   }
 
-  viewMount(viewName: string) {
+  viewMount(viewName: string): void {
     this.bus.emit('view-mount', {viewName});
   }
 
-  onViewMount(callback: (data: { viewName: string }) => void) {
+  onViewMount(callback: (data: { viewName: string }) => void): () => void {
     this.bus.subscribe('view-mount', callback);
     return () => this.bus.off('view-mount', callback);
   }
 
-  viewUnmount(viewName: string) {
+  viewUnmount(viewName: string): void {
     this.bus.emit('view-unmount', { viewName });
   }
 
-  onViewUnmount(callback: (data: { viewName: string }) => void) {
+  onViewUnmount(callback: (data: { viewName: string }) => void): () => void {
     this.bus.subscribe('view-unmount', callback);
     return () => this.bus.off('view-unmount', callback);
   }

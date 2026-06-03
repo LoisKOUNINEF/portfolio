@@ -2,7 +2,7 @@ import { Language } from '../../../../core/services/i18n/languages.js';
 import { I18nService, Service } from '../../../../core/index.js';
 import { notify } from '../../../../libs/index.js';
 
-export class LanguageToggler extends Service<LanguageToggler> {  
+export class LanguageTogglerService extends Service<LanguageTogglerService> {  
   public async toggleLang(): Promise<void> {
     const switchTo = I18nService.currentLanguage === 'en' ? 'fr' : 'en';
     await I18nService.setCurrentLanguage(switchTo);
@@ -21,4 +21,4 @@ export class LanguageToggler extends Service<LanguageToggler> {
 
 }
 
-export const LanguageTogglerService = LanguageToggler.getInstance();
+export const languageTogglerService = LanguageTogglerService.getInstance();

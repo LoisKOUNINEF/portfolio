@@ -1,4 +1,4 @@
-import { BaseButton, Component } from '../../../../core/index.js';
+import { BaseButton, Component } from '../../../core/index.js';
 
 /**
  * ```typescript

@@ -214,7 +214,7 @@
 	content: '🌙';
 }
 
-#theme-toggle:checked + label .theme-toggler::before {
+body.dark-theme .theme-toggler::before {
   content: '🔅';
 }
 

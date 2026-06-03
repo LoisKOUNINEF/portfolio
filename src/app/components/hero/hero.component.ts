@@ -1,5 +1,6 @@
 import { Component, ComponentConfig } from '../../../core/index.js';
-import { BulletPointComponent, ButtonComponent, TechBadgeComponent } from '../index.js';
+import { BulletPointComponent, TechBadgeComponent } from '../index.js';
+import { ButtonComponent } from '../../../libs/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 

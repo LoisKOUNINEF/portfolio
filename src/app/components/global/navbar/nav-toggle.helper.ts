@@ -1,7 +1,7 @@
 export interface INavDomElements {
   navbar: HTMLElement | null;
   anchors: Element[];
-  toggler: Element | null | undefined;
+  toggler: Element | null;
   navAnchorsContainer: Element | null;
 }
 
@@ -12,7 +12,6 @@ export interface INavToggleClasses {
 }
 
 export class NavToggleHelper {
-  private static readonly _label = 'nav-toggle';
   private static readonly _toggleClasses: INavToggleClasses = {
     open: 'open',
     hidden: 'hidden',
@@ -21,10 +20,6 @@ export class NavToggleHelper {
   private static _lastScrollY = window.scrollY;
   private static _clickJustOccurred = false;
   private static _clickTimeout: number | null = null; 
-
-  public static get label(): string {
-    return this._label;
-  }
 
   public static get toggleClasses(): INavToggleClasses {
     return this._toggleClasses;
@@ -35,6 +30,8 @@ export class NavToggleHelper {
     if (!navAnchorsContainer || !toggler) return;
     toggler.classList.toggle(this._toggleClasses.open);
     navAnchorsContainer.classList.toggle(this._toggleClasses.open);
+    const isOpen = toggler.classList.contains(this._toggleClasses.open);
+    toggler.setAttribute('aria-expanded', String(isOpen));
   }
 
 	public static hideOnScrollDown(): void {
@@ -86,8 +83,8 @@ export class NavToggleHelper {
   private static getDomElements(): INavDomElements {
     const navbar = document.getElementById('navbar');
     const navAnchorsContainer = document.getElementById('navbar-anchors');
-    const anchors = Array.from(navAnchorsContainer!.querySelectorAll('div span a'));
-    const toggler = document.querySelector(`label[for="${this._label}"]`)?.firstElementChild;
+    const anchors = Array.from(navAnchorsContainer!.querySelectorAll('a'));
+    const toggler = document.querySelector('.navbar__toggle-navbar');
     return { navbar, anchors, toggler, navAnchorsContainer };
   }
 

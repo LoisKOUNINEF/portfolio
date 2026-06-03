@@ -1,12 +1,14 @@
-import { 
-  AppEventBus, 
-  Component, 
-  ComponentConfig, 
-  IAnchorConfig 
+import {
+  Component,
+  ComponentConfig,
+  IAnchorConfig,
+  I18nService
 } from '../../../../core/index.js';
 import { 
   AnchorComponent, 
-  ButtonComponent, 
+  ButtonComponent 
+} from '../../../../libs/index.js';
+import { 
   LanguageTogglerComponent, 
   ThemeTogglerComponent 
 } from '../../index.js';
@@ -68,7 +70,9 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
       factory: (el) => new ButtonComponent(el, {
         callback: () => this.toggleNav(),
         className: 'navbar__toggle-navbar',
-        label: NavToggleHelper.label,
+        ariaControls: 'navbar-anchors',
+        ariaExpanded: false,
+        ariaLabel: I18nService.translate('navbar.toggle-label', 'Toggle navigation'),
       })
     }
   }

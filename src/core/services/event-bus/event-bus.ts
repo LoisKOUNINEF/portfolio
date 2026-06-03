@@ -2,13 +2,13 @@ import { Service } from "../../index.js";
 
 export type IEventBus = InstanceType<typeof EventBus>;
 
-type Subscription<K extends EventKey = EventKey> = {
+export type Subscription<K extends EventKey = EventKey> = {
   event: K;
   callback: (data: EventMap[K]) => void;
   once?: boolean;
 };
 
-export class EventBus extends Service<EventBus> {
+class EventBus extends Service<EventBus> {
   private _subscriptions: Subscription[] = [];
 
   constructor() {

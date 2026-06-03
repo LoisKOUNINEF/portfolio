@@ -15,6 +15,8 @@ declare interface LifecycleEventMap {
 declare interface OverlaysEventMap {
   'popover-opened': {};
   'popover-closed': {};
+  'overlay-opened': { type: string };
+  'overlay-closed': { type: string };
 }
 
 declare interface I18nEventMap {
@@ -24,6 +26,8 @@ declare interface I18nEventMap {
 }
 
 declare interface FrameworkEventMap extends NavigationEventMap, LifecycleEventMap, OverlaysEventMap, I18nEventMap {}
+
+declare interface AppEventMap {}
 
 declare interface EventMap extends FrameworkEventMap, AppEventMap {}
 

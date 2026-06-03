@@ -1,6 +1,6 @@
 import { Service } from '../../../../core/index.js';
 
-export class ThemeToggler extends Service<ThemeToggler> {  
+export class ThemeTogglerService extends Service<ThemeTogglerService> {  
   private _isLightTheme: boolean;
   private readonly _lightTheme = 'light';
   private readonly _darkTheme = 'dark';
@@ -53,4 +53,4 @@ export class ThemeToggler extends Service<ThemeToggler> {
 
 }
 
-export const ThemeTogglerService = ThemeToggler.getInstance();
+export const themeTogglerService = ThemeTogglerService.getInstance();
