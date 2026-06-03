@@ -1,24 +1,17 @@
-import { BaseComponent, ButtonManager, BaseButton, BaseComponentOptions } from '../../index.js';
+import { BaseComponent, BaseComponentOptions } from '../../index.js';
 import { ConfigHelper } from './helpers/config.helper.js';
 import { DataBindingHelper } from './helpers/data-binding.helper.js';
-
-export interface ComponentButton extends BaseButton {
-  // if needed for Component-specific properties
-}
 
 export interface ComponentProps {
   // Common HTML attributes - extend as needed
   className?: string;
   style?: string;
   textContent?: string;
-  
+
   // Form field bindings - extend as needed
   name?: string;
   email?: string;
-  
-  // Dynamic buttons
-  buttons?: ComponentButton[];
-  
+
   // Allow for additional data-bind attributes
   [key: string]: any;
 }
@@ -45,7 +38,6 @@ interface ComponentOptions<K = any> extends BaseComponentOptions {
 export abstract class Component<T extends HTMLElement = HTMLElement, K = any> extends BaseComponent<T> {
   protected config: K;
   protected props: ComponentProps;
-  private buttonManager: ButtonManager;
   private _templateFn: (config?: K) => string;
   private _normalizeKeys: (keyof K)[];
   private _defaults: Partial<K>;
@@ -67,11 +59,6 @@ export abstract class Component<T extends HTMLElement = HTMLElement, K = any> ex
     this._templateFn = templateFn;
     this._normalizeKeys = normalizeKeys as (keyof K)[];
     this._defaults = defaults;
-    this.buttonManager = new ButtonManager(
-      this,
-      this.props.buttons,
-      { containerClassName: 'component-buttons' }
-    );
   }
 
   public getValues(): Record<string, string> {
@@ -91,11 +78,6 @@ export abstract class Component<T extends HTMLElement = HTMLElement, K = any> ex
     this.applyProps();
   }
 
-  protected override compose(): void {
-    this.syncDynamicButtons();
-    super.compose();
-  }
-
   private applyProps(): void {
     if (this.props.className) {
       this.element.classList.add(this.props.className);
@@ -106,11 +88,8 @@ export abstract class Component<T extends HTMLElement = HTMLElement, K = any> ex
     this.applyDataBindings();
   }
 
-  private syncDynamicButtons(): void {
-    this.buttonManager.appendTo(this.element);
-  }
-
   private applyDataBindings(): void {
     DataBindingHelper.applyDataBindings(this.element, this.props);
   }
 }
+

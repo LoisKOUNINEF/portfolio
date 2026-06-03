@@ -1,11 +1,11 @@
 import {
   Component,
   ComponentConfig,
-  IAnchorConfig,
   I18nService
 } from '../../../../core/index.js';
 import { 
   AnchorComponent, 
+  IAnchorConfig,
   ButtonComponent 
 } from '../../../../libs/index.js';
 import { 

@@ -29,7 +29,6 @@ export class HomeView extends View {
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
-      this.getProjectsCatalogHeaderConfig(),
       ...this.getMainProjectsCatalog(),
       this.getShowMoreBtnConfig(),
       ...this.getAdditionalProjectsCatalog(),
@@ -51,13 +50,6 @@ export class HomeView extends View {
     return {
       selector: 'about',
       factory: (el) => new AboutMeComponent(el)
-    }
-  }
-
-  private getProjectsCatalogHeaderConfig(): ComponentConfig {
-    return {
-      selector: 'projects-catalog-header',
-      factory: (el) => new ProjectsCatalogHeaderComponent(el)
     }
   }
 

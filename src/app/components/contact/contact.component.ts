@@ -15,7 +15,6 @@ export class ContactComponent extends Component {
       {
         selector: 'email-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/envelope.svg',
           labelKey: 'contact.email',
           subtextKey: 'contact.email-subtext',
@@ -25,7 +24,6 @@ export class ContactComponent extends Component {
       {
         selector: 'linkedin-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/handshake.svg',
           labelKey: 'contact.linkedin',
           subtextKey: 'contact.linkedin-subtext',
@@ -36,7 +34,6 @@ export class ContactComponent extends Component {
       {
         selector: 'github-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/external/github.svg',
           labelKey: 'contact.github',
           subtextKey: 'contact.github-subtext',
@@ -47,7 +44,6 @@ export class ContactComponent extends Component {
       {
         selector: 'resume-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
           labelKey: 'contact.resume',
           subtextKey: 'contact.resume-subtext',

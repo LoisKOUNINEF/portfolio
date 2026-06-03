@@ -1,7 +1,5 @@
-import { ButtonManager, BaseButton, ComponentConfig, CatalogConfig, AppPipeRegistry, Overlays } from '../../../core/index.js';
+import { ComponentConfig, CatalogConfig, AppPipeRegistry, Overlays } from '../../../core/index.js';
 import { ModalOverlayRuntime, ModalOverlayRuntimeOptions } from '../core/modal-overlay-runtime.js';
-
-export interface PopoverButton extends BaseButton {}
 
 export interface PopoverOptions extends ModalOverlayRuntimeOptions {
   template: string;
@@ -9,19 +7,16 @@ export interface PopoverOptions extends ModalOverlayRuntimeOptions {
   catalogs?: CatalogConfig[];
   viewName?: string;
   onClose?: () => void;
-  buttons?: PopoverButton[];
 }
 
 export class PopoverOverlay extends ModalOverlayRuntime {
   private _onCloseCb?: () => void;
-  private _buttonManager: ButtonManager;
   private _components: ComponentConfig[];
   private _catalogs: CatalogConfig[];
   private _prevTitle: string | undefined;
 
   constructor({
     template,
-    buttons = [],
     onClose,
     viewName,
     components = [],
@@ -33,7 +28,6 @@ export class PopoverOverlay extends ModalOverlayRuntime {
     this._onCloseCb = onClose;
     this._components = components;
     this._catalogs = catalogs;
-    this._buttonManager = new ButtonManager(this, buttons, { containerClassName: 'popover-buttons' });
     this._setViewName(viewName);
   }
 
@@ -68,7 +62,6 @@ export class PopoverOverlay extends ModalOverlayRuntime {
   }
 
   protected override onAfterRender(): void {
-    this._buttonManager.appendTo(this.element);
   }
 
   protected override onBeforeDestroy(): void {

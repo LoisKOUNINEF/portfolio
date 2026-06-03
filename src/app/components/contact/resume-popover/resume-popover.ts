@@ -35,27 +35,23 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
     {
       selector: 'resume-color-card',
       factory: (el) => new InfoCardComponent(el, {
-        icon: '',
         iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
         labelKey: 'resume-popover.color-label',
         subtextKey: 'resume-popover.color-subtext',
         href: colorHref,
         download: colorFilename,
         callback: () => downloadStarted(),
-        target: '_self',
       }, { className: 'resume-popover__card' })
     },
     {
       selector: 'resume-mono-card',
       factory: (el) => new InfoCardComponent(el, {
-        icon: '',
         iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
         labelKey: 'resume-popover.mono-label',
         subtextKey: 'resume-popover.mono-subtext',
         href: monoHref,
         download: monoFilename,
         callback: () => downloadStarted(),
-        target: '_self',
       }, { className: 'resume-popover__card resume-mono-card' })
     },
   ];

@@ -60,14 +60,14 @@ a.resume-popover__card {
 		width: 100%;
 	}
 
-	.info-card__content {
+	.focusable-element__content {
 		text-align: center;
 		flex-grow:1;
 		@include mixins.respond-to(medium) {
 			padding-left: 0;
 		}
 	}
-	.info-card__icon {
+	.focusable-element__icon {
 		align-self: center;
 	}
 
@@ -77,8 +77,8 @@ a.resume-popover__card {
 		box-shadow: 0 7px 10px color-mix(in srgb, var(--primary), transparent 86%);
 		border-color: var(--primary);
 
-		.info-card__label,
-		.info-card__subtext {
+		.focusable-element__label,
+		.focusable-element__subtext {
 			color: var(--text-muted);
 		}
 	}
@@ -93,8 +93,8 @@ a.resume-popover__card {
 			box-shadow: none;
 			border-color: var(--background);
 
-			.info-card__label,
-			.info-card__subtext {
+			.focusable-element__label,
+			.focusable-element__subtext {
 				color: inherit;
 			}
 		}
@@ -105,15 +105,15 @@ a.resume-popover__card {
 		outline-offset: 2px;
 		outline: 2px solid var(--primary);
 
-		.info-card__label,
-		.info-card__subtext {
+		.focusable-element__label,
+		.focusable-element__subtext {
 			color: var(--text);
 		}
 	}
 }
 
 .resume-mono-card {
-	.info-card__icon-img {
+	.focusable-element__icon-img {
 		filter: grayscale(1);
 	}
 }

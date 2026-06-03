@@ -1,5 +1,5 @@
 import { AttributesHelper, IAttributesConfig } from "../helpers/attributes.helper.js";
-import { I18nService } from "../../index.js";
+import { LinkHelper } from "../helpers/link.helper.js";
 
 /**
  * ```typescript
@@ -56,18 +56,15 @@ export class AnchorManager {
   private setAnchorRef(anchor: HTMLAnchorElement): void {
     anchor.setAttribute('href', this.config.href);
     if (this.config.target) {
-      anchor.setAttribute('target', this.config.target);
-      anchor.setAttribute('rel', 'noopener noreferrer');
+      LinkHelper.applyExternalTarget(anchor, this.config.target);
     }
   }
 
   private addNewTabAriaLabel(anchor: HTMLAnchorElement): void {
-    const suffix = I18nService.translate('common.new-tab', '(opens in new tab)');
     const baseLabel = anchor.getAttribute('aria-label')
       || anchor.textContent
-      || (this.config.i18nKey ? I18nService.translate(this.config.i18nKey, '') : '')
       || this.config.href;
-    anchor.setAttribute('aria-label', `${baseLabel} ${suffix}`.trim());
+    anchor.setAttribute('aria-label', LinkHelper.appendNewTabSuffix(baseLabel));
   }
 
   private handleClick(anchor: HTMLAnchorElement): void {
@@ -76,12 +73,16 @@ export class AnchorManager {
 
     const id = this.config.href.slice(1);
 
-    anchor.addEventListener('click', (e) => {
+    const activate = (e: Event) => {
       e.preventDefault();
       const target = document.getElementById(id);
       this.scrollToTarget(target);
       this.accessibilityFeatures(target, id);
-    });
+    };
+
+    anchor.addEventListener('click', activate);
+    const spaceHandler = LinkHelper.makeInternalAnchorSpaceHandler(this.config.href, activate);
+    if (spaceHandler) anchor.addEventListener('keydown', spaceHandler);
   }
 
   private scrollToTarget(target: HTMLElement | null): void {

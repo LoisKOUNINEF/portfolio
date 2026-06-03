@@ -1,4 +1,5 @@
-import { BaseButton, Component } from '../../../core/index.js';
+import { Component } from '../../../core/index.js';
+import { BaseButton, ButtonManager } from '../utils/index.js';
 
 /**
  * ```typescript
@@ -19,20 +20,17 @@ interface ButtonContainerOptions {
   containerClassName?: string;
   containerStyles?: string;
 }
-  ```
- * Note : To ensure 'this' is bound properly
- * ```typescript
- // Will handle 'this' inside doStuff
- * { callback: () => this.doStuff() }
- * // Will still work, but won't handle 'this' inside doStuff
- * { callback: this.doStuff }
- * ```
 */
 export class ButtonComponent extends Component<HTMLButtonElement> {
+  private buttonManager: ButtonManager;
+
   constructor(mountTarget: HTMLElement, button: BaseButton) {
-    super({
-      mountTarget,
-      props: { buttons: [button] }
-    });
+    super({ mountTarget });
+    this.buttonManager = new ButtonManager(this, [button], { containerClassName: 'component-buttons' });
+  }
+
+  protected override compose(): void {
+    this.buttonManager.appendTo(this.element);
+    super.compose();
   }
 }

@@ -1,67 +1,36 @@
 import { Component, ComponentProps } from '../../../../core/index.js';
+import { FocusableHelper, IFocusableConfig } from '../../../../libs/index.js';
 
-export interface IInfoCardConfig {
-  icon: string;
+export interface IFocusableElementConfig extends IFocusableConfig {
+  iconSrc: string;
   labelKey: string;
   subtextKey: string;
-  href?: string;
-  target?: string;
-  download?: string;
-  id?: string;
-  iconSrc?: string;
-  callback?: () => void;
 }
 
-const templateFn = (_config: IInfoCardConfig) => `__TEMPLATE_PLACEHOLDER__`;
-
-export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
-  constructor(mountTarget: HTMLElement, config: IInfoCardConfig, props?: ComponentProps) {
+const templateFn = (_config: IFocusableElementConfig) => `__TEMPLATE_PLACEHOLDER__`;
+export class InfoCardComponent extends Component<HTMLElement, IFocusableElementConfig> {
+  constructor(mountTarget: HTMLElement, config: IFocusableElementConfig, props?: ComponentProps) {
     const { className, ...restProps } = props ?? {};
     super({
       templateFn,
       mountTarget,
       config,
       tagName: config.href ? 'a' : 'div',
-      normalizeKeys: ['href', 'target', 'download', 'id', 'iconSrc'],
+      normalizeKeys: ['href', 'target', 'download', 'iconSrc'],
       props: restProps,
     });
-    this.setStyles(className);
-    this.setLinkAttributes();
-    this.setCallback();
-    this.setTabNav();
-  }
-
-  private setStyles(className: string | undefined): void {
-    const extraClasses = className?.split(' ').filter(Boolean) ?? [];
-    this.element.classList.add('info-card', ...extraClasses);
-  }
-
-  private setLinkAttributes(): void {
-    if (!this.config.href) return;
-    const el = this.element as HTMLAnchorElement;
-    el.href = this.config.href;
-    if (this.config.target) el.target = this.config.target;
-    if (this.config.download) el.download = this.config.download;
-    if (this.config.id) el.id = this.config.id;
-  }
-
-  private setCallback() {
-    if (this.config.callback) {
-      this.element.addEventListener('click', this.config.callback);
+    this.element.classList.add('focusable-element');
+    if (className) {
+      className.split(' ').filter(Boolean).forEach(className => this.element.classList.add(className));
     }
   }
-  
-  private setTabNav() {
-    if (!this.config.href && this.config.callback) {
-      this.element.setAttribute('role', 'button');
-      this.element.setAttribute('tabindex', '0');
-      this.element.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.config.callback!();
-        }
-      });
-    }
+
+  protected override onBeforeRender(): void {
+    super.onBeforeRender();
+    FocusableHelper.applySemantics(this.element, this.config);
+  }
+
+  protected override onAfterRender(): void {
+    FocusableHelper.applyEventListeners(this.element, this.config, this.eventListeners);
   }
 }
-

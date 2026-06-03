@@ -64,8 +64,8 @@ a.contact__link-card {
 		box-shadow: 0 7px 10px color-mix(in srgb, var(--primary), transparent 86%);
 		border-color: var(--border);
 
-		.info-card__label,
-		.info-card__subtext {
+		.focusable-element__label,
+		.focusable-element__subtext {
 			color: var(--text-muted);
 		}
 	}
@@ -80,8 +80,8 @@ a.contact__link-card {
 			box-shadow: none;
 			border-color: var(--background);
 
-			.info-card__label,
-			.info-card__subtext {
+			.focusable-element__label,
+			.focusable-element__subtext {
 				color: inherit;
 			}
   	}
@@ -92,14 +92,14 @@ a.contact__link-card {
 		outline-offset: 2px;
 		outline: 2px solid var(--primary);
 		// @include mixins.themed(outline, 2px solid map.get($light-theme, primary), 2px solid map.get($dark-theme, primary));
-		// .info-card__label,
-		// .info-card__subtext {
+		// .focusable-element__label,
+		// .focusable-element__subtext {
 		// 	@include mixins.themed(color, color.scale(map.get($light-theme, text), $lightness: +20%), color.scale(map.get($dark-theme, text), $lightness: -10%));
 		// }
 	}
 
 
-	.info-card__icon {
+	.focusable-element__icon {
 		.base-svg {
 			position: relative;
 			z-index: 1;
@@ -115,7 +115,7 @@ a.contact__link-card {
 		}
 	}
 
-	.info-card__label {
+	.focusable-element__label {
 		&::after {
 			content: "";
 			position: absolute;
@@ -132,7 +132,7 @@ a.contact__link-card {
 }
 
 .contact__resume-card {
-	.info-card__label {
+	.focusable-element__label {
 		color: var(--primary);
 		// @include mixins.themed(color, map.get($light-theme, primary), map.get($dark-theme, primary));
 	}
