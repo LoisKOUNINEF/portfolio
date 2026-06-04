@@ -1,5 +1,6 @@
 import { Component, ComponentConfig } from '../../../../../core/index.js';
-import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent, PictureComponent} from '../../../index.js';
+import { PictureComponent } from '../../../../../libs/index.js'
+import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent } from '../../../index.js';
 
 interface IProjectHeadConfig {
   name: string;
@@ -60,12 +61,16 @@ export class ProjectHeaderComponent extends Component {
     return {
       selector: 'project-header-picture',
       factory: (el) => new PictureComponent(el, {
-        imageSrc: this._headConfig.imageSrc,
-        imageAlt: `${this._headConfig.name} illustration picture`,
+        sources: [
+          { src: `${this._headConfig.imageSrc}.avif`, type: 'image/avif' },
+          { src: `${this._headConfig.imageSrc}.webp`, type: 'image/webp' },
+        ],
+        fallback: `${this._headConfig.imageSrc}.jpg`,
+        alt: `${this._headConfig.name} illustration picture`,
       },
       {
         className: 'project-header__screen-mock-content'
       })
-    
+
   }}
 }

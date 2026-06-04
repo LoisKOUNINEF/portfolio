@@ -1,6 +1,5 @@
-import { PopoverView, ButtonComponent } from "../../../../libs/index.js";
+import { PopoverView, ButtonComponent, IPictureConfig, PictureComponent } from "../../../../libs/index.js";
 import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
-import { IPictureConfig, PictureComponent } from "../../index.js";
 
 export interface IImagePopConfig extends IPictureConfig {
   viewName?: string;
@@ -8,14 +7,18 @@ export interface IImagePopConfig extends IPictureConfig {
 
 const assetsBase = './assets/images/other-things/';
 const carouselImages = ['board', 'marbles'];
-const carouselImagesSrc = () => {
+const carouselImagesSrc = (): IImagePopConfig[] => {
   return carouselImages.map((s: string) => {
+    const base = assetsBase + s;
     return {
-      imageSrc: assetsBase + s,
-      imageAlt: s + ' illustration',
-      // captionI18nKey: 'other-things.' + s + '-caption'
-    }
-  })
+      sources: [
+        { src: `${base}.avif`, type: 'image/avif' },
+        { src: `${base}.webp`, type: 'image/webp' },
+      ],
+      fallback: `${base}.jpg`,
+      alt: `${s} illustration`,
+    };
+  });
 }
 
 export const displayCarouselPop = () => {

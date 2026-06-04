@@ -1,6 +1,6 @@
 import { Component, ComponentConfig } from '../../../core/index.js';
 import { displayCarouselPop } from './carousel-popover/carousel-popover.js';
-import { PictureComponent } from '../index.js';
+import { PictureComponent } from '../../../libs/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -9,15 +9,20 @@ export class OtherThingsComponent extends Component {
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-    this.listenToRenderEvents(['language-changed'])
+    this.listenToRenderEvents(['language-changed']);
   }
 
   public childConfigs(): ComponentConfig[] {
     return [{
       selector: 'other-things-thumbnail',
       factory: (el) => new PictureComponent(el, {
-        imageSrc: this._thumbnailSrc,
-        imageAlt: 'Carved books.'
+        sources: [
+          { src: `${this._thumbnailSrc}.avif`, type: 'image/avif' },
+          { src: `${this._thumbnailSrc}.webp`, type: 'image/webp' },
+        ],
+        fallback: `${this._thumbnailSrc}.jpg`,
+        alt: 'Carved books.',
+        loading: 'eager',
       })
     }]
   }

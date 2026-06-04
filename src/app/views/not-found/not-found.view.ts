@@ -1,6 +1,5 @@
 import { Navigation, ComponentConfig, View } from '../../../core/index.js';
-import { ButtonComponent } from '../../../libs/index.js';
-import { PictureComponent } from '../../components/index.js';
+import { ButtonComponent, PictureComponent } from '../../../libs/index.js';
 
 const template = `__TEMPLATE_PLACEHOLDER__`;
 
@@ -20,8 +19,13 @@ export class NotFoundView extends View {
       {
         selector: 'other-things-thumbnail',
         factory: (el) => new PictureComponent(el, {
-          imageSrc: './assets/images/404',
-          imageAlt: 'Carved books.' 
+          sources: [
+            { src: './assets/images/404.avif', type: 'image/avif' },
+            { src: './assets/images/404.webp', type: 'image/webp' },
+          ],
+          fallback: './assets/images/404.jpg',
+          alt: 'Page not found illustration — carved books.',
+          loading: 'eager',
         })
       },
       { 
