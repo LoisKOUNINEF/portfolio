@@ -1,6 +1,5 @@
 import { Component, ComponentProps } from '../../../core/index.js';
 
-
 export interface IPictureSource {
   src: string;
   type: string;
@@ -21,30 +20,16 @@ export interface IPictureConfig {
   caption?: string;
 }
 
-const renderSources = (sources: IPictureSource[]): string =>
-  sources.map(s => {
-    const srcset = s.srcset ?? s.src;
-    const media = s.media ? ` media="${s.media}"` : '';
-    const sizes = s.sizes ? ` sizes="${s.sizes}"` : '';
-    return `<source srcset="${srcset}" type="${s.type}"${media}${sizes}>`;
-  }).join('');
-
-const renderImg = (config: IPictureConfig): string => {
-  const width = config.width != null ? ` width="${config.width}"` : '';
-  const height = config.height != null ? ` height="${config.height}"` : '';
-  const loading = config.loading ?? 'lazy';
-  const decoding = config.decoding ?? 'async';
-  return `<img src="${config.fallback}" alt="${config.alt}"${width}${height} loading="${loading}" decoding="${decoding}"/>`;
-};
-
-const templateFn = (_config: IPictureConfig) => `<picture>
-${renderSources(_config.sources)}${renderImg(_config)}
-</picture>
-<figcaption data-optional="${_config.captionI18nKey || _config.caption}" data-i18n="${_config.captionI18nKey}" data-pipe="capitalize">${_config.caption || ''}</figcaption>`;
-
 export class PictureComponent extends Component<HTMLElement, IPictureConfig> {
   constructor(mountTarget: HTMLElement, config: IPictureConfig, props?: ComponentProps) {
-    super({ templateFn, mountTarget, config, tagName: 'figure', props });
+    super({ mountTarget, config, tagName: 'figure', props });
+  }
+
+  protected override generateTemplate(): string {
+    return `<picture>
+${this.renderSources()}${this.renderImg()}
+</picture>
+<figcaption data-optional="${this.config.captionI18nKey || this.config.caption}" data-i18n="${this.config.captionI18nKey}" data-pipe="capitalize">${this.config.caption || ''}</figcaption>`;
   }
 
   protected override onBeforeRender(): void {
@@ -58,5 +43,21 @@ export class PictureComponent extends Component<HTMLElement, IPictureConfig> {
     } else {
       this.element.removeAttribute('aria-hidden');
     }
+  }
+
+  private renderSources(): string {
+    return this.config.sources.map(s => {
+      const srcset = s.srcset ?? s.src;
+      const media = s.media ? ` media="${s.media}"` : '';
+      const sizes = s.sizes ? ` sizes="${s.sizes}"` : '';
+      return `<source srcset="${srcset}" type="${s.type}"${media}${sizes}>`;
+    }).join('');
+  }
+
+  private renderImg(): string {
+    const c = this.config;
+    const width = c.width != null ? ` width="${c.width}"` : '';
+    const height = c.height != null ? ` height="${c.height}"` : '';
+    return `<img src="${c.fallback}" alt="${c.alt}"${width}${height} loading="${c.loading ?? 'lazy'}" decoding="${c.decoding ?? 'async'}"/>`;
   }
 }
