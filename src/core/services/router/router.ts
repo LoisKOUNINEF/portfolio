@@ -130,6 +130,7 @@ class Router extends Service<Router> {
     this._currentParams = {};
     this._currentView = ViewRenderManager.renderNewView(notFoundConstructor, {});
     
+    NavigationManager.updateMetaContent(this._currentView);
     NavigationManager.updateHistory(normalizedPath, currentPath, pushState);
   }
 

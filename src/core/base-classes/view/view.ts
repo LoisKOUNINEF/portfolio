@@ -47,6 +47,7 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
   }
 
   private getKebabCaseViewName(): string {
+    console.warn('Consider setting viewName value in constructor for consistency.');
     const className = this.constructor.name;
     const baseName = className.replace(/View$/, '');
     return baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();

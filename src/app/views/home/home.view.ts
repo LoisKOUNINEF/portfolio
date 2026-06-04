@@ -18,7 +18,7 @@ export class HomeView extends View {
   private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
 
   constructor() {
-    super({template, tagName: 'div'});
+    super({template, tagName: 'div', viewName: 'home'});
   }
 
   public childConfigs(): ComponentConfig[] {

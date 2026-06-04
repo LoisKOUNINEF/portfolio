@@ -2,7 +2,7 @@ export default {
 	esbuild: {
         bundle: true,
         minify: true,
-        sourcemap: false,
+        sourcemap: true,
         drop: ['console', 'debugger'],
         platform: 'browser',
         format: 'esm',
