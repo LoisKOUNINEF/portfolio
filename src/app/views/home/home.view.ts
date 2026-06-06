@@ -5,7 +5,7 @@ import {
   ContactComponent,
   HeroComponent, InfosComponent,
   OtherThingsComponent,
-  ProjectCardComponent, ProjectsCatalogHeaderComponent,
+  ProjectCardComponent,
   ShowMoreComponent,
   TechStackComponent
 } from '../../components/index.js';
