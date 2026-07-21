@@ -1,25 +1,23 @@
-@use "sass:map";
 @use "mixins";
-@use "variables" as *;
-
-$spinner-config: (
-  'size':      2rem,
-  'thickness': 3px,
-  'duration':  1s,
-) !default;
+@use "spinner-variables" as *;
 
 .app-spinner {
-  @include mixins.flex-center;
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  // TO TEST IN MULTIPLE CONTEXTS
+  // grid alternative
+  // display: inline-grid;
+  // place-items: center;
 }
 
 .spinner__ring {
   @include mixins.rounded(50%);
-  @include mixins.spin(map.get($spinner-config, 'duration'));
-  width: var(--spinner-size, #{map.get($spinner-config, 'size')});
-  height: var(--spinner-size, #{map.get($spinner-config, 'size')});
-  animation-duration: var(--spinner-duration, #{map.get($spinner-config, 'duration')});
-  border: var(--spinner-thickness, #{map.get($spinner-config, 'thickness')}) solid transparent;
+  @include mixins.spin($app-spinner__duration);
+  width: var(--spinner-size, #{$app-spinner__size});
+  height: var(--spinner-size, #{$app-spinner__size});
+  animation-duration: var(--spinner-duration, #{$app-spinner__duration});
+  border: var(--spinner-thickness, #{$app-spinner__thickness}) solid transparent;
   border-top-color: var(--spinner-color, var(--primary));
 }
 

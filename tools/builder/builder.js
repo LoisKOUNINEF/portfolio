@@ -20,6 +20,9 @@ runScript(path.join(scriptsDir, 'validate-html.js'), 'Adding and validating tags
 if (isProd) {
 	runScript(path.join(scriptsDir, 'esbuild.js'), 'Running esbuild...');
 	runScript(path.join(scriptsDir, 'hash-files.js'), 'Hashing files...');
+	runScript(path.join(scriptsDir, 'generate-seo-html.js'), 'Generating SEO HTML pages...');
+	runScript(path.join(scriptsDir, 'generate-robots-txt.js'), 'Generating robots.txt...');
+	runScript(path.join(scriptsDir, 'generate-sitemap-xml.js'), 'Generating sitemap.xml...');
 	runScript(path.join(scriptsDir, 'compress-files.js'), 'Compressing files...');
 }
 

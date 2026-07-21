@@ -1,0 +1,30 @@
+@use "mixins";
+@use "picture-variables" as *;
+
+// PictureComponent renders a <figure> — no fixed app-* class is set by the component.
+// These styles apply to any figure produced by PictureComponent or consumed via props.className.
+
+figure {
+  display: block;
+  margin: 0;
+
+  picture {
+    display: block;
+    line-height: 0; // collapse inline gap below img
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    margin-top: $app-picture__caption-margin-top;
+    font-size: $app-picture__caption-font-size;
+    color: var(--text-muted);
+    line-height: 1.4;
+
+    &:empty { display: none; }
+  }
+}

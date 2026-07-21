@@ -1,0 +1,59 @@
+@use "mixins";
+@use "select-variables" as *;
+
+.app-select {
+  @include mixins.flex-column;
+  gap: $app-select__gap;
+  width: 100%;
+  cursor: pointer;
+
+  &:has(.select__control:disabled) {
+    cursor: not-allowed;
+  }
+}
+
+.select__label {
+  font-size: $app-select__label-font-size;
+  font-weight: 600;
+  color: var(--text-muted);
+
+  &:empty { display: none; }
+}
+
+.select__control {
+  width: 100%;
+  padding: $app-select__control-padding-y $app-select__control-padding-x;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: $app-select__control-border-radius;
+  font-family: $app-select__control-font-family;
+  font-size: $app-select__control-font-size;
+  line-height: 1.4;
+  cursor: inherit;
+  transition:
+    border-color  $app-select__control-transition-duration ease,
+    box-shadow    $app-select__control-transition-duration ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-color: var(--primary);
+  }
+
+  &:disabled {
+    background-color: var(--disabled-bg);
+    color: var(--disabled-text);
+    border-color: var(--border);
+    cursor: not-allowed;
+  }
+
+  option {
+    background-color: var(--surface);
+    color: var(--text);
+  }
+}

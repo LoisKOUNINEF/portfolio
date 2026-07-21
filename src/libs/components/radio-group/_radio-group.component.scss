@@ -1,0 +1,86 @@
+@use "mixins";
+@use "radio-group-variables" as *;
+
+.app-radio-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0; // fieldset min-width override
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.radio-group__legend {
+  font-size: $app-radio-group__legend-font-size;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0;
+  margin-bottom: $app-radio-group__legend-margin-bottom;
+
+  &:empty { display: none; }
+}
+
+.radio-group__options {
+  @include mixins.flex-column;
+  gap: $app-radio-group__options-gap;
+}
+
+.radio-group__option {
+  display: inline-flex;
+  align-items: center;
+  gap: $app-radio-group__option-gap;
+  cursor: pointer;
+
+  &:has(.radio__input:disabled) {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.radio__input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--border-strong);
+  border-radius: 50%;
+  background-color: var(--background);
+  cursor: inherit;
+  transition:
+    background-color $app-radio-group__input-transition-duration ease,
+    border-color     $app-radio-group__input-transition-duration ease,
+    box-shadow       $app-radio-group__input-transition-duration ease;
+
+  &:checked {
+    border-color: var(--primary);
+    // inner dot via inset box-shadow — adapts to theme automatically
+    box-shadow: inset 0 0 0 0.2rem var(--background), inset 0 0 0 0.5rem var(--primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background-color: var(--disabled-bg);
+    border-color: var(--border);
+    cursor: not-allowed;
+
+    &:checked {
+      box-shadow: inset 0 0 0 0.2rem var(--background), inset 0 0 0 0.5rem var(--border-strong);
+    }
+  }
+}
+
+.radio__label {
+  font-size: $app-radio-group__label-font-size;
+  color: var(--text);
+  line-height: 1.4;
+
+  &:empty { display: none; }
+}

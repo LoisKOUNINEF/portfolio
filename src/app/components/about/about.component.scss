@@ -1,26 +1,26 @@
 @use "sass:map";
 @use "variables" as *;
-@use "mixins";
+@use "../../../libs/scss/mixins-nutin";
 
 .about__wrapper {
-	@include mixins.wrapper;
+	@include mixins-nutin.wrapper;
 	padding-top: map.get($spacings, largest) * 2;
 	padding-left: map.get($spacings, large);
 	padding-bottom: map.get($spacings, large);
-	@include mixins.respond-to(medium) {
+	@include mixins-nutin.respond-to(medium) {
 		padding-left: 0;
 	}
 }
 
 .about__container {
 	width: 100%;
-	@include mixins.container;
+	@include mixins-nutin.container;
 	text-align: center;
 	padding-bottom: 0;
 }
 
 .about__header {
-  @include mixins.header;
+  @include mixins-nutin.header;
   flex-direction: column;
   align-items: center;
   h2 {
@@ -38,7 +38,7 @@
 	  padding-top: map.get($spacings, small);
 	  padding-bottom: map.get($spacings, medium);
 	  padding-left: map.get($spacings, medium);
-	  @include mixins.respond-to(medium) {
+	  @include mixins-nutin.respond-to(medium) {
 	  	line-height: map.get($spacings, large);
 		padding-left: 0;
 	  }
@@ -48,7 +48,7 @@
 .about__content {
 	padding-top: map.get($spacings, largest);
 	text-align: left;
-	@include mixins.respond-to(medium) {
+	@include mixins-nutin.respond-to(medium) {
 		padding-top: map.get($spacings, large);
 	}
 }

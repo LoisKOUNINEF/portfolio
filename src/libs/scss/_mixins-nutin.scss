@@ -2,29 +2,8 @@
 @use "variables" as *;
 @use "sass:color";
 
-// custom mixins
-// themed (edge cases)
-@mixin themed($property, $light-value, $dark-value) {
-  #{$property}: $light-value;
-  
-  .dark-theme & {
-    #{$property}: $dark-value;
-  }
-}
-
-
 @mixin card-shadow($color) {
   @include themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, $color), 0.1), 0 10px 15px rgba(map.get($dark-theme, $color), 0.1));
-}
-
-@mixin wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: map.get($spacings, 'medium');
-  @include respond-to(medium) {
-    padding: 0;
-  }
 }
 
 @mixin container() {
@@ -65,7 +44,69 @@
   @include themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, accent), .3), 0 4px 4px -4px rgba(map.get($dark-theme, accent), .5));
 }
 
-// nutin mixins
+@mixin themed($property, $light-value, $dark-value) {
+  #{$property}: $light-value;
+
+  .dark-theme & {
+    #{$property}: $dark-value;
+  }
+}
+
+@mixin wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: map.get($spacings, 'medium');
+  @include respond-to(medium) {
+    padding: 0;
+  }
+}
+
+// ================================================
+// TABLE OF CONTENTS
+//   1. Responsive
+//   2. Layout — Flexbox
+//   3. Layout — Grid
+//   4. Spacing & Sizing
+//   5. Typography & Text
+//   6. Position
+//   7. Background, Border & Shadow
+//   8. Interaction & State
+//  9. Accessibility
+//  10. Animation
+// ================================================
+
+
+// ------------------------------------------------
+// 1. Responsive
+// ------------------------------------------------
+
+@mixin respond-to($breakpoint) {
+  $value: map.get($breakpoints, $breakpoint);
+
+  @if $value {
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+}
+
+// ------------------------------------------------
+// 2. Layout — Flexbox
+// ------------------------------------------------
+
+@mixin flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -82,21 +123,44 @@
   flex-direction: row;
 }
 
-@mixin flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-@mixin flex-around {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 @mixin flex-wrap {
   display: flex;
   flex-wrap: wrap;
+}
+
+// ------------------------------------------------
+// 3. Layout — Grid
+// ------------------------------------------------
+
+@mixin advanced-fr-grid(
+  $columns: "1fr",
+  $rows: null,
+  $gap: 1rem,
+  $dense: false
+) {
+  display: grid;
+  grid-template-columns: unquote($columns);
+
+  @if $rows {
+    grid-template-rows: unquote($rows);
+  }
+
+  gap: $gap;
+
+  @if $dense {
+    grid-auto-flow: dense;
+  }
+}
+
+@mixin fr-grid($columns: "1fr", $gap: 1rem) {
+  display: grid;
+  grid-template-columns: unquote($columns);
+  gap: $gap;
+}
+
+@mixin fr-grid-rows($rows: "1fr", $gap: 1rem) {
+  grid-template-rows: unquote($rows);
+  row-gap: $gap;
 }
 
 @mixin grid($columns: 1, $gap: 1rem) {
@@ -105,13 +169,16 @@
   gap: $gap;
 }
 
-@mixin responsive-grid($default: 1, $breakpoints: (), $gap: 1rem) {
-  @include grid($default, $gap);
-  
-  @each $breakpoint, $columns in $breakpoints {
-    @media (min-width: $breakpoint) {
-      grid-template-columns: repeat($columns, 1fr);
-    }
+@mixin grid-area($area) {
+  grid-area: $area;
+}
+
+@mixin grid-column($span: null, $start: null) {
+  @if $span {
+    grid-column-end: span $span;
+  }
+  @if $start {
+    grid-column-start: $start;
   }
 }
 
@@ -124,34 +191,8 @@
   }
 }
 
-@mixin grid-column($span: null, $start: null) {
-  @if $span {
-    grid-column-end: span $span;
-  }
-  @if $start {
-    grid-column-start: $start;
-  }
-}
-
-@mixin fr-grid($columns: "1fr", $gap: 1rem) {
-  display: grid;
-  grid-template-columns: unquote($columns);
-  gap: $gap;
-}
-
-@mixin responsive-fr-grid($default: "1fr", $breakpoints: (), $gap: 1rem) {
-  @include fr-grid($default, $gap);
-  
-  @each $breakpoint, $columns in $breakpoints {
-    @media (min-width: $breakpoint) {
-      grid-template-columns: unquote($columns);
-    }
-  }
-}
-
-@mixin fr-grid-rows($rows: "1fr", $gap: 1rem) {
-  grid-template-rows: unquote($rows);
-  row-gap: $gap;
+@mixin grid-template-areas($areas) {
+  grid-template-areas: $areas;
 }
 
 @mixin minmax-fr-grid($min: "200px", $max: "1fr", $repeat: 3, $gap: 1rem) {
@@ -166,42 +207,33 @@
   gap: $gap;
 }
 
-@mixin advanced-fr-grid(
-  $columns: "1fr",
-  $rows: null,
-  $gap: 1rem,
-  $dense: false
-) {
-  display: grid;
-  grid-template-columns: unquote($columns);
-  
-  @if $rows {
-    grid-template-rows: unquote($rows);
-  }
-  
-  gap: $gap;
-  
-  @if $dense {
-    grid-auto-flow: dense;
+@mixin responsive-fr-grid($default: "1fr", $breakpoints: (), $gap: 1rem) {
+  @include fr-grid($default, $gap);
+
+  @each $breakpoint, $columns in $breakpoints {
+    @media (min-width: $breakpoint) {
+      grid-template-columns: unquote($columns);
+    }
   }
 }
 
-@mixin grid-area($area) {
-  grid-area: $area;
+@mixin responsive-grid($default: 1, $breakpoints: (), $gap: 1rem) {
+  @include grid($default, $gap);
+
+  @each $breakpoint, $columns in $breakpoints {
+    @media (min-width: $breakpoint) {
+      grid-template-columns: repeat($columns, 1fr);
+    }
+  }
 }
 
-@mixin grid-template-areas($areas) {
-  grid-template-areas: $areas;
-}
+// ------------------------------------------------
+// 4. Spacing & Sizing
+// ------------------------------------------------
 
 @mixin box($w, $h) {
   width: $w;
   height: $h;
-}
-
-@mixin margin-y($val) {
-  margin-top: $val;
-  margin-bottom: $val;
 }
 
 @mixin margin-x($val) {
@@ -209,9 +241,9 @@
   margin-right: $val;
 }
 
-@mixin padding-y($val) {
-  padding-top: $val;
-  padding-bottom: $val;
+@mixin margin-y($val) {
+  margin-top: $val;
+  margin-bottom: $val;
 }
 
 @mixin padding-x($val) {
@@ -219,11 +251,14 @@
   padding-right: $val;
 }
 
-@mixin text-ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+@mixin padding-y($val) {
+  padding-top: $val;
+  padding-bottom: $val;
 }
+
+// ------------------------------------------------
+// 5. Typography & Text
+// ------------------------------------------------
 
 @mixin font($size, $weight: normal) {
   font-size: $size;
@@ -236,6 +271,16 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ------------------------------------------------
+// 6. Position
+// ------------------------------------------------
 
 @mixin absolute-center {
   position: absolute;
@@ -260,6 +305,10 @@
   left: $l;
 }
 
+// ------------------------------------------------
+// 7. Background, Border & Shadow
+// ------------------------------------------------
+
 @mixin bg-cover {
   background-size: cover;
   background-position: center;
@@ -270,42 +319,39 @@
   background: linear-gradient(to $dir, $from, $to);
 }
 
+@mixin border($color, $width: 1px, $style: solid) {
+  border: $width $style $color;
+}
+
 @mixin box-shadow($shadow...) {
   box-shadow: $shadow;
 }
 
-@mixin transition($props...) {
-  transition: $props;
-}
-
-@mixin hover-scale($scale: 1.05) {
-  transition: transform 0.2s;
-  &:hover {
-    transform: scale($scale);
-  }
-}
-
-@mixin border($color, $width: 1px, $style: solid) {
-  border: $width $style $color;
-}
+@mixin image-cover {
+  -webkit-background-size: 100vw 100vh;
+  -moz-background-size: 100vw 100vh;
+  -o-background-size: 100vw 100vh;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+};
 
 @mixin rounded($radius: 4px) {
   border-radius: $radius;
 }
 
-@mixin hide {
-  display: none !important;
-}
+// ------------------------------------------------
+// 8. Interaction & State
+// ------------------------------------------------
 
-@mixin sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-  text-decoration: none;
-  outline: none;
+@mixin button-disabled {
+  button:disabled {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+    a {
+      cursor: not-allowed !important;
+    }
+  }
 }
 
 @mixin clearfix {
@@ -320,32 +366,50 @@
   cursor: pointer;
 }
 
-@mixin image-cover {
-  -webkit-background-size: 100vw 100vh;
-  -moz-background-size: 100vw 100vh;
-  -o-background-size: 100vw 100vh;
-  background-size: 100vw 100vh;
-  background-attachment: fixed;
-};
+@mixin hide {
+  display: none !important;
+}
 
-@mixin button-disabled {
-  button:disabled {
-    pointer-events: none !important;
-    cursor: not-allowed !important;
-    opacity: 0.6 !important;
-    a {
-      cursor: not-allowed !important;
-    }
+@mixin hover-scale($scale: 1.05) {
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale($scale);
   }
 }
 
-@mixin respond-to($breakpoint) {
-  $value: map.get($breakpoints, $breakpoint);
+@mixin transition($props...) {
+  transition: $props;
+}
 
-  @if $value {
-    @media (max-width: $value) {
-      @content;
-    }
+// ------------------------------------------------
+// 9. Accessibility
+// ------------------------------------------------
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  text-decoration: none;
+  outline: none;
+}
+
+// ------------------------------------------------
+// 10. Animation
+// ------------------------------------------------
+
+@mixin bounce-in($duration: 0.8s, $delay: 0s) {
+  @keyframes bounce-in {
+    0% { transform: scale(0.9); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    80% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  & {
+    animation: bounce-in $duration ease-out $delay forwards;
   }
 }
 
@@ -359,19 +423,14 @@
   }
 }
 
-@mixin slide-in-left($distance: 100%, $duration: 0.6s, $delay: 0s) {
-  @keyframes slide-in-left {
-    from {
-      transform: translateX(-#{$distance});
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@mixin pulse($duration: 1.5s, $delay: 0s) {
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
   }
+
   & {
-    animation: slide-in-left $duration ease-out $delay forwards;
+    animation: pulse $duration ease-in-out $delay infinite;
   }
 }
 
@@ -391,16 +450,31 @@
   }
 }
 
-@mixin bounce-in($duration: 0.8s, $delay: 0s) {
-  @keyframes bounce-in {
-    0% { transform: scale(0.9); opacity: 0; }
-    60% { transform: scale(1.05); opacity: 1; }
-    80% { transform: scale(0.95); }
-    100% { transform: scale(1); }
+@mixin shake($duration: 0.5s, $delay: 0s) {
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
   }
 
   & {
-    animation: bounce-in $duration ease-out $delay forwards;
+    animation: shake $duration ease-in-out $delay;
+  }
+}
+
+@mixin slide-in-left($distance: 100%, $duration: 0.6s, $delay: 0s) {
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-#{$distance});
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  & {
+    animation: slide-in-left $duration ease-out $delay forwards;
   }
 }
 
@@ -412,28 +486,5 @@
   & {
     animation: spin $duration linear $delay infinite;
     animation-direction: $direction;
-  }
-}
-
-@mixin pulse($duration: 1.5s, $delay: 0s) {
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  & {
-    animation: pulse $duration ease-in-out $delay infinite;
-  }
-}
-
-@mixin shake($duration: 0.5s, $delay: 0s) {
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-10px); }
-    40%, 80% { transform: translateX(10px); }
-  }
-
-  & {
-    animation: shake $duration ease-in-out $delay;
   }
 }

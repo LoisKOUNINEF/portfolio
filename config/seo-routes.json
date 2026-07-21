@@ -1,0 +1,34 @@
+{
+  "baseUrl": "https://lois-kouninef.eu",
+  "disallowBots": [],
+  "routes": [
+    {
+      "path": "/",
+      "title": { 
+        "en": "Loïs Kouninef — Fullstack Web Developer",
+        "fr": "Loïs Kouninef - Développeur Web Fullstack"
+      },
+      "description": { 
+        "en": "Professional portfolio. Projects, skills and contact.",
+        "fr": "Portfolio professionnel. Projets, compétences et informations de contact."
+      },
+      "ogImage": {
+        "en": "/assets/images/og-cover.jpg"
+      },
+      "content": {
+        "en": [
+          { 
+            "h1": "Loïs Kouninef — Fullstack Web Developer",
+            "p": "Professional portfolio. Projects, skills and contact." 
+          }
+        ], 
+        "fr": [
+          { 
+            "h1": "Loïs Kouninef — Développeur Web Fullstack",
+            "p": "Portfolio professionnel. Projets, compétences et informations de contact." 
+          }
+        ]
+      }
+    }
+  ]
+}

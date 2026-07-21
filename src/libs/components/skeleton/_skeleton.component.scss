@@ -1,0 +1,60 @@
+@use "mixins";
+@use "skeleton-variables" as *;
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+.app-skeleton {
+  display: block;
+  background-color: var(--surface);
+  border-radius: $app-skeleton__border-radius;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+
+  &.skeleton--rect {
+    width:  var(--skeleton-width, 100%);
+    height: var(--skeleton-height, 1em);
+  }
+
+  &.skeleton--circle {
+    // height defaults to match width so the shape stays circular
+    width:  var(--skeleton-width, 2.5rem);
+    height: var(--skeleton-height, var(--skeleton-width, 2.5rem));
+    border-radius: 50%;
+  }
+
+  &.skeleton--text {
+    width:  var(--skeleton-width, 100%);
+    height: var(--skeleton-height, 1em);
+    border-radius: $app-skeleton__text-border-radius;
+  }
+
+  // multiline: the wrapper becomes a flex column; children are the actual lines
+  &.skeleton--multiline {
+    background: none;
+    animation: none;
+    border-radius: 0;
+    @include mixins.flex-column;
+    gap: $app-skeleton__multiline-gap;
+  }
+}
+
+.skeleton__line {
+  display: block;
+  height: var(--skeleton-height, 1em);
+  background-color: var(--surface);
+  border-radius: $app-skeleton__line-border-radius;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+
+  // Stagger animation slightly per line for a wave feel
+  &:nth-child(2) { animation-delay: 0.1s; }
+  &:nth-child(3) { animation-delay: 0.2s; }
+  &:nth-child(4) { animation-delay: 0.3s; }
+  &:nth-child(n+5) { animation-delay: 0.4s; }
+
+  // Last line is shorter — mimics real text paragraphs
+  &:last-child {
+    width: 70%;
+  }
+}

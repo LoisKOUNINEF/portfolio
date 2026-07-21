@@ -1,0 +1,94 @@
+@use "sass:map";
+@use "mixins";
+@use "variables" as *;
+
+.app-form-control {
+  @include mixins.flex-column;
+  gap: map.get($spacings, "smallest");
+  width: 100%;
+
+  &.form-control--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &.form-control--error .form-control__input {
+    border-color: var(--error);
+
+    &:focus-visible {
+      outline-color: var(--error);
+      border-color: var(--error);
+    }
+  }
+}
+
+.form-control__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: map.get($spacings, "smallest");
+}
+
+.form-control__label-text {
+  font-size: map.get($font-sizes, "small");
+  font-weight: 600;
+  color: var(--text-muted);
+
+  &:empty { display: none; }
+}
+
+.form-control__required {
+  color: var(--error);
+  font-size: map.get($font-sizes, "small");
+  font-weight: 600;
+  line-height: 1;
+}
+
+.form-control__input {
+  width: 100%;
+  padding: map.get($spacings, "small") map.get($spacings, "medium");
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: map.get($border-radius, "medium");
+  font-family: $primary-font;
+  font-size: map.get($font-sizes, "medium");
+  line-height: 1.4;
+  transition:
+    border-color map.get($transitions, "fast") ease,
+    box-shadow   map.get($transitions, "fast") ease;
+
+  &::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-color: var(--primary);
+  }
+
+  &:disabled {
+    background-color: var(--disabled-bg);
+    color: var(--disabled-text);
+    border-color: var(--border);
+    cursor: not-allowed;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 6rem;
+  }
+}
+
+.form-control__error {
+  font-size: map.get($font-sizes, "small");
+  color: var(--error);
+  line-height: 1.4;
+
+  &:empty { display: none; }
+}

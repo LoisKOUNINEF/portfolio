@@ -1,4 +1,5 @@
-import { View, Navigation, Service } from '../../index.js';
+import { View, Navigation, Service, I18nService, AppEventBus } from '../../index.js';
+import { Language } from '../i18n/languages.js';
 import { Routes, RouteConfig, RouteGuardsManager, GuardResult } from './helpers/route-guard-manager.helper.js';
 import { ViewRenderManager } from './helpers/view-render-manager.helper.js';
 import { NavigationManager } from './helpers/navigation-manager.helper.js';
@@ -74,7 +75,7 @@ class Router extends Service<Router> {
     
     NavigationManager.updateMetaContent(this._currentView);
     NavigationManager.updateHistory(normalizedPath, currentPath, pushState);
-    window.scrollTo({ top:0 });
+    window.scrollTo({ top: 0 });
   }
 
   public getCurrentParams(): Record<string, string> {
@@ -87,12 +88,19 @@ class Router extends Service<Router> {
 
   private initializeEventListeners(): void {
     window.addEventListener('popstate', this.onPopState);
-    const unsubOnNav = Navigation.onNavigate(this.onNavigate)
+    const unsubOnNav = Navigation.onNavigate(this.onNavigate);
     const unsubOnReload = Navigation.onReload(this.onReload);
-    this._busSubscriptions.push(unsubOnNav, unsubOnReload);
+    const onLangChanged = () => NavigationManager.updateLocaleInUrl();
+    AppEventBus.subscribe('language-changed', onLangChanged);
+    const unsubOnLang = () => AppEventBus.off('language-changed', onLangChanged);
+    this._busSubscriptions.push(unsubOnNav, unsubOnReload, unsubOnLang);
   }
 
-  private handlePopState(): void {
+  private async handlePopState(): Promise<void> {
+    const newLocale = NavigationManager.getCurrentLocale();
+    if (newLocale && newLocale !== I18nService.currentLanguage) {
+      await I18nService.setCurrentLanguage(newLocale as Language);
+    }
     this.navigate(NavigationManager.getCurrentPath(), false);
   }
 

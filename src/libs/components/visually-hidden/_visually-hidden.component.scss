@@ -1,0 +1,7 @@
+@use "mixins";
+
+// Applied by VisuallyHiddenComponent in onBeforeRender().
+// Also available as .u-sr-only utility — both share the same underlying mixin.
+.visually-hidden {
+  @include mixins.sr-only;
+}
