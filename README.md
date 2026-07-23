@@ -8,8 +8,6 @@
 
 - `npm run build` (dev) or `npm run build:prod` (production)
 
-	Accepts `--bundle` (= build:prod) and `--log` (verbose output) flags
-
 ## Generate Component, View, Service
 
 - `npm run generate ELEMENT ELEMENT_NAME`

@@ -1,5 +1,29 @@
-@use "mixins";
-@use "spinner-variables" as *;
+@use "sass:map";
+
+$spinner-config: (
+  'size': 2rem,
+  'thickness': 3px,
+  'duration': 1s,
+  'size-sm': 1rem,
+  'thickness-sm': 2px,
+  'size-lg': 3rem,
+  'thickness-lg': 4px,
+  'size-xl': 4rem,
+  'thickness-xl': 5px,
+  'color-primary': var(--primary),
+  'border-radius': 50%,
+) !default;
+
+@mixin spin($duration: 1s, $delay: 0s, $direction: normal) {
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  & {
+    animation: spin $duration linear $delay infinite;
+    animation-direction: $direction;
+  }
+}
 
 .app-spinner {
   display: inline-flex;
@@ -12,26 +36,26 @@
 }
 
 .spinner__ring {
-  @include mixins.rounded(50%);
-  @include mixins.spin($app-spinner__duration);
-  width: var(--spinner-size, #{$app-spinner__size});
-  height: var(--spinner-size, #{$app-spinner__size});
-  animation-duration: var(--spinner-duration, #{$app-spinner__duration});
-  border: var(--spinner-thickness, #{$app-spinner__thickness}) solid transparent;
-  border-top-color: var(--spinner-color, var(--primary));
+  border-radius: map.get($spinner-config, 'border-radius');
+  @include spin(map.get($spinner-config, 'duration'));
+  width: var(--spinner-size, #{map.get($spinner-config, 'size')});
+  height: var(--spinner-size, #{map.get($spinner-config, 'size')});
+  animation-duration: var(--spinner-duration, #{map.get($spinner-config, 'duration')});
+  border: var(--spinner-thickness, #{map.get($spinner-config, 'thickness')}) solid transparent;
+  border-top-color: var(--spinner-color, #{map.get($spinner-config, 'color-primary')});
 }
 
 .app-spinner--sm .spinner__ring {
-  --spinner-size: 1rem;
-  --spinner-thickness: 2px;
+  --spinner-size: #{map.get($spinner-config, 'size-sm')};
+  --spinner-thickness: #{map.get($spinner-config, 'thickness-sm')};
 }
 
 .app-spinner--lg .spinner__ring {
-  --spinner-size: 3rem;
-  --spinner-thickness: 4px;
+  --spinner-size: #{map.get($spinner-config, 'size-lg')};
+  --spinner-thickness: #{map.get($spinner-config, 'thickness-lg')};
 }
 
 .app-spinner--xl .spinner__ring {
-  --spinner-size: 4rem;
-  --spinner-thickness: 5px;
+  --spinner-size: #{map.get($spinner-config, 'size-xl')};
+  --spinner-thickness: #{map.get($spinner-config, 'thickness-xl')};
 }

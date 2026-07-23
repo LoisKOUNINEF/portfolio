@@ -1,7 +1,7 @@
 import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/index.js';
 import { Component, ComponentConfig, ComponentProps } from '../../../../core/index.js';
 import { ButtonComponent } from '../../../../libs/index.js';
-import { displayProjectPop, ProjectHeaderComponent, ProjectLinksComponent, ProjectSectionComponent } from '../../index.js';
+import { displayProjectModal, ProjectHeaderComponent, ProjectLinksComponent, ProjectSectionComponent } from '../../index.js';
 
 const templateFn = (_project: ProjectConfigObject) => `__TEMPLATE_PLACEHOLDER__`;
 
@@ -63,13 +63,13 @@ export class ProjectCardComponent extends Component {
       factory: (el) => new ButtonComponent(el, {
         i18nKey: 'project-card.view-more',
         className: 'project-card__view-more',
-        callback: () => this.displayPop()
+        callback: () => this.displayModal()
       })
     }
   }
 
-  private displayPop() {
-    displayProjectPop(this._project);
+  private displayModal() {
+    displayProjectModal(this._project);
   }
 
   protected override onBeforeRender(): void {

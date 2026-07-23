@@ -4,6 +4,7 @@ import { FocusTrapHelper, IFocusTrapOptions } from './helpers/focus-trap.helper.
 export interface ModalOverlayRuntimeOptions extends OverlayRuntimeOptions {
   focusTrapOptions?: IFocusTrapOptions;
   dialogLabel?: string;
+  dismissible?: boolean;
 }
 
 export abstract class ModalOverlayRuntime extends OverlayRuntime {
@@ -11,13 +12,15 @@ export abstract class ModalOverlayRuntime extends OverlayRuntime {
   private _focusTrapOptions: IFocusTrapOptions;
   private _boundBackdropClick: ((e: MouseEvent) => void) | null = null;
   private _isDestroying = false;
+  private _dismissible: boolean;
   protected _overlay: HTMLElement | null = null;
   protected _wrapper: HTMLElement | null = null;
   protected _dialogLabel: string;
 
-  constructor({ focusTrapOptions = {}, dialogLabel = '', ...rest }: ModalOverlayRuntimeOptions) {
+  constructor({ focusTrapOptions = {}, dialogLabel = '', dismissible = true, ...rest }: ModalOverlayRuntimeOptions) {
     super(rest);
     this._dialogLabel = dialogLabel;
+    this._dismissible = dismissible;
     this._focusTrapOptions = {
       ...focusTrapOptions,
       onDeactivate: () => this.close(),
@@ -29,7 +32,7 @@ export abstract class ModalOverlayRuntime extends OverlayRuntime {
 
     super.render();
 
-    this._appendCloseButton(this.element);
+    if (this._dismissible) this._appendCloseButton(this.element);
     const { overlay, wrapper } = this._buildModalDom(this.element);
     this._overlay = overlay;
     this._wrapper = wrapper;
@@ -38,10 +41,12 @@ export abstract class ModalOverlayRuntime extends OverlayRuntime {
 
     this._autoLabelWrapper(this.element, wrapper);
 
-    this._boundBackdropClick = (e: MouseEvent) => {
-      if (e.target === this._overlay) this.close();
-    };
-    overlay.addEventListener('click', this._boundBackdropClick);
+    if (this._dismissible) {
+      this._boundBackdropClick = (e: MouseEvent) => {
+        if (e.target === this._overlay) this.close();
+      };
+      overlay.addEventListener('click', this._boundBackdropClick);
+    }
 
     this._focusTrap = new FocusTrapHelper({
       container: wrapper,

@@ -1,13 +1,7 @@
 @use "sass:map";
-@use "mixins";
-@use "variables" as *;
+@use "../core/overlay-variables" as *;
 
-$snack-colors: (
-  success: rgb(76 175 80),
-  error: rgb(244 67 54),
-  info: rgb(33 150 243),
-  default: rgb(153 153 153),
-) !default;
+$snackbar-colors: $semantic-colors !default;
 
 // snackbar overlay config
 $snackbar-config: (
@@ -18,10 +12,9 @@ $snackbar-config: (
   'offset': 1rem,
   'container-width': 350px,
   'animation-duration': 0.3s,
-  'color-default': map.get($snack-colors, default),
-  'color-success': map.get($snack-colors, success),
-  'color-error': map.get($snack-colors, error),
-  'color-info': map.get($snack-colors, info),
+  'shadow-offset-y': 2px,
+  'shadow-blur': 6px,
+  'shadow-color': rgba(0, 0, 0, 0.3),
 ) !default;
 
 // Positioned containers — one per gravity direction
@@ -54,28 +47,32 @@ $snackbar-config: (
 }
 
 .app-snackbar {
-  @include mixins.flex-center;
-  background: map.get($snackbar-config, 'color-default');
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: map.get($snackbar-colors, 'info');
+  color: map.get($snackbar-colors, 'text');
   padding: map.get($snackbar-config, 'padding');
   border-radius: map.get($snackbar-config, 'border-radius');
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0
+    map.get($snackbar-config, 'shadow-offset-y')
+    map.get($snackbar-config, 'shadow-blur')
+    map.get($snackbar-config, 'shadow-color');
   gap: map.get($snackbar-config, 'gap');
   width: 100%;
   animation: snackbar-fade-in map.get($snackbar-config, 'animation-duration') ease;
 }
 
-.app-snackbar--success { background: map.get($snackbar-config, 'color-success'); }
-.app-snackbar--error   { background: map.get($snackbar-config, 'color-error'); }
-.app-snackbar--info    {
-  background: map.get($snackbar-config, 'color-info');
-  color: var(--background);
-}
+.app-snackbar--success { background: map.get($snackbar-colors, 'success'); }
+.app-snackbar--error   { background: map.get($snackbar-colors, 'error'); }
+.app-snackbar--info    { background: map.get($snackbar-colors, 'info'); }
+.app-snackbar--warning { background: map.get($snackbar-colors, 'warning'); }
 
 .app-snackbar button {
   background: transparent;
   border: none;
-  color: #fff;
+  color: map.get($snackbar-colors, 'text');
   font-weight: bold;
   cursor: pointer;
 }

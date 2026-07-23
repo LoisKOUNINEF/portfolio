@@ -1,13 +1,13 @@
-import { PopoverView, ButtonComponent, IPictureConfig, PictureComponent } from "../../../../libs/index.js";
+import { ModalView, ButtonComponent, IPictureConfig, PictureComponent } from "../../../../libs/index.js";
 import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
 
-export interface IImagePopConfig extends IPictureConfig {
+export interface IImageModalConfig extends IPictureConfig {
   viewName?: string;
 }
 
 const assetsBase = './assets/images/other-things/';
 const carouselImages = ['board', 'marbles'];
-const carouselImagesSrc = (): IImagePopConfig[] => {
+const carouselImagesSrc = (): IImageModalConfig[] => {
   return carouselImages.map((s: string) => {
     const base = assetsBase + s;
     return {
@@ -21,19 +21,19 @@ const carouselImagesSrc = (): IImagePopConfig[] => {
   });
 }
 
-export const displayCarouselPop = () => {
-  const pop = new PopoverView({
-    template: carouselPopoverTemplate(),
-    components: carouselPopoverComponents(),
-    catalogs: carouselPopoverCatalogs(),
+export const displayCarouselModal = () => {
+  const modal = new ModalView({
+    template: carouselModalTemplate(),
+    components: carouselModalComponents(),
+    catalogs: carouselModalCatalogs(),
   });
-  pop.render();
+  modal.render();
   updateSlides();
 }
 
-const carouselPopoverTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
+const carouselModalTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
 
-const carouselPopoverComponents = (): ComponentConfig[] => [
+const carouselModalComponents = (): ComponentConfig[] => [
   {
     selector: 'prev-button',
     factory: (el) => new ButtonComponent(el, {
@@ -52,7 +52,7 @@ const carouselPopoverComponents = (): ComponentConfig[] => [
   }
 ];
 
-const carouselPopoverCatalogs = (): CatalogConfig[] => [
+const carouselModalCatalogs = (): CatalogConfig[] => [
   {
     selector: `carousel-pictures`,
     component: PictureComponent,

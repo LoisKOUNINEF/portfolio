@@ -120,7 +120,7 @@ function processRoute(template, baseUrl, lang, route) {
       const ogImage = typeof route.ogImage === 'object' && route.ogImage !== null ? route.ogImage[lang] : route.ogImage;
 
       if (!title || !description) {
-        print.boldError(`[generate-seo-html] Missing title or description for route "${route.path}" / lang "${lang}" in seo-routes.json`);
+        print.boldError(`[generate-seo-html] Missing title or description for route "${route.path}" / lang "${lang}" in seo.json`);
         exit(1);
       }
 
@@ -152,7 +152,7 @@ function processRoute(template, baseUrl, lang, route) {
     const { title, description } = route;
 
     if (!title || !description) {
-      print.boldError(`[generate-seo-html] Missing title or description for route "${route.path}" in seo-routes.json`);
+      print.boldError(`[generate-seo-html] Missing title or description for route "${route.path}" in seo.json`);
       exit(1);
     }
 
@@ -193,7 +193,7 @@ function generateSeoHtml() {
     exit(1);
   }
 
-  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo-routes.json');
+  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo.json');
   const seoConfig = JSON.parse(fs.readFileSync(seoConfigPath, 'utf-8'));
   const baseUrl = seoConfig.baseUrl.replace(/\/$/, '');
 

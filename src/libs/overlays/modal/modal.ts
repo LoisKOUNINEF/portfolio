@@ -1,19 +1,21 @@
 import { ComponentConfig, CatalogConfig, AppPipeRegistry, Overlays } from '../../../core/index.js';
 import { ModalOverlayRuntime, ModalOverlayRuntimeOptions } from '../core/modal-overlay-runtime.js';
 
-export interface PopoverOptions extends ModalOverlayRuntimeOptions {
+export interface ModalOptions extends ModalOverlayRuntimeOptions {
   template: string;
   components?: ComponentConfig[];
   catalogs?: CatalogConfig[];
   viewName?: string;
+  fullscreen?: boolean;
   onClose?: () => void;
 }
 
-export class PopoverOverlay extends ModalOverlayRuntime {
+export class ModalOverlay extends ModalOverlayRuntime {
   private _onCloseCb?: () => void;
   private _components: ComponentConfig[];
   private _catalogs: CatalogConfig[];
   private _prevTitle: string | undefined;
+  private _fullscreen: boolean;
 
   constructor({
     template,
@@ -21,13 +23,15 @@ export class PopoverOverlay extends ModalOverlayRuntime {
     viewName,
     components = [],
     catalogs = [],
+    fullscreen = false,
     focusTrapOptions = {},
     ...rest
-  }: PopoverOptions) {
+  }: ModalOptions) {
     super({ ...rest, template, focusTrapOptions, dialogLabel: viewName ?? '' });
     this._onCloseCb = onClose;
     this._components = components;
     this._catalogs = catalogs;
+    this._fullscreen = fullscreen;
     this._setViewName(viewName);
   }
 
@@ -40,33 +44,34 @@ export class PopoverOverlay extends ModalOverlayRuntime {
 
   public override render(): HTMLElement {
     const overlay = super.render();
-    Overlays.popoverOpened();
-    Overlays.overlayOpened('popover');
+    Overlays.modalOpened();
+    Overlays.overlayOpened('modal');
     return overlay;
   }
 
   protected override createBackdrop(): HTMLElement {
     const el = super.createBackdrop();
-    el.className = 'popover-overlay';
+    el.className = 'modal-overlay';
     return el;
   }
 
   protected override createWrapper(): HTMLElement {
     const el = super.createWrapper();
-    el.className = 'popover-wrapper';
+    el.className = 'modal-wrapper';
+    if (this._fullscreen) el.classList.add('modal-wrapper--fullscreen');
     return el;
   }
 
   protected override getContentClass(): string {
-    return 'popover-content';
+    return 'modal-content';
   }
 
   protected override onAfterRender(): void {
   }
 
   protected override onBeforeDestroy(): void {
-    Overlays.popoverClosed();
-    Overlays.overlayClosed('popover');
+    Overlays.modalClosed();
+    Overlays.overlayClosed('modal');
     if (this._prevTitle !== undefined) document.title = this._prevTitle;
     this._onCloseCb?.();
   }
@@ -79,4 +84,4 @@ export class PopoverOverlay extends ModalOverlayRuntime {
   }
 }
 
-export { PopoverOverlay as PopoverView };
+export { ModalOverlay as ModalView };

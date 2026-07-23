@@ -17,21 +17,22 @@ export class NotFoundView extends View {
     const btnClass = 'not-found__back-btn';
     return [
       {
-        selector: 'other-things-thumbnail',
+        selector: 'not-found-image',
         factory: (el) => new PictureComponent(el, {
           sources: [
-            { src: './assets/images/404.avif', type: 'image/avif' },
-            { src: './assets/images/404.webp', type: 'image/webp' },
+            { src: ' /assets/images/404.avif', type: 'image/avif' },
+            { src: ' /assets/images/404.webp', type: 'image/webp' },
           ],
-          fallback: './assets/images/404.jpg',
-          alt: 'Page not found illustration — carved books.',
+          fallback: '/assets/images/404.jpg',
+          alt: 'Page not found illustration — Black and white picture of a man standing on the edge of a wall. From the movie "Das Cabinet des Doktor Caligari", R. Wiene, 1920.',
           loading: 'eager',
         })
       },
       { 
         selector: 'back-to-home',
-        factory: (el) => new ButtonComponent(el, { i18nKey: 'not-found.redirect', callback: () => this.handleHome(), className: btnClass 
-        })
+        factory: (el) => new ButtonComponent(el, 
+          { i18nKey: 'not-found.redirect', callback: () => this.handleHome(), className: btnClass }
+        )
       },
     ]
   }

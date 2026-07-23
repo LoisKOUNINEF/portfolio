@@ -1,17 +1,17 @@
 import { Overlays, ComponentConfig, I18nService } from '../../../../core/index.js';
-import {notify, PopoverView} from '../../../../libs/index.js';
+import {notify, ModalView} from '../../../../libs/index.js';
 import { InfoCardComponent } from '../../common/index.js';
 import {Language} from "../../../../core/services/i18n/languages.js";
 
-const resumePopoverTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
+const resumeModalTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
 
-export const displayResumePop = () => {
+export const displayResumeModal = () => {
   const lang = I18nService.currentLanguage;
-  const pop = new PopoverView({
-    template: resumePopoverTemplate(),
-    components: resumePopoverComponents(lang),
+  const modal = new ModalView({
+    template: resumeModalTemplate(),
+    components: resumeModalComponents(lang),
   });
-  pop.render();
+  modal.render();
 };
 
 const downloadStarted = (): void => {
@@ -22,10 +22,10 @@ const downloadStarted = (): void => {
   const currentLang = I18nService.currentLanguage;
   const message = messages[currentLang] || messages['fr'] || 'Download started';
   notify(message);
-  Overlays.popoverClosed();
+  Overlays.modalClosed();
 };
 
-const resumePopoverComponents = (lang: string): ComponentConfig[] => {
+const resumeModalComponents = (lang: string): ComponentConfig[] => {
   const colorHref = `./assets/resumes/resume-lois-kouninef-${lang}.pdf`;
   const monoHref = `./assets/resumes/resume-lois-kouninef-printable-${lang}.pdf`;
   const colorFilename = lang === 'en' ? 'Lois_Kouninef_Resume_Color.pdf' : 'Lois_Kouninef_CV_Couleur.pdf';
@@ -36,23 +36,23 @@ const resumePopoverComponents = (lang: string): ComponentConfig[] => {
       selector: 'resume-color-card',
       factory: (el) => new InfoCardComponent(el, {
         iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
-        labelKey: 'resume-popover.color-label',
-        subtextKey: 'resume-popover.color-subtext',
+        labelKey: 'resume-modal.color-label',
+        subtextKey: 'resume-modal.color-subtext',
         href: colorHref,
         download: colorFilename,
         callback: () => downloadStarted(),
-      }, { className: 'resume-popover__card' })
+      }, { className: 'resume-modal__card' })
     },
     {
       selector: 'resume-mono-card',
       factory: (el) => new InfoCardComponent(el, {
         iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
-        labelKey: 'resume-popover.mono-label',
-        subtextKey: 'resume-popover.mono-subtext',
+        labelKey: 'resume-modal.mono-label',
+        subtextKey: 'resume-modal.mono-subtext',
         href: monoHref,
         download: monoFilename,
         callback: () => downloadStarted(),
-      }, { className: 'resume-popover__card resume-mono-card' })
+      }, { className: 'resume-modal__card resume-mono-card' })
     },
   ];
 };

@@ -2,7 +2,7 @@
 @use "sass:map";
 
 .modal-overlay {
-  z-index: map.get($overlay-z-index, popover);
+  z-index: map.get($overlay-z-index, modal);
   position: fixed;
   inset: 0;
   backdrop-filter: blur(5px);

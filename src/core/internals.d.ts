@@ -13,8 +13,8 @@ declare interface LifecycleEventMap {
 }
 
 declare interface OverlaysEventMap {
-  'popover-opened': {};
-  'popover-closed': {};
+  'modal-opened': {};
+  'modal-closed': {};
   'overlay-opened': { type: string };
   'overlay-closed': { type: string };
 }

@@ -1,33 +1,46 @@
-@use "mixins";
-@use "skeleton-variables" as *;
+@use "sass:map";
+
+$skeleton-config: (
+  'border-radius': 4px,
+  'text-border-radius': 2px,
+  'line-border-radius': 2px,
+  'multiline-gap': 0.5rem,
+  'pulse-duration': 1.5s,
+  'pulse-min-opacity': 0.45,
+  'stagger-delay': 0.1s,
+  'last-line-width': 70%,
+  'circle-default-size': 2.5rem,
+  'default-height': 1em,
+  'color-surface': var(--surface),
+) !default;
 
 @keyframes skeleton-pulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
+  50%       { opacity: map.get($skeleton-config, 'pulse-min-opacity'); }
 }
 
 .app-skeleton {
   display: block;
-  background-color: var(--surface);
-  border-radius: $app-skeleton__border-radius;
-  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  background-color: map.get($skeleton-config, 'color-surface');
+  border-radius: map.get($skeleton-config, 'border-radius');
+  animation: skeleton-pulse map.get($skeleton-config, 'pulse-duration') ease-in-out infinite;
 
   &.skeleton--rect {
     width:  var(--skeleton-width, 100%);
-    height: var(--skeleton-height, 1em);
+    height: var(--skeleton-height, #{map.get($skeleton-config, 'default-height')});
   }
 
   &.skeleton--circle {
     // height defaults to match width so the shape stays circular
-    width:  var(--skeleton-width, 2.5rem);
-    height: var(--skeleton-height, var(--skeleton-width, 2.5rem));
+    width:  var(--skeleton-width, #{map.get($skeleton-config, 'circle-default-size')});
+    height: var(--skeleton-height, var(--skeleton-width, #{map.get($skeleton-config, 'circle-default-size')}));
     border-radius: 50%;
   }
 
   &.skeleton--text {
     width:  var(--skeleton-width, 100%);
-    height: var(--skeleton-height, 1em);
-    border-radius: $app-skeleton__text-border-radius;
+    height: var(--skeleton-height, #{map.get($skeleton-config, 'default-height')});
+    border-radius: map.get($skeleton-config, 'text-border-radius');
   }
 
   // multiline: the wrapper becomes a flex column; children are the actual lines
@@ -35,26 +48,27 @@
     background: none;
     animation: none;
     border-radius: 0;
-    @include mixins.flex-column;
-    gap: $app-skeleton__multiline-gap;
+    display: flex;
+    flex-direction: column;
+    gap: map.get($skeleton-config, 'multiline-gap');
   }
 }
 
 .skeleton__line {
   display: block;
-  height: var(--skeleton-height, 1em);
-  background-color: var(--surface);
-  border-radius: $app-skeleton__line-border-radius;
-  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  height: var(--skeleton-height, #{map.get($skeleton-config, 'default-height')});
+  background-color: map.get($skeleton-config, 'color-surface');
+  border-radius: map.get($skeleton-config, 'line-border-radius');
+  animation: skeleton-pulse map.get($skeleton-config, 'pulse-duration') ease-in-out infinite;
 
   // Stagger animation slightly per line for a wave feel
-  &:nth-child(2) { animation-delay: 0.1s; }
-  &:nth-child(3) { animation-delay: 0.2s; }
-  &:nth-child(4) { animation-delay: 0.3s; }
-  &:nth-child(n+5) { animation-delay: 0.4s; }
+  &:nth-child(2) { animation-delay: map.get($skeleton-config, 'stagger-delay') * 1; }
+  &:nth-child(3) { animation-delay: map.get($skeleton-config, 'stagger-delay') * 2; }
+  &:nth-child(4) { animation-delay: map.get($skeleton-config, 'stagger-delay') * 3; }
+  &:nth-child(n+5) { animation-delay: map.get($skeleton-config, 'stagger-delay') * 4; }
 
   // Last line is shorter — mimics real text paragraphs
   &:last-child {
-    width: 70%;
+    width: map.get($skeleton-config, 'last-line-width');
   }
 }

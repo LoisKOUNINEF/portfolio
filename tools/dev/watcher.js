@@ -24,7 +24,7 @@ watcher.on('change', (filePath) => {
     print.boldInfo(`\n🔄 File changed: ${path.relative(process.cwd(), filePath)}\n`);
     print.info('\nRebuilding...');
 
-    const command = 'npm run build';
+    const command = 'npm run build --silent';
     
     exec(command, (err, stdout, stderr) => {
       if (stdout) process.stdout.write(stdout);
@@ -32,7 +32,7 @@ watcher.on('change', (filePath) => {
       if (err) {
         print.error(`\n❌ Build failed: ${err.message}`);
       } else {
-        print.boldHead('Watching for changes...');
+        print.boldBlue('\nWatching for changes...');
       }
       isBuilding = false;
     });
@@ -40,5 +40,5 @@ watcher.on('change', (filePath) => {
 });
 
 watcher.on('ready', () => {
-  print.boldHead('\nWatching for changes...\n');
+  print.boldBlue('\nWatching for changes...');
 });

@@ -3,7 +3,7 @@
 @use "mixins";
 @use "sass:color";
 
-.popover-wrapper:has(.resume-popover__wrapper) {
+.modal-wrapper:has(.resume-modal__wrapper) {
 	width: 50%;
 	height: auto;
 	max-height: 60%;
@@ -14,7 +14,7 @@
 	}
 }
 
-.resume-popover__wrapper {
+.resume-modal__wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -28,11 +28,11 @@
 	}
 }
 
-.resume-popover__title {
+.resume-modal__title {
 	padding-top: map.get($spacings, medium);
 }
 
-.resume-popover__cards {
+.resume-modal__cards {
 	display: flex;
 	flex-direction: column;
 	gap: map.get($spacings, medium);
@@ -41,14 +41,14 @@
 	padding-bottom: map.get($spacings, medium);
 }
 
-a.resume-popover__card {
+a.resume-modal__card {
 	text-decoration: none;
 	&:hover {
 		text-decoration: none;
 	}
 }
 
-.resume-popover__card {
+.resume-modal__card {
 	cursor: pointer;
 	text-decoration: none;
 	width: 75%;

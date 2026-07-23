@@ -2,7 +2,7 @@
 @use "variables" as *;
 @use "mixins";
 
-.popover-wrapper:has(.project-popover__wrapper) {
+.modal-wrapper:has(.project-modal__wrapper) {
   width: 80%;
   height: 90%;
   background: var(--surface);
@@ -13,7 +13,7 @@
   }
 }
 
-.project-popover__container {
+.project-modal__container {
   display: flex;
   padding: map.get($spacings, 'medium');
   opacity: 1;
@@ -25,7 +25,7 @@
   }
 }
 
-.project-popover__content {
+.project-modal__content {
   justify-content: flex-start;
   align-items: center;
   text-align: left;
@@ -58,7 +58,7 @@
   }
 }
 
-.project-popover__links {
+.project-modal__links {
   display: flex;
   padding: map.get($spacings, medium);
   gap: map.get($spacings, largest);

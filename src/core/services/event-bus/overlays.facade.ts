@@ -3,22 +3,22 @@ import { AppEventBus, IEventBus } from "./event-bus.js";
 class OverlaysFacade {
   constructor(private bus: IEventBus) {}
 
-  popoverOpened(): void {
-    this.bus.emit('popover-opened');
+  modalOpened(): void {
+    this.bus.emit('modal-opened');
   }
 
-  onPopoverOpened(callback: () => void): () => void {
-    this.bus.subscribe('popover-opened', callback);
-    return () => this.bus.off('popover-opened', callback);
+  onModalOpened(callback: () => void): () => void {
+    this.bus.subscribe('modal-opened', callback);
+    return () => this.bus.off('modal-opened', callback);
   }
 
-  popoverClosed(): void {
-    this.bus.emit('popover-closed');
+  modalClosed(): void {
+    this.bus.emit('modal-closed');
   }
 
-  onPopoverClosed(callback: () => void): () => void {
-    this.bus.subscribe('popover-closed', callback);
-    return () => this.bus.off('popover-closed', callback);
+  onModalClosed(callback: () => void): () => void {
+    this.bus.subscribe('modal-closed', callback);
+    return () => this.bus.off('modal-closed', callback);
   }
 
   overlayOpened(type: string): void {

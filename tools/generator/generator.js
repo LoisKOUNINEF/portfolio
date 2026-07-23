@@ -21,7 +21,7 @@ const targetPath = path.join('src', 'app', `${type.kebab}s/${fullPath.kebab}`);
 const creators = {
   service: (name, targetPath) => {
     const suffix = 'service';
-    print.section(`Creating service: ${name.capitalized}`);
+    print.section(`Generating service: ${name.capitalized}`);
     try {
       generateFile({ name, targetPath, templateFn: serviceTemplate, suffix: suffix });
       appendToIndex({ name, targetPath, suffix: suffix });
@@ -31,14 +31,14 @@ const creators = {
   },
   component: async (name, targetPath) => {
     const suffix = 'component';
-    print.section(`Creating component: ${name.capitalized}`);
-    const doCreateStylesheet = await promptBoolean('Create component\'s stylesheet in styles/components ?');
+    print.section(`Generating component: ${name.capitalized}`);
+    const doGenerateStylesheet = await promptBoolean('Generate component\'s stylesheet ?');
 
     try {
+      if (doGenerateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       generateFile({ name, targetPath, templateFn: componentTemplate, suffix: suffix });
       generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
       generateJson({ targetPath, name });
-      if (doCreateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       appendToIndex({ name, targetPath, suffix: suffix });
     } catch (err) {
       handleError("Failed to generate component", err);
@@ -46,14 +46,14 @@ const creators = {
   },
   view: async (name, targetPath) => {
     const suffix = 'view';
-    print.section(`Creating view: ${name.capitalized}`);
-    const doCreateStylesheet = await promptBoolean('Create component\'s stylesheet in styles/components ?');
+    print.section(`Generating view: ${name.capitalized}`);
+    const doGenerateStylesheet = await promptBoolean('Generate view\'s stylesheet ?');
 
     try {
+      if (doGenerateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       generateFile({ name, targetPath, templateFn: viewTemplate, suffix: suffix });
       generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
       generateJson({ targetPath, name });
-      if (doCreateStylesheet)  generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       appendToIndex({name, targetPath, suffix: suffix });
     } catch (err) {
       handleError("Failed to generate view", err);

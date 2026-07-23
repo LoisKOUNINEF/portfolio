@@ -4,11 +4,12 @@ import process from 'process';
 import { print } from './index.js';
 
 export function runScript(path, message) {
-  print.boldSection(message);
+  if (!message) print.boldSection(`Running ${path}...`);
+  else print.boldSection(message);
 
-  const args = [resolve(path)];
+  const args = [resolve(path), '--silent'];
 
-  const result = spawnSync('node', args, 
+  const result = spawnSync('node', args,
     { 
       stdio: 'inherit',
       env: { ...process.env }, 

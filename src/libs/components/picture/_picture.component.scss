@@ -1,5 +1,11 @@
-@use "mixins";
-@use "picture-variables" as *;
+@use "sass:map";
+
+$picture-config: (
+  'caption-margin-top': 0.25rem,
+  'caption-font-size': 0.875rem,
+  'caption-line-height': 1.4,
+  'color-text-muted': var(--text-muted),
+) !default;
 
 // PictureComponent renders a <figure> — no fixed app-* class is set by the component.
 // These styles apply to any figure produced by PictureComponent or consumed via props.className.
@@ -20,10 +26,10 @@ figure {
   }
 
   figcaption {
-    margin-top: $app-picture__caption-margin-top;
-    font-size: $app-picture__caption-font-size;
-    color: var(--text-muted);
-    line-height: 1.4;
+    margin-top: map.get($picture-config, 'caption-margin-top');
+    font-size: map.get($picture-config, 'caption-font-size');
+    color: map.get($picture-config, 'color-text-muted');
+    line-height: map.get($picture-config, 'caption-line-height');
 
     &:empty { display: none; }
   }

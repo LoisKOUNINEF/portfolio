@@ -1,5 +1,28 @@
-@use "mixins";
-@use "radio-group-variables" as *;
+@use "sass:map";
+
+$radio-group-config: (
+  'legend-font-size': 0.875rem,
+  'legend-margin-bottom': 0.5rem,
+  'options-gap': 0.5rem,
+  'option-gap': 0.5rem,
+  'input-transition-duration': 0.2s,
+  'label-font-size': 1rem,
+  'disabled-opacity': 0.6,
+  'input-size': 1.125rem,
+  'input-border-width': 2px,
+  'checked-inner-ring': 0.2rem,
+  'checked-outer-ring': 0.5rem,
+  'focus-outline-width': 2px,
+  'focus-outline-offset': 2px,
+  'label-line-height': 1.4,
+  'color-text-muted': var(--text-muted),
+  'color-border-strong': var(--border-strong),
+  'color-background': var(--background),
+  'color-primary': var(--primary),
+  'color-disabled-bg': var(--disabled-bg),
+  'color-border': var(--border),
+  'color-text': var(--text),
+) !default;
 
 .app-radio-group {
   border: none;
@@ -8,35 +31,36 @@
   min-width: 0; // fieldset min-width override
 
   &:disabled {
-    opacity: 0.6;
+    opacity: map.get($radio-group-config, 'disabled-opacity');
     cursor: not-allowed;
   }
 }
 
 .radio-group__legend {
-  font-size: $app-radio-group__legend-font-size;
+  font-size: map.get($radio-group-config, 'legend-font-size');
   font-weight: 600;
-  color: var(--text-muted);
+  color: map.get($radio-group-config, 'color-text-muted');
   padding: 0;
-  margin-bottom: $app-radio-group__legend-margin-bottom;
+  margin-bottom: map.get($radio-group-config, 'legend-margin-bottom');
 
   &:empty { display: none; }
 }
 
 .radio-group__options {
-  @include mixins.flex-column;
-  gap: $app-radio-group__options-gap;
+  display: flex;
+  flex-direction: column;
+  gap: map.get($radio-group-config, 'options-gap');
 }
 
 .radio-group__option {
   display: inline-flex;
   align-items: center;
-  gap: $app-radio-group__option-gap;
+  gap: map.get($radio-group-config, 'option-gap');
   cursor: pointer;
 
   &:has(.radio__input:disabled) {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: map.get($radio-group-config, 'disabled-opacity');
   }
 }
 
@@ -44,43 +68,47 @@
   appearance: none;
   -webkit-appearance: none;
   flex-shrink: 0;
-  width: 1.125rem;
-  height: 1.125rem;
-  border: 2px solid var(--border-strong);
+  width: map.get($radio-group-config, 'input-size');
+  height: map.get($radio-group-config, 'input-size');
+  border: map.get($radio-group-config, 'input-border-width') solid map.get($radio-group-config, 'color-border-strong');
   border-radius: 50%;
-  background-color: var(--background);
+  background-color: map.get($radio-group-config, 'color-background');
   cursor: inherit;
   transition:
-    background-color $app-radio-group__input-transition-duration ease,
-    border-color     $app-radio-group__input-transition-duration ease,
-    box-shadow       $app-radio-group__input-transition-duration ease;
+    background-color map.get($radio-group-config, 'input-transition-duration') ease,
+    border-color     map.get($radio-group-config, 'input-transition-duration') ease,
+    box-shadow       map.get($radio-group-config, 'input-transition-duration') ease;
 
   &:checked {
-    border-color: var(--primary);
+    border-color: map.get($radio-group-config, 'color-primary');
     // inner dot via inset box-shadow — adapts to theme automatically
-    box-shadow: inset 0 0 0 0.2rem var(--background), inset 0 0 0 0.5rem var(--primary);
+    box-shadow:
+      inset 0 0 0 map.get($radio-group-config, 'checked-inner-ring') map.get($radio-group-config, 'color-background'),
+      inset 0 0 0 map.get($radio-group-config, 'checked-outer-ring') map.get($radio-group-config, 'color-primary');
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    outline: map.get($radio-group-config, 'focus-outline-width') solid map.get($radio-group-config, 'color-primary');
+    outline-offset: map.get($radio-group-config, 'focus-outline-offset');
   }
 
   &:disabled {
-    background-color: var(--disabled-bg);
-    border-color: var(--border);
+    background-color: map.get($radio-group-config, 'color-disabled-bg');
+    border-color: map.get($radio-group-config, 'color-border');
     cursor: not-allowed;
 
     &:checked {
-      box-shadow: inset 0 0 0 0.2rem var(--background), inset 0 0 0 0.5rem var(--border-strong);
+      box-shadow:
+        inset 0 0 0 map.get($radio-group-config, 'checked-inner-ring') map.get($radio-group-config, 'color-background'),
+        inset 0 0 0 map.get($radio-group-config, 'checked-outer-ring') map.get($radio-group-config, 'color-border-strong');
     }
   }
 }
 
 .radio__label {
-  font-size: $app-radio-group__label-font-size;
-  color: var(--text);
-  line-height: 1.4;
+  font-size: map.get($radio-group-config, 'label-font-size');
+  color: map.get($radio-group-config, 'color-text');
+  line-height: map.get($radio-group-config, 'label-line-height');
 
   &:empty { display: none; }
 }

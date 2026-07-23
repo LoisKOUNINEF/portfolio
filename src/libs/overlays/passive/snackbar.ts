@@ -11,7 +11,7 @@ export type NotifyOptions = {
 };
 
 type SnackbarItem = PassiveOverlayItem & {
-  type?: 'info' | 'success' | 'error';
+  type?: 'info' | 'success' | 'error' | 'warning';
 };
 
 class Snackbar extends PassiveOverlayRuntime<SnackbarItem> {

@@ -1,20 +1,20 @@
 @use "sass:map";
 @use "variables" as *;
-@use "mixins";
+@use "./mixins-nutin";
 
 .u-hide {
-  @include mixins.hide;
+  @include mixins-nutin.hide;
 }
 
 .u-hide-on-medium {
-  @include mixins.respond-to(medium) {
-    @include mixins.hide;
+  @include mixins-nutin.respond-to(medium) {
+    @include mixins-nutin.hide;
   }
 }
 
 .u-hide-on-small {
-  @include mixins.respond-to(small) {
-    @include mixins.hide;
+  @include mixins-nutin.respond-to(small) {
+    @include mixins-nutin.hide;
   }
 }
 
@@ -24,17 +24,17 @@
 }
 
 .u-btn-disabled {
-  @include mixins.button-disabled;
+  @include mixins-nutin.button-disabled;
 }
 
 .u-sr-only {
-  @include mixins.sr-only;
+  @include mixins-nutin.sr-only;
 }
 
 .u-clearfix {
-  @include mixins.clearfix;
+  @include mixins-nutin.clearfix;
 }
 
 .u-pointer {
-  @include mixins.cursor-pointer;
+  @include mixins-nutin.cursor-pointer;
 }
