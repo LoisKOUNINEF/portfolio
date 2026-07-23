@@ -30,9 +30,9 @@ watcher.on('change', (filePath) => {
       if (stdout) process.stdout.write(stdout);
       if (stderr) process.stderr.write(stderr);
       if (err) {
-        print.error(`\n❌ Build failed: ${err.message}`);
+        print.boldError(`\nBuild failed: ${err.message}`);
       } else {
-        print.boldBlue('\nWatching for changes...');
+        print.boldBlue('Watching for changes...');
       }
       isBuilding = false;
     });
@@ -40,5 +40,5 @@ watcher.on('change', (filePath) => {
 });
 
 watcher.on('ready', () => {
-  print.boldBlue('\nWatching for changes...');
+  print.boldBlue('Watching for changes...');
 });

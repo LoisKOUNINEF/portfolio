@@ -19,7 +19,7 @@ async function mergeTemplates() {
     try {
       const htmlContent = await fs.readFile(htmlPath, 'utf-8');
       const minifiedHtml = await minifyHTML(htmlContent);
-      if (isVerbose) print.info(`Minified HTML: ${htmlPath}`);
+      if (isVerbose) print.gray(`Minified HTML: ${htmlPath}`);
 
       try {
         let jsContent = await fs.readFile(jsPath, 'utf-8');
@@ -32,7 +32,7 @@ async function mergeTemplates() {
         jsContent = jsContent.replace(PLACEHOLDER, minifiedHtml);
         await fs.writeFile(jsPath, jsContent);
         await fs.unlink(htmlPath);
-        if (isVerbose) print.info(`Updated ${jsFilename} with template from ${htmlFilename}.`);
+        if (isVerbose) print.gray(`Updated ${jsFilename} with template from ${htmlFilename}.`);
       } catch (err) {
         print.boldError(`ERROR: Cannot update ${jsFilename}. ${err.message}`);
       }
@@ -40,7 +40,7 @@ async function mergeTemplates() {
       print.boldError(`ERROR: Failed to read ${htmlFilename}. ${err.message}`);
     }
   }
-  if (isVerbose) print.info(`HTML templates minified and merged in scripts.\n`)
+  if (isVerbose) print.boldInfo(`✅ HTML templates minified and merged in scripts.`);
 }
 
 mergeTemplates().catch((err) => {

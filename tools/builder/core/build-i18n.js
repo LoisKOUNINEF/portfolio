@@ -50,7 +50,7 @@ async function removeJsonFiles(directory) {
   try {
     await fs.promises.access(directory);
   } catch {
-    print.info(`Directory ${directory} does not exist, skipping cleanup`);
+    print.gray(`Directory ${directory} does not exist, skipping cleanup`);
     return;
   }
   
@@ -60,7 +60,7 @@ async function removeJsonFiles(directory) {
     if (file.includes(`${path.sep}locales${path.sep}`)) {
       try {
         await fs.promises.unlink(file);
-        if (isVerbose) print.info(`Deleted locale JSON file: ${file}`);
+        if (isVerbose) print.gray(`Deleted locale JSON file: ${file}`);
       } catch (err) {
         print.error(`Failed to remove ${file}: ${err.message}`);
       }
@@ -72,7 +72,7 @@ async function removeJsonFiles(directory) {
 
   await removeEmptyDirectories(directory);
 
-  if (isVerbose) print.boldInfo(`JSON files cleanup complete.`);
+  if (isVerbose) print.boldInfo(`✅ JSON files cleanup complete.`);
 }
 
 async function removeEmptyDirectories(directory) {
@@ -102,7 +102,7 @@ async function removeEmptyDirectories(directory) {
       const updatedItems = await fs.promises.readdir(directory);
       if (updatedItems.length === 0) {
         await fs.promises.rmdir(directory, { recursive: false });
-        if (isVerbose) print.info(`📁 Removed empty directory: ${directory}`);
+        if (isVerbose) print.gray(`Removed empty directory: ${directory}`);
       }
     } catch (err) {
       print.error(`Failed to remove empty directory ${directory}: ${err.message}`);
@@ -114,15 +114,16 @@ async function mergeJson() {
   if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
 
   const localeFilesMap = findLocaleFiles();
-
+  // const locales = 
   for (const [locale, files] of Object.entries(localeFilesMap)) {
     const combined = combineJsonFiles(files);
     fs.writeFileSync(
       `${destDir}/${locale}.json`,
       JSON.stringify(combined, null, 2)
     );
-    if (isVerbose) print.boldInfo(`Json files for locale ${locale} merged successfully`);
+    if (isVerbose) print.info(`Json files for locale ${locale} merged successfully`);
   }
+  if (isVerbose) print.boldInfo(`✅ Locales json files merged successfully`);
   removeJsonFiles(PATHS.tempApp);
 }
 

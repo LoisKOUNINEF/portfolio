@@ -38,7 +38,7 @@ export function appendToIndex({ name, targetPath, suffix }) {
 
   try {
     fs.appendFileSync(indexFilePath, lineToAppend, 'utf8');
-    print.info(`${suffix}s/index.ts updated.`);
+    print.gray(`${suffix}s/index.ts updated.`);
   } catch (err) {
     print.error(`Error appending line: ${err}`);
   }

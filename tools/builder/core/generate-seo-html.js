@@ -146,7 +146,7 @@ function processRoute(template, baseUrl, lang, route) {
       fs.mkdirSync(outputDir, { recursive: true });
       fs.writeFileSync(outputPath, html, 'utf-8');
 
-      if (isVerbose) print.info(`Generated: ${path.relative(process.cwd(), outputPath)}`);
+      if (isVerbose) print.gray(`Generated: ${path.relative(process.cwd(), outputPath)}`);
     }
   } else {
     const { title, description } = route;
@@ -180,7 +180,7 @@ function processRoute(template, baseUrl, lang, route) {
     fs.mkdirSync(outputDir, { recursive: true });
     fs.writeFileSync(outputPath, html, 'utf-8');
 
-    if (isVerbose) print.info(`Generated: ${path.relative(process.cwd(), outputPath)}`);
+    if (isVerbose) print.gray(`Generated: ${path.relative(process.cwd(), outputPath)}`);
   }
 }
 
@@ -204,7 +204,7 @@ function generateSeoHtml() {
 
 try {
   generateSeoHtml();
-  if (isVerbose) print.boldInfo('SEO HTML generation complete.\n');
+  if (isVerbose) print.boldInfo('✅ SEO HTML generation complete.');
 } catch (err) {
   print.boldError(`[generate-seo-html] Unexpected error: ${err.message}`);
   exit(1);

@@ -29,7 +29,7 @@ function buildSitemapXml(urls) {
 }
 
 function generateSitemapXml() {
-  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo-routes.json');
+  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo.json');
   const seoConfig = JSON.parse(fs.readFileSync(seoConfigPath, 'utf-8'));
   const baseUrl = seoConfig.baseUrl.replace(/\/$/, '');
 
@@ -39,12 +39,12 @@ function generateSitemapXml() {
   const outputPath = path.join(PATHS.tempSource, 'sitemap.xml');
   fs.writeFileSync(outputPath, xml, 'utf-8');
 
-  if (isVerbose) print.info(`Generated: ${path.relative(process.cwd(), outputPath)}`);
+  if (isVerbose) print.gray(`Generated: ${path.relative(process.cwd(), outputPath)}`);
 }
 
 try {
   generateSitemapXml();
-  if (isVerbose) print.boldInfo('sitemap.xml generation complete.\n');
+  if (isVerbose) print.boldInfo('✅ sitemap.xml generation complete.');
 } catch (err) {
   print.boldError(`[generate-sitemap-xml] Unexpected error: ${err.message}`);
   exit(1);

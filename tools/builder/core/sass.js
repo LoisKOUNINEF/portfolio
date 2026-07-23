@@ -20,7 +20,7 @@ await sass.compileAsync(path.join(stylesPath, 'main.scss'), {
   style: 'compressed'
 }).then(result => {
   fs.writeFileSync(stylesOutput, result.css);
-  if (isVerbose) print.boldInfo('Global styles compiled.\n');
+  if (isVerbose) print.boldInfo('✅ Global styles compiled.');
 });
 
 // features styles
@@ -37,5 +37,7 @@ for (const style of appStyles) {
     style: 'compressed'
   })
   fs.appendFileSync(stylesOutput, result.css);
-  if (isVerbose) print.boldInfo(`${style} compiled.\n`);
+  if (isVerbose) print.gray(`${style} compiled.`);
 }
+
+if (isVerbose) print.boldInfo(`✅ App styles compiled.`);

@@ -3,7 +3,7 @@ import { exit } from 'process';
 
 async function compileTS() {
 	await runCommand('tsc', ['--project', 'tsconfig.json']);
-  if (isVerbose) print.boldInfo('TypeScript compiled.\n');
+  if (isVerbose) print.boldInfo('✅ TypeScript compiled.');
 }
 
 compileTS().catch((err) => {

@@ -5,7 +5,7 @@ import { PATHS } from './paths.js';
 import { print, isVerbose } from '../../utils/index.js';
 
 function generateRobotsTxt() {
-  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo-routes.json');
+  const seoConfigPath = path.join(PATHS.temp, 'config', 'seo.json');
   const seoConfig = JSON.parse(fs.readFileSync(seoConfigPath, 'utf-8'));
   const baseUrl = seoConfig.baseUrl.replace(/\/$/, '');
   const routes = seoConfig.routes ?? [];
@@ -50,12 +50,12 @@ function generateRobotsTxt() {
   const outputPath = path.join(PATHS.tempSource, 'robots.txt');
   fs.writeFileSync(outputPath, lines.join('\n') + '\n', 'utf-8');
 
-  if (isVerbose) print.info(`Generated: ${path.relative(process.cwd(), outputPath)}`);
+  if (isVerbose) print.gray(`Generated: ${path.relative(process.cwd(), outputPath)}`);
 }
 
 try {
   generateRobotsTxt();
-  if (isVerbose) print.boldInfo('robots.txt generation complete.\n');
+  if (isVerbose) print.boldInfo('✅ robots.txt generation complete.');
 } catch (err) {
   print.boldError(`[generate-robots-txt] Unexpected error: ${err.message}`);
   exit(1);

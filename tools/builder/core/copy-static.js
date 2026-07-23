@@ -6,10 +6,10 @@ import { BINARY_EXTENSIONS } from '../variables/binary-extensions.js';
 import { PATHS } from './paths.js';
 
 async function copyStatic() {
-  const extensions = [...BINARY_EXTENSIONS, 'html'];
+  const extensions = [...BINARY_EXTENSIONS, '.html'];
   if (isProd) extensions.push('.ts');
 
-  if (isVerbose) print.info(`File types that will be copied: ${Array.from(extensions)}`);
+  if (isVerbose) print.blue(`File types that will be copied: ${extensions.join(', ')}`);
 
   await ensureDir(PATHS.tempSource);
 
@@ -25,9 +25,9 @@ async function copyStatic() {
 
       try {
         await copyFile(file, dest);
-        if (isVerbose) print.info(`✅ Copied: ${file} → ${dest}`);
+        if (isVerbose) print.gray(`Copied: ${file} → ${dest}`);
       } catch (err) {
-        print.error(`❌ Failed to copy: ${file}. ${err.message}`);
+        print.error(`Failed to copy: ${file}. ${err.message}`);
         exit(1);
       }
     }
@@ -35,7 +35,7 @@ async function copyStatic() {
 
   if (isProd) await copyJsonFiles(PATHS.source, PATHS.tempSource);
 
-  if (isVerbose) print.boldInfo(`Copy complete.\n`);
+  if (isVerbose) print.boldInfo(`✅ Copy complete.`);
 }
 
 async function ensureDir(dir) {
@@ -55,7 +55,7 @@ async function copyFavicon() {
     await copyFile(srcPath, destPath);
     if (isVerbose) print.info('Copied: favicon.ico');
   } catch {
-    print.boldError('⚠️  No favicon found at public/favicon.ico');
+    print.warn('No favicon found at public/favicon.ico');
   }
 }
 
@@ -85,7 +85,7 @@ async function copyJsonFiles(sourceDir, destDir) {
     } else if (item.isFile() && path.extname(item.name) === '.json') {
       await fs.mkdir(path.dirname(destPath), { recursive: true });
       await fs.copyFile(sourcePath, destPath);
-      if (isVerbose) print.info(`Copied JSON: ${sourcePath} -> ${destPath}`);
+      if (isVerbose) print.gray(`Copied JSON: ${sourcePath} -> ${destPath}`);
     }
   }
 }

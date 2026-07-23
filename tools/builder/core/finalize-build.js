@@ -6,7 +6,7 @@ import { PATHS } from "./paths.js";
 function finalizeBuild() {
   if (isProd) removeFoldersAfterBundle();
   replaceDir(PATHS.temp, PATHS.build);
-  if (isVerbose) print.boldInfo('Build finalized.\n');
+  if (isVerbose) print.boldInfo('✅ Build finalized.');
 }
 
 function removeFoldersAfterBundle() {

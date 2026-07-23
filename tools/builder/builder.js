@@ -5,8 +5,8 @@ import { print, isProd, runScript } from '../utils/index.js';
 
 const scriptsDir = path.join(process.cwd(), 'tools', 'builder', 'core');
 
-if (!isProd) print.boldInfo('For production, use \'npm run build:prod\'\n');
-print.boldHead(`Starting build...`);
+if (!isProd) print.section('⚠️ For production, use \'npm run build:prod\' ⚠️');
+print.boldHead(`\nStarting build...`);
 
 runScript(path.join(scriptsDir, 'copy-static.js'), 'Copying files...');
 
@@ -28,4 +28,4 @@ if (isProd) {
 
 runScript(path.join(scriptsDir, 'finalize-build.js'), 'Finalizing build...')
 
-print.boldSuccess(`\nBuild successful!`);
+print.boldSuccess(`\nBuild successful!\n`);

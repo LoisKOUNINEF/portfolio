@@ -16,7 +16,7 @@ async function build() {
     keepNames: true, // View names are used to update meta.title
   });
 
-  if (isVerbose) print.boldInfo(`ESBuild complete.\n`);
+  if (isVerbose) print.boldInfo(`✅ ESBuild complete.`);
 }
 
 build().catch((err) => {

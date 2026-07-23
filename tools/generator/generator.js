@@ -2,7 +2,7 @@
 
 import path from "path";
 import { allFormats, getLastWord, print, promptBoolean } from "../utils/index.js";
-import { generateFile, appendToIndex, generateJson, generateStylesheet } from "./handle-file.js";
+import { generateFile, appendToIndex, generateJson } from "./handle-file.js";
 import { serviceTemplate, componentTemplate, viewTemplate, htmlTemplate, scssTemplate } from "./templates/index.js";
 
 // Constants and Setup
@@ -73,14 +73,14 @@ if (create) {
 
 // Helper Functions
 function showUsageAndExit(message) {
-  print.boldError(`\n❌ ${message}`);
-  print.boldError("Usage: npm run generate <type> <path>");
-  print.boldError(`Supported types: ${Object.keys(creators).join(", ")}`);
+  print.boldError(`\n${message}`);
+  print.warn("Usage: npm run generate <type> <path>");
+  print.warn(`Supported types: ${Object.keys(creators).join(", ")}`);
   process.exit(1);
 }
 
 function handleError(context, error) {
-  print.boldError(`\n❌ ${context}`);
+  print.boldError(`\n${context}`);
   print.boldError(error instanceof Error ? error.message : error);
   process.exit(1);
 }
