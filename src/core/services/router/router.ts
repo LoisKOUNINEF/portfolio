@@ -73,7 +73,6 @@ class Router extends Service<Router> {
       routeMatch.params
     );
     
-    NavigationManager.updateMetaContent(this._currentView);
     NavigationManager.updateHistory(normalizedPath, currentPath, pushState);
     window.scrollTo({ top: 0 });
   }
@@ -87,13 +86,22 @@ class Router extends Service<Router> {
   }
 
   private initializeEventListeners(): void {
+    this.initializeNavigationEvents();
+    this.initializeI18nEvents();
+  }
+
+  private initializeNavigationEvents(): void {
     window.addEventListener('popstate', this.onPopState);
     const unsubOnNav = Navigation.onNavigate(this.onNavigate);
     const unsubOnReload = Navigation.onReload(this.onReload);
+    this._busSubscriptions.push(unsubOnNav, unsubOnReload); 
+  }
+
+  private initializeI18nEvents(): void {
     const onLangChanged = () => NavigationManager.updateLocaleInUrl();
     AppEventBus.subscribe('language-changed', onLangChanged);
     const unsubOnLang = () => AppEventBus.off('language-changed', onLangChanged);
-    this._busSubscriptions.push(unsubOnNav, unsubOnReload, unsubOnLang);
+    this._busSubscriptions.push(unsubOnLang);    
   }
 
   private async handlePopState(): Promise<void> {
@@ -138,7 +146,6 @@ class Router extends Service<Router> {
     this._currentParams = {};
     this._currentView = ViewRenderManager.renderNewView(notFoundConstructor, {});
     
-    NavigationManager.updateMetaContent(this._currentView);
     NavigationManager.updateHistory(normalizedPath, currentPath, pushState);
   }
 

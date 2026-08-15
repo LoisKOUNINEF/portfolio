@@ -51,18 +51,6 @@ export class NavigationManager {
     }
   }
 
-  public static updateMetaContent(currentView: View): void {
-    if (!currentView.shouldUpdateMetaContent()) return;
-
-    const strippedName = currentView.viewName.replace('-view', '');
-    const title = `${strippedName}.meta.title`;
-    const description = `${strippedName}.meta.description`;
-
-    document.title = I18nService.translate(title);
-    document.querySelector('meta[name="description"]')
-      ?.setAttribute('content', I18nService.translate(description));
-  }
-
   public static getCurrentPath(): string {
     return this.normalizePath(window.location.pathname);
   }

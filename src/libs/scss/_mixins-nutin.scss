@@ -81,6 +81,13 @@
 // 1. Responsive
 // ------------------------------------------------
 
+$breakpoints: (
+  small: 576px,
+  medium: 815px,
+  large: 1450px,
+  largest: 1600px,
+) !default;
+
 @mixin respond-to($breakpoint) {
   $value: map.get($breakpoints, $breakpoint);
 

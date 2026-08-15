@@ -13,7 +13,7 @@ async function build() {
     ...builderConfig.esbuild,
     entryPoints: [ENTRY_FILE],
     outfile: OUT_FILE,
-    keepNames: true, // View names are used to update meta.title
+    keepNames: false, // View names are used to update meta.title
   });
 
   if (isVerbose) print.boldInfo(`✅ ESBuild complete.`);

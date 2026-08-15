@@ -37,21 +37,17 @@ export class NotFoundView extends View {
     ]
   }
 
+  private hideGlobals(): void {
+    this.hideNavbar();
+    this.hideFooter();
+  }
+
+  private revealGlobals(): void {
+    this.revealNavbar();
+    this.revealFooter();
+  }
+
   private handleHome(): void {
     Navigation.navigateTo('/');
-  }
-
-  private hideGlobals() {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    navbar.style = 'display: none';
-    const footer = document.getElementById('footer') as HTMLElement;
-    footer.style = 'display: none';
-  }
-
-  private revealGlobals() {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    navbar.style = 'display: block';
-    const footer = document.getElementById('footer') as HTMLElement;
-    footer.style = 'display: block';
   }
 }

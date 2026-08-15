@@ -7,6 +7,7 @@ export interface ViewOptions extends BaseComponentOptions {
 export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComponent<T> {
   public viewName: string;
   protected routeParams: Record<string, string> = {};
+  private _template: string;
 
   constructor({
     template,
@@ -19,8 +20,6 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     this._template = template ?? '';
     this.viewName = viewName || this.getKebabCaseViewName();
   }
-
-  private _template: string;
 
   protected override generateTemplate(): string {
     return this._template;
@@ -42,12 +41,43 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     return key in this.routeParams && this.routeParams[key] !== undefined;
   }
 
-  public shouldUpdateMetaContent(): boolean {
-    return true;
+/**
+ * Hide navbar
+ * Container div must have id="navbar"
+ */
+  protected hideNavbar(): void {
+    const navbar = document.getElementById('navbar') as HTMLElement;
+    if (navbar) navbar.style = 'display: none';
+  }
+
+/**
+ * Hide footer
+ * Container div must have id="footer"
+ */
+  protected hideFooter(): void {
+    const footer = document.getElementById('footer') as HTMLElement;
+    if (footer) footer.style = 'display: none';
+  }
+
+/**
+ * Reveal navbar
+ * Container div must have id="navbar"
+ */
+  protected revealNavbar(): void {
+    const navbar = document.getElementById('navbar') as HTMLElement;
+    if (navbar) navbar.style = 'display: block';
+  }
+
+/**
+ * Reveal footer
+ * Container div must have id="footer"
+ */
+  protected revealFooter(): void {
+    const footer = document.getElementById('footer') as HTMLElement;
+    if (footer) footer.style = 'display: block';
   }
 
   private getKebabCaseViewName(): string {
-    console.warn('Consider setting viewName value in constructor for consistency.');
     const className = this.constructor.name;
     const baseName = className.replace(/View$/, '');
     return baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
