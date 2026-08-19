@@ -78,6 +78,10 @@ export abstract class Component<T extends HTMLElement = HTMLElement, K = any> ex
     this.applyProps();
   }
 
+  protected override onAfterRender(): void {
+    this.applyDataBindings();
+  }
+
   private applyProps(): void {
     if (this.props.className) {
       this.element.classList.add(this.props.className);
@@ -85,11 +89,9 @@ export abstract class Component<T extends HTMLElement = HTMLElement, K = any> ex
     if (this.props.style) {
       this.element.style.cssText = this.props.style;
     }
-    this.applyDataBindings();
   }
 
   private applyDataBindings(): void {
     DataBindingHelper.applyDataBindings(this.element, this.props);
   }
 }
-

@@ -81,7 +81,7 @@ export class NavToggleHelper {
   }
 
   private static getDomElements(): INavDomElements {
-    const navbar = document.getElementById('navbar');
+    const navbar = document.getElementById('header');
     const navAnchorsContainer = document.getElementById('navbar-anchors');
     const anchors = Array.from(navAnchorsContainer!.querySelectorAll('a'));
     const toggler = document.querySelector('.navbar__toggle-navbar');

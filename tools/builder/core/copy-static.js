@@ -1,15 +1,14 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { exit } from 'process';
-import { getFilesRecursive, print, isVerbose, isProd } from '../../utils/index.js';
+import { getFilesRecursive, print } from '../../utils/index.js';
 import { BINARY_EXTENSIONS } from '../variables/binary-extensions.js';
 import { PATHS } from './paths.js';
+import { builderConfig } from '../builder.config.js';
 
 async function copyStatic() {
   const extensions = [...BINARY_EXTENSIONS, '.html'];
-  if (isProd) extensions.push('.ts');
-
-  if (isVerbose) print.blue(`File types that will be copied: ${extensions.join(', ')}`);
+  if (builderConfig.isProd) extensions.push('.ts');
 
   await ensureDir(PATHS.tempSource);
 
@@ -25,7 +24,6 @@ async function copyStatic() {
 
       try {
         await copyFile(file, dest);
-        if (isVerbose) print.gray(`Copied: ${file} → ${dest}`);
       } catch (err) {
         print.error(`Failed to copy: ${file}. ${err.message}`);
         exit(1);
@@ -33,9 +31,7 @@ async function copyStatic() {
     }
   }
 
-  if (isProd) await copyJsonFiles(PATHS.source, PATHS.tempSource);
-
-  if (isVerbose) print.boldInfo(`✅ Copy complete.`);
+  if (builderConfig.isProd) await copyJsonFiles(PATHS.source, PATHS.tempSource);
 }
 
 async function ensureDir(dir) {
@@ -53,7 +49,6 @@ async function copyFavicon() {
 
   try {
     await copyFile(srcPath, destPath);
-    if (isVerbose) print.info('Copied: favicon.ico');
   } catch {
     print.warn('No favicon found at public/favicon.ico');
   }
@@ -61,13 +56,17 @@ async function copyFavicon() {
 
 async function copyConfig() {
   const srcPath = path.resolve(path.join('config'));
-  const temp = isProd ? PATHS.temp : PATHS.tempSource;
+  const temp = builderConfig.isProd ? PATHS.temp : PATHS.tempSource;
   const destPath = path.join(temp, 'config');
   try {
     await copyJsonFiles(srcPath, destPath);
-    // for tests to run
-    if (!isProd) await copyJsonFiles(srcPath, path.join(PATHS.temp, 'config'));
-    if (isVerbose) print.info('Config files copied');
+    await copyFile(path.resolve('nutin.config.js'), path.join(temp, 'nutin.config.js'));
+
+    // for testin-nutin tests to run
+    if (!builderConfig.isProd) {
+      await copyJsonFiles(srcPath, path.join(PATHS.temp, 'config'));
+      await copyFile(path.resolve('nutin.config.js'), path.join(PATHS.temp, 'nutin.config.js'));
+    }
   } catch {
     print.boldError('Issue when copying config files.');
     exit(1);
@@ -75,7 +74,6 @@ async function copyConfig() {
 }
 
 async function copyJsonFiles(sourceDir, destDir) {
-  
   const items = await fs.readdir(sourceDir, { withFileTypes: true });
 
   for (const item of items) {
@@ -87,7 +85,6 @@ async function copyJsonFiles(sourceDir, destDir) {
     } else if (item.isFile() && path.extname(item.name) === '.json') {
       await fs.mkdir(path.dirname(destPath), { recursive: true });
       await fs.copyFile(sourcePath, destPath);
-      if (isVerbose) print.gray(`Copied JSON: ${sourcePath} -> ${destPath}`);
     }
   }
 }

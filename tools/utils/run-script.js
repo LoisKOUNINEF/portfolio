@@ -1,12 +1,11 @@
 import { resolve } from 'path';
 import { spawnSync } from 'child_process';
 import process from 'process';
-import { print, isVerbose } from './index.js';
+import { print } from './index.js';
 
 export function runScript(path, message) {
-  const hasNewline = isVerbose ? '\n' : '';
-  if (!message) print.boldSection(`${hasNewline}Running ${path}...`);
-  else print.boldSection(`${hasNewline}${message}`);
+  if (!message) print.boldSection(`Running ${path}...`);
+  else print.boldSection(`${message}`);
 
   const args = [resolve(path), '--silent'];
 

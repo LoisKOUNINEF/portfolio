@@ -54,7 +54,7 @@ export class ButtonManager {
 
     const container = document.createElement('div');
     container.className = this.containerOptions.containerClassName || 'dynamic-buttons';
-    container.style = this.containerOptions.containerStyles || '';
+    container.style.cssText = this.containerOptions.containerStyles || '';
 
     this.buttons.forEach((config, index) => {
       const button = this.createButton(config, index);

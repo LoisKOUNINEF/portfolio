@@ -1,4 +1,9 @@
 import { minify } from 'html-minifier-terser';
+import fs from 'fs';
+import { exit } from 'process';
+import { getFilesRecursive, print } from '../../utils/index.js';
+import { PATHS } from './paths.js';
+import { builderConfig } from '../builder.config.js';
 
 export async function minifyHTML(html) {
   return minify(html, {
@@ -14,3 +19,36 @@ export async function minifyHTML(html) {
   });
 }
 
+const TEMPLATE_REGEX =
+  /const\s+(template|templateFn)\s*=?\s*(?:\(.*?\)\s*=>\s*)?`([\s\S]*?)`/gm;
+
+async function minifyInlineHTML() {
+  const extension = builderConfig.isProd ? '.ts' : '.js';
+  const jsFiles = getFilesRecursive(PATHS.tempApp, extension);
+
+  for (const file of jsFiles) {
+    let code = fs.readFileSync(file, 'utf8');
+    let hasChanges = false;
+
+    const matches = [...code.matchAll(TEMPLATE_REGEX)];
+
+    if (matches.length) {
+      for (const match of matches) {
+        const [full, , html] = match;
+        const minified = await minifyHTML(html);
+        const minifiedBlock = full.replace(html, minified);
+        code = code.replace(full, minifiedBlock);
+        hasChanges = true;
+      }
+    }
+
+    if (hasChanges) {
+      fs.writeFileSync(file, code, 'utf8');
+    }
+  }
+}
+
+minifyInlineHTML().catch((err) => {
+  print.boldError(`Unexpected error: ${err.message}`);
+  exit(1);
+});

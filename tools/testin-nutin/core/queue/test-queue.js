@@ -1,0 +1,122 @@
+import path from 'path';
+import Queue from './queue.js';
+import { printStart, printSummary, printResults } from '../index.js';
+
+const testQueue = new Queue();
+let todo = 0;
+let passed = 0;
+let failed = 0;
+let elapsedTime;
+let currentTestFile = '';
+
+export function setCurrentTestFile(file) {
+  currentTestFile = file ? path.relative(process.cwd(), file) : '';
+}
+
+export function addTest(test) {
+  testQueue.enqueue(test.isTodo ? { ...test, file: currentTestFile } : test);
+}
+
+export async function runQueuedTests() {
+  printStart();
+  const startTime = performance.now();
+  const testAmount = testQueue.length;
+  const results = [];
+  let previousSuite = null;
+  let previousSuiteAfterAll = null;
+  let test;
+  
+  const runAfterAll = async (suiteName, afterAllFn) => {
+    if (!afterAllFn) return;
+    try {
+      await afterAllFn();
+    } catch (err) {
+      failed++;
+      results.push({
+        suiteName,
+        status: 'failed',
+        name: 'afterAll',
+        error: err.stack
+      });
+    }
+  };
+
+  for (let i = 0; i < testAmount; i++) {
+    test = testQueue.deque();
+
+    if (test.suiteName !== previousSuite) {
+      teardownJsdom();
+      await runAfterAll(previousSuite, previousSuiteAfterAll);
+      setupJsdom();
+      previousSuite = test.suiteName;
+      previousSuiteAfterAll = test.afterAll;
+      if (test.beforeAll) {
+        try {
+          await test.beforeAll();
+        } catch (err) {
+          failed++;
+          results.push({
+            suiteName: test.suiteName,
+            status: 'failed',
+            name: 'beforeAll',
+            error: err.stack
+          });
+        }
+      }
+    }
+
+    if (test.isTodo) {
+      todo++;
+      results.push({
+        suiteName: test.suiteName,
+        status: 'todo',
+        name: test.testName,
+        file: test.file
+      });
+      continue;
+    }
+
+    let testError = null;
+    try {
+      if (test.beforeEach) await test.beforeEach();
+      await test.testFn();
+    } catch (err) {
+      testError = err;
+    }
+
+    try {
+      if (test.afterEach) await test.afterEach();
+    } catch (err) {
+      if (!testError) testError = err;
+    }
+
+    if (testError) {
+      failed++;
+      results.push({
+        suiteName: test.suiteName,
+        status: 'failed',
+        name: test.testName,
+        error: testError.stack
+      });
+    } else {
+      passed++;
+      results.push({
+        suiteName: test.suiteName,
+        status: 'passed',
+        name: test.testName
+      });
+    }
+  }
+
+  if (previousSuite !== null) {
+    teardownJsdom();
+    await runAfterAll(previousSuite, previousSuiteAfterAll);
+  }
+
+  const endTime = performance.now();
+  elapsedTime = (endTime - startTime);
+  printResults(results);
+  printSummary(todo, passed, failed, elapsedTime);
+
+  return { todo, passed, failed, elapsedTime };
+}

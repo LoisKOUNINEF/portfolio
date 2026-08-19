@@ -44,7 +44,7 @@ export class AttributesHelper {
     }
 
     if(style) {
-      element.style = style;
+      element.style.cssText = style;
     }
   }
 }

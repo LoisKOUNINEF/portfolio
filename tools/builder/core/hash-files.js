@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { PATHS } from './paths.js';
-import { print, isVerbose, getFilesRecursive } from '../../utils/index.js';
+import { print, getFilesRecursive } from '../../utils/index.js';
 
 function addHashToFiles(distDir) {
   const files = getFilesRecursive(distDir, ['.js', '.css']);
@@ -24,15 +24,9 @@ function addHashToFiles(distDir) {
     const newRel = path.relative(distDir, newPath).replace(/\\/g, '/');
 
     fileMap[oldRel] = newRel;
-
-    if (isVerbose) {
-      print.gray(`Renamed: ${oldRel} → ${newRel}`);
-    }
   });
 
   updateHtmlReferences(path.join(distDir, 'index.html'), fileMap);
-
-  if (isVerbose) print.boldInfo(`✅ Hashing complete.`);
 }
 
 function hashFile(filePath) {
@@ -48,7 +42,6 @@ function updateHtmlReferences(htmlPath, fileMap) {
   });
   
   fs.writeFileSync(htmlPath, html);
-  if (isVerbose) print.boldGray('Updated index.html references');
 }
 
 addHashToFiles(PATHS.tempSource);

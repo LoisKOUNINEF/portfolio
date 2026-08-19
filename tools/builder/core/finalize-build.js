@@ -1,19 +1,24 @@
-import { print, isProd, isVerbose } from "../../utils/index.js";
 import fs from 'fs';
 import path from 'path';
 import { PATHS } from "./paths.js";
+import { builderConfig } from '../builder.config.js';
+import { print } from "../../utils/index.js";
 
 function finalizeBuild() {
-  if (isProd) removeFoldersAfterBundle();
+  if (builderConfig.isProd) removeFoldersAfterBundle();
+  if (builderConfig.isProd) removeNutinConfig();
   replaceDir(PATHS.temp, PATHS.build);
-  if (isVerbose) print.boldInfo('✅ Build finalized.');
 }
 
 function removeFoldersAfterBundle() {
-  const foldersToRemove = [ 'core', 'libs', 'app', path.join('..', 'config') ];
+  const foldersToRemove = [ 'core', 'app', path.join('..', 'config') ];
   const pathToFolder = (folder) => path.join(PATHS.tempSource, folder);
 
   foldersToRemove.forEach(folder => fs.rmSync(pathToFolder(folder), { recursive : true }));
+}
+
+function removeNutinConfig() {
+  fs.rmSync(path.join(PATHS.temp, 'nutin.config.js'));
 }
 
 function replaceDir(src, dest) {
@@ -21,4 +26,9 @@ function replaceDir(src, dest) {
   fs.renameSync(src, dest);
 }
 
-finalizeBuild();
+try {
+  finalizeBuild();
+} catch(err) {
+  print.boldError(`Unexpected error: ${err.message}`);
+  exit(1);
+}

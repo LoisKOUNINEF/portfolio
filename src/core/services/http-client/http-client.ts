@@ -4,7 +4,7 @@ import { HttpManager } from "./helpers/http-manager.helper.js";
 
 export type IHttpClient = InstanceType<typeof HttpClient>;
 
-class HttpClient extends Service<HttpClient> {
+export class HttpClient extends Service<HttpClient> {
   private _baseUrl: string;
   private _defaultHeaders: Record<string, string>;
 

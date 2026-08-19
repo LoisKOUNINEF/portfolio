@@ -1,15 +1,16 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { exit } from 'process';
-import { getFilesRecursive, print, isVerbose, isProd } from '../../utils/index.js';
+import { getFilesRecursive, print } from '../../utils/index.js';
 import { minifyHTML } from './minify-html.js';
 import { PATHS } from './paths.js';
+import { builderConfig } from '../builder.config.js';
 
 const PLACEHOLDER = '__TEMPLATE_PLACEHOLDER__';
 
 async function mergeTemplates() {
   const htmlFiles = await getFilesRecursive(PATHS.tempApp, 'html');
-  const fileExtension = isProd ? '.ts' : '.js';
+  const fileExtension = builderConfig.isProd ? '.ts' : '.js';
 
   for (const htmlPath of htmlFiles) {
     const jsPath = htmlPath.replace(/\.html$/, fileExtension);
@@ -19,7 +20,6 @@ async function mergeTemplates() {
     try {
       const htmlContent = await fs.readFile(htmlPath, 'utf-8');
       const minifiedHtml = await minifyHTML(htmlContent);
-      if (isVerbose) print.gray(`Minified HTML: ${htmlPath}`);
 
       try {
         let jsContent = await fs.readFile(jsPath, 'utf-8');
@@ -32,7 +32,6 @@ async function mergeTemplates() {
         jsContent = jsContent.replace(PLACEHOLDER, minifiedHtml);
         await fs.writeFile(jsPath, jsContent);
         await fs.unlink(htmlPath);
-        if (isVerbose) print.gray(`Updated ${jsFilename} with template from ${htmlFilename}.`);
       } catch (err) {
         print.boldError(`ERROR: Cannot update ${jsFilename}. ${err.message}`);
       }
@@ -40,7 +39,6 @@ async function mergeTemplates() {
       print.boldError(`ERROR: Failed to read ${htmlFilename}. ${err.message}`);
     }
   }
-  if (isVerbose) print.boldInfo(`✅ HTML templates minified and merged in scripts.`);
 }
 
 mergeTemplates().catch((err) => {

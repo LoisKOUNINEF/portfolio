@@ -1,0 +1,12 @@
+import process from 'process';
+import nutinConfig from '../../nutin.config.js';
+
+export const builderConfig = {
+  ...nutinConfig.builder,
+  isProd: process.env.NODE_ENV === 'production',
+  inlineTemplates: nutinConfig.inlineTemplates,
+  i18n: nutinConfig.i18n,
+  tailwind: nutinConfig.tailwind,
+  generateSEO: nutinConfig.generateSEOFiles,
+  WELL_KNOWN_NON_SEO_ROUTES: ['/404', '/403', '/500'],
+};

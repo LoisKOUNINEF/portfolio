@@ -1,9 +1,9 @@
 import * as sass from 'sass';
 import * as fs from 'fs';
 import path from 'path';
-import { getFilesRecursive, isVerbose, print } from '../../utils/index.js';
+import { getFilesRecursive, print } from '../../utils/index.js';
 import { PATHS } from './paths.js';
-import builderConfig from '../../../builder.config.js';
+import { builderConfig } from '../builder.config.js';
 
 const stylesOutput = path.join(PATHS.tempSource, 'main.css');
 
@@ -16,16 +16,14 @@ const libsInput = path.join(PATHS.source, 'libs');
 const pathsToLoad = [ ...stylesInput, libsInput ];
 
 await sass.compileAsync(path.join(stylesPath, 'main.scss'), {
-  loadPaths: [ ...pathsToLoad,  ],
+  loadPaths: [ ...pathsToLoad ],
   style: 'compressed'
 }).then(result => {
   fs.writeFileSync(stylesOutput, result.css);
-  if (isVerbose) print.boldInfo('✅ Global styles compiled.');
 });
 
 // features styles
 const appInput = path.join(PATHS.source, 'app');
-// const appOrigins = [ 'components', 'views', 'libs' ];
 const appStyles = [
   ...getFilesRecursive(path.join(appInput, 'components'), 'scss'), 
   ...getFilesRecursive(path.join(appInput, 'views'), 'scss')
@@ -37,7 +35,4 @@ for (const style of appStyles) {
     style: 'compressed'
   })
   fs.appendFileSync(stylesOutput, result.css);
-  if (isVerbose) print.gray(`${style} compiled.`);
 }
-
-if (isVerbose) print.boldInfo(`✅ App styles compiled.`);

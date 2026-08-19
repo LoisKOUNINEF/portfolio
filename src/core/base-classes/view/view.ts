@@ -42,12 +42,12 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
   }
 
 /**
- * Hide navbar
- * Container div must have id="navbar"
+ * Hide header
+ * Container div must have id="header"
  */
-  protected hideNavbar(): void {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    if (navbar) navbar.style = 'display: none';
+  protected hideHeader(): void {
+    const header = document.getElementById('header') as HTMLElement;
+    if (header) header.style.cssText = 'display: none';
   }
 
 /**
@@ -56,16 +56,16 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
  */
   protected hideFooter(): void {
     const footer = document.getElementById('footer') as HTMLElement;
-    if (footer) footer.style = 'display: none';
+    if (footer) footer.style.cssText = 'display: none';
   }
 
 /**
- * Reveal navbar
- * Container div must have id="navbar"
+ * Reveal header
+ * Container div must have id="header"
  */
-  protected revealNavbar(): void {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    if (navbar) navbar.style = 'display: block';
+  protected revealHeader(): void {
+    const header = document.getElementById('header') as HTMLElement;
+    if (header) header.style.cssText = 'display: block';
   }
 
 /**
@@ -74,7 +74,7 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
  */
   protected revealFooter(): void {
     const footer = document.getElementById('footer') as HTMLElement;
-    if (footer) footer.style = 'display: block';
+    if (footer) footer.style.cssText = 'display: block';
   }
 
   private getKebabCaseViewName(): string {

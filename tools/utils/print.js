@@ -16,14 +16,14 @@ export const chalk = {
 };
 
 export const print = {
-	head: (s) => console.info(`${chalk.purple(s)}`),  
-	boldHead : (s) => console.info(`${chalk.boldPurple(s)}`),
-	section: (s) => console.info(`${chalk.yellow(s)}`),
-	boldSection: (s) => console.info(`${chalk.boldYellow(s)}`),
-	info: (s) => console.info(`${chalk.green(s)}`),
+  head: (s) => console.info(`${chalk.purple(s)}`),  
+  boldHead : (s) => console.info(`${chalk.boldPurple(s)}`),
+  section: (s) => console.info(`${chalk.yellow(s)}`),
+  boldSection: (s) => console.info(`${chalk.boldYellow(s)}`),
+  info: (s) => console.info(`${chalk.green(s)}`),
   boldInfo: (s) => console.info(`${chalk.boldGreen(s)}`),
-	success: (s) => console.log(`${chalk.cyan(s)}`),
-	boldSuccess: (s) => console.log(`${chalk.boldCyan(s)}`),
+  success: (s) => console.log(`${chalk.cyan(s)}`),
+  boldSuccess: (s) => console.log(`${chalk.boldCyan(s)}`),
   gray: (s) => console.info(`${chalk.gray(s)}`),
   boldGray: (s) => console.info(`${chalk.boldGray(s)}`),
   blue: (s) => console.info(`${chalk.blue(s)}`),
@@ -32,5 +32,6 @@ export const print = {
   boldError: (s) => console.error(`${chalk.boldRed(s)}`),
   grayError: (s) => console.error(`${chalk.boldGray(s)}`),
   warn: (s) => console.warn(`${chalk.yellow(s)}`),
+  boldWarn: (s) => console.warn(`${chalk.yellow(s)}`),
   debug: (s) => console.debug(`${chalk.gray(s)}`),
 }

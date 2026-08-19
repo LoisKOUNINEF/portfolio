@@ -1,5 +1,4 @@
-import { AppRouter, Service, I18nService } from '../core/index.js';
-import { registerPipes } from '../libs/index.js';
+import { AppRouter, Service, I18nService, registerPipes  } from '../core/index.js';
 import { FooterComponent, NavbarComponent } from './components/index.js';
 import { appRoutes } from './routes.js';
 

@@ -1,9 +1,8 @@
-import { runCommand, print, isVerbose } from "../../utils/index.js";
 import { exit } from 'process';
+import { runCommand, print } from "../../utils/index.js";
 
 async function compileTS() {
-	await runCommand('tsc', ['--project', 'tsconfig.json']);
-  if (isVerbose) print.boldInfo('✅ TypeScript compiled.');
+  await runCommand('tsc', ['--project', 'tsconfig.json']);
 }
 
 compileTS().catch((err) => {

@@ -38,12 +38,12 @@ export class NotFoundView extends View {
   }
 
   private hideGlobals(): void {
-    this.hideNavbar();
+    this.hideHeader();
     this.hideFooter();
   }
 
   private revealGlobals(): void {
-    this.revealNavbar();
+    this.revealHeader();
     this.revealFooter();
   }
 
