@@ -13,8 +13,8 @@
     "testin-nutin": "npm run build && node tools/testin-nutin/runner.js",
     "testin-nutin:watch": "npm run build && node tools/testin-nutin/watch-tests.js",
     "testin-nutin:coverage": "npm run build && node tools/testin-nutin/runner.js --coverage",
-    "docker:build": "docker build -t portfolio -f tools/docker/Dockerfile .",
-    "docker:run": "docker run -p 9090:9090 portfolio:latest",
+    "docker:build": "node tools/docker/scripts/docker-build.js",
+    "docker:run": "node tools/docker/scripts/docker-run.js",
     "patch": "npm version patch -m 'CI/CD: Bump version to %s'",
     "minor": "npm version minor -m 'CI/CD: Bump version to %s'",
     "major": "npm version major -m 'CI/CD: Bump version to %s'"

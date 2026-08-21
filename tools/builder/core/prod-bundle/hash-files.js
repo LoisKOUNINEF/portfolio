@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { PATHS } from './paths.js';
-import { print, getFilesRecursive } from '../../utils/index.js';
+import { PATHS } from '../app/paths.js';
+import { print, getFilesRecursive, errorExit } from '../../../utils/index.js';
 
 function addHashToFiles(distDir) {
   const files = getFilesRecursive(distDir, ['.js', '.css']);
@@ -34,14 +34,22 @@ function hashFile(filePath) {
   return crypto.createHash('sha256').update(content).digest('hex').substring(0, 8);
 }
 
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function updateHtmlReferences(htmlPath, fileMap) {
   let html = fs.readFileSync(htmlPath, 'utf8');
-  
+
   Object.entries(fileMap).forEach(([oldName, newName]) => {
-    html = html.replace(new RegExp(oldName, 'g'), newName);
+    html = html.replace(new RegExp(escapeRegExp(oldName), 'g'), newName);
   });
-  
+
   fs.writeFileSync(htmlPath, html);
 }
 
-addHashToFiles(PATHS.tempSource);
+try {
+  addHashToFiles(PATHS.tempSource)
+} catch(err) {
+  errorExit(err, 'hash-files');
+}

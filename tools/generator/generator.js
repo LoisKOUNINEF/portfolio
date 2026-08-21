@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import path from "path";
-import { allFormats, getLastWord, print, promptBoolean } from "../utils/index.js";
-import { generateFile, appendToIndex, generateJson } from "./handle-file.js";
+import { allFormats, getLastWord, print, promptBoolean, errorExit } from "../utils/index.js";
+import { generateFile, appendToIndex, generateLocalesJson } from "./handle-file.js";
 import { serviceTemplate, componentTemplate, viewTemplate, htmlTemplate, scssTemplate, testTemplate } from "./templates/index.js";
 import nutinConfig from "../../nutin.config.js";
 
@@ -11,6 +11,7 @@ const [, , rawType, rawFullPath] = process.argv;
 
 if (!rawType || !rawFullPath) {
   showUsageAndExit("Missing arguments.");
+  process.exit(1);
 }
 
 const type = allFormats(rawType);
@@ -36,9 +37,9 @@ const creators = {
     print.section(`Generating component: ${name.capitalized}`);
 
     try {
-      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       generateFile({ name, targetPath, templateFn: componentTemplate, suffix: suffix });
       if (!nutinConfig.inlineTemplates) generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
+      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       if (nutinConfig.generator.generateLocales) await generateLocales({ targetPath, name });
       appendToIndex({ name, targetPath, suffix: suffix });
       if (nutinConfig.generator.generateTest) await generateTest({ name, targetPath, suffix });
@@ -51,9 +52,9 @@ const creators = {
     print.section(`Generating view: ${name.capitalized}`);
 
     try {
-      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       generateFile({ name, targetPath, templateFn: viewTemplate, suffix: suffix });
       if (!nutinConfig.inlineTemplates) generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
+      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
       if (nutinConfig.generator.generateLocales) await generateLocales({ targetPath, name });
       appendToIndex({ name, targetPath, suffix: suffix });
       if (nutinConfig.generator.generateTest) await generateTest({ name, targetPath, suffix });
@@ -71,6 +72,7 @@ if (create) {
   print.boldSuccess(`\n${type.capitalized} ${name.capitalized} generated in ${targetPath}.\n`)
 } else {
   showUsageAndExit(`Unsupported type: '${type.kebab}'`);
+  process.exit(1);
 }
 
 // Helper Functions
@@ -91,7 +93,7 @@ async function generateTest({ targetPath, name, suffix }) {
 async function generateLocales({ targetPath, name }) {
   let isGenerate = true;
   if (!nutinConfig.i18n) {
-    print.warn('⚠️ Enable i18n in nutin.config.js to use json-based content.');
+    print.warn('⚠️ Enable i18n in nutin.config.js to use json-based content per language.');
     if (!process.stdin.isTTY) {
       print.warn('Non-interactive shell detected — skipping locales file generation.');
       isGenerate = false;
@@ -99,7 +101,7 @@ async function generateLocales({ targetPath, name }) {
       isGenerate = await promptBoolean('Do you want to generate the locales file(s) anyway ?');
     }
   }
-  if (isGenerate) generateJson({ targetPath, name });
+  if (isGenerate) generateLocalesJson({ targetPath, name });
 }
 
 function showUsageAndExit(message) {
@@ -110,7 +112,5 @@ function showUsageAndExit(message) {
 }
 
 function handleError(context, error) {
-  print.boldError(`\n${context}`);
-  print.boldError(error instanceof Error ? error.message : error);
-  process.exit(1);
+  errorExit(error, context);
 }

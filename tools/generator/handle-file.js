@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { print, LANGUAGES } from '../utils/index.js';
-import { jsonTemplate } from './templates/index.js';
+import { localeTemplate } from './templates/index.js';
 
 export function generateFile({
   name,
@@ -39,18 +39,27 @@ export function appendToIndex({ name, targetPath, suffix }) {
     fs.appendFileSync(indexFilePath, lineToAppend, 'utf8');
     print.gray(`${suffix}s/index.ts updated.`);
   } catch (err) {
-    print.error(`Error appending line: ${err}`);
+    throw new Error(`Failed to update ${indexFilePath}: ${err.message}`, { cause: err });
   }
 }
 
-export function generateJson({ targetPath, name }) {
+export function generateLocalesJson({ targetPath, name }) {
   const localesDir = `${targetPath}/locales`;
   fs.mkdirSync(localesDir, { recursive: true });
 
-  const template = targetPath.includes('view') ? jsonTemplate(name) : `{ "default": "${name.pascal} works !"}`;
+  const template = localeTemplate(name);
 
-// include "meta" keys for views, empty JSON for components
-  LANGUAGES.forEach((lang) => {
-    fs.writeFileSync(`${localesDir}/${lang}.json`, template);
-  });
+  const failedLangs = [];
+  for (const lang of LANGUAGES) {
+    try {
+      fs.writeFileSync(`${localesDir}/${lang}.json`, template);
+    } catch (err) {
+      print.error(`Failed to write locale file for "${lang}": ${err.message}`);
+      failedLangs.push(lang);
+    }
+  }
+
+  if (failedLangs.length) {
+    throw new Error(`Failed to generate locale file(s) for: ${failedLangs.join(', ')}`);
+  }
 }

@@ -3,8 +3,8 @@ export default {
   tailwind: false,         // Enable Tailwind CSS v4
   i18n: true,             // Enable i18n; configure languages in config/languages.json 
   inlineTemplates: false,  // Embed HTML templates in .ts files instead of colocated .html files
-
   generateSEOFiles: true, // Generate per-route HTML, robots.txt and sitemap.xml; configure SEO data in config/seo.json
+  dockerPorts: [9090],
 
   // Components / Views scaffolding
   generator: {
@@ -17,7 +17,7 @@ export default {
   builder: {
     sass: {
       paths: [ 
-        'base', 
+        'base',
       ], // Directories in styles/ to include in the Sass load path
     },
 

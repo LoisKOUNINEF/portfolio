@@ -1,10 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { exit } from 'process';
-import { getFilesRecursive, print } from '../../utils/index.js';
-import { BINARY_EXTENSIONS } from '../variables/binary-extensions.js';
+import { getFilesRecursive, print, errorExit } from '../../../utils/index.js';
+import { BINARY_EXTENSIONS } from './binary-extensions.js';
 import { PATHS } from './paths.js';
-import { builderConfig } from '../builder.config.js';
+import { builderConfig } from '../../builder.config.js';
 
 async function copyStatic() {
   const extensions = [...BINARY_EXTENSIONS, '.html'];
@@ -25,8 +24,7 @@ async function copyStatic() {
       try {
         await copyFile(file, dest);
       } catch (err) {
-        print.error(`Failed to copy: ${file}. ${err.message}`);
-        exit(1);
+        throw new Error(`Failed to copy: ${file}. ${err.message}`, { cause: err });
       }
     }
   }
@@ -49,8 +47,9 @@ async function copyFavicon() {
 
   try {
     await copyFile(srcPath, destPath);
-  } catch {
-    print.warn('No favicon found at public/favicon.ico');
+  } catch (err) {
+    if (err.code === 'ENOENT') print.warn('No favicon found at public/favicon.ico');
+    else errorExit(err, 'copy-static');
   }
 }
 
@@ -67,9 +66,8 @@ async function copyConfig() {
       await copyJsonFiles(srcPath, path.join(PATHS.temp, 'config'));
       await copyFile(path.resolve('nutin.config.js'), path.join(PATHS.temp, 'nutin.config.js'));
     }
-  } catch {
-    print.boldError('Issue when copying config files.');
-    exit(1);
+  } catch (err) {
+    errorExit(err, 'copy-static');
   }
 }
 
@@ -90,6 +88,5 @@ async function copyJsonFiles(sourceDir, destDir) {
 }
 
 copyStatic().catch((err) => {
-  print.boldError(`Unexpected error: ${err.message}`);
-  exit(1);
+  errorExit(err, 'copy-static');
 });

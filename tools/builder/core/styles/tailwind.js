@@ -1,9 +1,9 @@
 import { execFileSync } from 'child_process';
 import * as fs from 'fs';
 import path from 'path';
-import { print, runCommand, promptBoolean } from '../../utils/index.js';
-import { PATHS } from './paths.js';
-import { builderConfig } from '../builder.config.js';
+import { print, runCommand, promptBoolean, errorExit } from '../../../utils/index.js';
+import { PATHS } from '../app/paths.js';
+import { builderConfig } from '../../builder.config.js';
 
 const REQUIRED_DEPS = [
   { name: 'tailwindcss', version: '^4.3.0' },
@@ -32,6 +32,9 @@ const getInstallCommand = (packageManager, deps) => {
 const missingDeps = REQUIRED_DEPS.filter(dep => !isInstalled(dep.name));
 
 if (missingDeps.length) {
+  if (builderConfig.isProd) {
+    errorExit('Tailwind CSS is enabled (tailwind: true) but its dependencies are missing.\nRun "npm install" before rebuilding');
+  }
   const packageManager = getPackageManager();
   const installCommand = getInstallCommand(packageManager, missingDeps);
 
@@ -39,19 +42,24 @@ if (missingDeps.length) {
   print.gray('Required packages:');
   missingDeps.forEach(dep => print.gray(`  - ${dep.name}@${dep.version}`));
 
-  if (!process.stdin.isTTY) {
-    print.boldError(`Non-interactive shell detected. Run manually: ${installCommand}`);
-    process.exit(1);
+  let shouldInstall = true;
+  if (process.stdin.isTTY) {
+    shouldInstall = await promptBoolean('Install them now?');
+  } else {
+    print.gray(`Non-interactive shell detected. Installing automatically: ${installCommand}`);
   }
 
-  const shouldInstall = await promptBoolean('Install them now?');
   if (!shouldInstall) {
     print.boldError(`Aborting. Run manually: ${installCommand}`);
     process.exit(1);
   }
 
   const [command, ...args] = installCommand.split(' ');
-  await runCommand(command, args);
+  try {
+    await runCommand(command, args);
+  } catch (err) {
+    errorExit(err, 'tailwind-install');
+  }
 }
 
 const twBin = path.join(process.cwd(), 'node_modules', '.bin', 'tailwindcss');
@@ -62,7 +70,11 @@ const mainCss = path.join(PATHS.tempSource, 'main.css');
 const args = ['-i', input, '-o', output];
 if (builderConfig.isProd) args.push('--minify');
 
-execFileSync(twBin, args, { stdio: 'pipe' });
+try {
+  execFileSync(twBin, args, { stdio: 'inherit' });
+} catch (err) {
+  errorExit(err, 'tailwind');
+}
 
 // Tailwind's @layer blocks always lose to unlayered SCSS in the cascade regardless
 // of order, so prepending here is only for readable file ordering, not precedence.

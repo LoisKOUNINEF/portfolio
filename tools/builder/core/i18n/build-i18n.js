@@ -1,8 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { exit } from 'process';
-import { getFilesRecursive, print } from '../../utils/index.js';
-import { PATHS } from './paths.js';
+import { getFilesRecursive, print, errorExit } from '../../../utils/index.js';
+import { PATHS } from '../app/paths.js';
 
 const destDir = path.join(PATHS.tempSource, 'locales');
 
@@ -114,10 +113,9 @@ async function mergeJson() {
       JSON.stringify(combined, null, 2)
     );
   }
-  removeJsonFiles(PATHS.tempApp);
+  await removeJsonFiles(PATHS.tempApp);
 }
 
 mergeJson().catch((err) => {
-  print.boldError(`Unexpected error: ${err.message}`);
-  exit(1);
+  errorExit(err)
 });
