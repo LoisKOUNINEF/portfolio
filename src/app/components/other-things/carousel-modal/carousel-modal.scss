@@ -2,7 +2,7 @@
 @use "variables" as *;
 @use "mixins";
 
-.modal-wrapper:has(.carousel-modal__wrapper) {
+.a11y-modal-wrapper:has(.carousel-modal__wrapper) {
 	@include mixins.flex-center;
 	width: 55%;
 	height: auto;
@@ -56,7 +56,7 @@
 		border-radius: 1rem;
 	}
 
-  figure {
+  .a11y-picture {
   	position: relative;
     display: flex;
     flex-direction: column;

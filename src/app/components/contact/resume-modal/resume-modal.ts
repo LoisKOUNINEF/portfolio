@@ -1,5 +1,6 @@
-import { Overlays, ComponentConfig, I18nService } from '../../../../core/index.js';
-import {notify, ModalView} from '../../../../libs/index.js';
+import { ComponentConfig, I18nService } from '../../../../core/index.js';
+import { notify } from 'a11y-elements/overlays/snackbar';
+import { ModalView } from '../../../../libs/index.js';
 import { InfoCardComponent } from '../../common/index.js';
 import {Language} from "../../../../core/services/i18n/languages.js";
 
@@ -22,7 +23,6 @@ const downloadStarted = (): void => {
   const currentLang = I18nService.currentLanguage;
   const message = messages[currentLang] || messages['fr'] || 'Download started';
   notify(message);
-  Overlays.modalClosed();
 };
 
 const resumeModalComponents = (lang: string): ComponentConfig[] => {

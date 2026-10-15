@@ -1,6 +1,6 @@
 import { Component, ComponentConfig } from '../../../core/index.js';
 import { displayCarouselModal } from './carousel-modal/carousel-modal.js';
-import { PictureComponent } from '../../../libs/index.js';
+import { PictureComponent } from '../common/index.js';
 
 const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
 

@@ -6,3 +6,6 @@ export * from './tech/tech-string/tech-string.component.js';
 export * from './bullet-point/bullet-point.component.js';
 
 export * from './info-card/info-card.component.js';
+
+export * from './picture/picture.component.js';
+export * from './anchor/anchor.component.js';

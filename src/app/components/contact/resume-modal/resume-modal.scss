@@ -3,7 +3,7 @@
 @use "mixins";
 @use "sass:color";
 
-.modal-wrapper:has(.resume-modal__wrapper) {
+.a11y-modal-wrapper:has(.resume-modal__wrapper) {
 	width: 50%;
 	height: auto;
 	max-height: 60%;

@@ -1,6 +1,6 @@
 import { Language } from '../../../../core/services/i18n/languages.js';
 import { I18nService, Service } from '../../../../core/index.js';
-import { notify } from '../../../../libs/index.js';
+import { notify } from 'a11y-elements/overlays/snackbar';
 
 export class LanguageTogglerService extends Service<LanguageTogglerService> {  
   public async toggleLang(): Promise<void> {

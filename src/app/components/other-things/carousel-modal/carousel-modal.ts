@@ -1,4 +1,5 @@
-import { ModalView, ButtonComponent, IPictureConfig, PictureComponent } from "../../../../libs/index.js";
+import { ModalView, ButtonComponent } from "../../../../libs/index.js";
+import { IPictureConfig, PictureComponent } from "../../common/index.js";
 import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
 
 export interface IImageModalConfig extends IPictureConfig {

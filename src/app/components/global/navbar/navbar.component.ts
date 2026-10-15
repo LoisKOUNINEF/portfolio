@@ -3,11 +3,8 @@ import {
   ComponentConfig,
   I18nService
 } from '../../../../core/index.js';
-import { 
-  AnchorComponent, 
-  IAnchorConfig,
-  ButtonComponent 
-} from '../../../../libs/index.js';
+import { ButtonComponent } from '../../../../libs/index.js';
+import { AnchorComponent, IAnchorConfig } from '../../common/index.js';
 import { 
   LanguageTogglerComponent, 
   ThemeTogglerComponent 

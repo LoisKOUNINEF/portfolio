@@ -1,0 +1,74 @@
+@use "sass:map";
+
+// Theme for a11y-elements (node_modules/a11y-elements/dist/a11y.css).
+// The package reads every visual value from a `--a11y-<component>-<token>` custom
+// property; each map below is emitted as those properties at :root.
+// Override a map (`@use "a11y-theme" with (...)`) or a single custom property to reskin.
+
+$a11y-semantic-config: (
+  'color-success': rgb(76 175 80),
+  'color-error': rgb(244 67 54),
+  'color-info': rgb(33 150 243),
+  'color-warning': rgb(244 67 54),
+  'color-text': white,
+) !default;
+
+$a11y-z-index-config: (
+  'snackbar': 400,
+  'modal-backdrop': 500,
+  'modal': 510,
+) !default;
+
+$a11y-modal-config: (
+  'transition-duration': 0.3s,
+  'border-radius': 1rem,
+  'initial-scale': 0.95,
+  'close-button-size': 1.5rem,
+  'overlay-padding': 0,
+  'content-padding': 0,
+  'footer-gap': 1rem,
+  'footer-margin-top': 1.5rem,
+  'footer-button-padding': 0.5rem 1rem,
+  'shadow-offset-y': 2px,
+  'shadow-blur': 2px,
+  'shadow-fade': 80%,
+  'color-overlay': var(--overlay),
+  'color-background': var(--background),
+  'color-text': var(--text),
+  'color-secondary': var(--secondary),
+  'color-secondary-hover': var(--secondary-hover),
+) !default;
+
+$a11y-snackbar-config: (
+  'padding': 0.75rem 1.5rem,
+  'border-radius': 0.5rem,
+  'gap': 1rem,
+  'stack-gap': 0.5rem,
+  'offset': 1rem,
+  'container-width': 350px,
+  'animation-duration': 0.3s,
+  'shadow-offset-y': 2px,
+  'shadow-blur': 6px,
+  'shadow-color': rgba(0, 0, 0, 0.3),
+) !default;
+
+$a11y-picture-config: (
+  'caption-margin-top': 0.25rem,
+  'caption-font-size': 0.875rem,
+  'caption-line-height': 1.4,
+  'color-text-muted': var(--text-muted),
+) !default;
+
+@mixin emit-tokens($prefix, $config) {
+  @each $key, $value in $config {
+    --a11y-#{$prefix}#{$key}: #{$value};
+  }
+}
+
+:root {
+  @include emit-tokens('', $a11y-semantic-config);
+  @include emit-tokens('z-', $a11y-z-index-config);
+  @include emit-tokens('modal-', $a11y-modal-config);
+  @include emit-tokens('snackbar-', $a11y-snackbar-config);
+  @include emit-tokens('picture-', $a11y-picture-config);
+}

@@ -3,6 +3,9 @@ import path from 'path';
 import { print, errorExit } from '../../../utils/index.js';
 import { PATHS } from '../app/paths.js';
 import { addTags } from './add-tags.js';
+import { addImportMap } from './add-import-map.js';
+import { buildImportMap } from '../app/vendor-deps.js';
+import { builderConfig } from '../../builder.config.js';
 
 async function validateHtml() {
   const filePath = path.join(PATHS.tempSource, 'index.html');
@@ -19,6 +22,9 @@ async function validateHtml() {
   }
 
   htmlContent = await addTags(htmlContent, filePath).catch(err => errorExit(err.message));
+  if (!builderConfig.isProd) {
+    htmlContent = await addImportMap(htmlContent, filePath, buildImportMap()).catch(err => errorExit(err.message));
+  }
 
   if (!/<script[^>]*type=["']module["']/.test(htmlContent)) {
     errorExit('No module scripts found in HTML');

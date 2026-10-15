@@ -21,7 +21,7 @@ A production-grade, zero-runtime-dependency frontend framework. TypeScript + Sas
 ```
 src/
   core/          ← Framework internals (DO NOT modify without good reason)
-  libs/          ← Reusable UI utilities (overlays, pipes, guards)
+  libs/          ← Nutin-specific UI glue (ButtonComponent, EmptyComponent, ModalView host, SCSS mixins)
   app/           ← Application code
     main.ts      ← Entry point (init sequence)
     routes.ts    ← Route definitions
@@ -217,31 +217,37 @@ Built-in pipes (registered in `src/libs/pipes/pipes.ts`):
 
 ---
 
-## UI Libraries (`src/libs/`)
+## UI Libraries
 
-### PopoverView (Modal/Dialog)
-`src/libs/overlays/popover/popover.ts`
+### Accessibility elements (`a11y-elements` package)
+Framework-agnostic, Light-DOM custom elements (npm: `a11y-elements`). Import an element's subpath once
+to register its tag (`import 'a11y-elements/overlays/modal'`); the modules that render a tag import it themselves.
+Default styles come from `@use "pkg:a11y-elements/a11y.css"` at the top of `src/styles/main.scss`;
+the portfolio theme maps onto the `--a11y-*` custom properties in `src/styles/_a11y-theme.scss`.
 
-Extends `View`. Full-featured modal with focus trap, backdrop, animation, scroll lock.
-
-```typescript
-const modal = new MyPopoverView(hostElement);
-modal.render();  // opens
-modal.destroy(); // closes
-```
-
-Features: close button + callback, dynamic buttons via `ButtonManager`, Escape key, click-outside-to-close, accessibility (tab trap, focus return, ARIA).
-
-### Snackbar (`notify`)
-`src/libs/overlays/snackbar/snackbar.ts`
-
-Toast notification queue.
+In use: `<a11y-modal>`, `<a11y-snackbar>` (`notify()`), `<a11y-anchor>`, `<a11y-picture>`, `<a11y-focusable>`.
+App adapters rendering them from Nutin configs: `src/app/components/common/{anchor,picture,info-card}`.
 
 ```typescript
+import { notify } from 'a11y-elements/overlays/snackbar';
 notify('Saved!', { type: 'success', duration: 3000 });
-notify('Error', { type: 'error', position: 'top-right' });
-notify('Info', { type: 'info', action: { label: 'Undo', callback: fn } });
 ```
+
+Dev builds serve unbundled ESM, so runtime `dependencies` are copied to `/vendor` and exposed through an
+import map (`tools/builder/core/app/vendor-deps.js`); prod bundles them with esbuild.
+
+### ModalView (`src/libs/overlays/modal-host.ts`)
+Renders a Nutin template + child/catalog configs into an `<a11y-modal>` and opens it; the element owns
+focus trap, backdrop, Escape, close button and scroll lock. Destroyed when the dialog closes.
+
+```typescript
+const modal = new ModalView({ template, components, catalogs, viewName: 'project' });
+modal.render();  // opens
+modal.close();   // closes (then destroys itself)
+```
+
+### ButtonComponent / EmptyComponent (`src/libs/components/`)
+Nutin-only helpers, not part of `a11y-elements`.
 
 ### Guards
 `src/libs/guards/guards.ts`

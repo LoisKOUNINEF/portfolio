@@ -1,5 +1,11 @@
+// a11y-elements default styles - first, so every rule below wins the cascade
+@use "pkg:a11y-elements/a11y.css";
+
 // libs - using partials to ensure proper stacking context
 @use "../libs";
+
+// a11y-elements theme tokens
+@use "a11y-theme";
 
 // global styles
 @use "styles";

@@ -1,4 +1,5 @@
-import { Component, ComponentProps } from '../../../core/index.js';
+import 'a11y-elements/accessibility-components/picture';
+import { Component, ComponentProps } from '../../../../core/index.js';
 
 export interface IPictureSource {
   src: string;
@@ -20,9 +21,13 @@ export interface IPictureConfig {
   caption?: string;
 }
 
+/**
+ * Renders the `<picture>` markup inside `<a11y-picture>` (a11y-elements),
+ * which handles the figure role and decorative `aria-hidden`.
+ */
 export class PictureComponent extends Component<HTMLElement, IPictureConfig> {
   constructor(mountTarget: HTMLElement, config: IPictureConfig, props?: ComponentProps) {
-    super({ mountTarget, config, tagName: 'figure', props });
+    super({ mountTarget, config, tagName: 'a11y-picture', props });
   }
 
   protected override generateTemplate(): string {
@@ -30,19 +35,6 @@ export class PictureComponent extends Component<HTMLElement, IPictureConfig> {
 ${this.renderSources()}${this.renderImg()}
 </picture>
 <figcaption data-optional="${this.config.captionI18nKey || this.config.caption}" data-i18n="${this.config.captionI18nKey}" data-pipe="capitalize">${this.config.caption || ''}</figcaption>`;
-  }
-
-  protected override onBeforeRender(): void {
-    super.onBeforeRender();
-    const isDecorative =
-      this.config.alt === '' &&
-      !this.config.caption &&
-      !this.config.captionI18nKey;
-    if (isDecorative) {
-      this.element.setAttribute('aria-hidden', 'true');
-    } else {
-      this.element.removeAttribute('aria-hidden');
-    }
   }
 
   private renderSources(): string {

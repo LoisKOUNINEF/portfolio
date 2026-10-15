@@ -31,5 +31,8 @@
     "live-server": "^1.2.2",
     "sass": "^1.89.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "a11y-elements": "^0.1.0"
   }
 }

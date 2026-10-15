@@ -2,7 +2,7 @@
 @use "variables" as *;
 @use "mixins";
 
-.modal-wrapper:has(.project-modal__wrapper) {
+.a11y-modal-wrapper:has(.project-modal__wrapper) {
   width: 80%;
   height: 90%;
   background: var(--surface);

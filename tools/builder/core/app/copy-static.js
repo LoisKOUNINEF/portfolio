@@ -3,6 +3,7 @@ import path from 'path';
 import { getFilesRecursive, print, errorExit } from '../../../utils/index.js';
 import { BINARY_EXTENSIONS } from './binary-extensions.js';
 import { PATHS } from './paths.js';
+import { copyVendorDependencies } from './vendor-deps.js';
 import { builderConfig } from '../../builder.config.js';
 
 async function copyStatic() {
@@ -13,6 +14,8 @@ async function copyStatic() {
 
   await copyFavicon();
   await copyConfig();
+  // dev serves unbundled ESM: runtime deps are served from /vendor (see vendor-deps.js)
+  if (!builderConfig.isProd) await copyVendorDependencies(PATHS.tempSource);
 
   for (const extension of extensions) {
     const files = await getFilesRecursive(PATHS.source, extension);
