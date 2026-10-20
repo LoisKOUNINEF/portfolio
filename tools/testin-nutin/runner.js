@@ -8,7 +8,8 @@ import config from '#root/nutin.config.js';
 
 const args = process.argv.slice(2);
 const coverageEnabled = args.includes('--coverage') || Boolean(config.testinNutin.coverage?.enabled);
-const fileFilters = args.filter(arg => arg !== '--coverage');
+const verboseEnabled = args.includes('--verbose');
+const fileFilters = args.filter(arg => arg !== '--coverage' && arg !== '--verbose');
 
 // Tests import and run the compiled build output (dist/src/)
 // and has no sourcemap back to the .ts sources
@@ -40,10 +41,8 @@ if (fileFilters.length) {
 }
 
 async function loadTestFile(file) {
-  setupJsdom();
   setCurrentTestFile(file);
   await import(file);
-  teardownJsdom();
 }
 
 async function runCoverage(testResults) {
@@ -72,22 +71,31 @@ async function runCoverage(testResults) {
 }
 
 async function runTests() {
-  if (config.testinNutin.verbose) print.head('Test suites :');
+  if (verboseEnabled) print.head('Test suites :');
 
   if (coverageEnabled) await startCoverage();
 
+  // One DOM for importing every file (module-level code may use it); each suite
+  // then runs in a fresh one (see runQueuedTests).
+  let loadFailures = 0;
+  setupJsdom();
   for (const file of testFiles) {
     try {
       await loadTestFile(file);
     } catch (error) {
+      loadFailures++;
       print.boldError(`✗ ${file} failed to load:`);
       print.grayError(error.stack);
     }
   }
+  teardownJsdom();
 
   const testResults = await runQueuedTests();
 
-  if (testResults.failed > 0) process.exitCode = 1;
+  if (loadFailures > 0) {
+    print.boldError(`✗ ${loadFailures} test file(s) failed to load — see errors above.\n`);
+  }
+  if (testResults.failed > 0 || loadFailures > 0) process.exitCode = 1;
 
   if (coverageEnabled) await runCoverage(testResults);
 }

@@ -1,8 +1,8 @@
-import {AppEventBus, Component, ComponentConfig} from '../../../core/index.js';
-import { InfoCardComponent } from '../common/index.js';
+import { Component, html } from '../../../core/index.js';
+import { InfoCardComponent } from '../common/info-card/info-card.component.js';
 import { displayResumeModal } from './resume-modal/resume-modal.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ContactComponent extends Component {
   constructor(mountTarget: HTMLElement) {
@@ -10,7 +10,7 @@ export class ContactComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'email-card',

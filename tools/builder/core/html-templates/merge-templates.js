@@ -1,82 +1,240 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { getFilesRecursive, print } from '../../../utils/index.js';
+import esbuild from 'esbuild';
+import { getFilesRecursive, print, pascalCased, capitalized } from '../../../utils/index.js';
 import { PATHS } from '../app/paths.js';
-import { minifyHTML } from './minify-html.js';
+import { findInlineTemplate, minifyTemplateBody } from './template-literal.js';
 
 const PLACEHOLDER = '__TEMPLATE_PLACEHOLDER__';
 const TARGET_EXTENSIONS = ['.ts', '.js'];
 
-export async function mergeMinifiedTemplates() {
+// Where each merged .html template sits in its code file (merge-templates writes it,
+// compile-ts reads it to report type errors at the .html line). Keyed by path relative to
+// dist-build (`src/app/...`), which is also the path of the source file in the project.
+export const TEMPLATE_MAP_FILE = path.join(PATHS.temp, '.template-map.json');
+
+// A component/view's template can live inline in its .ts/.js file or in a
+// colocated .html sibling merged in via `__TEMPLATE_PLACEHOLDER__` — resolved
+// automatically per file rather than through a global config flag:
+//   external + placeholder -> merge external in
+//   external + real inline markup -> conflict, fail
+//   no external + real inline markup -> keep inline
+//   no external + still the placeholder -> nothing to use, fail
+// Templates are merged as written, so tsc type-checks them with readable line numbers
+// (see compile-ts); minifyTemplates() minifies every template afterwards.
+export async function mergeTemplates() {
   const htmlFiles = await getFilesRecursive(PATHS.tempApp, 'html');
+  const resolvedPaths = new Set();
   const failures = [];
+  const templateMap = {};
 
   for (const htmlPath of htmlFiles) {
-    const htmlFilename = path.basename(htmlPath);
-
-    try {
-      const htmlContent = await fs.readFile(htmlPath, 'utf-8');
-      const minifiedHtml = await minifyHTML(htmlContent);
-      const mergedInto = await mergeIntoSiblings(htmlPath, minifiedHtml, failures);
-
-      if (mergedInto > 0) await fs.unlink(htmlPath);
-      else failures.push(`${htmlFilename} (no matching .ts or .js found)`);
-    } catch (err) {
-      print.boldError(`ERROR: Failed to read ${htmlFilename}. ${err.message}`);
-      failures.push(htmlFilename);
-    }
+    await mergeExternalTemplate(htmlPath, resolvedPaths, failures, templateMap);
   }
 
-  const leftoverPlaceholders = await findLeftoverPlaceholders();
-  failures.push(...leftoverPlaceholders);
+  await checkRemainingTemplates(resolvedPaths, failures);
+  await fs.writeFile(TEMPLATE_MAP_FILE, JSON.stringify(templateMap));
 
   if (failures.length) {
-    throw new Error(`Failed to merge ${failures.length} template(s): ${failures.join(', ')}`);
+    throw new Error(`Failed to resolve ${failures.length} template(s).`);
   }
 }
 
-// Normally a view/component has exactly one sibling here — `.js` in dev (tsc
-// output), `.ts` in prod (esbuild bundles straight from source, tsc runs
-// --noEmit there). Patching whichever exist(s) rather than assuming one,
-// so this can't silently regress again if that dev/prod split ever changes.
-async function mergeIntoSiblings(htmlPath, minifiedHtml, failures) {
-  let mergedInto = 0;
+// Minifies the template of every code file, merged or inline. Anything that can't be
+// minified safely is kept as written.
+export async function minifyTemplates() {
+  const templateMap = await readTemplateMap();
+  const codeFiles = await getFilesRecursive(PATHS.tempApp, TARGET_EXTENSIONS);
+
+  for (const codePath of codeFiles) {
+    const content = await fs.readFile(codePath, 'utf-8');
+    const template = findMergedTemplate(content, codePath, templateMap) ?? findInlineTemplate(content);
+    if (!template || template.body === null || template.body === PLACEHOLDER) continue;
+
+    const minified = await minifyTemplateBody(template.body);
+    if (minified === null) {
+      print.gray(describeUnminified(codePath));
+      continue;
+    }
+    const updated = content.slice(0, template.open) + minified + content.slice(template.end);
+    await fs.writeFile(codePath, await keepIfValid(codePath, updated, content));
+  }
+}
+
+// Normally a view/component has exactly one sibling here: its copied `.ts` (TypeScript
+// projects; tsc compiles it once merged) or `.js` (JS-only projects). Checking whichever
+// exist(s) rather than assuming one, so this can't silently regress if that ever changes.
+async function mergeExternalTemplate(htmlPath, resolvedPaths, failures, templateMap) {
+  const htmlFilename = path.basename(htmlPath);
+
+  let htmlContent;
+  try {
+    htmlContent = await fs.readFile(htmlPath, 'utf-8');
+  } catch (err) {
+    print.warn(`Failed to read "${htmlFilename}". ${err.message}`);
+    failures.push(htmlFilename);
+    return;
+  }
+
+  let mergedCount = 0;
+  let conflictCount = 0;
 
   for (const extension of TARGET_EXTENSIONS) {
-    const targetPath = htmlPath.replace(/\.html$/, extension);
-    const targetFilename = path.basename(targetPath);
+    const codePath = htmlPath.replace(/\.html$/, extension);
 
     let content;
     try {
-      content = await fs.readFile(targetPath, 'utf-8');
+      content = await fs.readFile(codePath, 'utf-8');
     } catch (err) {
       if (err.code === 'ENOENT') continue;
-      print.boldError(`ERROR: Cannot update ${targetFilename}. ${err.message}`);
-      failures.push(targetFilename);
+      print.warn(`Cannot update "${path.basename(codePath)}". ${err.message}`);
+      failures.push(path.basename(codePath));
+      resolvedPaths.add(codePath);
       continue;
     }
 
-    if (!content.includes(PLACEHOLDER)) {
-      print.boldError(`ERROR: No matching placeholder in ${targetFilename}. Make sure the template const is \`${PLACEHOLDER}\`.`);
-      failures.push(targetFilename);
+    resolvedPaths.add(codePath);
+    warnIfUntagged(codePath, content, htmlContent);
+
+    if (content.includes(PLACEHOLDER)) {
+      templateMap[path.relative(PATHS.temp, codePath)] = {
+        html: path.relative(PATHS.temp, htmlPath),
+        ...placeholderPosition(content),
+        lines: htmlContent.split('\n').length,
+        template: htmlContent,
+      };
+      // Replacements go through functions: a replacement *string* expands `$$`, `$&`,
+      // `$'`… found in the markup (e.g. `$${price}` would lose its `$`).
+      await fs.writeFile(codePath, content.replace(PLACEHOLDER, () => htmlContent));
+      mergedCount++;
       continue;
     }
 
-    await fs.writeFile(targetPath, content.replace(PLACEHOLDER, minifiedHtml));
-    mergedInto++;
+    print.warn(describeConflict(codePath));
+    failures.push(path.basename(codePath));
+    conflictCount++;
   }
 
-  return mergedInto;
+  if (mergedCount > 0) {
+    await fs.unlink(htmlPath);
+  } else if (mergedCount + conflictCount === 0) {
+    print.warn(describeOrphanHtml(htmlPath));
+    failures.push(htmlFilename);
+  }
 }
 
-async function findLeftoverPlaceholders() {
-  const files = await getFilesRecursive(PATHS.tempApp, TARGET_EXTENSIONS);
-  const leftovers = [];
+// Inline templates: a placeholder with no .html to fill it fails; untagged ones warn.
+async function checkRemainingTemplates(resolvedPaths, failures) {
+  const codeFiles = await getFilesRecursive(PATHS.tempApp, TARGET_EXTENSIONS);
 
-  for (const file of files) {
-    const content = await fs.readFile(file, 'utf-8');
-    if (content.includes(PLACEHOLDER)) leftovers.push(`${path.basename(file)} (no matching .html found)`);
+  for (const codePath of codeFiles) {
+    if (resolvedPaths.has(codePath)) continue;
+
+    const content = await fs.readFile(codePath, 'utf-8');
+    const template = findInlineTemplate(content);
+    if (!template || template.body === null) continue;
+    warnIfUntagged(codePath, content, template.body);
+
+    if (template.body === PLACEHOLDER) {
+      print.warn(describeMissingTemplate(codePath));
+      failures.push(path.basename(codePath));
+    }
   }
+}
 
-  return leftovers;
+export async function readTemplateMap() {
+  try {
+    return JSON.parse(await fs.readFile(TEMPLATE_MAP_FILE, 'utf-8'));
+  } catch {
+    return {};
+  }
+}
+
+// A merged template, found by its markup: it's wherever the placeholder was, whatever the
+// variable holding it is called, in the copied .ts or in tsc's .js emitted from it.
+function findMergedTemplate(content, codePath, templateMap) {
+  const relPath = path.relative(PATHS.temp, codePath);
+  const entry = templateMap[relPath] ?? templateMap[relPath.replace(/\.js$/, '.ts')];
+  if (!entry) return null;
+  const open = content.indexOf(entry.template);
+  if (open === -1) return null;
+  return { open, end: open + entry.template.length, body: entry.template };
+}
+
+// 1-based line and column of the placeholder in a code file.
+export function placeholderPosition(content) {
+  const index = content.indexOf(PLACEHOLDER);
+  const before = content.slice(0, index);
+  return { line: before.split('\n').length, col: index - before.lastIndexOf('\n') };
+}
+
+// Last safety net: minified code that no longer parses is replaced by the code as written.
+async function keepIfValid(codePath, minified, asWritten) {
+  if (minified === asWritten) return minified;
+  try {
+    await esbuild.transform(minified, { loader: codePath.endsWith('.ts') ? 'ts' : 'js' });
+    return minified;
+  } catch {
+    print.gray(describeUnminified(codePath));
+    return asWritten;
+  }
+}
+
+// Templates are escaped by the html`` tag; an untagged literal with ${} interpolates raw.
+function warnIfUntagged(codePath, content, markup) {
+  const template = findInlineTemplate(content);
+  if (template && !template.tagged && markup.includes('${')) print.warn(describeUntagged(codePath));
+}
+
+function describeCodeFile(codePath) {
+  const filename = path.basename(codePath);
+  const basename = filename.replace(/\.(ts|js)$/, '');
+  const lastDot = basename.lastIndexOf('.');
+  const namePart = lastDot === -1 ? basename : basename.slice(0, lastDot);
+  const suffix = lastDot === -1 ? '' : basename.slice(lastDot + 1);
+  const kind = suffix ? capitalized(suffix) : 'Component';
+  const className = `${pascalCased(namePart)}${kind}`;
+
+  return { filename, basename, kind, className };
+}
+
+function describeConflict(codePath) {
+  const { filename, basename, kind, className } = describeCodeFile(codePath);
+
+  return `${kind} "${className}" has both an inline template and an external template.
+
+Use either:
+  ${filename}
+or:
+  ${filename} (template placeholder) + ${basename}.html
+Remove one of the template definitions.`;
+}
+
+function describeMissingTemplate(codePath) {
+  const { filename, basename, kind, className } = describeCodeFile(codePath);
+
+  return `${kind} "${className}" has a template placeholder but no external template.
+
+Expected:
+  ${filename} (template placeholder) + ${basename}.html
+Add ${basename}.html, or replace the placeholder in ${filename} with inline markup.`;
+}
+
+function describeUnminified(filePath) {
+  return `Kept the template of ${path.basename(filePath)} unminified: its markup couldn't be minified safely.`;
+}
+
+function describeUntagged(codePath) {
+  const { filename, kind, className } = describeCodeFile(codePath);
+
+  return `${kind} "${className}" has an untagged template: its \${} values are inserted unescaped.
+Tag it in ${filename}: html\`...\` (import html from core), and wrap trusted markup in raw().`;
+}
+
+function describeOrphanHtml(htmlPath) {
+  const htmlFilename = path.basename(htmlPath);
+  const basename = htmlFilename.replace(/\.html$/, '');
+
+  return `"${htmlFilename}" has no matching component or view (expected ${basename}.ts or ${basename}.js).
+Remove ${htmlFilename}, or add ${basename}.ts with a template placeholder to merge it into.`;
 }

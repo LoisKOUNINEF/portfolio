@@ -1,7 +1,7 @@
-import { Component, ComponentConfig } from '../../../core/index.js';
-import { InfoCardComponent } from '../common/index.js';
+import { Component, html } from '../../../core/index.js';
+import { InfoCardComponent } from '../common/info-card/info-card.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class InfosComponent extends Component {
   constructor(mountTarget: HTMLElement) {
@@ -9,7 +9,7 @@ export class InfosComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'location-card',

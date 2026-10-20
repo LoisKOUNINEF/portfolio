@@ -1,37 +1,25 @@
-import { AppRouter, Service, I18nService, registerPipes  } from '../core/index.js';
-import { FooterComponent, NavbarComponent } from './components/index.js';
+import 'a11y-elements/components/anchor';
+import 'a11y-elements/components/focusable';
+import 'a11y-elements/components/picture';
+import 'a11y-elements/overlays/modal';
+import 'a11y-elements/overlays/snackbar';
+import { AppRouter, initI18n, registerGlobals, registerPipes } from '../core/index.js';
+import { FooterComponent } from './components/global/footer/footer.component.js';
+import { NavbarComponent } from './components/global/navbar/navbar.component.js';
 import { appRoutes } from './routes.js';
 
 class App {
-  private footer: FooterComponent;
-  private header: NavbarComponent;
-
   constructor() {
     registerPipes();
+    registerGlobals({
+      before: [{ component: NavbarComponent, id: 'navbar' }],
+      after: [{ component: FooterComponent, id: 'site-footer' }],
+    });
     AppRouter(appRoutes);
-
-    this.header = new NavbarComponent('body' as unknown as HTMLElement);
-    this.footer = new FooterComponent('body' as unknown as HTMLElement);
-
-    this.initialize();
-  }
-
-  public async initialize() {
-    this.renderBaseLayout();
-  }
-
-  private renderBaseLayout() {
-    document.body.prepend(this.header.render());
-    document.body.append(this.footer.render());
   }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await I18nService.initTranslations();
-  await I18nService.loadTranslations(I18nService.currentLanguage);
-  const app = new App();
-});
-
-window.addEventListener('beforeunload', async () => {
-  await Service.destroyAll();
+  await initI18n();
+  new App();
 });

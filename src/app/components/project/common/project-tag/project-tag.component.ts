@@ -1,6 +1,6 @@
-import { Component } from '../../../../../core/index.js';
+import { Component, html } from '../../../../../core/index.js';
 
-const templateFn = (_config: IProjectTag) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: IProjectTag) => html`__TEMPLATE_PLACEHOLDER__`;
 
 
 export class ProjectTagComponent extends Component {

@@ -1,7 +1,7 @@
 import * as sass from 'sass';
 import * as fs from 'fs';
 import path from 'path';
-import { getFilesRecursive, print, errorExit } from '../../../utils/index.js';
+import { getFilesRecursive, errorExit } from '../../../utils/index.js';
 import { PATHS } from '../app/paths.js';
 import { builderConfig } from '../../builder.config.js';
 
@@ -12,7 +12,7 @@ const stylesPath = path.join(PATHS.source, 'styles');
 const scssOrigins = builderConfig.sass.paths;
 const scssPath = (origin) => path.join(stylesPath, origin);
 const stylesInput = scssOrigins.map(origin => scssPath(origin));
-const pathsToLoad = [ ...stylesInput, path.join(PATHS.source, 'libs') ];
+const pathsToLoad = [ ...stylesInput ];
 // resolves `@use "pkg:<package>/<subpath>"` through node_modules (package exports)
 const importers = [ new sass.NodePackageImporter() ];
 
@@ -26,10 +26,8 @@ try {
 
   // features styles
   const appInput = path.join(PATHS.source, 'app');
-  const appStyles = [
-    ...getFilesRecursive(path.join(appInput, 'components'), 'scss'),
-    ...getFilesRecursive(path.join(appInput, 'views'), 'scss')
-  ];
+  // Partials (_name.scss) only exist to be @use'd — compiling them standalone would duplicate their CSS.
+  const appStyles = getFilesRecursive(appInput, 'scss').filter((file) => !path.basename(file).startsWith('_'));
 
   for (const style of appStyles) {
     const result = await sass.compileAsync(style, {

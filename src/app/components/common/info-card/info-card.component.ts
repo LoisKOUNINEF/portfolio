@@ -1,6 +1,4 @@
-import 'a11y-elements/accessibility-components/anchor';
-import 'a11y-elements/accessibility-components/focusable';
-import { Component, ComponentProps } from '../../../../core/index.js';
+import { Component, html } from '../../../../core/index.js';
 
 export interface IFocusableConfig {
   href?: string;
@@ -16,7 +14,7 @@ export interface IFocusableElementConfig extends IFocusableConfig {
   subtextKey: string;
 }
 
-const templateFn = (_config: IFocusableElementConfig) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: IFocusableElementConfig) => html`__TEMPLATE_PLACEHOLDER__`;
 
 /**
  * Link mode (`href`): a real `<a>` wrapped in `<a11y-anchor>` (new-tab rel/label, internal anchor focus).
@@ -26,7 +24,7 @@ const templateFn = (_config: IFocusableElementConfig) => `__TEMPLATE_PLACEHOLDER
 export class InfoCardComponent extends Component<HTMLElement, IFocusableElementConfig> {
   private readonly _classNames: string[];
 
-  constructor(mountTarget: HTMLElement, config: IFocusableElementConfig, props?: ComponentProps) {
+  constructor(mountTarget: HTMLElement, config: IFocusableElementConfig, props?: Nutin.ComponentProps) {
     const { className, ...restProps } = props ?? {};
     super({
       templateFn,
@@ -46,6 +44,7 @@ export class InfoCardComponent extends Component<HTMLElement, IFocusableElementC
   }
 
   protected override onAfterRender(): void {
+    super.onAfterRender();
     const target = this.config.href ? this.wrapInAnchor() : this.element;
     if (this.config.callback) {
       const click: EventListener = () => this.config.callback!();

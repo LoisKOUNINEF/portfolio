@@ -1,8 +1,10 @@
-import { Navigation, ComponentConfig, View } from '../../../core/index.js';
-import { ButtonComponent } from '../../../libs/index.js';
-import { PictureComponent } from '../../components/index.js';
+import { I18nService, Navigation, View, hideGlobals, html, revealGlobals } from '../../../core/index.js';
+import { ButtonComponent } from '../../components/common/button/button.component.js';
+import { PictureComponent } from '../../components/common/picture/picture.component.js';
 
-const template = `__TEMPLATE_PLACEHOLDER__`;
+const template = html`__TEMPLATE_PLACEHOLDER__`;
+
+const GLOBAL_IDS = ['navbar', 'site-footer'];
 
 export class NotFoundView extends View {
   constructor() {
@@ -10,11 +12,15 @@ export class NotFoundView extends View {
     this.hideGlobals();
   }
 
+  public override documentTitle(): string {
+    return I18nService.translate('not-found.meta.title', 'Page Not Found');
+  }
+
   public onExit(): void {
     this.revealGlobals();    
   }
 
-  childConfigs(): ComponentConfig[] {
+  registerChildren(): Nutin.ComponentConfig[] {
     const btnClass = 'not-found__back-btn';
     return [
       {
@@ -39,13 +45,11 @@ export class NotFoundView extends View {
   }
 
   private hideGlobals(): void {
-    this.hideHeader();
-    this.hideFooter();
+    hideGlobals(GLOBAL_IDS);
   }
 
   private revealGlobals(): void {
-    this.revealHeader();
-    this.revealFooter();
+    revealGlobals(GLOBAL_IDS);
   }
 
   private handleHome(): void {

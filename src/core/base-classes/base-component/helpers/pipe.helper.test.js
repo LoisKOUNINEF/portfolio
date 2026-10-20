@@ -1,5 +1,6 @@
-import { PipeHelper } from '#root/dist/src/core/base-classes/base-component/helpers/pipe.helper.js';
+import * as PipeHelper from '#root/dist/src/core/base-classes/base-component/helpers/pipe.helper.js';
 import { AppPipeRegistry } from '#root/dist/src/core/services/index.js';
+import * as DomHelper from '#root/dist/src/core/base-classes/base-component/helpers/dom.helper.js';
 
 describe('PipeHelper', () => {
   let container;
@@ -74,9 +75,26 @@ describe('PipeHelper', () => {
     expect(container.querySelector('input').value).toBe('FROM SOURCE');
   });
 
-  it('stops processing pipes when a pipe segment resolves to an empty name', () => {
-    container.innerHTML = '<span data-pipe=":arg">hi</span>';
+  it('warns and skips a pipe segment that resolves to an empty name, continuing the rest of the chain', () => {
+    const warnSpy = spyOn(console, 'warn');
+    warnSpy.andCallFake(() => {});
+
+    container.innerHTML = '<span data-pipe=":arg|upper">hi</span>';
     PipeHelper.parsePipeAttributes(container);
-    expect(container.querySelector('span').textContent).toBe('hi');
+
+    expect(container.querySelector('span').textContent).toBe('HI');
+    expect(warnSpy.callCount).toBe(1);
+
+    warnSpy.restore();
+  });
+
+  it('skips elements inside a nested component root, which pipes its own content', () => {
+    container.innerHTML = '<span class="own" data-pipe="upper">a</span><div class="child"><span class="nested" data-pipe="upper">b</span></div>';
+    DomHelper.markComponentRoot(container.querySelector('.child'));
+
+    PipeHelper.parsePipeAttributes(container);
+
+    expect(container.querySelector('.own').textContent).toBe('A');
+    expect(container.querySelector('.nested').textContent).toBe('b');
   });
 });

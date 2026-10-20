@@ -1,4 +1,6 @@
-declare interface AppEventMap {}
+declare namespace Nutin {
+  interface AppEventMap {}
+}
 
 declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting' | 'run-for-the-bun';
 

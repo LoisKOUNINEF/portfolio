@@ -1,8 +1,8 @@
-import { Component, ComponentConfig } from '../../../core/index.js';
+import { Component, html } from '../../../core/index.js';
 import { displayCarouselModal } from './carousel-modal/carousel-modal.js';
-import { PictureComponent } from '../common/index.js';
+import { PictureComponent } from '../common/picture/picture.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class OtherThingsComponent extends Component {
   private readonly _thumbnailSrc = './assets/images/other-things/thumbnail';
@@ -12,7 +12,7 @@ export class OtherThingsComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'other-things-thumbnail',
       factory: (el) => new PictureComponent(el, {
@@ -27,7 +27,7 @@ export class OtherThingsComponent extends Component {
     }]
   }
 
-  private _displayCarouselModal = (): void => {
+  protected _displayCarouselModal = (): void => {
     displayCarouselModal();
   }
 }

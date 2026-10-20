@@ -1,14 +1,7 @@
-import { Component, ComponentConfig } from '../../../core/index.js';
-import { TechBadgeComponent } from '../index.js';
+import { Component, html } from '../../../core/index.js';
+import { TechBadgeComponent } from '../common/tech/tech-badge/tech-badge.component.js';
 
-interface ITechStackKeys {
-  frontend: TechSvgKey[],
-  backend: TechSvgKey[],
-  database: TechSvgKey[],
-  tools: TechSvgKey[]
-}
-
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class TechStackComponent extends Component {
   private _keys = {
@@ -23,7 +16,7 @@ export class TechStackComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [
       ...this.getFrontendBadges(),
       ...this.getBackendBadges(),
@@ -32,37 +25,37 @@ export class TechStackComponent extends Component {
     ];
   }
 
-  private getFrontendBadges(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getFrontendBadges(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: 'frontend-badges',
-      array: this._keys.frontend,
+      items: this._keys.frontend,
       component: TechBadgeComponent,
       elementName: 'frontend-badge'
     })
   }
 
-  private getBackendBadges(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getBackendBadges(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: 'backend-badges',
-      array: this._keys.backend,
+      items: this._keys.backend,
       component: TechBadgeComponent,
       elementName: 'backend-badge'
     })
   }
 
-  private getDatabaseBadges(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getDatabaseBadges(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: 'database-badges',
-      array: this._keys.database,
+      items: this._keys.database,
       component: TechBadgeComponent,
       elementName: 'database-badge'
     })
   }
 
-  private getToolsBadges(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getToolsBadges(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: 'tools-badges',
-      array: this._keys.tools,
+      items: this._keys.tools,
       component: TechBadgeComponent,
       elementName: 'tools-badge'
     })

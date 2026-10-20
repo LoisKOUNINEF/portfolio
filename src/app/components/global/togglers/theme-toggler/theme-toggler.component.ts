@@ -1,15 +1,15 @@
-import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { themeTogglerService } from '../../../../services/index.js';
-import { ButtonComponent } from '../../../../../libs/index.js';
+import { Component, html } from '../../../../../core/index.js';
+import { themeTogglerService } from '../../../../services/togglers/theme-toggler/theme-toggler.service.js';
+import { ButtonComponent } from '../../../common/button/button.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ThemeTogglerComponent extends Component {
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'theme-toggle',
       factory: (el) => new ButtonComponent(el, {

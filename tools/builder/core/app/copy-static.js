@@ -3,19 +3,22 @@ import path from 'path';
 import { getFilesRecursive, print, errorExit } from '../../../utils/index.js';
 import { BINARY_EXTENSIONS } from './binary-extensions.js';
 import { PATHS } from './paths.js';
-import { copyVendorDependencies } from './vendor-deps.js';
 import { builderConfig } from '../../builder.config.js';
 
 async function copyStatic() {
   const extensions = [...BINARY_EXTENSIONS, '.html'];
-  if (builderConfig.isProd) extensions.push('.ts');
+  // Templates are merged into these copies, then tsc checks them (and emits .js in dev).
+  extensions.push('.ts');
 
+  // Every build starts from a clean dist-build: a failed/interrupted prior
+  // build never gets renamed away by finalize-build.js, so a stale sibling
+  // (already merged, placeholder gone) can otherwise sit next to the next
+  // run's fresh output and trip merge-templates.js's per-sibling check.
+  await fs.rm(PATHS.temp, { recursive: true, force: true });
   await ensureDir(PATHS.tempSource);
 
   await copyFavicon();
   await copyConfig();
-  // dev serves unbundled ESM: runtime deps are served from /vendor (see vendor-deps.js)
-  if (!builderConfig.isProd) await copyVendorDependencies(PATHS.tempSource);
 
   for (const extension of extensions) {
     const files = await getFilesRecursive(PATHS.source, extension);

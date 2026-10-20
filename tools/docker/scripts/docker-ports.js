@@ -6,15 +6,15 @@ const MAX_PORT = 49151;
 
 export function validateDockerPorts(rawPorts) {
   if (rawPorts === undefined) {
-    throw new Error('nutin.config.js: "dockerPorts" not found.');
+    throw new Error('nutin.config.js: "dockerPorts" not found. It must be an array of integers (e.g. [9090, 6969])');
   }
 
   if (!Array.isArray(rawPorts)) {
-    throw new Error('nutin.config.js: "dockerPorts" must be an array of integers (e.g. [8080, 3000]).');
+    throw new Error('nutin.config.js: "dockerPorts" must be an array of integers (e.g. [9090, 6969]).');
   }
 
   if (rawPorts.length === 0) {
-    throw new Error('nutin.config.js: "dockerPorts" must contain at least one port.');
+    throw new Error('nutin.config.js: "dockerPorts" must contain at least one port (e.g. [9090]).');
   }
 
   const seen = new Set();
@@ -23,7 +23,7 @@ export function validateDockerPorts(rawPorts) {
     const port = rawPorts[i];
 
     if (typeof port !== 'number' || !Number.isInteger(port)) {
-      throw new Error(`nutin.config.js: "dockerPorts[${i}]" must be an integer (got ${typeof port}: ${JSON.stringify(port)}). Ports must be numbers, e.g. 8080 not "8080".`);
+      throw new Error(`nutin.config.js: "dockerPorts[${i}]" must be an integer; ports must be numbers, e.g. 9090 not "9090".`);
     }
 
     if (port < MIN_PORT) {
@@ -31,7 +31,11 @@ export function validateDockerPorts(rawPorts) {
     }
 
     if (port > MAX_PORT) {
-      throw new Error(`nutin.config.js: "dockerPorts[${i}]" (${port}) is in the OS ephemeral port range (49152-65535) — use a registered port between ${MIN_PORT} and ${MAX_PORT}.`);
+      throw new Error(`nutin.config.js: "dockerPorts[${i}]": use a registered port between ${MIN_PORT} and ${MAX_PORT}.`);
+    }
+
+    if (port < MIN_PORT || port > MAX_PORT) {
+      throw new Error(`nutin.config.js: "dockerPorts[${i}]" (${port}) is outside of port range (${MIN_PORT} / ${MAX_PORT} .`);
     }
 
     if (seen.has(port)) {

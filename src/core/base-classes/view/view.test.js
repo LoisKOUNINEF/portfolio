@@ -1,7 +1,6 @@
 import { View } from '#root/dist/src/core/index.js';
 
 class HomeView extends View {}
-class MyFancyView extends View {}
 class NamedView extends View {}
 
 describe('View', () => {
@@ -14,44 +13,42 @@ describe('View', () => {
   afterEach(() => {
     app.innerHTML = '';
     app = null;
-    const header = document.getElementById('header');
-    if (header) header.remove();
-    const footer = document.getElementById('footer');
-    if (footer) footer.remove();
   });
 
-  it('derives a kebab-case viewName from the class name, stripping a trailing "View"', () => {
-    const view = new HomeView({});
-    expect(view.viewName).toBe('home');
+  it('throws when viewName is omitted', () => {
+    expect(() => new HomeView({})).toThrow();
   });
 
-  it('derives a kebab-case viewName for a multi-word class name', () => {
-    const view = new MyFancyView({});
-    expect(view.viewName).toBe('my-fancy');
+  it('throws when viewName is an empty string', () => {
+    expect(() => new HomeView({ viewName: '' })).toThrow();
   });
 
-  it('uses an explicit viewName option instead of deriving one', () => {
+  it('has no document title of its own by default', () => {
+    expect(new NamedView({ viewName: 'custom-name' }).documentTitle()).toBe(undefined);
+  });
+
+  it('uses the explicit viewName option', () => {
     const view = new NamedView({ viewName: 'custom-name' });
     expect(view.viewName).toBe('custom-name');
   });
 
   it('generateTemplate() returns the constructor template', () => {
-    const view = new HomeView({ template: '<p>hi</p>' });
+    const view = new HomeView({ viewName: 'home', template: '<p>hi</p>' });
     expect(view.render().innerHTML).toBe('<p>hi</p>');
   });
 
   it('defaults the template to an empty string', () => {
-    const view = new HomeView({});
+    const view = new HomeView({ viewName: 'home' });
     expect(view.render().innerHTML).toBe('');
   });
 
   it('defaults the tagName to "section"', () => {
-    const view = new HomeView({});
+    const view = new HomeView({ viewName: 'home' });
     expect(view.getElement().tagName).toBe('SECTION');
   });
 
   it('setRouteParams/getRouteParams/getRouteParam/hasRouteParam manage route params', () => {
-    const view = new HomeView({});
+    const view = new HomeView({ viewName: 'home' });
     expect(view.hasRouteParam('id')).toBe(false);
     expect(view.getRouteParam('id')).toBeUndefined();
 
@@ -63,47 +60,15 @@ describe('View', () => {
   });
 
   it('getRouteParams() returns a copy, not a live reference', () => {
-    const view = new HomeView({});
+    const view = new HomeView({ viewName: 'home' });
     view.setRouteParams({ id: '1' });
     const params = view.getRouteParams();
     params.id = 'mutated';
     expect(view.getRouteParam('id')).toBe('1');
   });
 
-  it('hideHeader/revealHeader toggle the #header element display style when present', () => {
-    const header = document.createElement('div');
-    header.id = 'header';
-    document.body.appendChild(header);
-
-    const view = new HomeView({});
-    view.hideHeader();
-    expect(header.style.display).toBe('none');
-
-    view.revealHeader();
-    expect(header.style.display).toBe('block');
-  });
-
-  it('hideFooter/revealFooter toggle the #footer element display style when present', () => {
-    const footer = document.createElement('div');
-    footer.id = 'footer';
-    document.body.appendChild(footer);
-
-    const view = new HomeView({});
-    view.hideFooter();
-    expect(footer.style.display).toBe('none');
-
-    view.revealFooter();
-    expect(footer.style.display).toBe('block');
-  });
-
-  it('hideHeader/hideFooter are no-ops when the elements are absent', () => {
-    const view = new HomeView({});
-    expect(() => view.hideHeader()).not.toThrow();
-    expect(() => view.hideFooter()).not.toThrow();
-  });
-
   it('onEnter and onExit are present as no-op hooks', () => {
-    const view = new HomeView({});
+    const view = new HomeView({ viewName: 'home' });
     expect(() => view.onEnter()).not.toThrow();
     expect(() => view.onExit()).not.toThrow();
   });

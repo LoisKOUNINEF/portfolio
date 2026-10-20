@@ -1,8 +1,9 @@
-import { Component, ComponentConfig } from '../../../core/index.js';
-import { BulletPointComponent, TechBadgeComponent } from '../index.js';
-import { ButtonComponent } from '../../../libs/index.js';
+import { Component, html } from '../../../core/index.js';
+import { BulletPointComponent } from '../common/bullet-point/bullet-point.component.js';
+import { TechBadgeComponent } from '../common/tech/tech-badge/tech-badge.component.js';
+import { ButtonComponent } from '../common/button/button.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class HeroComponent extends Component {
   private _mainStackKeys: TechSvgKey[] = [ 'angular', 'nestjs', 'postgresql', 'docker' ];
@@ -12,7 +13,7 @@ export class HeroComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [
       ...this.getKeyCompetences(),
       ...this.getTechBadges(),
@@ -20,30 +21,30 @@ export class HeroComponent extends Component {
     ]
   }
 
-  private getTechBadges(): ComponentConfig[] {
-    return this.catalogConfig({
-      array: this._mainStackKeys,
+  private getTechBadges(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
+      items: this._mainStackKeys,
       selector: 'hero-main-stack',
       component: TechBadgeComponent,
       elementName: 'hero-tech-badge'
     })
   }
 
-  private getKeyCompetences(): ComponentConfig[] {
+  private getKeyCompetences(): Nutin.ComponentConfig[] {
     const jsonNamePattern = (i: number) => `hero.key-competence-${i}`;
     const i18nKeys: string[] = [];
     for (let i = 0; i < 3; i++) {
       i18nKeys.push(jsonNamePattern(i+1));
     }
-    return this.catalogConfig({
-      array: i18nKeys,
+    return this.createCatalogComponents({
+      items: i18nKeys,
       selector: 'hero-key-competences',
       component: BulletPointComponent,
       elementName: 'hero-key-competence'
     })
   }
 
-  private getCtaAnchor(): ComponentConfig {
+  private getCtaAnchor(): Nutin.ComponentConfig {
     return {
       selector: 'hero-cta',
       factory: (el) => new ButtonComponent(el, {
@@ -59,7 +60,7 @@ export class HeroComponent extends Component {
     projectAnchor?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  private scrollToTechnos() {
+  protected scrollToTechnos() {
     const projectAnchor = document.getElementById('tech-stack');
     projectAnchor?.scrollIntoView({ behavior: 'smooth' });
   }

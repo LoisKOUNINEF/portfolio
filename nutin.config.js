@@ -1,23 +1,17 @@
 export default {
   // Nutin options
   tailwind: false,         // Enable Tailwind CSS v4
-  i18n: true,             // Enable i18n; configure languages in config/languages.json 
-  inlineTemplates: false,  // Embed HTML templates in .ts files instead of colocated .html files
-  generateSEOFiles: true, // Generate per-route HTML, robots.txt and sitemap.xml; configure SEO data in config/seo.json
-  dockerPorts: [9090],
+  i18n: true,              // Enable i18n; configure languages in config/languages.json
+  generateSEOFiles: true,  // Generate per-route HTML, robots.txt and sitemap.xml; configure SEO data in config/seo.json
 
-  // Components / Views scaffolding
-  generator: {
-    generateStylesheet: false, // Generate a .scss file alongside each component or view
-    generateLocales: false,    // Generate locale files alongside components and views (requires i18n)
-    generateTest: false,       // Generate test files alongside components, views and services (requires testinNutin.includeApp)
-  },
+  // Nutin features
+  dockerPorts: [9090],     // Ports the Docker container exposes/listens on — edit as needed
 
   // Build pipeline
   builder: {
     sass: {
       paths: [ 
-        'base',
+        'base', 
       ], // Directories in styles/ to include in the Sass load path
     },
 
@@ -25,7 +19,7 @@ export default {
       bundle: true,
       minify: true,
       sourcemap: false,
-      target: ['es2015'],
+      target: ['es2020'],
       drop: ['console', 'debugger'],
     },
   },
@@ -33,12 +27,10 @@ export default {
   // Testing toolkit
   // `npm run testin-nutin`
   testinNutin: {
-    includeFramework: true,  // Test Nutin source - src/core and src/libs
+    includeFramework: true,  // Test Nutin source - src/core
     includeTools: false,     // Test tools/ (builder, testin-nutin, etc.)
     includeApp: false,       // Include application tests
 
-    verbose: false,          // Log test suites and individual tests
-    
     coverage: {
       enabled: false,        // Include coverage in the normal test command
       threshold: 95,         // Fail if any global coverage metric falls below this threshold

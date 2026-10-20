@@ -5,12 +5,12 @@ describe('componentTemplate', () => {
     const name = { pascal: 'Widget' };
     const targetPath = 'src/app/components/widget';
 
-    // With nutin.config.js's default inlineTemplates: false, the html body is
-    // left as a placeholder for the builder to swap in at build time.
+    // The generator always leaves the html body as a placeholder — the builder
+    // swaps in the .html sibling's content at build time.
     expect(componentTemplate(name, targetPath)).toBe(
-      `import { Component } from '../../../core/index.js';
+      `import { Component, html } from '../../../core/index.js';
 
-const templateFn = () => \`__TEMPLATE_PLACEHOLDER__\`;
+const templateFn = () => html\`__TEMPLATE_PLACEHOLDER__\`;
 
 export class WidgetComponent extends Component {
   constructor(mountTarget: HTMLElement) {

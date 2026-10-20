@@ -1,6 +1,8 @@
-import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { PictureComponent } from '../../../common/index.js';
-import {BulletPointComponent, ProjectTagComponent, TechBadgeComponent, TechStringComponent } from '../../../index.js';
+import { Component, html } from '../../../../../core/index.js';
+import { PictureComponent } from '../../../common/picture/picture.component.js';
+import { ProjectTagComponent } from '../project-tag/project-tag.component.js';
+import { TechBadgeComponent } from '../../../common/tech/tech-badge/tech-badge.component.js';
+import { TechStringComponent } from '../../../common/tech/tech-string/tech-string.component.js';
 
 interface IProjectHeadConfig {
   name: string;
@@ -11,7 +13,7 @@ interface IProjectHeadConfig {
   displayTechIcons?: boolean;
 }
 
-const templateFn = (_config: IProjectHeadConfig) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: IProjectHeadConfig) => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ProjectHeaderComponent extends Component {
   private _headConfig: IProjectHeadConfig;
@@ -21,7 +23,7 @@ export class ProjectHeaderComponent extends Component {
     this._headConfig = config;
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     const configs = this.getTagsConfig();
     if (!this._headConfig.displayTechIcons) {
       configs.push(this.getTechStringConfig());
@@ -32,32 +34,32 @@ export class ProjectHeaderComponent extends Component {
     return configs;
   }
 
-  private getTechBadgesConfig(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getTechBadgesConfig(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: `project-header-technos`,
-      array: this._headConfig.technos,
+      items: this._headConfig.technos,
       component: TechBadgeComponent,
       elementName: `project-header-techno`
     })
   }
 
-  private getTagsConfig(): ComponentConfig[] {
-    return this.catalogConfig({
+  private getTagsConfig(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: `project-header-tags`,
-      array: this._headConfig.tags,
+      items: this._headConfig.tags,
       component: ProjectTagComponent,
       elementName: `project-header-tag`
     })
   }
 
-  private getTechStringConfig(): ComponentConfig {
+  private getTechStringConfig(): Nutin.ComponentConfig {
     return {
       selector: 'project-header-tech-string',
       factory: (el) => new TechStringComponent(el, this._headConfig.technos)
     }
   }
 
-  private getPictureConfig(): ComponentConfig {
+  private getPictureConfig(): Nutin.ComponentConfig {
     return {
       selector: 'project-header-picture',
       factory: (el) => new PictureComponent(el, {

@@ -1,7 +1,8 @@
-import { AppEventBus, CatalogItemConfig, I18nService, Service } from '../../../core/index.js';
+import { I18nService, Service } from '../../../core/index.js';
 
-export type ProjectConfigFolder = ProjectFolderName | CatalogItemConfig<ProjectFolderName>;
-export type ProjectConfigObject = IProject | CatalogItemConfig<IProject>;
+export type ProjectConfigFolder = ProjectFolderName | Nutin.CatalogItemConfig<ProjectFolderName>;
+// A project, with its catalog index when rendered from a catalog
+export type ProjectConfigObject = IProject & Partial<Nutin.CatalogItemBase>;
 
 export class Project extends Service<Project> {
   public getProject(folderName: ProjectConfigFolder): ProjectConfigObject {

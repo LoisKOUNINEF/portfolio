@@ -1,10 +1,53 @@
 #!/usr/bin/env node
 
 import path from "path";
-import { allFormats, getLastWord, print, promptBoolean, errorExit } from "../utils/index.js";
-import { generateFile, appendToIndex, generateLocalesJson } from "./handle-file.js";
+import { allFormats, getLastWord, print, errorExit } from "../utils/index.js";
+import fs from "fs";
+import { generateFile, generateLocalesJson } from "./handle-file.js";
 import { serviceTemplate, componentTemplate, viewTemplate, htmlTemplate, scssTemplate, testTemplate } from "./templates/index.js";
 import nutinConfig from "../../nutin.config.js";
+
+// Creator Mapping
+const creators = {
+  service: async (name, targetPath) => {
+    const suffix = 'service';
+    print.section(`Generating service: ${name.capitalized}`);
+    try {
+      generateFile({ name, targetPath, templateFn: serviceTemplate, suffix: suffix });
+      await generateTest({ name, targetPath, suffix: suffix });
+    } catch (err) {
+      handleError("Failed to generate service", err);
+    }
+  },
+  component: async (name, targetPath) => {
+    const suffix = 'component';
+    print.section(`Generating component: ${name.capitalized}`);
+
+    try {
+      generateFile({ name, targetPath, templateFn: componentTemplate, suffix: suffix });
+      generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
+      generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
+      await generateLocales({ targetPath, name, isView: false });
+      await generateTest({ name, targetPath, suffix });
+    } catch (err) {
+      handleError("Failed to generate component", err);
+    }
+  },
+  view: async (name, targetPath) => {
+    const suffix = 'view';
+    print.section(`Generating view: ${name.capitalized}`);
+
+    try {
+      generateFile({ name, targetPath, templateFn: viewTemplate, suffix: suffix });
+      generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
+      generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
+      await generateLocales({ targetPath, name, isView: true });
+      await generateTest({ name, targetPath, suffix });
+    } catch (err) {
+      handleError("Failed to generate view", err);
+    }
+  },
+};
 
 // Constants and Setup
 const [, , rawType, rawFullPath] = process.argv;
@@ -17,57 +60,19 @@ if (!rawType || !rawFullPath) {
 const type = allFormats(rawType);
 const fullPath = allFormats(rawFullPath);
 const name = allFormats(getLastWord(fullPath.kebab));
-const targetPath = path.join('src', 'app', `${type.kebab}s/${fullPath.kebab}`);
-
-// Creator Mapping
-const creators = {
-  service: async (name, targetPath) => {
-    const suffix = 'service';
-    print.section(`Generating service: ${name.capitalized}`);
-    try {
-      generateFile({ name, targetPath, templateFn: serviceTemplate, suffix: suffix });
-      appendToIndex({ name, targetPath, suffix: suffix });
-      if (nutinConfig.generator.generateTest) await generateTest({ name, targetPath, suffix: suffix });
-    } catch (err) {
-      handleError("Failed to generate service", err);
-    }
-  },
-  component: async (name, targetPath) => {
-    const suffix = 'component';
-    print.section(`Generating component: ${name.capitalized}`);
-
-    try {
-      generateFile({ name, targetPath, templateFn: componentTemplate, suffix: suffix });
-      if (!nutinConfig.inlineTemplates) generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
-      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
-      if (nutinConfig.generator.generateLocales) await generateLocales({ targetPath, name });
-      appendToIndex({ name, targetPath, suffix: suffix });
-      if (nutinConfig.generator.generateTest) await generateTest({ name, targetPath, suffix });
-    } catch (err) {
-      handleError("Failed to generate component", err);
-    }
-  },
-  view: async (name, targetPath) => {
-    const suffix = 'view';
-    print.section(`Generating view: ${name.capitalized}`);
-
-    try {
-      generateFile({ name, targetPath, templateFn: viewTemplate, suffix: suffix });
-      if (!nutinConfig.inlineTemplates) generateFile({ name, targetPath, templateFn: htmlTemplate, suffix: suffix, extension: 'html' });
-      if (nutinConfig.generator.generateStylesheet) generateFile({ name, targetPath, templateFn: scssTemplate, suffix: suffix, extension: 'scss' });
-      if (nutinConfig.generator.generateLocales) await generateLocales({ targetPath, name });
-      appendToIndex({ name, targetPath, suffix: suffix });
-      if (nutinConfig.generator.generateTest) await generateTest({ name, targetPath, suffix });
-    } catch (err) {
-      handleError("Failed to generate view", err);
-    }
-  },
-};
+const targetPath = path.join('src', 'app', fullPath.kebab);
 
 // Main Execution
 const create = creators[type.kebab];
 
 if (create) {
+  // Folder names carry no type suffix, so a view and a component with the same path would
+  // share one folder (and clobber each other's locales/) — refuse before writing anything.
+  if (fs.existsSync(targetPath) && fs.readdirSync(targetPath).length > 0) {
+    print.boldError(`\nA folder with this name already exists: ${targetPath}`);
+    print.warn("Pick another path, e.g. user/user-view and user/user-card.");
+    process.exit(1);
+  }
   await create(name, targetPath);
   print.boldSuccess(`\n${type.capitalized} ${name.capitalized} generated in ${targetPath}.\n`)
 } else {
@@ -77,31 +82,11 @@ if (create) {
 
 // Helper Functions
 async function generateTest({ targetPath, name, suffix }) {
-  let isGenerate = true;
-  if (!nutinConfig.testinNutin.includeApp) {
-    print.warn('⚠️ Enable includeApp in nutin.config.js testinNutin object to use test files.');
-    if (!process.stdin.isTTY) {
-      print.warn('Non-interactive shell detected — skipping test file generation.');
-      isGenerate = false;
-    } else {
-      isGenerate = await promptBoolean('Do you want to generate the test file anyway ?');
-    }
-  }
-  if (isGenerate) generateFile({ targetPath, name, templateFn: testTemplate, extension: 'test.js', suffix: suffix });
+  if (nutinConfig.testinNutin.includeApp) generateFile({ targetPath, name, templateFn: testTemplate, extension: 'test.js', suffix: suffix });
 }
 
-async function generateLocales({ targetPath, name }) {
-  let isGenerate = true;
-  if (!nutinConfig.i18n) {
-    print.warn('⚠️ Enable i18n in nutin.config.js to use json-based content per language.');
-    if (!process.stdin.isTTY) {
-      print.warn('Non-interactive shell detected — skipping locales file generation.');
-      isGenerate = false;
-    } else {
-      isGenerate = await promptBoolean('Do you want to generate the locales file(s) anyway ?');
-    }
-  }
-  if (isGenerate) generateLocalesJson({ targetPath, name });
+async function generateLocales({ targetPath, name, isView }) {
+  if (nutinConfig.i18n) generateLocalesJson({ targetPath, name, isView });
 }
 
 function showUsageAndExit(message) {

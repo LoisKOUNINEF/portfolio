@@ -1,6 +1,6 @@
 @use "sass:map";
 @use "variables" as *;
-@use "../../../libs/scss/mixins-nutin";
+@use "mixins-nutin";
 
 .about__wrapper {
 	@include mixins-nutin.wrapper;

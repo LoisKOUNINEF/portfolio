@@ -3,6 +3,8 @@ import config from '#root/nutin.config.js';
 
 export { chalk, print } from '../../utils/index.js';
 
+const verboseEnabled = process.argv.includes('--verbose');
+
 export function printSummary(todo, passed, failed, time) {
   const totalTime = time.toFixed(2);
   const total = passed + failed;
@@ -21,7 +23,7 @@ export function printResults(results) {
 
   sortedResults.forEach(result => {
     if (result.status === 'passed') {
-      if (config.testinNutin.verbose ) console.log(`${chalk.green('✓')} ${chalk.cyan(`${result.suiteName}`)} - ${chalk.green(`${result.name}`)}`);
+      if (verboseEnabled) console.log(`${chalk.green('✓')} ${chalk.cyan(`${result.suiteName}`)} - ${chalk.green(`${result.name}`)}`);
     } else if (result.status === 'todo') {
       print.warn(`TODO: ${result.name} in ${toTsPath(result.file)}`);
     } else {
@@ -37,8 +39,9 @@ export function printStart() {
 
 export function printCoverageReport(report) {
   if (!report.length) {
-    print.warn('No app source files were covered.');
-    return { globalLinesPct: 100, globalFunctionsPct: 100, globalBranchesPct: 100 };
+    // 0, not 100: an empty report must not pass a coverage threshold by default.
+    print.warn('No source files were covered.');
+    return { globalLinesPct: 0, globalFunctionsPct: 0, globalBranchesPct: 0 };
   }
 
   print.boldBlue('\nCoverage Summary');
@@ -75,9 +78,10 @@ export function printCoverageReport(report) {
 
 export function toTsPath(input) {
   return input
-    .split('/')
+    .split(/[\\/]/)
     .slice(1)
     .join('/')
-    .replace(/\.js$/, '.ts');
+    // Test files stay .test.js in TypeScript projects too.
+    .replace(/(?<!\.test)\.js$/, '.ts');
 }
 

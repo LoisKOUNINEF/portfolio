@@ -1,6 +1,7 @@
-import { ModalView, ButtonComponent } from "../../../../libs/index.js";
-import { IPictureConfig, PictureComponent } from "../../common/index.js";
-import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
+import { ModalView } from '../../common/modal-host/modal-host.js';
+import { ButtonComponent } from '../../common/button/button.component.js';
+import { IPictureConfig, PictureComponent } from '../../common/picture/picture.component.js';
+import { html } from '../../../../core/index.js';
 
 export interface IImageModalConfig extends IPictureConfig {
   viewName?: string;
@@ -32,9 +33,9 @@ export const displayCarouselModal = () => {
   updateSlides();
 }
 
-const carouselModalTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
+const carouselModalTemplate = () => html`__TEMPLATE_PLACEHOLDER__`;
 
-const carouselModalComponents = (): ComponentConfig[] => [
+const carouselModalComponents = (): Nutin.ComponentConfig[] => [
   {
     selector: 'prev-button',
     factory: (el) => new ButtonComponent(el, {
@@ -53,11 +54,11 @@ const carouselModalComponents = (): ComponentConfig[] => [
   }
 ];
 
-const carouselModalCatalogs = (): CatalogConfig[] => [
+const carouselModalCatalogs = (): Nutin.CatalogConfig[] => [
   {
     selector: `carousel-pictures`,
     component: PictureComponent,
-    array: carouselImagesSrc(),
+    items: carouselImagesSrc(),
     elementName: `carousel-picture`,
     props: { className: 'carousel__slide' }
   },

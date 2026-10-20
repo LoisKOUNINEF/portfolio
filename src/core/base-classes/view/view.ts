@@ -1,13 +1,9 @@
-import { BaseComponent, BaseComponentOptions } from '../../index.js';
-
-export interface ViewOptions extends BaseComponentOptions {
-  viewName?: string;
-}
+import { BaseComponent } from '../base-component/base-component.js';
 
 export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComponent<T> {
-  public viewName: string;
+  private _viewName: string;
   protected routeParams: Record<string, string> = {};
-  private _template: string;
+  private _template: Nutin.Template;
 
   constructor({
     template,
@@ -15,13 +11,18 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     mountTarget = '#app',
     viewName,
     trustLevel,
-  }: ViewOptions) {
+  }: Nutin.ViewOptions) {
     super({ mountTarget, tagName, trustLevel });
+    if (!viewName) throw new Error('View requires a viewName.');
     this._template = template ?? '';
-    this.viewName = viewName || this.getKebabCaseViewName();
+    this._viewName = viewName;
   }
 
-  protected override generateTemplate(): string {
+  public get viewName(): string {
+    return this._viewName;
+  }
+
+  protected override generateTemplate(): Nutin.Template {
     return this._template;
   }
 
@@ -41,46 +42,11 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     return key in this.routeParams && this.routeParams[key] !== undefined;
   }
 
-/**
- * Hide header
- * Container div must have id="header"
- */
-  protected hideHeader(): void {
-    const header = document.getElementById('header') as HTMLElement;
-    if (header) header.style.cssText = 'display: none';
-  }
-
-/**
- * Hide footer
- * Container div must have id="footer"
- */
-  protected hideFooter(): void {
-    const footer = document.getElementById('footer') as HTMLElement;
-    if (footer) footer.style.cssText = 'display: none';
-  }
-
-/**
- * Reveal header
- * Container div must have id="header"
- */
-  protected revealHeader(): void {
-    const header = document.getElementById('header') as HTMLElement;
-    if (header) header.style.cssText = 'display: block';
-  }
-
-/**
- * Reveal footer
- * Container div must have id="footer"
- */
-  protected revealFooter(): void {
-    const footer = document.getElementById('footer') as HTMLElement;
-    if (footer) footer.style.cssText = 'display: block';
-  }
-
-  private getKebabCaseViewName(): string {
-    const className = this.constructor.name;
-    const baseName = className.replace(/View$/, '');
-    return baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  // The page's title, read by the router after each navigation (document.title). Override it
+  // for a title that depends on the route, e.g. the page being shown. Undefined: the router
+  // uses config/seo.json's title, then the "<viewName>.title" translation, then viewName.
+  public documentTitle(): string | undefined {
+    return undefined;
   }
 
   // Navigation hooks — called by router only, never by render lifecycle

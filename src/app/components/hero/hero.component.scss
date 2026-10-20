@@ -161,6 +161,7 @@
 	border-radius: map.get($border-radius, large);
 	transition: all ease-in-out .2s;
   outline: 2px solid transparent;
+  color: var(--background);
 	@include mixins.respond-to(medium) {
 		width: 100%;
 		padding: map.get($spacings, small) map.get($spacings, small);

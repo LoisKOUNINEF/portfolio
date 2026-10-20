@@ -1,7 +1,7 @@
-import { AppEventBus, Component, ComponentConfig, I18nService } from '../../../../core/index.js';
-import { ButtonComponent } from '../../../../libs/index.js';
+import { Component, I18nService, html } from '../../../../core/index.js';
+import { ButtonComponent } from '../../common/button/button.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 interface ShowMoreTranslations {
   more: string;
@@ -18,11 +18,11 @@ export class ShowMoreComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [this.getBtnConfig()];
   }
 
-  private getBtnConfig(): ComponentConfig {
+  private getBtnConfig(): Nutin.ComponentConfig {
     return {
       selector: 'show-more-inner-btn',
       factory: (el) => new ButtonComponent(el, {

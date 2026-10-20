@@ -1,17 +1,11 @@
-import {
-  Component,
-  ComponentConfig,
-  I18nService
-} from '../../../../core/index.js';
-import { ButtonComponent } from '../../../../libs/index.js';
-import { AnchorComponent, IAnchorConfig } from '../../common/index.js';
-import { 
-  LanguageTogglerComponent, 
-  ThemeTogglerComponent 
-} from '../../index.js';
+import { Component, I18nService, html } from '../../../../core/index.js';
+import { ButtonComponent } from '../../common/button/button.component.js';
+import { AnchorComponent, IAnchorConfig } from '../../common/anchor/anchor.component.js';
+import { LanguageTogglerComponent } from '../togglers/language-toggler/language-toggler.component.js';
+import { ThemeTogglerComponent } from '../togglers/theme-toggler/theme-toggler.component.js';
 import { NavToggleHelper } from './nav-toggle.helper.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class NavbarComponent extends Component<HTMLHeadingElement> {
   private readonly _anchorHrefs: IAnchorConfig[] = [
@@ -28,18 +22,21 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  override onAfterRender() {
-    window.addEventListener('scroll', () => this.scrollHelper());
+  protected override onAfterRender(): void {
+    super.onAfterRender();
+    const onScroll: EventListener = () => this.scrollHelper();
+    window.addEventListener('scroll', onScroll);
+    this.eventListeners.push([window, 'scroll', onScroll]);
     NavToggleHelper.setupAnchorListeners();
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [ ...this.getAnchors(), ...this.getTogglers() ]
   }
 
-  private getAnchors(): ComponentConfig[] {
-    return this.catalogConfig({
-      array: this._anchorHrefs,
+  private getAnchors(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
+      items: this._anchorHrefs,
       selector: 'navbar-anchors',
       elementName: 'nav-anchor',
       component: AnchorComponent,
@@ -47,7 +44,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
     })
   }
 
-  private getTogglers(): ComponentConfig[] {
+  private getTogglers(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'language-toggler',
@@ -61,7 +58,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
     ]
   }
 
-  private getToggleBtn(): ComponentConfig {
+  private getToggleBtn(): Nutin.ComponentConfig {
     return {
       selector: 'nav-toggle',
       factory: (el) => new ButtonComponent(el, {

@@ -1,22 +1,19 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { generateFile, appendToIndex } from './handle-file.js';
+import { generateFile } from './handle-file.js';
 
 describe('handle-file', () => {
   let tmpDir;
-  let originalCwd;
   let exitSpy;
 
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nutin-handle-file-'));
-    originalCwd = process.cwd();
     exitSpy = spyOn(process, 'exit').andCallFake(() => {});
   });
 
   afterEach(() => {
     exitSpy.restore();
-    process.chdir(originalCwd);
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 
@@ -36,9 +33,9 @@ describe('handle-file', () => {
     const targetPath = path.join(tmpDir, 'services', 'widget');
     const name = { kebab: 'widget', pascal: 'Widget', camel: 'widget', capitalized: 'Widget' };
 
-    generateFile({ name, targetPath, templateFn: () => 'x', suffix: 'service', extension: 'js' });
+    generateFile({ name, targetPath, templateFn: () => 'x', suffix: 'service', extension: 'scss' });
 
-    expect(fs.existsSync(path.join(targetPath, 'widget.service.js'))).toBeTruthy();
+    expect(fs.existsSync(path.join(targetPath, 'widget.service.scss'))).toBeTruthy();
   });
 
   it('generateFile calls process.exit(1) instead of overwriting an existing file', () => {
@@ -52,21 +49,5 @@ describe('handle-file', () => {
 
     expect(exitSpy.callCount).toBe(1);
     expect(exitSpy.lastCall).toEqual([1]);
-  });
-
-  it('appendToIndex appends an export line to the barrel three segments up from targetPath', () => {
-    process.chdir(tmpDir);
-    const basePath = path.join('src', 'app', 'components');
-    fs.mkdirSync(basePath, { recursive: true });
-    fs.writeFileSync(path.join(basePath, 'index.ts'), "export * from './existing.js';\n");
-
-    const targetPath = path.join('src', 'app', 'components', 'widget');
-    const name = { kebab: 'widget', pascal: 'Widget', camel: 'widget', capitalized: 'Widget' };
-
-    // appendToIndex prints a "index.ts updated" log via console.info
-    silenceConsole('info', () => appendToIndex({ name, targetPath, suffix: 'component' }));
-
-    const indexContent = fs.readFileSync(path.join(basePath, 'index.ts'), 'utf8');
-    expect(indexContent).toBe("export * from './existing.js';\nexport * from './widget/widget.component.js';\n");
   });
 });

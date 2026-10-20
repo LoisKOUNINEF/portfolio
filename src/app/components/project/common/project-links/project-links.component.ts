@@ -1,7 +1,7 @@
-import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { ExternalLinkComponent } from '../../../index.js';
+import { Component, html } from '../../../../../core/index.js';
+import { ExternalLinkComponent } from '../../../common/external-link/external-link.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ProjectLinksComponent extends Component {
   private _links: IProjectLink[];
@@ -11,10 +11,10 @@ export class ProjectLinksComponent extends Component {
     this._links = config;
   }
 
-  public childConfigs(): ComponentConfig[] {
-    return this.catalogConfig({
+  public registerChildren(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
       selector: `project-links`,
-      array: this._links,
+      items: this._links,
       component: ExternalLinkComponent,
       elementName: `project-link`
     })

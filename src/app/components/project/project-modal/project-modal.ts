@@ -1,10 +1,8 @@
-import { ModalView } from "../../../../libs/index.js";
-import { CatalogConfig, ComponentConfig } from "../../../../core/index.js";
-import {
-  ProjectSectionComponent,
-  ProjectHeaderComponent,
-  ProjectLinksComponent,
-} from "../../index.js";
+import { ModalView } from '../../common/modal-host/modal-host.js';
+import { html } from '../../../../core/index.js';
+import { ProjectSectionComponent } from '../common/project-section/project-section.component.js';
+import { ProjectHeaderComponent } from '../common/project-header/project-header.component.js';
+import { ProjectLinksComponent } from '../common/project-links/project-links.component.js';
 
 export const displayProjectModal = (project: IProject) => {
   const modal = new ModalView({
@@ -16,9 +14,9 @@ export const displayProjectModal = (project: IProject) => {
   modal.render();
 }
 
-const projectModalTemplate = (_project: IProject) => `__TEMPLATE_PLACEHOLDER__`;
+const projectModalTemplate = (_project: IProject) => html`__TEMPLATE_PLACEHOLDER__`;
 
-const projectModalComponents = (project: IProject): ComponentConfig[] => [
+const projectModalComponents = (project: IProject): Nutin.ComponentConfig[] => [
   {
     selector: `${project.name}-modal-header`,
     factory: (el) => new ProjectHeaderComponent(el, {
@@ -62,17 +60,17 @@ const projectModalComponents = (project: IProject): ComponentConfig[] => [
   },
 ];
 
-const projectModalCatalogs = (project: IProject): CatalogConfig[] => [
+const projectModalCatalogs = (project: IProject): Nutin.CatalogConfig[] => [
   {
     selector: `${project.name}-modal-choices`,
     component: ProjectSectionComponent,
-    array: project.choices,
+    items: project.choices,
     elementName: `${project.name}-modal-choice`
   },
   {
     selector: `${project.name}-modal-challenges`,
     component: ProjectSectionComponent,
-    array: project.challenges,
+    items: project.challenges,
     elementName: `${project.name}-modal-challenge`
   },
 ];

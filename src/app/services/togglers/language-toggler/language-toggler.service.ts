@@ -1,4 +1,3 @@
-import { Language } from '../../../../core/services/i18n/languages.js';
 import { I18nService, Service } from '../../../../core/index.js';
 import { notify } from 'a11y-elements/overlays/snackbar';
 
@@ -10,7 +9,7 @@ export class LanguageTogglerService extends Service<LanguageTogglerService> {
   }
 
   private notifyChange() {
-    const messages: Record<Language, string> = {
+    const messages: Record<Nutin.Language, string> = {
       fr: 'Langue: Français',
       en: 'Language: English'
     };

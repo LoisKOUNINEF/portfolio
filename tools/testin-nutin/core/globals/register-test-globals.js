@@ -4,7 +4,8 @@ import { silenceConsole } from './silence-console.js';
 import './assertion-lib.js';
 import './spyon.js';
 import './clock.js';
-import config from '#root/nutin.config.js';
+
+const verboseEnabled = process.argv.includes('--verbose');
 
 export function registerTestGlobals() {
   let currentSuite = '';
@@ -18,19 +19,18 @@ export function registerTestGlobals() {
       afterEach: null,
       afterAll: null
     };
-    if (config.testinNutin.verbose) print.boldSuccess('📂 ' + name);
+    if (verboseEnabled) print.boldSuccess('📂 ' + name);
     fn();
   };
 
+  // The suite's hooks object is shared by reference (read when the queue runs), so a hook
+  // registered after some it() calls in the same describe() still applies to them.
   global.it = (name, fn) => {
-    addTest({ 
-      suiteName: currentSuite, 
-      testName: name, 
+    addTest({
+      suiteName: currentSuite,
+      testName: name,
       testFn: fn,
-      beforeEach: currentSuiteHooks.beforeEach,
-      beforeAll: currentSuiteHooks.beforeAll,
-      afterEach: currentSuiteHooks.afterEach,
-      afterAll: currentSuiteHooks.afterAll
+      hooks: currentSuiteHooks,
     });
   };
   global.it.todo = (s) => {

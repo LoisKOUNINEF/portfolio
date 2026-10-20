@@ -1,4 +1,4 @@
-import { AppPipeRegistry, CatalogItemConfig } from "../../../../core/index.js";
+import { AppPipeRegistry } from '../../../../core/index.js';
 
 export const labels: Record<string, string> = {
   typescript: 'TypeScript',
@@ -32,7 +32,7 @@ export const proficiencies: Record<string, string> = {
   bash: 'secondary',
 }
 
-export const getLabel = (config: CatalogItemConfig<ITech | string> | ITech[] | ITech): string => {
+export const getLabel = (config: Nutin.CatalogItemConfig<ITech | string> | ITech[] | ITech): string => {
   let label = '';
   if ('value' in config && typeof config.value === 'string') {
     label = labels[config.value] 
@@ -48,7 +48,7 @@ export const getLabel = (config: CatalogItemConfig<ITech | string> | ITech[] | I
   return label;
 }
 
-export const getProficiency = (config: CatalogItemConfig<ITech | string>): string | undefined => {
+export const getProficiency = (config: Nutin.CatalogItemConfig<ITech | string>): string | undefined => {
   if (!('displayProficiency' in config)) return;
   let proficiency: string | undefined;
   if ('value' in config && typeof config.value === 'string' ) {

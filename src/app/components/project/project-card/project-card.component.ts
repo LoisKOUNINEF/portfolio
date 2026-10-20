@@ -1,15 +1,18 @@
-import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/index.js';
-import { Component, ComponentConfig, ComponentProps } from '../../../../core/index.js';
-import { ButtonComponent } from '../../../../libs/index.js';
-import { displayProjectModal, ProjectHeaderComponent, ProjectLinksComponent, ProjectSectionComponent } from '../../index.js';
+import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/project/project.service.js';
+import { Component, html } from '../../../../core/index.js';
+import { ButtonComponent } from '../../common/button/button.component.js';
+import { displayProjectModal } from '../project-modal/project-modal.js';
+import { ProjectHeaderComponent } from '../common/project-header/project-header.component.js';
+import { ProjectLinksComponent } from '../common/project-links/project-links.component.js';
+import { ProjectSectionComponent } from '../common/project-section/project-section.component.js';
 
-const templateFn = (_project: ProjectConfigObject) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_project: ProjectConfigObject) => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ProjectCardComponent extends Component {
   private _project: ProjectConfigObject;
   private readonly _initialConfig: ProjectConfigFolder;
 
-  constructor(mountTarget: HTMLElement, config: ProjectConfigFolder, props?: ComponentProps) {
+  constructor(mountTarget: HTMLElement, config: ProjectConfigFolder, props?: Nutin.ComponentProps) {
     const project = ProjectService.getProject(config);
 
     super({ templateFn, mountTarget, config: project, props });
@@ -19,7 +22,7 @@ export class ProjectCardComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return [
       this.getHeaderConfig(),
       this.getPresentationConfig(),
@@ -28,7 +31,7 @@ export class ProjectCardComponent extends Component {
     ]
   }
 
-  private getHeaderConfig(): ComponentConfig {
+  private getHeaderConfig(): Nutin.ComponentConfig {
     const { name, imageSrc, tagline, technos, tags } = {...this._project};
     return {
       selector: `project-card-header`,
@@ -39,7 +42,7 @@ export class ProjectCardComponent extends Component {
     }
   }
 
-  private getPresentationConfig(): ComponentConfig {
+  private getPresentationConfig(): Nutin.ComponentConfig {
     return {
       selector: `project-card-presentation`,
       factory: (el) => new ProjectSectionComponent(el, 
@@ -48,7 +51,7 @@ export class ProjectCardComponent extends Component {
     }
   }
 
-  private getLinksConfig(): ComponentConfig {
+  private getLinksConfig(): Nutin.ComponentConfig {
     return {
       selector: `project-card-links`,
       factory: (el) => new ProjectLinksComponent(el,
@@ -57,7 +60,7 @@ export class ProjectCardComponent extends Component {
     }
   }
 
-  private getViewMoreBtnConfig(): ComponentConfig {
+  private getViewMoreBtnConfig(): Nutin.ComponentConfig {
     return {
       selector: `project-card-view-more`,
       factory: (el) => new ButtonComponent(el, {
@@ -73,6 +76,7 @@ export class ProjectCardComponent extends Component {
   }
 
   protected override onBeforeRender(): void {
+    super.onBeforeRender();
     this._project = ProjectService.getProject(this._initialConfig);
   }
 }

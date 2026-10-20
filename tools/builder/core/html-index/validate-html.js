@@ -2,10 +2,11 @@ import { readFile } from 'fs/promises';
 import path from 'path';
 import { print, errorExit } from '../../../utils/index.js';
 import { PATHS } from '../app/paths.js';
-import { addTags } from './add-tags.js';
-import { addImportMap } from './add-import-map.js';
-import { buildImportMap } from '../app/vendor-deps.js';
+import { readRoutesImporters } from '../app/route-keys.js';
 import { builderConfig } from '../../builder.config.js';
+import { addTags } from './add-tags.js';
+
+const ROUTES_FILE = path.join(PATHS.sourceApp, 'routes.ts');
 
 async function validateHtml() {
   const filePath = path.join(PATHS.tempSource, 'index.html');
@@ -17,14 +18,15 @@ async function validateHtml() {
     errorExit(`Failed to read ${filePath}`);
   }
 
-  if (!htmlContent.includes('id="app"')) {
-    errorExit('Missing #app container in HTML');
+  // The router mounts views into #app, and generateSEOFiles prerenders into it. An app without
+  // the router mounts its components wherever it wants: a missing target is reported at runtime.
+  const needsApp = builderConfig.generateSEO || readRoutesImporters(PATHS.sourceApp, ROUTES_FILE).length > 0;
+  if (needsApp && !htmlContent.includes('id="app"')) {
+    const reason = builderConfig.generateSEO ? 'generateSEOFiles prerenders pages into it' : 'the router mounts views into it';
+    errorExit(`Missing #app container in index.html: ${reason}.`);
   }
 
   htmlContent = await addTags(htmlContent, filePath).catch(err => errorExit(err.message));
-  if (!builderConfig.isProd) {
-    htmlContent = await addImportMap(htmlContent, filePath, buildImportMap()).catch(err => errorExit(err.message));
-  }
 
   if (!/<script[^>]*type=["']module["']/.test(htmlContent)) {
     errorExit('No module scripts found in HTML');

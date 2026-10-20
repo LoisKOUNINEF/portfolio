@@ -1,6 +1,7 @@
 import fs from 'fs';
-import path from 'path';
-import { print, LANGUAGES } from '../utils/index.js';
+import { print } from '../utils/index.js';
+// Imported directly, not via the utils barrel: it reads config/languages.json on load.
+import { LANGUAGES } from '../utils/languages.js';
 import { localeTemplate } from './templates/index.js';
 
 export function generateFile({
@@ -22,32 +23,11 @@ export function generateFile({
   fs.writeFileSync(filePath, template);
 }
 
-export function appendToIndex({ name, targetPath, suffix }) {
-  const absTargetPath = path.resolve(process.cwd(), targetPath);
-
-  const parts = targetPath.split(path.sep);
-  const basePath = parts.slice(0, 3).join(path.sep);
-
-  const indexFilePath = path.join(basePath, 'index.ts');
-
-  const absFilePath = path.join(absTargetPath, `${name.kebab}.${suffix}.js`);
-  const relPath = path.relative(basePath, absFilePath).replace(/\\/g, '/');
-
-  const lineToAppend = `export * from './${relPath}';\n`;
-
-  try {
-    fs.appendFileSync(indexFilePath, lineToAppend, 'utf8');
-    print.gray(`${suffix}s/index.ts updated.`);
-  } catch (err) {
-    throw new Error(`Failed to update ${indexFilePath}: ${err.message}`, { cause: err });
-  }
-}
-
-export function generateLocalesJson({ targetPath, name }) {
+export function generateLocalesJson({ targetPath, name, isView }) {
   const localesDir = `${targetPath}/locales`;
   fs.mkdirSync(localesDir, { recursive: true });
 
-  const template = localeTemplate(name);
+  const template = localeTemplate(name, isView);
 
   const failedLangs = [];
   for (const lang of LANGUAGES) {

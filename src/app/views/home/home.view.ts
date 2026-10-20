@@ -1,16 +1,15 @@
-import { ComponentConfig, View } from '../../../core/index.js';
-import { EmptyComponent } from '../../../libs/index.js';
-import {
-  AboutMeComponent,
-  ContactComponent,
-  HeroComponent, InfosComponent,
-  OtherThingsComponent,
-  ProjectCardComponent,
-  ShowMoreComponent,
-  TechStackComponent
-} from '../../components/index.js';
+import { View, html } from '../../../core/index.js';
+import { EmptyComponent } from '../../components/common/empty/empty.component.js';
+import { AboutMeComponent } from '../../components/about/about.component.js';
+import { ContactComponent } from '../../components/contact/contact.component.js';
+import { HeroComponent } from '../../components/hero/hero.component.js';
+import { InfosComponent } from '../../components/infos/infos.component.js';
+import { OtherThingsComponent } from '../../components/other-things/other-things.component.js';
+import { ProjectCardComponent } from '../../components/project/project-card/project-card.component.js';
+import { ShowMoreComponent } from '../../components/project/show-more/show-more.component.js';
+import { TechStackComponent } from '../../components/tech-stack/tech-stack.component.js';
 
-const template = `__TEMPLATE_PLACEHOLDER__`;
+const template = html`__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
   private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', /*'run-for-the-bun'*/];
@@ -21,11 +20,11 @@ export class HomeView extends View {
     super({template, tagName: 'div', viewName: 'home'});
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public registerChildren(): Nutin.ComponentConfig[] {
     return this.getChildConfigs();
   }
 
-  private getChildConfigs(): ComponentConfig[] {
+  private getChildConfigs(): Nutin.ComponentConfig[] {
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
@@ -39,23 +38,23 @@ export class HomeView extends View {
       this.getOtherThingsConfig()
     ]
   }
-  private getHeroConfig(): ComponentConfig {
+  private getHeroConfig(): Nutin.ComponentConfig {
     return {
       selector: 'hero',
       factory: (el) => new HeroComponent(el)
     }
   }
 
-  private getAboutMeConfig(): ComponentConfig {
+  private getAboutMeConfig(): Nutin.ComponentConfig {
     return {
       selector: 'about',
       factory: (el) => new AboutMeComponent(el)
     }
   }
 
-  private getMainProjectsCatalog(): ComponentConfig[] {
-    return this.catalogConfig({
-      array: this._allProjects.slice(0, this._mainProjectsCount),
+  private getMainProjectsCatalog(): Nutin.ComponentConfig[] {
+    return this.createCatalogComponents({
+      items: this._allProjects.slice(0, this._mainProjectsCount),
       selector: 'main-projects-catalog',
       elementName: 'main-project',
       component: ProjectCardComponent,
@@ -63,7 +62,7 @@ export class HomeView extends View {
     });
   }
 
-  private getShowMoreBtnConfig(): ComponentConfig {
+  private getShowMoreBtnConfig(): Nutin.ComponentConfig {
     const selector = 'show-more-btn';
     const additional = this._allProjects.slice(this._mainProjectsCount);
     if (!additional.length) {
@@ -78,11 +77,11 @@ export class HomeView extends View {
     };
   }
 
-  private getAdditionalProjectsCatalog(): ComponentConfig[] {
+  private getAdditionalProjectsCatalog(): Nutin.ComponentConfig[] {
     const additional = this._allProjects.slice(this._mainProjectsCount);
     if (!additional.length) return [];
-    return this.catalogConfig({
-      array: additional,
+    return this.createCatalogComponents({
+      items: additional,
       selector: 'additional-projects-catalog',
       elementName: 'additional-project',
       component: ProjectCardComponent,
@@ -90,14 +89,14 @@ export class HomeView extends View {
     });
   }
 
-  private getStackConfig(): ComponentConfig {
+  private getStackConfig(): Nutin.ComponentConfig {
     return {
       selector: 'tech-stack',
       factory: (el) => new TechStackComponent(el)
     }
   }
 
-  private getSelfHostingProjectConfig(): ComponentConfig {
+  private getSelfHostingProjectConfig(): Nutin.ComponentConfig {
     return {
       selector: 'infrastructure',
       factory: (el) => new ProjectCardComponent(el, 
@@ -106,21 +105,21 @@ export class HomeView extends View {
     }
   }
 
-  private getContactConfig(): ComponentConfig {
+  private getContactConfig(): Nutin.ComponentConfig {
     return {
       selector: 'contact',
       factory: (el) => new ContactComponent(el)
     }
   }
 
-  private getInfosConfig(): ComponentConfig {
+  private getInfosConfig(): Nutin.ComponentConfig {
     return {
       selector: 'infos',
       factory: (el) => new InfosComponent(el)
     }
   }
 
-  private getOtherThingsConfig(): ComponentConfig {
+  private getOtherThingsConfig(): Nutin.ComponentConfig {
     return {
       selector: 'other-things',
       factory: (el) => new OtherThingsComponent(el)

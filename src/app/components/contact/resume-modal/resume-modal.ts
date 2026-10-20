@@ -1,10 +1,9 @@
-import { ComponentConfig, I18nService } from '../../../../core/index.js';
+import { I18nService, html } from '../../../../core/index.js';
 import { notify } from 'a11y-elements/overlays/snackbar';
-import { ModalView } from '../../../../libs/index.js';
-import { InfoCardComponent } from '../../common/index.js';
-import {Language} from "../../../../core/services/i18n/languages.js";
+import { ModalView } from '../../common/modal-host/modal-host.js';
+import { InfoCardComponent } from '../../common/info-card/info-card.component.js';
 
-const resumeModalTemplate = () => `__TEMPLATE_PLACEHOLDER__`;
+const resumeModalTemplate = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export const displayResumeModal = () => {
   const lang = I18nService.currentLanguage;
@@ -16,7 +15,7 @@ export const displayResumeModal = () => {
 };
 
 const downloadStarted = (): void => {
-  const messages: Record<Language, string> = {
+  const messages: Record<Nutin.Language, string> = {
     fr: 'Téléchargement lancé',
     en: 'Download started',
   };
@@ -25,7 +24,7 @@ const downloadStarted = (): void => {
   notify(message);
 };
 
-const resumeModalComponents = (lang: string): ComponentConfig[] => {
+const resumeModalComponents = (lang: string): Nutin.ComponentConfig[] => {
   const colorHref = `./assets/resumes/resume-lois-kouninef-${lang}.pdf`;
   const monoHref = `./assets/resumes/resume-lois-kouninef-printable-${lang}.pdf`;
   const colorFilename = lang === 'en' ? 'Lois_Kouninef_Resume_Color.pdf' : 'Lois_Kouninef_CV_Couleur.pdf';
