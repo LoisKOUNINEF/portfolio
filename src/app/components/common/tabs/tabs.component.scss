@@ -48,6 +48,18 @@ $tabs-config: (
 	display: none;
 }
 
+.tabs__tab {
+	&:hover {
+		border-bottom: 1px solid var(--text);
+	}
+
+	@media (hover: none) {
+		&:hover {
+			border-bottom: none;
+		}
+	}
+}
+
 // Small screens: the picker replaces the tablist
 @include mixins.respond-to(medium) {
 	.tabs__list-slot {
