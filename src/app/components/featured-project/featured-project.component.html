@@ -11,7 +11,9 @@
 				<li data-i18n="featured-project.highlight-2"></li>
 				<li data-i18n="featured-project.highlight-3"></li>
 			</ul>
-			<div data-component="featured-project-link"></div>
+			<div data-event="keydown:_onLinkKeydown:@event">
+				<div data-component="featured-project-link" data-event="click:_openProjectAfterScroll"></div>
+			</div>
 		</div>
 		<div class="featured-project__picture" data-component="featured-project-picture"></div>
 	</div>
