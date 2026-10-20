@@ -1,0 +1,86 @@
+{
+	"name": "Service mail | Mailer Dockerisé",
+	"tagline": "L'envoi d'e-mails pour mes applications : Postfix et OpenDKIM sur Docker Swarm, en réutilisant les certificats TLS de Traefik.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Un relais Postfix limité à mes domaines, avec authentification SMTP depuis un secret Docker.",
+			"Signature DKIM avec OpenDKIM.",
+			"Certificats TLS extraits du stockage de certificats de Traefik, avec rechargement de Postfix à chaque renouvellement.",
+			"Accessible aux applications via un réseau overlay dédié."
+		]
+	},
+	"popTagline": "Mis en place pour que mes applications envoient leurs e-mails de vérification et de commande sans fournisseur tiers.",
+	"overview": {
+		"mainContent": "Le service mail est une stack Docker Swarm de quatre services : Postfix, OpenDKIM, un extracteur de certificats et un service de rechargement. Les applications rejoignent son réseau et envoient leurs e-mails via Postfix, qui les fait signer par OpenDKIM.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Certificats lus depuis le fichier renouvelé par Traefik, surveillé en continu.",
+			"Une petite image dédiée qui signale à Postfix l'arrivée de nouveaux certificats.",
+			"Clés DKIM générées par script."
+		]
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Envoyer des e-mails transactionnels (vérification de compte, réinitialisation de mot de passe, commandes) depuis mon propre domaine.",
+			"Comprendre ce qu'exige la délivrabilité des e-mails : DKIM, TLS, enregistrements DNS."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Pas de gestion de certificats supplémentaire : réutiliser ce que Traefik renouvelle déjà.",
+			"Envoi uniquement : aucune boîte mail à maintenir."
+		]
+	},
+	"choices": [
+		{
+			"title": "Réutiliser les certificats de Traefik",
+			"mainContent": "Plutôt qu'un second client de certificats, un conteneur extrait le certificat et la clé du domaine mail depuis le stockage de Traefik, et les réécrit à chaque changement."
+		},
+		{
+			"title": "Se signaler via un volume partagé",
+			"mainContent": "L'extracteur dépose un fichier de signal dans un volume partagé. Le service de rechargement le détecte et demande à Postfix de recharger sa configuration : un renouvellement de certificat ne nécessite aucun redémarrage."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Délivrabilité",
+			"mainContent": "Les e-mails auto-hébergés sont facilement classés en spam : signature DKIM, enregistrements DNS corrects et TLS ont tous été nécessaires pour que les messages arrivent de façon fiable."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"L'e-mail est un vieux protocole, aux nombreuses règles implicites.",
+			"De petits conteneurs à usage unique se combinent bien."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "linux"
+		},
+		{
+			"svgKey": "bash"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/Mail-Delivery"
+		}
+	]
+}

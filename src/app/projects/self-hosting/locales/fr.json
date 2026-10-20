@@ -1,14 +1,24 @@
 {
-	"name": "Systèmes & Infrastructure",
+	"name": "Infrastructure | Auto-hébergement",
 	"tagline": "Auto-hébergement en production — déploiement, sécurité et opérations quotidiennes pour des services exposés sur Internet.",
 	"imageSrc": "./assets/images/projects/self-hosting",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 			"Gestion conjointe des aspects déploiement, réseau et sécurité, pour un comportement prévisible en environnement réel.",
 			"Mesures de sécurité essentielles (mises à jour automatiques, accès restreint, pare-feu, prévention des intrusions).",
 			"Reverse proxy avec renouvellement automatique des certificats TLS.",
 			"Services conteneurisés orchestrés avec Docker Swarm.",
-			"Service mail auto-hébergé pour les besoins des applications."
+			"Monitoring avec Grafana et Prometheus."
 		]
 	},
 	"popTagline": "Mis en place pour acquérir une expérience pratique du déploiement, des bases de la sécurité et des préoccupations opérationnelles quotidiennes dans un environnement auto-hébergé.",
@@ -20,7 +30,8 @@
 			"Orchestration Docker: Swarm pour la gestion des conteneurs, secrets pour la gestion sécurisée des données sensibles.",
 			"Reverse proxy et routage: Traefik pour le routage HTTPS dynamique, avec Nginx utilisé dans les images pour les sites statiques.",
 			"Sécurité: désactivation de l’accès root, configuration d’UFW, fail2ban pour la protection contre les attaques par force brute.",
-			"Déploiements automatisés: mise en place d’un pipeline CI / CD réutilisable basé sur des scripts bash et des workflows GitHub.",
+			"Déploiements automatisés : voir le projet CI / CD.",
+			"Envoi d'e-mails : voir le projet Mailer Dockerisé.",
 			"Monitoring: Grafana et Prometheus pour suivre les performances du système."
 		],
 		"after": "Le résultat est une configuration flexible, capable de supporter plusieurs applications, d’évoluer avec mes besoins et de servir de terrain d’apprentissage concret pour les problématiques réelles de déploiement."

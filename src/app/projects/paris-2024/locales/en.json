@@ -23,13 +23,14 @@
 	},
 	"popTagline": "Developed to explore authentication, payment flows, and end-to-end application architecture in a full-stack context.",
 	"overview": {
-		"mainContent": "Paris 2024 is a full-stack web application built around the 2024 Olympic Games. The project focuses on aggregating, exposing, and presenting structured data through a backend API and a frontend application designed for clarity and usability.",
+		"mainContent": "Paris 2024 is a full-stack online ticketing application for the 2024 Olympic Games, built as a study project. Visitors buy their tickets online and receive them by email as QR codes, replacing fraud-prone physical tickets.",
 		"keyPointsTitle": "Main features",
 		"keyPoints": [
-			"Backend API for fetching, normalizing, and exposing structured data.",
-			"Clear API contracts enabling clean frontend–backend separation.",
-			"Frontend focused on data presentation and user interaction",
-			"End-to-end deployment with a production-oriented mindset"
+			"Offers, cart and authentication, with the cart kept across sessions and merged on login.",
+			"Stripe payments, then e-tickets: a user key and a ticket key, concatenated into a QR code sent by email.",
+			"Admin panel to manage offers and view sales statistics.",
+			"Scheduled jobs for expired token cleanup and account deletion.",
+			"Nx monorepo: Angular client, NestJS server and shared libraries."
 		],
 		"after": "It served both as a functional product and as a way to work end-to-end on a complete system: data ingestion, backend logic, API design, frontend consumption, and deployment. Even without external users, the system was operated as if failures mattered."
 	},
@@ -54,12 +55,12 @@
 	},
 	"choices": [
 		{
-			"title": "Backend as a dedicated data layer",
+			"title": "Business rules on the server",
 			"mainContent": "The backend is responsible for:",
 			"keyPoints": [
-				"Fetching and normalizing data.",
-				"Exposing a clean, stable API.",
-				"Encapsulating business rules."
+				"Validating carts and orders.",
+				"Handling payments and issuing tickets.",
+				"Enforcing access rules (roles, sessions)."
 			],
 			"after": "This avoids leaking data complexity into the frontend and makes the system easier to evolve or reuse."
 		},
@@ -86,9 +87,9 @@
 	],
 	"challenges": [
 		{
-			"title": "Dealing with evolving or imperfect data",
-			"mainContent": "Real-world datasets are rarely clean or stable. This required defensive handling on the backend and clear guarantees on what the frontend could rely on.",
-			"after": "Normalizing data early simplified the rest of the system."
+			"title": "Keeping user state consistent",
+			"mainContent": "Visitors can fill a cart before signing in. That anonymous cart had to be kept, then merged with the account's cart on login, without duplicating or losing items.",
+			"after": "Making the merge rules explicit simplified the rest of the purchase flow."
 		},
 		{
 			"title": "Avoiding frontend–backend drift",
@@ -105,7 +106,7 @@
 		"keyPoints": [
 			"Full-stack projects succeed or fail at the boundaries between layers.",
 			"A well-designed API simplifies everything built on top of it.",
-			"Real data exposes design weaknesses quickly and usefully.",
+			"Payment and authentication flows expose design weaknesses quickly.",
 			"Clear contracts matter more than stack sophistication."
 		],
 		"after": "This project reinforced the importance of thinking holistically about applications: not just how each part works, but how responsibilities are divided and communicated across the system."
@@ -122,6 +123,9 @@
 		},
 		{
 			"svgKey": "nx"
+		},
+		{
+			"svgKey": "typeorm"
 		}
 	],
 	"links": [

@@ -3,15 +3,40 @@
 @use "mixins";
 @use "sass:color";
 
-.home__separator {
-  display: inline-block;
+// One vertical spacing between all sections; a separator sits in its middle
+$home-config: (
+  'section-spacing': map.get($spacings, largest) * 2,
+  'separator-height': 15px,
+) !default;
+
+$section-spacing: map.get($home-config, 'section-spacing');
+$separator-height: map.get($home-config, 'separator-height');
+
+// The look of a separator: a soft line at the bottom edge of a $separator-height box
+@mixin separator-line {
+  display: block;
   width: 50%;
   margin-left: 25%;
-  height: 15px;
+  height: $separator-height;
   box-shadow: 0 4px 4px -4px var(--border-strong);
   @include mixins.respond-to(medium) {
     width: 90%;
     margin-left: 5%;
+  }
+}
+
+.home__sections > * {
+  padding-top: $section-spacing;
+}
+
+.home__separator {
+  @include separator-line;
+  // The line is drawn at the separator's bottom edge
+  margin-top: calc(#{$section-spacing} / 2 - #{$separator-height});
+  padding-top: 0;
+
+  & + * {
+    padding-top: calc(#{$section-spacing} / 2);
   }
 }
 
@@ -30,126 +55,54 @@
   }
 }
 
-.home__main-projects {
-  padding-top: map.get($spacings, largest)*2;
-  & > [data-catalog],
-  .home__additional-projects > [data-catalog] {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+// Contact and Infos side by side, as wide as the card grids above
+$home-contact-infos-config: (
+  'column-gap': map.get($spacings, largest),
+  // The sections' card lists already end with a bottom padding
+  'row-gap': 0,
+  'max-width': 100ch,
+  'padding-bottom': map.get($spacings, largest) * 2,
+  'padding-left': map.get($spacings, large),
+  // Same as the sections' wrapper mixin
+  'padding-right': map.get($spacings, medium),
+) !default;
 
-    @include mixins.respond-to(medium) {
-      padding-top: 0;
-    }
-
-    & > article {
-      display: flex;
-
-      @include mixins.respond-to(medium) {
-        overflow: visible;
-        overflow-wrap: break-word;
-      }
-
-      & > div {
-        display: flex;
-        flex: 1;
-      }
-    }
-
-
-    .project-card__wrapper {
-      width: 100%;
-      box-sizing: border-box;
-      padding-block: map.get($spacings, small);
-    }
-
-    .project-card__container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      box-sizing: border-box;
-      @include mixins.respond-to(medium) {
-        padding-top: map.get($spacings, medium);
-      }
-    }
-
-    .project-card__content {
-      flex: 1;
-    }
-
-    .project-card__links {
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: map.get($spacings, small);
-      padding-left: map.get($spacings, largest);
-      padding-right: map.get($spacings, largest);
-      @include mixins.respond-to(medium) {
-        padding: 0;
-        padding-bottom: map.get($spacings, small);
-      }
-    }
-
-    .project-card__view-more {
-      text-wrap: wrap;
-      white-space: normal;
-      max-width: 100%;
-    }
-
-    .project-header__container {
-      padding-block: map.get($spacings, small);
-    }
-
-    .project-header__images {
-      padding-bottom: 0;
-    }
-
-    .project-header__screen-mock {
-      margin-block: map.get($spacings, small);
-    }
-  }
-
-  .home__additional-projects {
-    display: none;
-
-    &.open {
-      display: block;
-      -webkit-animation: fadeIn .2s;
-      animation: fadeIn .2s;
-    }
-  }
-}
-
-.projects-catalog-header {
-  @include mixins.header;
-  flex-direction: column;
-  align-items: center;
-  padding-left: map.get($spacings, largest);
-  h2 {
-    font-size: map.get($font-sizes, largest);
-    padding-left: map.get($spacings, smallest);
-  }
-  padding-top: map.get($spacings, largest);
-  padding-bottom: map.get($spacings, large);
-  p {
-    min-width: 100ch;
-    font-size: map.get($font-sizes, small);
-    font-style: italic;
-    padding-left: map.get($spacings, largest);
-  }
+.home__contact-infos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: map.get($home-contact-infos-config, 'column-gap');
+  row-gap: map.get($home-contact-infos-config, 'row-gap');
+  box-sizing: content-box;
+  max-width: map.get($home-contact-infos-config, 'max-width');
+  padding-bottom: map.get($home-contact-infos-config, 'padding-bottom');
+  padding-left: map.get($home-contact-infos-config, 'padding-left');
+  padding-right: map.get($home-contact-infos-config, 'padding-right');
   @include mixins.respond-to(medium) {
-    padding-left: map.get($spacings, small);
-    padding-top: 0;
-    padding-bottom: 0;
-    p {
-      min-width: auto;
-    }
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
-@-webkit-keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+// Contact's résumé card, across both columns
+.home__resume {
+  grid-column: 1 / -1;
+  // One column: right after Contact, before Infos
+  @include mixins.respond-to(medium) {
+    order: 1;
+  }
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+
+// One column: Infos becomes its own section, separated from Contact like the others
+.home__infos {
+  @include mixins.respond-to(medium) {
+    order: 2;
+    padding-top: calc(#{$section-spacing} / 2 - #{$separator-height});
+
+    &::before {
+      content: "";
+      @include separator-line;
+      margin-bottom: calc(#{$section-spacing} / 2);
+    }
+  }
 }

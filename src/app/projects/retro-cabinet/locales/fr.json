@@ -1,0 +1,105 @@
+{
+	"name": "Jeux en TypeScript | Retro Cabinet",
+	"tagline": "Une plateforme de jeux classiques où neuf jeux partagent un même contrat moteur, une même boucle de jeu et un même système de sauvegarde.",
+	"imageSrc": "./assets/images/projects/retro-cabinet",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "oop",
+			"color": "yellow"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Neuf jeux classiques (Tetris, Pacman, Space Invaders, Snake, Arkanoid, Asteroids, Columns, Frogger, Pong) derrière un contrat unique : chaque jeu gère son état et ses règles, sans rien connaître du DOM ni des timers.",
+			"Jeux en grille cadencés à leur propre vitesse et jeux canvas pilotés par les frames d'animation, exécutés par la même boucle de jeu.",
+			"Sauvegarde automatique à la pause ou au changement d'onglet, meilleurs scores datés, options par jeu.",
+			"Contrôles virtuels sur écrans tactiles, qui envoient les mêmes codes de touches que le clavier : aucun code spécifique au tactile dans les jeux.",
+			"Chaque jeu est chargé à sa première visite."
+		]
+	},
+	"popTagline": "Anciennement PixelsMansion (Angular), reconstruit avec Nutin pour mettre son architecture de jeux à l'épreuve.",
+	"overview": {
+		"mainContent": "Retro Cabinet est une arcade de clones de jeux classiques dans le navigateur. Le projet a commencé sous le nom de PixelsMansion, une application Angular, puis a été reconstruit avec Nutin : le framework est désormais une couche d'orchestration autour d'un code de jeu qui n'en dépend pas.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Un registre unique des jeux, à partir duquel sont construites les routes et les cartes de la page d'accueil.",
+			"Des définitions de jeux avec options typées (niveau de départ, labyrinthe, réglages on/off) et une fabrique qui construit le jeu selon les réglages choisis.",
+			"Des sauvegardes versionnées : quand les champs sauvegardés d'un jeu changent, ses anciennes sauvegardes sont ignorées plutôt que restaurées dans une forme incorrecte.",
+			"Touches gérées par position physique : les claviers QWERTY et AZERTY fonctionnent tous deux.",
+			"Un morpion caché contre l'ordinateur, derrière sa propre route."
+		],
+		"after": "Comme pour PixelsMansion, les jeux sont des fonctionnalités : l'essentiel est l'architecture qui leur permet de coexister."
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Vérifier que l'architecture de jeux conçue avec Angular tient sans framework complet.",
+			"Garder les règles des jeux testables isolément, à l'écart du rendu et du timing.",
+			"Utiliser Nutin sur une application soumise à des contraintes temps réel."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Les jeux sont de la logique pure : ni DOM, ni timers, ni accès au stockage.",
+			"Une boucle, un système de sauvegarde et un schéma de contrôles pour tous les jeux.",
+			"Ajouter un jeu revient à écrire ses règles et une entrée dans le registre."
+		]
+	},
+	"choices": [
+		{
+			"title": "Un contrat étroit entre les jeux et la vue",
+			"mainContent": "Chaque jeu implémente la même interface : réinitialisation, tick, gestion des touches, et snapshot / restauration optionnels pour les sauvegardes. La vue le pilote et affiche ce qu'il expose : une grille de cellules, ou un dessin sur canvas.",
+			"after": "Les jeux restent testables unitairement, sans navigateur."
+		},
+		{
+			"title": "Jeux en grille et jeux canvas dans une même boucle",
+			"mainContent": "Les jeux en grille avancent par timeouts chaînés, en relisant leur vitesse avant chaque tick pour qu'un passage de niveau s'applique immédiatement. Les jeux canvas avancent à chaque frame d'animation, avec un pas de temps plafonné pour qu'une frame bloquée ne fasse pas traverser les briques à la balle."
+		},
+		{
+			"title": "Une persistance défensive",
+			"mainContent": "Les données stockées sont considérées comme non fiables : chaque lecture vérifie la forme reçue et traite toute autre valeur comme une absence de données. Les sauvegardes portent une version par jeu."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Porter sans emporter le framework",
+			"mainContent": "PixelsMansion s'appuyait sur les signals d'Angular pour propager les changements. Le reconstruire avec Nutin a imposé des mises à jour explicites, ce qui a sorti de la logique de la couche UI pour la placer dans les jeux eux-mêmes."
+		},
+		{
+			"title": "Saisie tactile",
+			"mainContent": "Les contrôles tactiles (une croix directionnelle, ou un stick pour les jeux de pilotage comme Snake) envoient les mêmes codes de touches que le clavier, avec une répétition optionnelle pour les directions maintenues.",
+			"after": "La saisie reste une préoccupation unique pour les jeux."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Une architecture se valide en la déplaçant, pas en la construisant une fois.",
+			"Garder la logique des jeux indépendante du rendu a facilité à la fois le portage et les tests.",
+			"Les données sauvegardées doivent être versionnées dès qu'elles survivent à une mise en production."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/retro-cabinet"
+		},
+		{
+			"svgKey": "live",
+			"url": "arcade.lois-kouninef.eu"
+		}
+	]
+}

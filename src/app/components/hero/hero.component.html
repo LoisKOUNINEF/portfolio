@@ -1,25 +1,13 @@
 <div class="hero__wrapper">
-	<div class="hero__container">
-		<div class="hero__title">
-			<h1 data-i18n="hero.main-title"></h1>
-		</div>
-		<div class="hero__value-prop">
-			<p data-i18n="hero.value-prop"></p>
-		</div>
-		<div class="hero__key-competences-container">
-			<div class="hero__key-competences">
-				<p data-i18n="hero.key-competence-1"></p>
-				<p data-i18n="hero.key-competence-2"></p>
-				<p data-i18n="hero.key-competence-3"></p>
-				<p class="hero__key-competences underline"></p>
-			</div>
-			<div class="hero__main-stack" data-event="click:scrollToTechnos">
-				<p class="hero__main-stack-title" data-i18n="hero.main-stack"></p>
-				<p data-catalog="hero-main-stack" class="svgs__container hero__main-stack-icons"></p>
-			</div>
-		</div>
-		<div class="hero__cta-container">
-			<p data-component="hero-cta"></p>
-		</div>
+	<h1 class="hero__title" data-i18n="hero.main-title"></h1>
+	<p class="hero__value-prop" data-i18n="hero.value-prop"></p>
+	<ul class="hero__key-competences">
+		<li data-i18n="hero.key-competence-1"></li>
+		<li data-i18n="hero.key-competence-2"></li>
+		<li data-i18n="hero.key-competence-3"></li>
+	</ul>
+	<div class="hero__ctas">
+		<div data-component="hero-cta-primary"></div>
+		<div data-component="hero-cta-secondary"></div>
 	</div>
 </div>

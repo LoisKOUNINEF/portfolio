@@ -2,7 +2,10 @@ declare namespace Nutin {
   interface AppEventMap {}
 }
 
-declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting' | 'run-for-the-bun';
+declare type ProjectFolderName =
+  | 'nutin' | 'a11y-elements'
+  | 'paris-2024' | 'retro-cabinet' | 'notelet' | 'narrative-palettes'
+  | 'self-hosting' | 'ci-cd' | 'mailer';
 
 declare type TechSvgKey = FrontendSvgKey | BackendSvgKey | DatabaseSvgKey | ToolsSvgKey;
 

@@ -4,17 +4,41 @@
   "routes": [
     {
       "path": "/",
-      "title": { 
+      "title": {
         "en": "Loïs Kouninef — Fullstack Web Developer",
         "fr": "Loïs Kouninef - Développeur Web Fullstack"
       },
-      "description": { 
+      "description": {
         "en": "Professional portfolio. Projects, skills and contact.",
         "fr": "Portfolio professionnel. Projets, compétences et informations de contact."
       },
       "ogImage": {
         "en": "/assets/images/og-cover.jpg"
       }
+    },
+    {
+      "path": "/other-things",
+      "title": {
+        "en": "Other things I build — Loïs Kouninef",
+        "fr": "Autres créations - Loïs Kouninef"
+      },
+      "description": {
+        "en": "Book carving, board games and marble mazes: what I build away from the keyboard.",
+        "fr": "Sculpture de livres, jeux de société et labyrinthes à billes : ce que je crée loin du clavier."
+      },
+      "disallow": true
+    },
+    {
+      "path": "/secret",
+      "title": {
+        "en": "Other things I build — Loïs Kouninef",
+        "fr": "Autres créations - Loïs Kouninef"
+      },
+      "description": {
+        "en": "Book carving, board games and marble mazes: what I build away from the keyboard.",
+        "fr": "Sculpture de livres, jeux de société et labyrinthes à billes : ce que je crée loin du clavier."
+      },
+      "disallow": true
     }
   ]
 }

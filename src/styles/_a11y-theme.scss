@@ -59,16 +59,40 @@ $a11y-picture-config: (
   'color-text-muted': var(--text-muted),
 ) !default;
 
+$a11y-tabs-config: (
+  'gap': 0.25rem,
+  'border-width': 0,
+  'indicator-width': 2px,
+  'tab-padding': 0.5rem 0.75rem,
+  'tab-border-radius': 0,
+  'tab-font-size': 1.05rem,
+  'tab-font-weight': 600,
+  'tab-line-height': 1.4,
+  'focus-outline-width': 2px,
+  'focus-outline-offset': 2px,
+  'transition-duration': 0.2s,
+  'color-text': var(--text-muted),
+  'color-text-hover': var(--text),
+  'color-selected': var(--primary),
+  'color-focus': var(--primary),
+  'color-border': var(--border-strong),
+  'color-disabled': var(--text-disabled),
+) !default;
+
 @mixin emit-tokens($prefix, $config) {
   @each $key, $value in $config {
     --a11y-#{$prefix}#{$key}: #{$value};
   }
 }
 
-:root {
+// Also on .dark-theme (body): tokens referencing theme variables resolve where they are
+// declared, so they must be recomputed where the dark values are defined
+:root,
+.dark-theme {
   @include emit-tokens('', $a11y-semantic-config);
   @include emit-tokens('z-', $a11y-z-index-config);
   @include emit-tokens('modal-', $a11y-modal-config);
   @include emit-tokens('snackbar-', $a11y-snackbar-config);
   @include emit-tokens('picture-', $a11y-picture-config);
+  @include emit-tokens('tabs-', $a11y-tabs-config);
 }

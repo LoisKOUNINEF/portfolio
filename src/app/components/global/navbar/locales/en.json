@@ -1,8 +1,7 @@
 {
 	"hero": "Home",
-	"main-projects": "Projects",
+	"projects": "Projects",
 	"tech-stack": "Tech Stack",
-	"infrastructure": "Systems & Infrastructure",
 	"about": "About",
 	"contact": "Contact",
 	"toggle-label": "Toggle navigation"

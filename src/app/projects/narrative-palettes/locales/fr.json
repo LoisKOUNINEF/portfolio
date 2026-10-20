@@ -1,0 +1,87 @@
+{
+	"name": "Palettes de couleurs | narrative-palettes",
+	"tagline": "Des palettes de couleurs contrastées claires / sombres avec polices suggérées, chacune fondée sur une référence historique ou culturelle.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "a11y",
+			"color": "purple"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"24 palettes, chacune en version claire et sombre, des céramiques d'Iznik au Bauhaus.",
+			"Chaque palette utilise le même jeu de tokens (fond, surface, texte, couleur principale, couleurs de statut, bordures…), plus une police de texte et une police de titres.",
+			"Chaque palette est testée selon les ratios de contraste WCAG 2.2 AA, sur le fond comme sur la surface.",
+			"Chaque palette est accompagnée de l'histoire de ses couleurs et de ses polices."
+		]
+	},
+	"popTagline": "Un jeu de tokens pour mes projets Nutin, et un prétexte pour explorer l'histoire des pigments.",
+	"overview": {
+		"mainContent": "narrative-palettes est un site vitrine développé avec Nutin : en choisissant une palette, toute la page l'adopte et affiche ses tokens, ses polices et l'histoire qui les accompagne. Le jeu de tokens est celui de mes projets Nutin, ce portfolio compris.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Un sélecteur de thème qui applique les palettes en direct.",
+			"Des vérifications de contraste exécutées comme tests : une palette qui échoue ne peut pas être publiée.",
+			"Quelques palettes cachées, derrière une route secrète."
+		]
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Disposer de palettes accessibles prêtes à l'emploi pour mes projets.",
+			"Fonder le choix des couleurs sur des références plutôt que sur le seul goût."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Les mêmes noms de tokens dans toutes les palettes.",
+			"WCAG AA comme exigence ferme, pas comme recommandation."
+		]
+	},
+	"choices": [
+		{
+			"title": "Le contraste comme test",
+			"mainContent": "Un test calcule le ratio WCAG de chaque token de texte (4,5:1) et de chaque token d'interface (3:1) sur les deux surfaces, ainsi que celui du texte sur les fonds de boutons."
+		},
+		{
+			"title": "Les palettes comme données",
+			"mainContent": "Chaque palette est un objet typé (nom, période, histoire, polices et valeurs de couleurs) : le site et les tests lisent la même source."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Fidélité historique et contraste",
+			"mainContent": "Les pigments documentés atteignent rarement les ratios de contraste actuels tels quels. Les valeurs ont été ajustées jusqu'à passer les tests, tout en restant reconnaissables."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Les contraintes d'accessibilité affinent le design plutôt qu'elles ne le limitent.",
+			"Des données typées rendent le contenu testable."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/narrative-palettes"
+		},
+		{
+			"svgKey": "live",
+			"url": "narrative-palettes.nutin.dev"
+		}
+	]
+}

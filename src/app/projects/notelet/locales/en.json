@@ -1,0 +1,94 @@
+{
+	"name": "Browser extension | Notelet",
+	"tagline": "Notes and to-dos for each page and each site, in Chrome's side panel or Firefox's sidebar.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "extension",
+			"color": "cyan"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Notes and to-dos attached to the current page or to its whole site, following tab switches.",
+			"Reorderable to-do lists, with completed items tucked away. Items can move between a page and its site.",
+			"Stored on the device or synced with the browser profile. No account, no servers, no tracking.",
+			"Fully usable with the keyboard and screen readers.",
+			"One codebase for Chrome and Firefox, built with Nutin."
+		]
+	},
+	"popTagline": "Built to keep notes about a page where they belong: next to it.",
+	"overview": {
+		"mainContent": "Notelet is a browser extension whose panel is a Nutin application mounted without the router. A background script follows the active tab, and the panel shows the notes and to-dos of that page and its site.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"Chrome's side panel and Firefox's sidebar from one source: Firefox's manifest is derived from Chrome's at build time.",
+			"Addresses normalized before being used as keys (no fragment, no tracking parameters).",
+			"Switching between local and synced storage, with an item-by-item merge when sync is turned on.",
+			"Reproducible packages: the same sources give the same archive, byte for byte."
+		]
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To ship a product through store reviews, from permission justifications to a privacy policy.",
+			"To use Nutin outside of a classic website.",
+			"To build an accessible interface for a dense, keyboard-heavy tool."
+		]
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Minimal permissions: the active tab's address only, never page contents.",
+			"No network requests: data stays in the browser's storage.",
+			"Two browsers, one codebase."
+		]
+	},
+	"choices": [
+		{
+			"title": "Faking browser APIs in tests",
+			"mainContent": "Application tests run against a fake of the extension APIs, which can also behave like Firefox: storage and tab logic is tested without a browser."
+		},
+		{
+			"title": "A release pipeline with approval",
+			"mainContent": "CI builds, tests, packages and lints both extensions, and checks that a second build gives the same archive. A version tag creates the GitHub release, then store submissions wait for manual approval.",
+			"after": "Third-party actions are pinned to commit hashes and updated by Dependabot."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Concurrent windows",
+			"mainContent": "Each window has its own panel, saving on its own: two windows changing the same list at the very same moment can lose one change.",
+			"after": "Known limitations are documented rather than hidden."
+		},
+		{
+			"title": "Sync conflicts",
+			"mainContent": "Browser sync keeps one entry per list, so the last write wins between two computers. Turning sync on merges lists item by item instead."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Publishing to stores is a project in itself: permissions, reviews, privacy.",
+			"Reproducible builds make releases verifiable.",
+			"Documenting known limitations is part of the product."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/Ticknote"
+		}
+	]
+}

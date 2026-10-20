@@ -1,0 +1,110 @@
+{
+	"name": "Web Components | a11y-elements",
+	"tagline": "Des Custom Elements d'accessibilité indépendants de tout framework : une couche de comportement pour du vrai markup, pas un kit UI stylé.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "tool",
+			"color": "orange"
+		},
+		{
+			"i18nKey": "a11y",
+			"color": "purple"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Une trentaine d'éléments : champs de formulaire (input, select, groupes de cases et de boutons radio, switch, sélection de fichier…), liens, images, onglets, et overlays (modale, drawer, popover, tooltip, dropdown, menu contextuel, snackbar…).",
+			"Light DOM uniquement : les éléments enrichissent le markup du projet, stylé avec son propre CSS.",
+			"Chaque valeur visuelle est une propriété CSS personnalisée, avec un thème sombre optionnel.",
+			"Utilisable avec un bundler, ou sans étape de build grâce à des bundles navigateur par élément.",
+			"Publié sur npm, utilisé par ce portfolio et d'autres projets Nutin."
+		]
+	},
+	"popTagline": "Conçu pour ne plus réécrire les mêmes comportements d'accessibilité dans chaque projet.",
+	"overview": {
+		"mainContent": "a11y-elements regroupe les comportements d'accessibilité que je réécrivais d'un projet à l'autre : gestion du focus, interactions clavier, attributs ARIA et annonces aux lecteurs d'écran. Chaque élément est un Custom Element natif, utilisable avec n'importe quel framework, ou sans.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Custom Elements natifs, sans dépendance à l'exécution.",
+			"Overlays avec piège à focus, blocage du scroll, empilement et motifs de fermeture.",
+			"Textes intégrés (par ex. « ouvre un nouvel onglet ») traduisibles en un seul appel.",
+			"Un sanitizer intégré pour le markup transmis aux éléments.",
+			"Testé avec Vitest et jsdom (plus de 700 tests)."
+		]
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Faire de l'accessibilité le comportement par défaut, plutôt qu'un ajout tardif dans chaque projet.",
+			"Rester indépendant de tout framework, Nutin compris.",
+			"Laisser le design visuel à chaque projet."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Light DOM : pas de Shadow DOM, le markup et le CSS du projet gardent la main.",
+			"De vrais éléments : de vrais liens, boutons et champs, jamais des imitations.",
+			"Ne charger que ce qui sert : un point d'entrée par élément."
+		]
+	},
+	"choices": [
+		{
+			"title": "Enrichir de vrais éléments",
+			"mainContent": "La plupart des éléments enrichissent des enfants écrits par l'auteur (un lien, un select, une image) au lieu de générer leur propre markup. Un MutationObserver synchronise les attributs ARIA quand ces enfants changent, avec des écritures protégées pour que l'observer ne boucle jamais."
+		},
+		{
+			"title": "Entièrement personnalisable",
+			"mainContent": "Chaque composant lit ses valeurs dans ses propres propriétés CSS personnalisées, avec repli sur une douzaine de variables sémantiques globales, puis sur la valeur par défaut.",
+			"after": "Quelques variables suffisent à habiller tous les éléments."
+		},
+		{
+			"title": "Des bundles autonomes qui coopèrent",
+			"mainContent": "Les bundles navigateur partagent leur code commun via des fichiers chunk, et l'état global de la page (ids, textes, overlays ouverts) est stocké de façon partagée : des bundles chargés séparément fonctionnent ensemble."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Des couleurs par défaut conformes WCAG",
+			"mainContent": "Les couleurs de statut ont été revues pour respecter le contraste WCAG AA avec leur texte, et un test vérifie désormais chaque paire par défaut."
+		},
+		{
+			"title": "Des pièges à focus qui se comportent comme Tab",
+			"mainContent": "Dans un piège à focus, chaque groupe de boutons radio est un seul arrêt de tabulation, comme en natif."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"L'accessibilité est surtout une affaire de comportement : focus, clavier et annonces.",
+			"Une petite API publique est plus facile à garder accessible qu'une grande.",
+			"Les tests sont la trace la plus fiable des attentes ARIA."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "html"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/a11y-elements"
+		},
+		{
+			"svgKey": "npm",
+			"url": "npmjs.com/package/a11y-elements"
+		},
+		{
+			"svgKey": "live",
+			"url": "nutin.org/en/a11y-elements"
+		}
+	]
+}

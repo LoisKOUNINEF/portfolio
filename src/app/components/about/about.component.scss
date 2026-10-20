@@ -1,31 +1,18 @@
 @use "sass:map";
 @use "variables" as *;
+@use "section";
 @use "mixins-nutin";
 
 .about__wrapper {
-	@include mixins-nutin.wrapper;
-	padding-top: map.get($spacings, largest) * 2;
-	padding-left: map.get($spacings, large);
-	padding-bottom: map.get($spacings, large);
-	@include mixins-nutin.respond-to(medium) {
-		padding-left: 0;
-	}
+	@include section.section-wrapper;
 }
 
 .about__container {
 	width: 100%;
-	@include mixins-nutin.container;
-	text-align: center;
-	padding-bottom: 0;
 }
 
 .about__header {
-  @include mixins-nutin.header;
-  flex-direction: column;
-  align-items: center;
-  h2 {
-  	font-size: map.get($font-sizes, largest);
-  }
+	@include section.section-header;
 }
 
 .about__section {
@@ -36,7 +23,6 @@
 		line-height: 1.8rem;
 	  max-width: 80ch;
 	  padding-top: map.get($spacings, small);
-	  padding-bottom: map.get($spacings, medium);
 	  padding-left: map.get($spacings, medium);
 	  @include mixins-nutin.respond-to(medium) {
 	  	line-height: map.get($spacings, large);
@@ -46,9 +32,5 @@
 }
 
 .about__content {
-	padding-top: map.get($spacings, largest);
 	text-align: left;
-	@include mixins-nutin.respond-to(medium) {
-		padding-top: map.get($spacings, large);
-	}
 }

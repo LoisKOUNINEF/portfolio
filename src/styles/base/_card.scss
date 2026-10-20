@@ -1,0 +1,69 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+// Card look shared by the project and tech stack cards (nutin.org's articles index
+// pattern: icon, title, content). Override with `@use "card" with ($card-config: (...))`.
+$card-config: (
+	'padding': 1.1rem 1.25rem 1.4rem,
+	'padding-small': 1.1rem map.get($spacings, small) map.get($spacings, medium),
+	'border-width': 0.5px,
+	'border-radius': 12px,
+	'icon-size': 20px,
+	'icon-stroke-width': 1.5,
+	'header-gap': 10px,
+	'header-margin-bottom': map.get($spacings, small),
+	'title-font-size': 1rem,
+	'title-font-weight': 600,
+	'title-line-height': 1.4,
+	'grid-gap': 12px,
+	'grid-max-width': 100ch,
+	'color-surface': var(--surface),
+	'color-border': var(--border),
+	'color-primary': var(--primary),
+) !default;
+
+@mixin card {
+	padding: map.get($card-config, 'padding');
+	background: map.get($card-config, 'color-surface');
+	border: map.get($card-config, 'border-width') solid map.get($card-config, 'color-border');
+	border-radius: map.get($card-config, 'border-radius');
+	@include mixins.respond-to(medium) {
+		padding: map.get($card-config, 'padding-small');
+	}
+}
+
+// Icon and title on one line
+@mixin card-header {
+	display: flex;
+	align-items: center;
+	gap: map.get($card-config, 'header-gap');
+	margin-bottom: map.get($card-config, 'header-margin-bottom');
+}
+
+// For a 24×24 line-icon <svg>
+@mixin card-icon {
+	display: block;
+	flex-shrink: 0;
+	width: map.get($card-config, 'icon-size');
+	height: map.get($card-config, 'icon-size');
+	fill: none;
+	stroke: map.get($card-config, 'color-primary');
+	stroke-width: map.get($card-config, 'icon-stroke-width');
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+@mixin card-title {
+	color: map.get($card-config, 'color-primary');
+	font-size: map.get($card-config, 'title-font-size');
+	font-weight: map.get($card-config, 'title-font-weight');
+	line-height: map.get($card-config, 'title-line-height');
+}
+
+@mixin card-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: map.get($card-config, 'grid-gap');
+	max-width: map.get($card-config, 'grid-max-width');
+}

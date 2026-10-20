@@ -63,15 +63,12 @@ $tech-badge-svgs: (
   font-size: map.get($font-sizes, smallest);
 }
 
+// One line: "Professional use" / "Utilisation professionnelle"
 [class*="svg-tech-proficiency"] {
-  min-width: 10ch;
   font-size: 0.65rem;
-  text-wrap: wrap;
+  white-space: nowrap;
   color: var(--text-muted);
   text-align: center;
-  @include mixins.respond-to(medium) {
-    min-width: auto;
-  }
 }
 
 .svg-tech-proficiency__primary {

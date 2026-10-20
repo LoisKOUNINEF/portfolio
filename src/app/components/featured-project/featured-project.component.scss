@@ -1,0 +1,97 @@
+@use "sass:map";
+@use "variables" as *;
+@use "section";
+@use "mixins-nutin";
+
+$featured-project-config: (
+	'content-gap': map.get($spacings, largest),
+	'padding': 1.1rem 1.25rem 1.4rem,
+	'border-width': 0.5px,
+	'border-radius': 12px,
+	'name-font-size': map.get($font-sizes, large),
+	'name-font-weight': 700,
+	'name-margin-bottom': map.get($spacings, small),
+	'text-line-height': 1.6,
+	'summary-margin-bottom': map.get($spacings, medium),
+	'highlights-gap': map.get($spacings, small),
+	'highlights-padding-left': map.get($spacings, large),
+	'highlights-margin-bottom': map.get($spacings, large),
+	'link-font-weight': 600,
+	'picture-max-width': 40%,
+	'picture-border-radius': map.get($border-radius, large),
+	'color-surface': var(--surface),
+	'color-border': var(--border),
+	'color-primary': var(--primary),
+	'color-primary-hover': var(--primary-hover),
+	'color-text': var(--text),
+) !default;
+
+.featured-project__wrapper {
+	@include section.section-wrapper;
+}
+
+.featured-project__header {
+	@include section.section-header;
+}
+
+.featured-project__content {
+	display: flex;
+	align-items: center;
+	gap: map.get($featured-project-config, 'content-gap');
+	padding: map.get($featured-project-config, 'padding');
+	background: map.get($featured-project-config, 'color-surface');
+	border: map.get($featured-project-config, 'border-width') solid map.get($featured-project-config, 'color-border');
+	border-radius: map.get($featured-project-config, 'border-radius');
+	@include mixins-nutin.respond-to(medium) {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+}
+
+.featured-project__text {
+	flex: 1;
+	color: map.get($featured-project-config, 'color-text');
+	line-height: map.get($featured-project-config, 'text-line-height');
+}
+
+.featured-project__name {
+	margin-bottom: map.get($featured-project-config, 'name-margin-bottom');
+	font-family: $secondary-font;
+	font-size: map.get($featured-project-config, 'name-font-size');
+	font-weight: map.get($featured-project-config, 'name-font-weight');
+	color: map.get($featured-project-config, 'color-primary');
+}
+
+.featured-project__summary {
+	margin-bottom: map.get($featured-project-config, 'summary-margin-bottom');
+}
+
+.featured-project__highlights {
+	display: flex;
+	flex-direction: column;
+	gap: map.get($featured-project-config, 'highlights-gap');
+	margin-bottom: map.get($featured-project-config, 'highlights-margin-bottom');
+	padding-left: map.get($featured-project-config, 'highlights-padding-left');
+	list-style: disc;
+}
+
+.featured-project__link {
+	font-weight: map.get($featured-project-config, 'link-font-weight');
+	color: map.get($featured-project-config, 'color-primary');
+	&:hover {
+		color: map.get($featured-project-config, 'color-primary-hover');
+	}
+}
+
+.featured-project__picture {
+	max-width: map.get($featured-project-config, 'picture-max-width');
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: map.get($featured-project-config, 'picture-border-radius');
+	}
+	@include mixins-nutin.respond-to(medium) {
+		max-width: 100%;
+	}
+}

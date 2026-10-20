@@ -1,0 +1,6 @@
+<div class="tabs__list-slot">
+	<div class="tabs__list" data-tablist>
+		${config.tabs.map((tab) => html`<button class="tabs__tab" data-tab="${tab.name}" data-i18n="${tab.i18nKey}"></button>`)}
+	</div>
+</div>
+${config.tabs.map((tab) => html`<div class="tabs__panel" data-panel="${tab.name}"><div data-component="tab-panel-${tab.name}"></div></div>`)}

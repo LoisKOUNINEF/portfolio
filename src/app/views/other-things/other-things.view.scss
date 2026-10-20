@@ -1,0 +1,60 @@
+@use "sass:map";
+@use "variables" as *;
+
+$other-things-view-config: (
+	'padding-top': map.get($spacings, largest) * 2,
+	'back-offset': map.get($spacings, medium),
+	'back-z-index': 2,
+	'back-font-size': map.get($font-sizes, medium),
+	'back-font-weight': 600,
+	'back-padding': map.get($spacings, small) map.get($spacings, medium),
+	'back-border-width': 1px,
+	'back-border-radius': map.get($border-radius, pill),
+	'back-shadow-offset-y': 2px,
+	'back-shadow-blur': 6px,
+	'back-shadow-fade': 85%,
+	'back-outline-width': 2px,
+	'back-outline-offset': 2px,
+	'color-primary': var(--primary),
+	'color-primary-hover': var(--primary-hover),
+	'color-surface': var(--surface),
+	'color-border': var(--border-strong),
+	'color-shadow': var(--text),
+) !default;
+
+.other-things-view__container {
+	padding-top: map.get($other-things-view-config, 'padding-top');
+}
+
+.other-things-view__back {
+	position: fixed;
+	top: map.get($other-things-view-config, 'back-offset');
+	left: map.get($other-things-view-config, 'back-offset');
+	z-index: map.get($other-things-view-config, 'back-z-index');
+}
+
+.other-things-view__back-btn {
+	padding: map.get($other-things-view-config, 'back-padding');
+	border: map.get($other-things-view-config, 'back-border-width') solid map.get($other-things-view-config, 'color-border');
+	border-radius: map.get($other-things-view-config, 'back-border-radius');
+	background: map.get($other-things-view-config, 'color-surface');
+	box-shadow:
+		0
+		map.get($other-things-view-config, 'back-shadow-offset-y')
+		map.get($other-things-view-config, 'back-shadow-blur')
+		color-mix(in srgb, map.get($other-things-view-config, 'color-shadow'), transparent map.get($other-things-view-config, 'back-shadow-fade'));
+	color: map.get($other-things-view-config, 'color-primary');
+	font: inherit;
+	font-size: map.get($other-things-view-config, 'back-font-size');
+	font-weight: map.get($other-things-view-config, 'back-font-weight');
+
+	&:hover {
+		color: map.get($other-things-view-config, 'color-primary-hover');
+		text-decoration: underline;
+	}
+
+	&:focus-visible {
+		outline: map.get($other-things-view-config, 'back-outline-width') solid map.get($other-things-view-config, 'color-primary');
+		outline-offset: map.get($other-things-view-config, 'back-outline-offset');
+	}
+}

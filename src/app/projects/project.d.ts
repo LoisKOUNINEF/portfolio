@@ -3,7 +3,8 @@ declare interface IProjectBase {
   name: string;
   tags: IProjectTag[];
   tagline: string;
-  imageSrc: string;
+  // Path without extension (.avif/.webp/.jpg variants); optional until a picture exists
+  imageSrc?: string;
   presentation: IProjectSection;
   technos: ITechBase[];
   links: IProjectLink[];

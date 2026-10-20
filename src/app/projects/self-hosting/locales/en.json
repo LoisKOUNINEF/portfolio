@@ -1,14 +1,24 @@
 {
-	"name": "Systems & Infrastructure",
+	"name": "Infrastructure | Self-hosting",
 	"tagline": "Self-hosted production environment — deployment, security, and day-to-day operations for internet-exposed services.",
 	"imageSrc": "./assets/images/projects/self-hosting",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
 	"presentation": {
 		"keyPoints": [
 			"Managing deployment, networking, and security concerns together, ensuring predictable behavior in a real-world environment.",
 			"Essential security measures scoped to realistic threats for a personal, internet-exposed service (automatic updates, restricted access, firewall, intrusion prevention).",
 			"Reverse proxy with automated TLS certificate renewal.",
 			"Containerized services orchestrated with Docker Swarm.",
-			"Self-hosted mail service for application needs."
+			"Monitoring with Grafana and Prometheus."
 		]
 	},
 	"popTagline": "Set up to gain hands-on experience with deployment, security basics, and everyday operational concerns in a self-hosted environment.",
@@ -20,7 +30,8 @@
 			"Docker orchestration: Swarm for container management, secrets for secure data handling.",
 			"Reverse proxy & routing: Traefik for dynamic HTTPS routing, with Nginx used inside images for static sites.",
 			"Security: disable root access, configure UFW, fail2ban for brute-force protection.",
-			"Automated Deployments: Implemented a reusable CI / CD pipeline based on bash scripts & GitHub workflows.",
+			"Automated deployments: see the CI / CD project.",
+			"Outgoing mail: see the Dockerised mailer project.",
 			"Monitoring: Grafana + Prometheus for insights into system performance."
 		],
 		"after": "The result is a flexible setup that supports multiple applications, evolves with my needs, and serves as a practical learning ground for real-world deployment concerns."

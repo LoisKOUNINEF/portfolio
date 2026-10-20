@@ -1,0 +1,110 @@
+{
+	"name": "Web Components | a11y-elements",
+	"tagline": "Framework-agnostic accessibility Custom Elements: a behavior layer for real markup, not a themed UI kit.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "tool",
+			"color": "orange"
+		},
+		{
+			"i18nKey": "a11y",
+			"color": "purple"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"About thirty elements: form controls (input, select, checkbox and radio groups, switch, file input…), links, pictures, tabs, and overlays (modal, drawer, popover, tooltip, dropdown, context menu, snackbar…).",
+			"Light DOM only: elements enhance the consumer's own markup, styled with the consumer's own CSS.",
+			"Every visual value is a CSS custom property, with an opt-in dark theme.",
+			"Usable with a bundler, or with no build step through per-element browser bundles.",
+			"Published on npm, used by this portfolio and other Nutin projects."
+		]
+	},
+	"popTagline": "Built to stop rewriting the same accessibility behavior in every project.",
+	"overview": {
+		"mainContent": "a11y-elements packages the accessibility behavior I kept rewriting from project to project: focus management, keyboard interaction, ARIA wiring and live announcements. Each element is a native Custom Element that works with any framework, or none.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"Native Custom Elements, with no runtime dependency.",
+			"Overlays with focus traps, scroll lock, stacking and close reasons.",
+			"Built-in strings (e.g. \"opens in new tab\") translatable in a single call.",
+			"A built-in sanitizer for markup passed to elements.",
+			"Tested with Vitest and jsdom (700+ tests)."
+		]
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To make accessible behavior the default rather than an afterthought in each project.",
+			"To stay independent from any framework, Nutin included.",
+			"To leave visual design to each project."
+		]
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Light DOM: no Shadow DOM, so the consumer's markup and CSS stay in control.",
+			"Real elements: real links, buttons and inputs, never imitations.",
+			"Load only what you use: one entry per element."
+		]
+	},
+	"choices": [
+		{
+			"title": "Enhancing real elements",
+			"mainContent": "Most elements enhance children written by the author (a link, a select, a picture) instead of generating their own markup. A MutationObserver keeps ARIA attributes in sync when those children change, with guarded writes so the observer never loops."
+		},
+		{
+			"title": "Everything themable",
+			"mainContent": "Each component reads its values from its own custom properties, falling back to about a dozen global semantic variables, then to the shipped default.",
+			"after": "A few variables are enough to theme every element."
+		},
+		{
+			"title": "Standalone bundles that cooperate",
+			"mainContent": "Browser bundles share their common code through chunk files, and page-wide state (ids, strings, open overlays) lives on a global store, so separately loaded bundles work together."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Default colors that pass WCAG",
+			"mainContent": "Status colors were reviewed against WCAG AA contrast with their text, and a test now checks every default pair."
+		},
+		{
+			"title": "Focus traps that behave like native Tab",
+			"mainContent": "Inside a focus trap, each radio group is a single Tab stop, as it is natively."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Accessibility is mostly behavior: focus, keyboard and announcements.",
+			"A small public API is easier to keep accessible than a large one.",
+			"Tests are the most reliable record of ARIA expectations."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "html"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/a11y-elements"
+		},
+		{
+			"svgKey": "npm",
+			"url": "npmjs.com/package/a11y-elements"
+		},
+		{
+			"svgKey": "live",
+			"url": "nutin.org/en/a11y-elements"
+		}
+	]
+}

@@ -1,0 +1,94 @@
+{
+	"name": "Extension de navigateur | Notelet",
+	"tagline": "Des notes et des tâches pour chaque page et chaque site, dans le panneau latéral de Chrome ou la barre latérale de Firefox.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "extension",
+			"color": "cyan"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Notes et tâches rattachées à la page en cours ou à tout son site, qui suivent les changements d'onglet.",
+			"Listes de tâches réorganisables, tâches terminées mises de côté. Les éléments peuvent passer d'une page à son site.",
+			"Stockage sur l'appareil ou synchronisé avec le profil du navigateur. Ni compte, ni serveur, ni pistage.",
+			"Entièrement utilisable au clavier et avec un lecteur d'écran.",
+			"Une seule base de code pour Chrome et Firefox, développée avec Nutin."
+		]
+	},
+	"popTagline": "Conçu pour garder les notes sur une page là où elles ont leur place : à côté d'elle.",
+	"overview": {
+		"mainContent": "Notelet est une extension de navigateur dont le panneau est une application Nutin montée sans le router. Un script d'arrière-plan suit l'onglet actif, et le panneau affiche les notes et tâches de cette page et de son site.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Panneau latéral de Chrome et barre latérale de Firefox à partir d'une même source : le manifeste Firefox est dérivé de celui de Chrome au build.",
+			"Adresses normalisées avant d'être utilisées comme clés (sans fragment ni paramètres de pistage).",
+			"Bascule entre stockage local et synchronisé, avec fusion élément par élément à l'activation de la synchronisation.",
+			"Paquets reproductibles : les mêmes sources donnent la même archive, à l'octet près."
+		]
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Publier un produit en passant par la revue des stores, des justifications de permissions à la politique de confidentialité.",
+			"Utiliser Nutin en dehors d'un site web classique.",
+			"Construire une interface accessible pour un outil dense, très utilisé au clavier."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Permissions minimales : uniquement l'adresse de l'onglet actif, jamais le contenu des pages.",
+			"Aucune requête réseau : les données restent dans le stockage du navigateur.",
+			"Deux navigateurs, une seule base de code."
+		]
+	},
+	"choices": [
+		{
+			"title": "Simuler les API du navigateur dans les tests",
+			"mainContent": "Les tests de l'application s'exécutent sur une imitation des API d'extension, qui peut aussi se comporter comme Firefox : la logique de stockage et d'onglets est testée sans navigateur."
+		},
+		{
+			"title": "Un pipeline de publication avec validation",
+			"mainContent": "La CI compile, teste, empaquette et analyse les deux extensions, et vérifie qu'un second build donne la même archive. Un tag de version crée la release GitHub, puis les soumissions aux stores attendent une validation manuelle.",
+			"after": "Les actions tierces sont épinglées par hash de commit et mises à jour par Dependabot."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Fenêtres simultanées",
+			"mainContent": "Chaque fenêtre a son propre panneau, qui enregistre de son côté : deux fenêtres modifiant la même liste au même instant peuvent perdre l'une des modifications.",
+			"after": "Les limites connues sont documentées plutôt que cachées."
+		},
+		{
+			"title": "Conflits de synchronisation",
+			"mainContent": "La synchronisation du navigateur conserve une entrée par liste : entre deux ordinateurs, la dernière écriture l'emporte. L'activation de la synchronisation fusionne en revanche les listes élément par élément."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Publier sur les stores est un projet en soi : permissions, revues, confidentialité.",
+			"Des builds reproductibles rendent les publications vérifiables.",
+			"Documenter les limites connues fait partie du produit."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/Ticknote"
+		}
+	]
+}

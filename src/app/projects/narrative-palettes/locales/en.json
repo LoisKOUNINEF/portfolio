@@ -1,0 +1,87 @@
+{
+	"name": "Color palettes | narrative-palettes",
+	"tagline": "Contrasted light / dark color palettes with suggested fonts, each based on a historical or cultural reference.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "a11y",
+			"color": "purple"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"24 palettes, each in a light and a dark version, from Iznik ceramics to the Bauhaus.",
+			"Every palette uses the same set of tokens (background, surface, text, primary, status colors, borders…), plus a body and a display font.",
+			"Every palette is tested against WCAG 2.2 AA contrast ratios, on both background and surface.",
+			"Each palette comes with the story behind its colors and fonts."
+		]
+	},
+	"popTagline": "A token set for my Nutin projects, and an excuse to dig into the history of pigments.",
+	"overview": {
+		"mainContent": "narrative-palettes is a showcase website built with Nutin: pick a palette and the whole page switches to it, showing its tokens, its fonts and the story behind them. The token set is the one used by my Nutin projects, this portfolio included.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"A theme picker applying palettes live.",
+			"Contrast checks run as tests: a palette that fails can't ship.",
+			"A few hidden palettes, behind a secret route."
+		]
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To have ready-to-use, accessible palettes for my projects.",
+			"To ground color choices in references rather than taste alone."
+		]
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"The same token names in every palette.",
+			"WCAG AA as a hard requirement, not a guideline."
+		]
+	},
+	"choices": [
+		{
+			"title": "Contrast as a test",
+			"mainContent": "A test computes the WCAG ratio of every text token (4.5:1) and every interface token (3:1) against both surfaces, and of text on button fills."
+		},
+		{
+			"title": "Palettes as data",
+			"mainContent": "Each palette is a typed object (name, period, story, fonts and color values), so the website and the tests read the same source."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Historical accuracy vs contrast",
+			"mainContent": "Documented pigments rarely meet modern contrast ratios as they are. Values were adjusted until they passed, while remaining recognizable."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Accessibility constraints sharpen design rather than limit it.",
+			"Typed data makes content testable."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/narrative-palettes"
+		},
+		{
+			"svgKey": "live",
+			"url": "narrative-palettes.nutin.dev"
+		}
+	]
+}

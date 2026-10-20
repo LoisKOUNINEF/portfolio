@@ -1,0 +1,97 @@
+{
+	"name": "CI / CD | Pipelines réutilisables",
+	"tagline": "Des workflows GitHub Actions et scripts bash réutilisés dans mes projets, des déploiements Docker Swarm aux publications npm et sur les stores de navigateurs.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Workflow mono-projet : build et publication d'une image Docker sur le registre de GitHub, génération du fichier de stack, déploiement sur Docker Swarm via SSH.",
+			"Workflow multi-services (client, serveur, migrations) : staging puis production, avec promotion des images de staging et restauration d'une sauvegarde de la base si le déploiement échoue.",
+			"Vérifications de santé après chaque déploiement, avec retour automatique à la stack précédente.",
+			"Workflows de paquets : publication npm avec provenance, empaquetage d'extensions de navigateur et soumissions aux stores après validation manuelle.",
+			"Suppression des anciennes images sur le registre et sur le serveur."
+		]
+	},
+	"popTagline": "Écrits une fois, puis réutilisés et adaptés de projet en projet.",
+	"overview": {
+		"mainContent": "Chaque projet se déploie avec les mêmes briques : des scripts de jobs exécutés dans GitHub Actions, et des scripts de déploiement copiés sur le serveur et exécutés via SSH. Les fichiers de stack sont générés à partir d'un modèle : un projet ne déclare que ses noms, son domaine et ses ports.",
+		"keyPointsTitle": "Fonctionnalités principales :",
+		"keyPoints": [
+			"Tags d'images injectés dans le fichier de stack généré. La production reprend les tags validés en staging.",
+			"Pull requests vers la branche principale uniquement depuis staging. La branche staging est recréée après chaque mise en production.",
+			"Fichiers des déploiements échoués archivés et horodatés.",
+			"Garde-fous de publication : le tag doit être sur la branche principale et correspondre à la version du paquet."
+		]
+	},
+	"purpose": {
+		"title": "Objectifs",
+		"mainContent": "Les principaux objectifs étaient :",
+		"keyPoints": [
+			"Déployer chaque projet de la même façon, prévisible.",
+			"Faire d'un déploiement échoué un non-événement : détecté, annulé, archivé."
+		]
+	},
+	"constraints": {
+		"title": "Contraintes",
+		"keyPoints": [
+			"Bash et GitHub Actions, sans plateforme supplémentaire.",
+			"Secrets conservés dans GitHub et les secrets Docker, jamais dans le dépôt.",
+			"Lisible par une seule personne, des mois plus tard."
+		]
+	},
+	"choices": [
+		{
+			"title": "Promouvoir plutôt que reconstruire",
+			"mainContent": "La production déploie exactement les images validées en staging, en copiant leurs tags."
+		},
+		{
+			"title": "Vérifications de santé, puis retour arrière",
+			"mainContent": "Après le déploiement, le nombre de réplicas est surveillé. Si les services ne sont pas opérationnels à temps, le fichier de stack précédent est restauré et redéployé."
+		},
+		{
+			"title": "Des scripts des deux côtés",
+			"mainContent": "Les scripts de jobs s'exécutent sur le runner de CI, les scripts de déploiement sur le serveur : chaque côté peut aussi être lancé à la main."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Garder les copies synchronisées",
+			"mainContent": "Réutiliser les scripts en les copiant implique de reporter les améliorations à la main d'un dépôt à l'autre."
+		},
+		{
+			"title": "Garder les actions à jour",
+			"mainContent": "L'abandon de Node 20 pour les actions GitHub a nécessité de passer chaque workflow à des versions d'actions plus récentes, et d'épingler les images des runners."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"Un chemin de retour arrière rend les déploiements fréquents sereins.",
+			"Les conventions (noms de services et de stacks) rendent les scripts réutilisables."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "bash"
+		},
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "git"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/paris-2024/tree/main/.github"
+		}
+	]
+}

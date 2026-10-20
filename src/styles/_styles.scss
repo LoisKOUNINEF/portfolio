@@ -47,6 +47,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		margin-top: 5%;
 		@include mixins.respond-to(medium) {
 			margin-top: 25%;
+			padding: 0 .5rem;
 		}
 	}
 

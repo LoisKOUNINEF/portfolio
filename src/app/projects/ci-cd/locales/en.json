@@ -1,0 +1,97 @@
+{
+	"name": "CI / CD | Reusable pipelines",
+	"tagline": "GitHub Actions workflows and bash scripts reused across my projects, from Docker Swarm deployments to npm and browser store releases.",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Single-project workflow: build and publish a Docker image to GitHub's registry, generate the stack file, deploy to Docker Swarm over SSH.",
+			"Multi-service workflow (client, server, migrations): staging then production, with images promoted from staging and a database backup restored if the deployment fails.",
+			"Health checks after each deployment, with automatic rollback to the previous stack.",
+			"Package workflows: npm publishing with provenance, browser extension packaging and store submissions behind manual approval.",
+			"Old images pruned from the registry and from the server."
+		]
+	},
+	"popTagline": "Written once, then reused and adapted from project to project.",
+	"overview": {
+		"mainContent": "Every project deploys with the same building blocks: job scripts running in GitHub Actions, and deployment scripts copied to the server and run over SSH. Stack files are generated from a template, so a project only declares its names, domain and ports.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"Image tags injected into the generated stack file. Production reuses the tags validated in staging.",
+			"Pull requests to the main branch only from staging. The staging branch is recreated after each release.",
+			"Files of failed deployments archived with a timestamp.",
+			"Release guards: the tag must be on the main branch and match the package version."
+		]
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To deploy every project the same, predictable way.",
+			"To make a failed deployment a non-event: detected, rolled back, archived."
+		]
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Plain bash and GitHub Actions, no additional platform.",
+			"Secrets kept in GitHub and Docker secrets, never in the repository.",
+			"Readable by one person, months later."
+		]
+	},
+	"choices": [
+		{
+			"title": "Promote, don't rebuild",
+			"mainContent": "Production deploys the exact images validated in staging, by copying their tags."
+		},
+		{
+			"title": "Health checks, then rollback",
+			"mainContent": "After deploying, replica counts are polled. If services aren't healthy in time, the previous stack file is restored and deployed again."
+		},
+		{
+			"title": "Scripts on both sides",
+			"mainContent": "Job scripts run on the CI runner, deployment scripts on the server: each side can also be run by hand."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Keeping copies in sync",
+			"mainContent": "Reusing scripts by copying them means improvements have to be carried over by hand from one repository to another."
+		},
+		{
+			"title": "Keeping actions up to date",
+			"mainContent": "GitHub retiring Node 20 for actions meant moving every workflow to newer action versions, and pinning the runner images."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"A rollback path is what makes frequent deployments comfortable.",
+			"Conventions (service and stack names) are what make scripts reusable."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "bash"
+		},
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "git"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/paris-2024/tree/main/.github"
+		}
+	]
+}

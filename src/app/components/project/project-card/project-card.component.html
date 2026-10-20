@@ -1,16 +1,9 @@
-<div 
-	class="project-card__wrapper">
-	<div class="project-card__container ${_project.index  === undefined
-		? 'project-card__standalone' 
-		: ''
-	}">
-		<div data-component="project-card-header"></div>
-		<div class="project-card__content">
-			<p data-component="project-card-presentation"></p>
-		</div>
-		<div class="project-card__links">
-			<p data-component="project-card-links"></p>
-			<p data-component="project-card-view-more"></p>
-		</div>
+<div class="project-card" id="${_card.folder}">
+	<div class="project-card__header">
+		<svg class="project-card__icon" viewBox="0 0 24 24" aria-hidden="true">${raw(projectIcons[_card.folder])}</svg>
+		<h3 class="project-card__title">
+			<button type="button" class="project-card__button" aria-describedby="${_card.folder}-tagline" data-event="click:_openModal">${_card.project.name}</button>
+		</h3>
 	</div>
+	<p class="project-card__tagline" id="${_card.folder}-tagline">${_card.project.tagline}</p>
 </div>

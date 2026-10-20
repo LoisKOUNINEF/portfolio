@@ -1,9 +1,9 @@
-{ 
+{
   "main-title": "Loïs, développeur web fullstack",
   "value-prop": "Je conçois et déploie des systèmes auto-hébergés fiables, sous contraintes réelles.",
-  "key-competence-1": "\uD83E\uDDE9 Apps full-stack auto-hébergées",
-  "key-competence-2": "⚙\uFE0F Pipelines de déploiement via conteneurs",
-  "key-competence-3": "\uD83E\uDDE0 Architecture et conception des systèmes",
-  "main-stack": "Stack Principal:",
-  "cta": "Découvrir mon travail"
+  "key-competence-1": "🧩 Apps full-stack auto-hébergées",
+  "key-competence-2": "⚙️ Pipelines de déploiement via conteneurs",
+  "key-competence-3": "🧠 Architecture et conception des systèmes",
+  "cta": "Découvrir mon travail",
+  "cta-secondary": "Me contacter"
 }

@@ -1,0 +1,98 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+// Override with `@use "tabs.component" with ($tabs-config: (...))`.
+// Tab colors, font and indicator come from $a11y-tabs-config (styles/_a11y-theme.scss)
+$tabs-config: (
+	'list-gap': map.get($spacings, small),
+	'slot-margin-bottom': map.get($spacings, large),
+	'docked-offset': 0,
+	'docked-padding': map.get($spacings, small),
+	'docked-gap': map.get($spacings, smallest),
+	'docked-border-width': 1px,
+	'docked-border-radius': map.get($border-radius, large),
+	'docked-z-index': 1,
+	'docked-shadow-offset-x': -2px,
+	'docked-shadow-offset-y': 2px,
+	'docked-shadow-blur': 8px,
+	'docked-shadow-fade': 85%,
+	'docked-tab-padding': map.get($spacings, small) map.get($spacings, medium),
+	'docked-tab-padding-small': map.get($spacings, medium) map.get($spacings, small),
+	'docked-transition-duration': map.get($transitions, fast),
+	'color-surface': var(--surface),
+	'color-border': var(--border-strong),
+	'color-shadow': var(--text),
+) !default;
+
+.tabs__list {
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	gap: map.get($tabs-config, 'list-gap');
+}
+
+.tabs__list-slot {
+	margin-bottom: map.get($tabs-config, 'slot-margin-bottom');
+}
+
+// Small screens: no inline tablist, only the docked rail (tabs.component.ts)
+@include mixins.respond-to(medium) {
+	.tabs__list-slot {
+		margin-bottom: 0;
+	}
+
+	a11y-tabs:not(.tabs--docked) .tabs__list {
+		display: none;
+	}
+}
+
+.tabs--docked .tabs__list {
+	position: fixed;
+	top: 50%;
+	right: map.get($tabs-config, 'docked-offset');
+	z-index: map.get($tabs-config, 'docked-z-index');
+	flex-wrap: nowrap;
+	gap: map.get($tabs-config, 'docked-gap');
+	margin: 0;
+	padding: map.get($tabs-config, 'docked-padding');
+	transform: translateY(-50%);
+	background: map.get($tabs-config, 'color-surface');
+	border: map.get($tabs-config, 'docked-border-width') solid map.get($tabs-config, 'color-border');
+	border-right: none;
+	border-radius: map.get($tabs-config, 'docked-border-radius') 0 0 map.get($tabs-config, 'docked-border-radius');
+	box-shadow:
+		map.get($tabs-config, 'docked-shadow-offset-x')
+		map.get($tabs-config, 'docked-shadow-offset-y')
+		map.get($tabs-config, 'docked-shadow-blur')
+		color-mix(in srgb, map.get($tabs-config, 'color-shadow'), transparent map.get($tabs-config, 'docked-shadow-fade'));
+	animation: tabs-dock map.get($tabs-config, 'docked-transition-duration') ease-out;
+
+	// Indicator on the edge facing the content, whatever the writing mode
+	.tabs__tab {
+		padding: map.get($tabs-config, 'docked-tab-padding');
+		border: none;
+		border-left: var(--a11y-tabs-indicator-width) solid transparent;
+	}
+
+	.tabs__tab[aria-selected="true"] {
+		border-left-color: var(--a11y-tabs-color-selected);
+	}
+
+	@include mixins.respond-to(medium) {
+		.tabs__tab {
+			writing-mode: vertical-rl;
+			padding: map.get($tabs-config, 'docked-tab-padding-small');
+		}
+	}
+}
+
+@keyframes tabs-dock {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tabs--docked .tabs__list {
+		animation: none;
+	}
+}

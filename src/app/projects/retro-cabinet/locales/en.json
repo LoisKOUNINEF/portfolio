@@ -1,0 +1,105 @@
+{
+	"name": "Games in TypeScript | Retro Cabinet",
+	"tagline": "A classic games platform where nine games share one engine contract, one game loop and one save system.",
+	"imageSrc": "./assets/images/projects/retro-cabinet",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "oop",
+			"color": "yellow"
+		}
+	],
+	"presentation": {
+		"keyPoints": [
+			"Nine classic games (Tetris, Pacman, Space Invaders, Snake, Arkanoid, Asteroids, Columns, Frogger, Pong) behind a single game contract: each game owns its state and rules, and knows nothing about the DOM or timers.",
+			"Grid games ticking at their own speed and canvas games driven by animation frames, run by the same game loop.",
+			"Auto-save on pause or when switching tabs, best scores with their dates, per-game options.",
+			"Virtual controls on touch devices, sending the same key codes as the keyboard: games need no touch-specific code.",
+			"Each game is loaded on its first visit."
+		]
+	},
+	"popTagline": "Formerly PixelsMansion (Angular), rebuilt with Nutin to put its game architecture to the test.",
+	"overview": {
+		"mainContent": "Retro Cabinet is a browser arcade of classic game clones. It started as PixelsMansion, an Angular application, and was rebuilt with Nutin: the framework is now an orchestration layer around game code that doesn't depend on it.",
+		"keyPointsTitle": "Main features:",
+		"keyPoints": [
+			"A single registry of games, from which routes and home page cards are built.",
+			"Game definitions with typed options (starting level, maze, on/off settings) and a factory building the game from the chosen settings.",
+			"Versioned saves: when a game's saved fields change, its older saves are dropped instead of being restored into the wrong shape.",
+			"Keys handled by physical position, so QWERTY and AZERTY layouts both work.",
+			"A hidden tic-tac-toe against the computer, behind its own route."
+		],
+		"after": "As with PixelsMansion, games are features: the focus is the architecture that lets them coexist."
+	},
+	"purpose": {
+		"title": "Purpose",
+		"mainContent": "The main goals were:",
+		"keyPoints": [
+			"To check that the game architecture designed with Angular holds without a full framework.",
+			"To keep game rules testable in isolation, away from rendering and timing.",
+			"To use Nutin on an application with real-time constraints."
+		]
+	},
+	"constraints": {
+		"title": "Constraints",
+		"keyPoints": [
+			"Games are pure logic: no DOM, no timers, no storage access.",
+			"One loop, one save system and one control scheme for every game.",
+			"Adding a game means writing its rules and one registry entry."
+		]
+	},
+	"choices": [
+		{
+			"title": "A narrow contract between games and the view",
+			"mainContent": "Every game implements the same interface: reset, tick, key handling, and optional snapshot / restore for saves. The view drives it and renders what it exposes: a grid of cells, or a canvas drawing.",
+			"after": "Games remain unit-testable without a browser."
+		},
+		{
+			"title": "Grid and canvas games under one loop",
+			"mainContent": "Grid games tick on chained timeouts, reading their speed again before every tick so a level-up applies immediately. Canvas games tick on animation frames, with a capped time step so a stalled frame can't make a ball go through bricks."
+		},
+		{
+			"title": "Defensive persistence",
+			"mainContent": "Stored data is treated as untrusted: every reader checks the shape it gets and treats anything else as nothing stored. Saves carry a version per game."
+		}
+	],
+	"challenges": [
+		{
+			"title": "Porting without carrying the framework over",
+			"mainContent": "PixelsMansion relied on Angular signals for change propagation. Rebuilding it with Nutin meant making updates explicit, which moved logic out of the UI layer and into the games themselves."
+		},
+		{
+			"title": "Touch input",
+			"mainContent": "Touch controls (a D-pad, or a stick for steering games like Snake) send the same key codes as the keyboard, with an optional repeat for held directions.",
+			"after": "Input stays a single concern for the games."
+		}
+	],
+	"learned": {
+		"keyPoints": [
+			"An architecture is validated by moving it, not by building it once.",
+			"Keeping game logic free of rendering made both the port and the tests easier.",
+			"Saved data needs versioning as soon as it outlives a release."
+		]
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": [
+		{
+			"svgKey": "github",
+			"url": "github.com/LoisKOUNINEF/retro-cabinet"
+		},
+		{
+			"svgKey": "live",
+			"url": "arcade.lois-kouninef.eu"
+		}
+	]
+}

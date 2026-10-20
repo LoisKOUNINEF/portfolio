@@ -1,122 +1,86 @@
 @use "sass:map";
 @use "variables" as *;
-@use "mixins";
-@use "sass:color";
+@use "card";
 
-@mixin view-more-btn() {
-  background: var(--surface);
-  cursor: pointer;
-  transition: all ease-in-out .2s;
-  transition: background ease-in-out .2s;
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: .01rem;
-  padding: map.get($spacings, smallest) map.get($spacings, small);
-  color: var(--primary);
-  border-radius: map.get($border-radius, medium);
-  text-wrap: nowrap;
-  @include mixins.themed(outline, 3px solid transparent, 2px solid transparent);
-  &:hover, &:focus-visible {
-    text-decoration: underline;
-    color: var(--primary-hover);
-  }
-  &:hover {
-    transform: translateY(-2px);
-  }
-  &:focus-visible {
-    outline-color: var(--primary);
-  }
-  @media(hover: none) {
-    &:hover {
-      text-decoration: none;
-      color: var(--primary);
-    }
-  }
+// Shared look in styles/base/_card.scss; what's specific to a clickable project card here.
+// Override with `@use "project-card.component" with ($project-card-config: (...))`.
+$project-card-config: (
+	'icon-hover-scale': 1.1,
+	'tagline-font-size': 0.95rem,
+	'tagline-line-height': 1.6,
+	// Room above a card a link jumps to (#nutin), clear of the fixed navbar
+	'scroll-margin-top': 6rem,
+	'focus-outline-width': 2px,
+	'focus-outline-offset': 2px,
+	'transition-duration': map.get($transitions, fast),
+	'color-primary': var(--primary),
+	'color-text': var(--text),
+) !default;
+
+.project-card {
+	@include card.card;
+	position: relative;
+	height: 100%;
+	scroll-margin-top: map.get($project-card-config, 'scroll-margin-top');
+	cursor: pointer;
+	transition: border-color map.get($project-card-config, 'transition-duration') ease-in-out;
+
+	&:hover {
+		border-color: map.get($project-card-config, 'color-primary');
+
+		.project-card__icon {
+			scale: map.get($project-card-config, 'icon-hover-scale');
+		}
+	}
+
+	// The button is the card's only tab stop: outline the whole card while it has keyboard focus
+	&:has(.project-card__button:focus-visible) {
+		outline: map.get($project-card-config, 'focus-outline-width') solid map.get($project-card-config, 'color-primary');
+		outline-offset: map.get($project-card-config, 'focus-outline-offset');
+	}
 }
 
-.project-card__wrapper {
-  @include mixins.wrapper;
-  padding-top: 0;
+.project-card__icon {
+	@include card.card-icon;
+	transition: scale map.get($project-card-config, 'transition-duration') ease-in-out;
 }
 
-.project-card__container {
-  background: var(--surface);
-  width: 100%;
-  @include mixins.container;
-  @include mixins.header(primary);
-  text-align: left;
-  gap: map.get($spacings, large);
-  border: 1px solid transparent;
-  border-color: var(--border-strong);
-  margin-bottom: map.get($spacings, largest);
-
-  &.project-card__standalone {
-    width: 100%;
-    border-color: transparent;
-    margin-bottom: map.get($spacings, largest)*1.5;
-    .project-header__title {
-      /*
-      Can't figure out where the extra space on top comes from
-      Negative margin until solved
-      */
-      margin-top: -(map.get($spacings, medium));
-      border-color: transparent;
-    }
-    .project-card__view-more {
-      display: none;
-    }
-    @include mixins.respond-to(medium) {
-      padding-top: map.get($spacings, large);
-      padding-left: map.get($spacings, medium);
-    }
-
-    .project-card__links {
-      display: flex;
-      justify-content: flex-end;
-      padding-bottom: map.get($spacings, medium);
-      padding-right: map.get($spacings, largest );
-      padding-top: 0;
-      gap: map.get($spacings, largest);
-      flex-wrap: nowrap;
-      @include mixins.respond-to(medium) {
-        padding: map.get($spacings, medium) 0;
-      }
-    }
-
-    .project-card__view-more {
-      @include view-more-btn;
-    }
-  }
-
-  @include mixins.respond-to(medium) {
-    display: block;
-    padding-top: 0;
-    gap: map.get($spacings, medium);
-    .project-header__svgs {
-      display: none;
-    }
-  }
+.project-card__header {
+	@include card.card-header;
 }
 
-.project-card__content {
-  padding-bottom: map.get($spacings, medium);
-  @include mixins.respond-to(medium) {
-    padding: 0;
-  }
+.project-card__button {
+	@include card.card-title;
+	padding: 0;
+	border: none;
+	background: none;
+	font-family: inherit;
+	text-align: start;
+	cursor: pointer;
+
+	// Stretched over the whole card, so a click anywhere on it opens the modal
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+	}
+
+	@supports selector(:has(*)) {
+		&:focus-visible {
+			outline: none;
+		}
+	}
 }
 
-.project-card__links {
-  display: flex;
-  padding: map.get($spacings, medium);
-  padding-top: 0;
-  gap: map.get($spacings, largest);
-  flex-wrap: nowrap;
-  @include mixins.respond-to(medium) {
-    padding: map.get($spacings, medium) 0;
-    justify-content: space-between;
-  }
+.project-card__tagline {
+	font-size: map.get($project-card-config, 'tagline-font-size');
+	line-height: map.get($project-card-config, 'tagline-line-height');
+	color: map.get($project-card-config, 'color-text');
 }
 
-.project-card__view-more {
-  @include view-more-btn;
+@media (prefers-reduced-motion: reduce) {
+	.project-card,
+	.project-card__icon {
+		transition: none;
+	}
 }

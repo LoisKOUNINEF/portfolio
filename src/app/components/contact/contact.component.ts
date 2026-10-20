@@ -1,6 +1,5 @@
 import { Component, html } from '../../../core/index.js';
 import { InfoCardComponent } from '../common/info-card/info-card.component.js';
-import { displayResumeModal } from './resume-modal/resume-modal.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
@@ -40,15 +39,6 @@ export class ContactComponent extends Component {
           href: 'https://github.com/LoisKOUNINEF/',
           target: '_blank',
         }, { className: 'contact__link-card' })
-      },
-      {
-        selector: 'resume-card',
-        factory: (el) => new InfoCardComponent(el, {
-          iconSrc: '/assets/images/svgs/mock-emojis/download.svg',
-          labelKey: 'contact.resume',
-          subtextKey: 'contact.resume-subtext',
-          callback: () => displayResumeModal(),
-        }, { className: 'contact__link-card contact__resume-card' })
       },
     ];
   }

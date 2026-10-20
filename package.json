@@ -34,7 +34,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "a11y-elements": "^0.4.0"
+    "a11y-elements": "file:../a11y-elements"
   },
   "engines": {
     "node": ">=24"

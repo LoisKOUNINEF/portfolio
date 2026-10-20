@@ -1,0 +1,5 @@
+@use "card";
+
+.project-grid {
+	@include card.card-grid;
+}

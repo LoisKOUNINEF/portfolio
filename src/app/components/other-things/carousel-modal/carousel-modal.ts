@@ -7,7 +7,7 @@ export interface IImageModalConfig extends IPictureConfig {
   viewName?: string;
 }
 
-const assetsBase = './assets/images/other-things/';
+const assetsBase = '/assets/images/other-things/';
 const carouselImages = ['board', 'marbles'];
 const carouselImagesSrc = (): IImageModalConfig[] => {
   return carouselImages.map((s: string) => {

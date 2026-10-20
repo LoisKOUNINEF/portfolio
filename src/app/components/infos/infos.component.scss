@@ -1,36 +1,25 @@
 @use "sass:map";
 @use "variables" as *;
+@use "section";
 @use "mixins";
 
+// Spacing and alignment come from .home__contact-infos (home view)
 .infos__wrapper {
-  @include mixins.wrapper;
-  padding-bottom: map.get($spacings, largest) * 3;
-  padding-top: 3rem;
-  padding-left: map.get($spacings, large);
-  @include mixins.respond-to(medium) {
-    padding-top: map.get($spacings, largest);
-    padding-left: 0;
-  }
+	padding: 0;
 }
 
 .infos__container {
-  width: 100%;
-  @include mixins.container();
-  text-align: left;
+	width: 100%;
+	text-align: left;
 }
 
 .infos__header {
-  @include mixins.header;
-  flex-direction: column;
-  align-items: center;
-  h2 {
-    font-size: map.get($font-sizes, largest);
-  }
+	@include section.section-header;
 }
 
 .infos__items {
-  width: 80%;
-  padding: map.get($spacings, large) 0;
+  width: 100%;
+  padding-bottom: map.get($spacings, large);
   display: grid;
   grid-template-columns: 1fr;
   gap: map.get($spacings, medium);

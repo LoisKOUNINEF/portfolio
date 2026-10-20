@@ -5,7 +5,7 @@ import { PictureComponent } from '../common/picture/picture.component.js';
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class OtherThingsComponent extends Component {
-  private readonly _thumbnailSrc = './assets/images/other-things/thumbnail';
+  private readonly _thumbnailSrc = '/assets/images/other-things/thumbnail';
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});

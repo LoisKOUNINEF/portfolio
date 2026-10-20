@@ -6,7 +6,7 @@ import { TechStringComponent } from '../../../common/tech/tech-string/tech-strin
 
 interface IProjectHeadConfig {
   name: string;
-  imageSrc: string;
+  imageSrc?: string;
   tagline: string;
   technos: ITech[];
   tags: IProjectTag[];
@@ -29,7 +29,7 @@ export class ProjectHeaderComponent extends Component {
       configs.push(this.getTechStringConfig());
     } else {
       configs.push(...this.getTechBadgesConfig());
-      configs.push(this.getPictureConfig())
+      if (this._headConfig.imageSrc) configs.push(this.getPictureConfig());
     }
     return configs;
   }

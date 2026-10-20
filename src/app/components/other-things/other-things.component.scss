@@ -23,8 +23,12 @@
   @include mixins.header;
   flex-direction: column;
   align-items: center;
-  h2 {
+  // A page heading here (its own route): same look as the home sections' h2
+  h1 {
   	font-size: map.get($font-sizes, largest);
+  	font-family: $secondary-font;
+  	font-weight: bold;
+  	color: var(--primary);
   }
 }
 

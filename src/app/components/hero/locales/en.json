@@ -1,9 +1,9 @@
-{ 
-"main-title": "Loïs, fullstack web developer",
-"value-prop": "I design and deploy reliable, self-hosted systems under real-world constraints.",
-"key-competence-1": "\uD83E\uDDE9 Self-hosted full-stack apps",
-"key-competence-2": "⚙\uFE0F Containerized deployment pipelines",
-"key-competence-3": "\uD83E\uDDE0 Infrastructure & system design",
-"main-stack": "Core Stack:",
-"cta": "Explore my work"
+{
+  "main-title": "Loïs, fullstack web developer",
+  "value-prop": "I design and deploy reliable, self-hosted systems under real-world constraints.",
+  "key-competence-1": "🧩 Self-hosted full-stack apps",
+  "key-competence-2": "⚙️ Containerized deployment pipelines",
+  "key-competence-3": "🧠 Infrastructure & system design",
+  "cta": "See my work",
+  "cta-secondary": "Get in touch"
 }

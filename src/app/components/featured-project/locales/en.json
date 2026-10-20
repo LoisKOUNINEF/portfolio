@@ -1,0 +1,10 @@
+{
+	"title": "Featured project",
+	"name": "Nutin",
+	"summary": "A minimal TypeScript frontend framework: DOM-based components and views, a router and an event bus, with no runtime dependency. It powers this portfolio, its own website and my other frontend projects.",
+	"highlight-1": "Explicit, event-driven updates: no virtual DOM, no hidden change detection.",
+	"highlight-2": "CLI, build pipeline, generators and test runner included.",
+	"highlight-3": "Published on npm, documented on nutin.org.",
+	"link": "See Nutin in projects",
+	"image-alt": "Screenshot of the Nutin website."
+}

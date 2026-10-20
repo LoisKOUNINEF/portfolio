@@ -23,13 +23,14 @@
 	},
 	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",
 	"overview": {
-		"mainContent": "Paris 2024 est une application web full-stack construite autour des Jeux Olympiques de 2024. Le projet se concentre sur l’agrégation, l’exposition et la présentation de données structurées via une API backend et une application frontend conçue pour la clarté et l’utilisabilité.",
+		"mainContent": "Paris 2024 est une application full-stack de billetterie en ligne pour les Jeux Olympiques 2024, réalisée dans le cadre de mes études. Les visiteurs achètent leurs billets en ligne et les reçoivent par e-mail sous forme de QR codes, en remplacement des billets physiques, sujets à la fraude.",
 		"keyPointsTitle": "Fonctionnalités principales",
 		"keyPoints": [
-			"API backend pour récupérer, normaliser et exposer des données structurées.",
-			"Contrats d’API clairs permettant une séparation nette entre frontend et backend.",
-			"Frontend centré sur la présentation des données et l’interaction utilisateur.",
-			"Déploiement de bout en bout avec une approche orientée production."
+			"Offres, panier et authentification, avec un panier conservé entre les sessions et fusionné à la connexion.",
+			"Paiements Stripe, puis billets électroniques : une clé utilisateur et une clé billet, concaténées dans un QR code envoyé par e-mail.",
+			"Espace administrateur pour gérer les offres et consulter les statistiques de ventes.",
+			"Tâches planifiées pour le nettoyage des jetons expirés et la suppression de comptes.",
+			"Monorepo Nx : client Angular, serveur NestJS et bibliothèques partagées."
 		],
 		"after": "Le projet a servi à la fois de produit fonctionnel et de terrain d’apprentissage pour travailler de bout en bout sur un système complet : ingestion des données, logique backend, conception d’API, consommation côté frontend et déploiement. Même sans utilisateurs externes, le système était exploité comme si les pannes avaient de l'importance."
 	},
@@ -54,12 +55,12 @@
 	},
 	"choices": [
 		{
-			"title": "Backend comme couche de données dédiée",
+			"title": "Les règles métier côté serveur",
 			"mainContent": "Le backend est responsable de :",
 			"keyPoints": [
-				"La récupération et la normalisation des données.",
-				"L’exposition d’une API propre et stable.",
-				"L’encapsulation des règles métier."
+				"Valider les paniers et les commandes.",
+				"Gérer les paiements et émettre les billets.",
+				"Appliquer les règles d'accès (rôles, sessions)."
 			],
 			"after": "Cela évite de faire fuiter la complexité des données dans le frontend et rend le système plus facile à faire évoluer ou à réutiliser."
 		},
@@ -86,9 +87,9 @@
 	],
 	"challenges": [
 		{
-			"title": "Gérer des données évolutives ou imparfaites",
-			"mainContent": "Les jeux de données du monde réel sont rarement propres ou stables. Cela a nécessité une gestion défensive côté backend et des garanties claires sur ce sur quoi le frontend pouvait s’appuyer.",
-			"after": "La normalisation des données en amont a simplifié le reste du système."
+			"title": "Garder un état utilisateur cohérent",
+			"mainContent": "Les visiteurs peuvent remplir un panier avant de se connecter. Ce panier anonyme devait être conservé, puis fusionné avec celui du compte à la connexion, sans doublon ni perte d'articles.",
+			"after": "Expliciter les règles de fusion a simplifié le reste du parcours d'achat."
 		},
 		{
 			"title": "Éviter la dérive entre frontend et backend",
@@ -105,7 +106,7 @@
 		"keyPoints": [
 			"Les projets full-stack réussissent ou échouent aux frontières entre les couches.",
 			"Une API bien conçue simplifie tout ce qui est construit au-dessus.",
-			"Les données réelles révèlent rapidement — et utilement — les faiblesses de conception.",
+			"Les parcours de paiement et d'authentification révèlent vite les faiblesses de conception.",
 			"Des contrats clairs comptent davantage que la sophistication de la stack."
 		],
 		"after": "Ce projet a renforcé l’importance d’une réflexion globale sur les applications : non seulement sur le fonctionnement de chaque partie, mais aussi sur la manière dont les responsabilités sont réparties et communiquées à l’échelle du système."
@@ -122,6 +123,9 @@
 		},
 		{
 			"svgKey": "nx"
+		},
+		{
+			"svgKey": "typeorm"
 		}
 	],
 	"links": [
