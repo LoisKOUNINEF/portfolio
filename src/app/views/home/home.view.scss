@@ -33,6 +33,7 @@ $separator-height: map.get($home-config, 'separator-height');
   @include separator-line;
   // The line is drawn at the separator's bottom edge
   margin-top: calc(#{$section-spacing} / 2 - #{$separator-height});
+  // Not a section: no section spacing of its own (.home__sections > *)
   padding-top: 0;
 
   & + * {

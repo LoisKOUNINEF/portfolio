@@ -3,8 +3,6 @@
 @use "mixins";
 @use "section";
 
-// Compact page header: content-height, aligned like the other sections (styles/base/_section.scss).
-// Override with `@use "hero.component" with ($hero-config: (...))`.
 $hero-config: (
 	'title-font-size': 2.5rem,
 	'title-font-size-small': map.get($font-sizes, largest),
@@ -45,6 +43,7 @@ $hero-config: (
 .hero__wrapper {
 	@include section.section-wrapper;
 	align-items: flex-start;
+	margin-bottom: 3rem;
 }
 
 .hero__title {
@@ -73,7 +72,8 @@ $hero-config: (
 	display: flex;
 	flex-direction: column;
 	gap: map.get($hero-config, 'competences-gap');
-	margin-top: map.get($hero-config, 'competences-margin-top');
+	margin-top: map.get($hero-config, 'competences-margin-top') * 2;
+	margin-bottom: map.get($hero-config, 'competences-margin-top');
 	list-style: none;
 	font-family: $secondary-font;
 	font-size: map.get($hero-config, 'competences-font-size');

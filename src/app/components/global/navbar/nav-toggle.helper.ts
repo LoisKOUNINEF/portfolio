@@ -20,8 +20,13 @@ export class NavToggleHelper {
   private static _lastScrollY = window.scrollY;
   private static _clickJustOccurred = false;
   private static _clickTimeout: number | null = null; 
-  // Share of the viewport height, from the top, where the current section is read
-  private static readonly _highlightLine = 0.25;
+  // Where the current section is read, as a share of the viewport height from the top:
+  // `start` until the last screen of scroll, sliding to `end` at the bottom of the page
+  private static readonly _highlightLine = { start: 0.25, end: 0.5 };
+  // A clicked link's href, kept highlighted until the user scrolls themselves (see holdHighlight)
+  private static _heldHref: string | null = null;
+  // Inputs that mean the user is scrolling (or interacting) on their own
+  private static readonly _userScrollEvents = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
 
   public static get toggleClasses(): INavToggleClasses {
     return this._toggleClasses;
@@ -49,25 +54,52 @@ export class NavToggleHelper {
     this._lastScrollY = current;
   }
 
-  // Highlights the link of the section a line at the top quarter of the viewport is in, or
-  // of the last section above it: content between linked sections (e.g. Featured, after
-  // Home) belongs to the link before it. Near the top, so that a short section (About)
-  // jumped to from its link is the one highlighted. At the very bottom, the last link:
-  // its section may never reach the line.
+  // Highlights the link of the section a reference line is in, or of the last section above
+  // it: content between linked sections (e.g. Featured, after Home) belongs to the link
+  // before it. The line sits at the top quarter of the viewport, so that a short section
+  // (About) jumped to from its link is the one highlighted. Over the last screen of scroll
+  // it slides down to the middle: the last section (Contact) can't scroll up to the top
+  // quarter, but gets highlighted once it fills the end of the page. At the very bottom
+  // (2px tolerance: zoomed pages scroll by fractions), the last link regardless.
   public static highlightCurrent(): void {
     const { anchors } = this.getDomElements();
+    if (this._heldHref !== null) {
+      this.setActive(anchors, anchors.find(anchor => anchor.getAttribute('href') === this._heldHref));
+      return;
+    }
     const sections = anchors
       .map(anchor => ({ anchor, el: document.getElementById(anchor.getAttribute('href')?.slice(1) ?? '') }))
       .filter((section): section is { anchor: HTMLAnchorElement; el: HTMLElement } => section.el !== null);
     if (!sections.length) return;
 
-    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
-    const y = window.scrollY + window.innerHeight * this._highlightLine;
-    const current = atBottom
+    const viewport = window.innerHeight;
+    const remaining = Math.max(0, document.documentElement.scrollHeight - viewport - window.scrollY);
+    const endProgress = viewport > 0 ? Math.max(0, 1 - remaining / viewport) : 0;
+    const { start, end } = this._highlightLine;
+    const y = window.scrollY + viewport * (start + (end - start) * endProgress);
+    const current = remaining <= 2
       ? sections.at(-1)!
       : [...sections].reverse().find(({ el }) => el.getBoundingClientRect().top + window.scrollY <= y) ?? sections[0]!;
 
-    anchors.forEach((anchor: Element) => anchor.classList.toggle(this._toggleClasses.active, anchor === current.anchor));
+    this.setActive(anchors, current.anchor);
+  }
+
+  private static setActive(anchors: Element[], active: Element | undefined): void {
+    if (!active) return;
+    anchors.forEach((anchor: Element) => anchor.classList.toggle(this._toggleClasses.active, anchor === active));
+  }
+
+  // The clicked link stays highlighted until the user scrolls themselves: its section may
+  // never reach the reference line (end of the page, very tall screens), and the smooth
+  // scroll to it passes through other sections
+  private static holdHighlight(anchor: HTMLAnchorElement): void {
+    this._heldHref = anchor.getAttribute('href');
+    this.highlightCurrent();
+    const release = (): void => {
+      this._heldHref = null;
+      this._userScrollEvents.forEach(type => window.removeEventListener(type, release));
+    };
+    this._userScrollEvents.forEach(type => window.addEventListener(type, release, { passive: true }));
   }
 
   public static setupAnchorListeners(): void {
@@ -78,7 +110,8 @@ export class NavToggleHelper {
       const anchor = target.closest('a');
 
       if (anchor && anchor.hasAttribute('href') && anchor.getAttribute('href')?.startsWith('#')) {
-        this.handleAnchorClick(navbar, navAnchorsContainer)
+        this.handleAnchorClick(navbar, navAnchorsContainer);
+        this.holdHighlight(anchor);
       }
     });
   }
