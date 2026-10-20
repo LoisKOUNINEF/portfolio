@@ -19,6 +19,8 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget, tagName: 'header'});
     this.listenToRenderEvents(['language-changed']);
+    // Initial state, for whatever position the page opens at
+    this.listen('view-mount', () => NavToggleHelper.highlightCurrent());
   }
 
   protected override onAfterRender(): void {
@@ -27,6 +29,8 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
     window.addEventListener('scroll', onScroll);
     this.eventListeners.push([window, 'scroll', onScroll]);
     NavToggleHelper.setupAnchorListeners();
+    // A re-render (e.g. language change) resets the links to their initial classes
+    NavToggleHelper.highlightCurrent();
   }
 
   public registerChildren(): Nutin.ComponentConfig[] {

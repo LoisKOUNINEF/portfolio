@@ -20,6 +20,8 @@ export class NavToggleHelper {
   private static _lastScrollY = window.scrollY;
   private static _clickJustOccurred = false;
   private static _clickTimeout: number | null = null; 
+  // Share of the viewport height, from the top, where the current section is read
+  private static readonly _highlightLine = 0.25;
 
   public static get toggleClasses(): INavToggleClasses {
     return this._toggleClasses;
@@ -47,24 +49,25 @@ export class NavToggleHelper {
     this._lastScrollY = current;
   }
 
+  // Highlights the link of the section a line at the top quarter of the viewport is in, or
+  // of the last section above it: content between linked sections (e.g. Featured, after
+  // Home) belongs to the link before it. Near the top, so that a short section (About)
+  // jumped to from its link is the one highlighted. At the very bottom, the last link:
+  // its section may never reach the line.
   public static highlightCurrent(): void {
     const { anchors } = this.getDomElements();
-    const sections = anchors.map(anchor => {
-      const id = anchor.getAttribute('href')?.replace('#', '');
-      return { anchor, el: document.getElementById(id!) };
-    });
+    const sections = anchors
+      .map(anchor => ({ anchor, el: document.getElementById(anchor.getAttribute('href')?.slice(1) ?? '') }))
+      .filter((section): section is { anchor: HTMLAnchorElement; el: HTMLElement } => section.el !== null);
+    if (!sections.length) return;
 
-    const y = window.scrollY + window.innerHeight / 2;
+    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
+    const y = window.scrollY + window.innerHeight * this._highlightLine;
+    const current = atBottom
+      ? sections.at(-1)!
+      : [...sections].reverse().find(({ el }) => el.getBoundingClientRect().top + window.scrollY <= y) ?? sections[0]!;
 
-    sections.forEach(({ anchor, el }) => {
-      const top = el?.offsetTop;
-      const bottom = top! + el?.offsetHeight!;
-
-      if (y >= top! && y < bottom) {
-        anchors.forEach((el: Element) => el.classList.remove(this._toggleClasses.active));
-        anchor.classList.add(this._toggleClasses.active);
-      }
-    });
+    anchors.forEach((anchor: Element) => anchor.classList.toggle(this._toggleClasses.active, anchor === current.anchor));
   }
 
   public static setupAnchorListeners(): void {
