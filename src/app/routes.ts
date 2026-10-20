@@ -9,5 +9,4 @@ export const appRoutes: Nutin.Routes = {
   '/': () => new HomeView(),
   '/404': () => new NotFoundView(),
   '/other-things': otherThingsView,
-  '/secret': otherThingsView,
 }

@@ -71,8 +71,10 @@ $tech-badge-svgs: (
   text-align: center;
 }
 
+// Stands out from the muted levels: --secondary is too close to --text-muted in the current palette
 .svg-tech-proficiency__primary {
-  color: var(--secondary);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .tech-string__main {

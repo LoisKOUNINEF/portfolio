@@ -27,18 +27,6 @@
         "fr": "Sculpture de livres, jeux de société et labyrinthes à billes : ce que je crée loin du clavier."
       },
       "disallow": true
-    },
-    {
-      "path": "/secret",
-      "title": {
-        "en": "Other things I build — Loïs Kouninef",
-        "fr": "Autres créations - Loïs Kouninef"
-      },
-      "description": {
-        "en": "Book carving, board games and marble mazes: what I build away from the keyboard.",
-        "fr": "Sculpture de livres, jeux de société et labyrinthes à billes : ce que je crée loin du clavier."
-      },
-      "disallow": true
     }
   ]
 }
