@@ -20,6 +20,7 @@ export class ProjectsComponent extends Component {
     return [{
       selector: 'projects-tabs',
       factory: (el) => new TabsComponent(el, {
+        titleI18nKey: 'projects.title',
         labelI18nKey: 'projects.tabs-label',
         selected: 'apps',
         tabs: this.getTabs(),

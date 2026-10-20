@@ -1,0 +1,10 @@
+@use "sass:map";
+@use "variables" as *;
+
+.project-key-point__container {
+  padding: map.get($spacings, small) 0;
+}
+
+.project-key-point__label {
+  font-weight: bold;
+}

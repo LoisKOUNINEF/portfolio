@@ -24,6 +24,7 @@ $other-things-view-config: (
 
 .other-things-view__container {
 	padding-top: map.get($other-things-view-config, 'padding-top');
+	display: flex;
 }
 
 .other-things-view__back {

@@ -30,6 +30,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	}
 	font-size: 18px;
 	body {
+		--a11y-color-info: var(--primary);
+		--a11y-color-text-on-info: var(--background);
 		background-color: var(--background);
   	color: var(--text);
 		min-height: 100svh;

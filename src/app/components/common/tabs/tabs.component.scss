@@ -1,29 +1,38 @@
 @use "sass:map";
 @use "variables" as *;
 @use "mixins";
+@use "section";
 
 // Override with `@use "tabs.component" with ($tabs-config: (...))`.
 // Tab colors, font and indicator come from $a11y-tabs-config (styles/_a11y-theme.scss)
 $tabs-config: (
 	'list-gap': map.get($spacings, small),
 	'slot-margin-bottom': map.get($spacings, large),
-	'docked-offset': 0,
-	'docked-padding': map.get($spacings, small),
-	'docked-gap': map.get($spacings, smallest),
-	'docked-border-width': 1px,
-	'docked-border-radius': map.get($border-radius, large),
-	'docked-z-index': 1,
-	'docked-shadow-offset-x': -2px,
-	'docked-shadow-offset-y': 2px,
-	'docked-shadow-blur': 8px,
-	'docked-shadow-fade': 85%,
-	'docked-tab-padding': map.get($spacings, small) map.get($spacings, medium),
-	'docked-tab-padding-small': map.get($spacings, medium) map.get($spacings, small),
-	'docked-transition-duration': map.get($transitions, fast),
+	'header-gap': map.get($spacings, medium),
+	'picker-padding': map.get($spacings, smallest) 2.25rem map.get($spacings, smallest) map.get($spacings, medium),
+	'picker-border-width': 1px,
+	'picker-border-radius': map.get($border-radius, pill),
+	'picker-font-size': map.get($font-sizes, small),
+	'picker-font-weight': 600,
+	'picker-line-height': 1.6,
+	'picker-chevron-size': 5px,
+	'picker-chevron-offset': 1.1rem,
+	'focus-outline-width': 2px,
+	'focus-outline-offset': 2px,
 	'color-surface': var(--surface),
 	'color-border': var(--border-strong),
-	'color-shadow': var(--text),
+	'color-text': var(--text),
+	'color-focus': var(--primary),
 ) !default;
+
+// Section heading, with the small-screen picker on its line
+.tabs__header {
+	@include section.section-header;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: map.get($tabs-config, 'header-gap');
+}
 
 .tabs__list {
 	justify-content: flex-start;
@@ -35,64 +44,47 @@ $tabs-config: (
 	margin-bottom: map.get($tabs-config, 'slot-margin-bottom');
 }
 
-// Small screens: no inline tablist, only the docked rail (tabs.component.ts)
+.tabs__picker {
+	display: none;
+}
+
+// Small screens: the picker replaces the tablist
 @include mixins.respond-to(medium) {
 	.tabs__list-slot {
-		margin-bottom: 0;
-	}
-
-	a11y-tabs:not(.tabs--docked) .tabs__list {
 		display: none;
 	}
-}
 
-.tabs--docked .tabs__list {
-	position: fixed;
-	top: 50%;
-	right: map.get($tabs-config, 'docked-offset');
-	z-index: map.get($tabs-config, 'docked-z-index');
-	flex-wrap: nowrap;
-	gap: map.get($tabs-config, 'docked-gap');
-	margin: 0;
-	padding: map.get($tabs-config, 'docked-padding');
-	transform: translateY(-50%);
-	background: map.get($tabs-config, 'color-surface');
-	border: map.get($tabs-config, 'docked-border-width') solid map.get($tabs-config, 'color-border');
-	border-right: none;
-	border-radius: map.get($tabs-config, 'docked-border-radius') 0 0 map.get($tabs-config, 'docked-border-radius');
-	box-shadow:
-		map.get($tabs-config, 'docked-shadow-offset-x')
-		map.get($tabs-config, 'docked-shadow-offset-y')
-		map.get($tabs-config, 'docked-shadow-blur')
-		color-mix(in srgb, map.get($tabs-config, 'color-shadow'), transparent map.get($tabs-config, 'docked-shadow-fade'));
-	animation: tabs-dock map.get($tabs-config, 'docked-transition-duration') ease-out;
+	.tabs__picker {
+		$chevron: map.get($tabs-config, 'picker-chevron-size');
+		$offset: map.get($tabs-config, 'picker-chevron-offset');
 
-	// Indicator on the edge facing the content, whatever the writing mode
-	.tabs__tab {
-		padding: map.get($tabs-config, 'docked-tab-padding');
-		border: none;
-		border-left: var(--a11y-tabs-indicator-width) solid transparent;
-	}
+		display: block;
+		flex-shrink: 0;
+		appearance: none;
+		-webkit-appearance: none;
+		padding: map.get($tabs-config, 'picker-padding');
+		border: map.get($tabs-config, 'picker-border-width') solid map.get($tabs-config, 'color-border');
+		border-radius: map.get($tabs-config, 'picker-border-radius');
+		// Chevron from two triangles in the text color, so it follows the theme
+		background-color: map.get($tabs-config, 'color-surface');
+		background-image:
+			linear-gradient(45deg, transparent 50%, currentColor 50%),
+			linear-gradient(135deg, currentColor 50%, transparent 50%);
+		background-position:
+			calc(100% - #{$offset}) 50%,
+			calc(100% - #{$offset} + #{$chevron}) 50%;
+		background-size: $chevron $chevron;
+		background-repeat: no-repeat;
+		color: map.get($tabs-config, 'color-text');
+		font: inherit;
+		font-size: map.get($tabs-config, 'picker-font-size');
+		font-weight: map.get($tabs-config, 'picker-font-weight');
+		line-height: map.get($tabs-config, 'picker-line-height');
+		cursor: pointer;
 
-	.tabs__tab[aria-selected="true"] {
-		border-left-color: var(--a11y-tabs-color-selected);
-	}
-
-	@include mixins.respond-to(medium) {
-		.tabs__tab {
-			writing-mode: vertical-rl;
-			padding: map.get($tabs-config, 'docked-tab-padding-small');
+		&:focus-visible {
+			outline: map.get($tabs-config, 'focus-outline-width') solid map.get($tabs-config, 'color-focus');
+			outline-offset: map.get($tabs-config, 'focus-outline-offset');
 		}
-	}
-}
-
-@keyframes tabs-dock {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.tabs--docked .tabs__list {
-		animation: none;
 	}
 }

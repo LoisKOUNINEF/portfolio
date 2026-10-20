@@ -7,10 +7,5 @@
 	"systems-title": "Systems & operations",
 	"systems": "I consider deployment and security fundamentals as part of the design process. The goal is to build reliable applications with a predictable behavior under real conditions. This approach guided the design of my fullstack application (auth, payments, deployment pipeline).",
 	"background-title": "Previous career",
-	"background": "Before moving into software development, I spent 20 years in hospitality and catering, including management roles. That experience shaped the way I work: handling real-time constraints, prioritizing under pressure. Moreover, it reinforced a pragmatic mindset: balancing ideal solutions with what is actually viable in practice.",
-	"tabs-label": "About sections",
-	"approach-tab": "Approach",
-	"architecture-tab": "Architecture",
-	"operations-tab": "Operations",
-	"background-tab": "Background"
+	"background": "Before moving into software development, I spent 20 years in hospitality and catering, including management roles. That experience shaped the way I work: handling real-time constraints, prioritizing under pressure. Moreover, it reinforced a pragmatic mindset: balancing ideal solutions with what is actually viable in practice."
 }

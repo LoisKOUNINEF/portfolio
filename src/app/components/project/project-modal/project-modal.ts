@@ -29,30 +29,6 @@ const projectModalComponents = (project: IProject): Nutin.ComponentConfig[] => [
     })
   },
   {
-    selector: `${project.name}-modal-overview`,
-    factory: (el) => new ProjectSectionComponent(el,
-      project.overview
-    )
-  },
-  {
-    selector: `${project.name}-modal-purpose`,
-    factory: (el) => new ProjectSectionComponent(el,
-      project.purpose
-    )
-  },
-  {
-    selector: `${project.name}-modal-constraints`,
-    factory: (el) => new ProjectSectionComponent(el,
-      project.constraints
-    )
-  },
-  {
-    selector: `${project.name}-modal-learned`,
-    factory: (el) => new ProjectSectionComponent(el,
-      project.learned
-    )
-  },
-  {
     selector: `${project.name}-modal-links`,
     factory: (el) => new ProjectLinksComponent(el,
       project.links
@@ -62,15 +38,9 @@ const projectModalComponents = (project: IProject): Nutin.ComponentConfig[] => [
 
 const projectModalCatalogs = (project: IProject): Nutin.CatalogConfig[] => [
   {
-    selector: `${project.name}-modal-choices`,
+    selector: `${project.name}-modal-sections`,
     component: ProjectSectionComponent,
-    items: project.choices,
-    elementName: `${project.name}-modal-choice`
-  },
-  {
-    selector: `${project.name}-modal-challenges`,
-    component: ProjectSectionComponent,
-    items: project.challenges,
-    elementName: `${project.name}-modal-challenge`
+    items: project.sections ?? [],
+    elementName: `${project.name}-modal-section`
   },
 ];

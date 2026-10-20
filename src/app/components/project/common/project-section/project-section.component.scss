@@ -3,22 +3,45 @@
 @use "mixins";
 
 .project-section__container {
+  display: flex;
+  gap: map.get($spacings, large);
+  align-items: flex-start;
   max-width: 100%;
   line-height: map.get($spacings, large);
   padding: 0 map.get($spacings, large);
-  h5, h6, h7 {
+  h5, h6 {
     font-weight: bold;
     padding: map.get($spacings, small) 0;
   }
-  h6, h7 {
-    padding-top: map.get($spacings, medium);
-  }
   @include mixins.respond-to(medium) {
+    flex-direction: column;
     padding: 0;
   }
 }
 
-.project-section__main-content {
+.project-section--image-left {
+  flex-direction: row-reverse;
+  @include mixins.respond-to(medium) {
+    flex-direction: column;
+  }
+}
+
+.project-section__text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.project-section__name {
+  font-family: $secondary-font;
+  font-size: 1.05rem;
+  padding: map.get($spacings, large) 0;
+}
+
+.project-section__head {
+  padding-top: map.get($spacings, medium);
+}
+
+.project-section__content {
   padding: map.get($spacings, large) 0;
 }
 
@@ -26,6 +49,15 @@
   padding-bottom: map.get($spacings, small);
 }
 
-.project-section__after {
-  padding-bottom: map.get($spacings, small);
+.project-section__picture {
+  flex: 0 1 40%;
+  align-self: center;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @include mixins.respond-to(medium) {
+    width: 100%;
+  }
 }

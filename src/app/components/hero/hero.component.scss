@@ -71,6 +71,7 @@ $hero-config: (
 	color: map.get($hero-config, 'color-value-prop');
 	@include mixins.respond-to(medium) {
 		font-size: map.get($hero-config, 'value-prop-font-size-small');
+		line-height: 2rem;
 	}
 }
 
@@ -80,7 +81,7 @@ $hero-config: (
 	gap: map.get($hero-config, 'competences-gap');
 	margin-top: map.get($hero-config, 'competences-margin-top') * 2;
 	margin-bottom: map.get($hero-config, 'competences-margin-top');
-	padding-left: 1rem;
+	padding-left: 2rem;
 	list-style: none;
 	font-family: $secondary-font;
 	font-size: map.get($hero-config, 'competences-font-size');
@@ -93,6 +94,7 @@ $hero-config: (
 		font-size: map.get($hero-config, 'competences-font-size-small');
 		margin-top: map.get($hero-config, 'competences-margin-top');
 		margin-bottom: map.get($hero-config, 'competences-margin-top');
+		padding-left: 1rem;
 	}
 }
 

@@ -1,36 +1,46 @@
 @use "sass:map";
 @use "variables" as *;
 @use "section";
-@use "mixins-nutin";
+@use "card";
+
+// Card look shared with the project and tech stack cards (styles/base/_card.scss)
+$about-config: (
+	'text-font-size': 0.95rem,
+	'text-line-height': 1.6,
+	'color-text': var(--text),
+) !default;
 
 .about__wrapper {
 	@include section.section-wrapper;
-}
-
-.about__container {
-	width: 100%;
 }
 
 .about__header {
 	@include section.section-header;
 }
 
+.about__grid {
+	@include card.card-grid;
+	text-align: left;
+}
+
 .about__section {
+	@include card.card;
+
 	h3 {
-		font-weight: bold;
+		@include card.card-title;
 	}
+
 	p {
-		line-height: 1.8rem;
-	  max-width: 80ch;
-	  padding-top: map.get($spacings, small);
-	  padding-left: map.get($spacings, medium);
-	  @include mixins-nutin.respond-to(medium) {
-	  	line-height: map.get($spacings, large);
-		padding-left: 0;
-	  }
+		font-size: map.get($about-config, 'text-font-size');
+		line-height: map.get($about-config, 'text-line-height');
+		color: map.get($about-config, 'color-text');
 	}
 }
 
-.about__content {
-	text-align: left;
+.about__section-header {
+	@include card.card-header;
+}
+
+.about__section-icon {
+	@include card.card-icon;
 }
