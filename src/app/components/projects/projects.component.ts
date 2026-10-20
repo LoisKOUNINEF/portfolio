@@ -4,9 +4,9 @@ import { ProjectGridComponent } from '../project/project-grid/project-grid.compo
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
-const PROJECT_GROUPS: Record<'tools' | 'apps' | 'infra', ProjectFolderName[]> = {
-  tools: ['nutin', 'a11y-elements'],
+const PROJECT_GROUPS: Record<'apps' | 'tools' | 'infra', ProjectFolderName[]> = {
   apps: ['paris-2024', 'retro-cabinet', 'notelet', 'narrative-palettes'],
+  tools: ['nutin', 'a11y-elements'],
   infra: ['self-hosting', 'ci-cd', 'mailer'],
 };
 

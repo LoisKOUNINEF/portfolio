@@ -68,8 +68,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	}
 
 	a {
-		text-decoration: none;
-		color: inherit;
+		color: var(--accent);
 		[href^="http"]::after {
 	    content: "";
 	    display: inline-block;

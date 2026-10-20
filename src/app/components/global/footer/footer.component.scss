@@ -9,6 +9,9 @@
 	padding: map.get($spacings, medium);
 	width: 100%;
 	@include mixins.rounded;
+	a {
+		text-decoration: none;
+	}
 }
 
 .footer__body {

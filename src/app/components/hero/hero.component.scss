@@ -44,6 +44,12 @@ $hero-config: (
 	@include section.section-wrapper;
 	align-items: flex-start;
 	margin-bottom: 3rem;
+	a {
+		text-decoration: none;
+	}
+	@include mixins.respond-to(medium) {
+		padding: 0 .5rem;
+	}
 }
 
 .hero__title {
@@ -74,6 +80,7 @@ $hero-config: (
 	gap: map.get($hero-config, 'competences-gap');
 	margin-top: map.get($hero-config, 'competences-margin-top') * 2;
 	margin-bottom: map.get($hero-config, 'competences-margin-top');
+	padding-left: 1rem;
 	list-style: none;
 	font-family: $secondary-font;
 	font-size: map.get($hero-config, 'competences-font-size');
@@ -84,6 +91,8 @@ $hero-config: (
 	opacity: map.get($hero-config, 'competences-opacity');
 	@include mixins.respond-to(medium) {
 		font-size: map.get($hero-config, 'competences-font-size-small');
+		margin-top: map.get($hero-config, 'competences-margin-top');
+		margin-bottom: map.get($hero-config, 'competences-margin-top');
 	}
 }
 

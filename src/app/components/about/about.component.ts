@@ -6,9 +6,9 @@ const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 // Tab name → its section's title and text keys (about.<title>, about.<text>)
 const ABOUT_SECTIONS: { name: string; title: string; text: string }[] = [
-  { name: 'approach', title: 'pitch-headline', text: 'pitch-subtext' },
   { name: 'architecture', title: 'architecture-title', text: 'architecture' },
   { name: 'operations', title: 'systems-title', text: 'systems' },
+  { name: 'approach', title: 'pitch-headline', text: 'pitch-subtext' },
   { name: 'background', title: 'background-title', text: 'background' },
 ];
 
