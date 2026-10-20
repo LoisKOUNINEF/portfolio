@@ -1,5 +1,7 @@
 @use "sass:map";
 @use "variables" as *;
+@use "sass:list";
+@use "mixins";
 @use "card";
 
 // Shared look in styles/base/_card.scss; what's specific to a clickable project card here.
@@ -8,6 +10,12 @@ $project-card-config: (
 	'icon-hover-scale': 1.1,
 	'tagline-font-size': 0.95rem,
 	'tagline-line-height': 1.6,
+	// Picture on the right, about as tall as a card's text
+	'thumb-width': 11rem,
+	'thumb-aspect-ratio': list.slash(16, 9),
+	'thumb-gap': map.get($spacings, large),
+	'thumb-border-radius': map.get($border-radius, large),
+	'placeholder-color': color-mix(in srgb, var(--text), transparent 90%),
 	// Room above a card a link jumps to (#nutin), clear of the fixed navbar
 	'scroll-margin-top': 6rem,
 	'focus-outline-width': 2px,
@@ -20,6 +28,10 @@ $project-card-config: (
 .project-card {
 	@include card.card;
 	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) map.get($project-card-config, 'thumb-width');
+	align-items: center;
+	gap: map.get($project-card-config, 'thumb-gap');
 	height: 100%;
 	scroll-margin-top: map.get($project-card-config, 'scroll-margin-top');
 	cursor: pointer;
@@ -37,6 +49,40 @@ $project-card-config: (
 	&:has(.project-card__button:focus-visible) {
 		outline: map.get($project-card-config, 'focus-outline-width') solid map.get($project-card-config, 'color-primary');
 		outline-offset: map.get($project-card-config, 'focus-outline-offset');
+	}
+
+	// One column: the picture goes on top, empty slots are left out
+	@include mixins.respond-to(medium) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+.project-card__thumb {
+	aspect-ratio: map.get($project-card-config, 'thumb-aspect-ratio');
+	border-radius: map.get($project-card-config, 'thumb-border-radius');
+	overflow: hidden;
+
+	picture,
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	img {
+		object-fit: cover;
+	}
+
+	@include mixins.respond-to(medium) {
+		order: -1;
+	}
+}
+
+.project-card__thumb--placeholder {
+	background: map.get($project-card-config, 'placeholder-color');
+
+	@include mixins.respond-to(medium) {
+		display: none;
 	}
 }
 

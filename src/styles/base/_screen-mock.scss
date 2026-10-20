@@ -1,0 +1,138 @@
+@use "sass:list";
+@use "sass:map";
+@use "variables" as *;
+@use "mixins";
+
+// Monitor-like frame around a project picture: screen, foot and stand. Sizing (width,
+// margins) is the consumer's. Override with `@use "screen-mock" with ($screen-mock-config: (...))`.
+$screen-mock-config: (
+	'aspect-ratio': list.slash(16, 9),
+	// Share of the frame's height taken by the screen; the stand gets the rest
+	'screen-height': 85%,
+	'stand-height': 15%,
+	'background': var(--background),
+	'border-width': 2px,
+	'border-opacity': 70%,
+	'border-radius': map.get($border-radius, medium),
+	// Kept verbatim from the project header: without a comma between its two shadows the
+	// declaration is invalid, so browsers drop it
+	'shadow': 0 2px 8px color-mix(in srgb, var(--text), transparent 95%) inset 0 1px 0 color-mix(in srgb, var(--text), transparent 20%),
+	// Trapezoid between the screen and the stand
+	'foot-bottom': 5%,
+	'foot-left': 40%,
+	'foot-width': 20%,
+	'foot-height': 10%,
+	'foot-opacity': 70%,
+	'foot-clip-path': polygon(0 0, 100% 0, 70% 100%, 30% 100%),
+	// Picture inset inside the screen
+	'content-inset': .4rem,
+	'content-border-radius': map.get($border-radius, small),
+	'content-background-opacity': 90%,
+	'content-border-width': 1px,
+	'content-border-alpha': .2,
+	'stand-pole-width': 2px,
+	'stand-pole-height': 60%,
+	'stand-base-left': 20%,
+	'stand-base-width': 60%,
+	'stand-base-height': 2px,
+	'stand-opacity': 80%,
+) !default;
+
+@function -faded-text($opacity) {
+	@return color-mix(in srgb, var(--text), transparent $opacity);
+}
+
+// On the frame's container, which holds the content element and the stand
+@mixin screen-mock {
+	position: relative;
+	aspect-ratio: map.get($screen-mock-config, 'aspect-ratio');
+	background: transparent;
+
+	// Screen
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: map.get($screen-mock-config, 'screen-height');
+		background: map.get($screen-mock-config, 'background');
+		border: map.get($screen-mock-config, 'border-width') solid -faded-text(map.get($screen-mock-config, 'border-opacity'));
+		border-radius: map.get($screen-mock-config, 'border-radius');
+		box-shadow: map.get($screen-mock-config, 'shadow');
+		overflow: hidden;
+	}
+
+	// Foot
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: map.get($screen-mock-config, 'foot-bottom');
+		left: map.get($screen-mock-config, 'foot-left');
+		width: map.get($screen-mock-config, 'foot-width');
+		height: map.get($screen-mock-config, 'foot-height');
+		background: -faded-text(map.get($screen-mock-config, 'foot-opacity'));
+		clip-path: map.get($screen-mock-config, 'foot-clip-path');
+	}
+
+	picture {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+// On the picture's root element, inset inside the screen
+@mixin screen-mock-content {
+	$inset: map.get($screen-mock-config, 'content-inset');
+	$border: map.get($screen-mock-config, 'content-border-width') solid;
+	$alpha: map.get($screen-mock-config, 'content-border-alpha');
+	position: absolute;
+	top: $inset;
+	left: $inset;
+	width: calc(100% - #{$inset * 2});
+	height: calc(#{map.get($screen-mock-config, 'screen-height')} - #{$inset * 2});
+	margin: 0;
+	border-radius: map.get($screen-mock-config, 'content-border-radius');
+	overflow: hidden;
+	background: -faded-text(map.get($screen-mock-config, 'content-background-opacity'));
+	@include mixins.themed(border, $border rgba(map.get($light-theme, text), $alpha), $border rgba(map.get($dark-theme, text), $alpha));
+}
+
+// On an empty element after the content: the pole and base below the screen
+@mixin screen-mock-stand {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	height: map.get($screen-mock-config, 'stand-height');
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: map.get($screen-mock-config, 'stand-pole-width');
+		height: map.get($screen-mock-config, 'stand-pole-height');
+		background: -faded-text(map.get($screen-mock-config, 'stand-opacity'));
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: map.get($screen-mock-config, 'stand-base-left');
+		width: map.get($screen-mock-config, 'stand-base-width');
+		height: map.get($screen-mock-config, 'stand-base-height');
+		background: -faded-text(map.get($screen-mock-config, 'stand-opacity'));
+	}
+}

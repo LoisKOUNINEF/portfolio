@@ -37,6 +37,8 @@ export class FeaturedProjectComponent extends Component {
           ],
           fallback: `${this._imageSrc}.jpg`,
           alt: I18nService.translate('featured-project.image-alt'),
+        }, {
+          className: 'featured-project__screen-content',
         }),
       },
       {

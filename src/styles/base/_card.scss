@@ -17,7 +17,8 @@ $card-config: (
 	'title-font-weight': 600,
 	'title-line-height': 1.4,
 	'grid-gap': 12px,
-	'grid-max-width': 100ch,
+	// Max-width of the card grids
+	'grid-max-width': 45rem,
 	'color-surface': var(--surface),
 	'color-border': var(--border),
 	'color-primary': var(--primary),

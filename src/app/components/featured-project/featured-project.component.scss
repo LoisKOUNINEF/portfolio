@@ -2,10 +2,13 @@
 @use "variables" as *;
 @use "section";
 @use "mixins-nutin";
+@use "screen-mock";
 
 $featured-project-config: (
 	'content-gap': map.get($spacings, largest),
-	'padding': 1.1rem 1.25rem 1.4rem,
+	'padding-top': 1.1rem,
+	'padding-inline': 1.25rem,
+	'padding-bottom': 1.4rem,
 	'border-width': 0.5px,
 	'border-radius': 12px,
 	'name-font-size': map.get($font-sizes, large),
@@ -17,8 +20,9 @@ $featured-project-config: (
 	'highlights-padding-left': map.get($spacings, large),
 	'highlights-margin-bottom': map.get($spacings, large),
 	'link-font-weight': 600,
-	'picture-max-width': 40%,
-	'picture-border-radius': map.get($border-radius, large),
+	// Screen's share of the room inside a full-width card; the text gets the rest
+	'screen-share': 0.4,
+	'screen-max-width': 17rem,
 	'color-surface': var(--surface),
 	'color-border': var(--border),
 	'color-primary': var(--primary),
@@ -26,8 +30,20 @@ $featured-project-config: (
 	'color-text': var(--text),
 ) !default;
 
+// Room inside the card if it spanned the whole section (100cqw: .featured-project__wrapper)
+$-full-inner: calc(100cqw - #{map.get($featured-project-config, 'padding-inline') * 2} - #{map.get($featured-project-config, 'border-width') * 2});
+$-screen-share: map.get($featured-project-config, 'screen-share');
+// The text keeps the width it has in a full-width card; once the screen reaches its
+// max-width, the card shrinks around them instead of growing
+$-text-width: calc(#{$-full-inner} * #{1 - $-screen-share} - #{map.get($featured-project-config, 'content-gap')});
+$-screen-width: min(calc(#{$-full-inner} * #{$-screen-share}), #{map.get($featured-project-config, 'screen-max-width')});
+// Set explicitly rather than fit-content: browsers size a flex container's content
+// differently, and a too-narrow card let the screen stick out of it
+$-card-width: calc(#{$-text-width} + #{map.get($featured-project-config, 'content-gap')} + #{$-screen-width} + #{map.get($featured-project-config, 'padding-inline') * 2} + #{map.get($featured-project-config, 'border-width') * 2});
+
 .featured-project__wrapper {
 	@include section.section-wrapper;
+	container-type: inline-size;
 }
 
 .featured-project__header {
@@ -36,22 +52,28 @@ $featured-project-config: (
 
 .featured-project__content {
 	display: flex;
+	width: $-card-width;
+	max-width: 100%;
 	align-items: center;
 	gap: map.get($featured-project-config, 'content-gap');
-	padding: map.get($featured-project-config, 'padding');
+	padding: map.get($featured-project-config, 'padding-top') map.get($featured-project-config, 'padding-inline') map.get($featured-project-config, 'padding-bottom');
 	background: map.get($featured-project-config, 'color-surface');
 	border: map.get($featured-project-config, 'border-width') solid map.get($featured-project-config, 'color-border');
 	border-radius: map.get($featured-project-config, 'border-radius');
 	@include mixins-nutin.respond-to(medium) {
 		flex-direction: column-reverse;
 		align-items: stretch;
+		width: auto;
 	}
 }
 
 .featured-project__text {
-	flex: 1;
+	flex: 0 0 $-text-width;
 	color: map.get($featured-project-config, 'color-text');
 	line-height: map.get($featured-project-config, 'text-line-height');
+	@include mixins-nutin.respond-to(medium) {
+		flex: none;
+	}
 }
 
 .featured-project__name {
@@ -83,15 +105,20 @@ $featured-project-config: (
 	}
 }
 
-.featured-project__picture {
-	max-width: map.get($featured-project-config, 'picture-max-width');
-	img {
-		display: block;
-		width: 100%;
-		height: auto;
-		border-radius: map.get($featured-project-config, 'picture-border-radius');
-	}
+// Frame: styles/base/_screen-mock.scss
+.featured-project__screen {
+	@include screen-mock.screen-mock;
+	flex-shrink: 0;
+	width: $-screen-width;
 	@include mixins-nutin.respond-to(medium) {
-		max-width: 100%;
+		width: 100%;
 	}
+}
+
+.featured-project__screen-content {
+	@include screen-mock.screen-mock-content;
+}
+
+.featured-project__screen-stand {
+	@include screen-mock.screen-mock-stand;
 }
