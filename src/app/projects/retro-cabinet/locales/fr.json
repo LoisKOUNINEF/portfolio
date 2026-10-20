@@ -1,7 +1,7 @@
 {
 	"name": "Jeux en TypeScript | Retro Cabinet",
 	"tagline": "Une plateforme de jeux classiques où neuf jeux partagent un même contrat moteur, une même boucle de jeu et un même système de sauvegarde.",
-	"imageSrc": "./assets/images/projects/retro-cabinet",
+	"imageSrc": "/assets/images/projects/retro-cabinet",
 	"tags": [
 		{
 			"i18nKey": "personal",

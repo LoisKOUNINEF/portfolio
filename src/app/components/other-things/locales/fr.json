@@ -1,5 +1,5 @@
-{ 
-	"title": "Autres Créations",
+{
+  "title": "Autres Créations",
   "carving-title": "Sculpture de livres",
   "carving-content": "Je transforme d’anciens livres reliés en compartiments secrets ou en objets interactifs. Chaque pièce est pensée à partir du matériau d’origine autant que de sa destination.",
   "board-title": "Création de jeux de société",
@@ -8,5 +8,8 @@
   "marbles-content": "Je crée des labyrinthes artisanaux et des objets interactifs à partir de billes conservées depuis l’enfance. Une manière de redonner à des objets oubliés leur dimension ludique.",
   "board-caption": "Jeux de plateau",
   "marbles-caption": "Jeux de bille",
-  "back": "← Retour au portfolio"
+  "back": "← Retour au portfolio",
+  "thumbnail-label": "Livres sculptés : ouvrir la galerie photo",
+  "carousel-prev": "Photo précédente",
+  "carousel-next": "Photo suivante"
 }

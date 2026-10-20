@@ -1,7 +1,7 @@
-import { ModalView } from '../../common/modal-host/modal-host.js';
+import { ModalHost } from '../../common/modal-host/modal-host.js';
 import { ButtonComponent } from '../../common/button/button.component.js';
 import { IPictureConfig, PictureComponent } from '../../common/picture/picture.component.js';
-import { html } from '../../../../core/index.js';
+import { I18nService, html } from '../../../../core/index.js';
 
 export interface IImageModalConfig extends IPictureConfig {
   viewName?: string;
@@ -18,18 +18,26 @@ const carouselImagesSrc = (): IImageModalConfig[] => {
         { src: `${base}.webp`, type: 'image/webp' },
       ],
       fallback: `${base}.jpg`,
-      alt: `${s} illustration`,
+      alt: I18nService.translate(`other-things.${s}-caption`),
+      width: 1080,
+      height: 1080,
     };
   });
 }
 
+// The open carousel's root element and current slide; each opening starts on the first slide
+let carouselEl: HTMLElement | null = null;
+let currentIndex = 0;
+
 export const displayCarouselModal = () => {
-  const modal = new ModalView({
+  currentIndex = 0;
+  const modal = new ModalHost({
     template: carouselModalTemplate(),
     components: carouselModalComponents(),
     catalogs: carouselModalCatalogs(),
+    onClose: () => { carouselEl = null; },
   });
-  modal.render();
+  carouselEl = modal.render();
   updateSlides();
 }
 
@@ -40,6 +48,7 @@ const carouselModalComponents = (): Nutin.ComponentConfig[] => [
     selector: 'prev-button',
     factory: (el) => new ButtonComponent(el, {
       textContent: '‹',
+      ariaLabel: I18nService.translate('other-things.carousel-prev'),
       callback: () => displayPrev(),
       className: 'carousel__button carousel__button--prev'
     }),
@@ -48,6 +57,7 @@ const carouselModalComponents = (): Nutin.ComponentConfig[] => [
     selector: 'next-button',
     factory: (el) => new ButtonComponent(el, {
       textContent: '›',
+      ariaLabel: I18nService.translate('other-things.carousel-next'),
       callback: () => displayNext(),
       className: 'carousel__button carousel__button--next',
     }),
@@ -64,10 +74,8 @@ const carouselModalCatalogs = (): Nutin.CatalogConfig[] => [
   },
 ];
 
-let currentIndex = 0;
-
 function getSlides(): Element[] {
-  const carousel = document.querySelector('[data-catalog="carousel-pictures"]');
+  const carousel = carouselEl?.querySelector('[data-catalog="carousel-pictures"]');
   return Array.from(carousel?.querySelectorAll('[data-index]') ?? []);
 }
 

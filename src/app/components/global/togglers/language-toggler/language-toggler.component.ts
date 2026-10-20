@@ -1,4 +1,4 @@
-import { Component, html } from '../../../../../core/index.js';
+import { Component, I18nService, html } from '../../../../../core/index.js';
 import { languageTogglerService } from '../../../../services/togglers/language-toggler/language-toggler.service.js';
 import { ButtonComponent } from '../../../common/button/button.component.js';
 
@@ -15,7 +15,8 @@ export class LanguageTogglerComponent extends Component {
       factory: (el) => new ButtonComponent(el, {
         callback: async () => await this.toggleLang(),
         i18nKey: 'language-toggler.flag',
-        className: 'navbar__toggler lang-toggler'
+        className: 'navbar__toggler lang-toggler',
+        ariaLabel: I18nService.translate('language-toggler.label'),
       })
     }]
   }

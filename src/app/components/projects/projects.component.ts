@@ -13,7 +13,6 @@ const PROJECT_GROUPS: Record<'apps' | 'tools' | 'infra', ProjectFolderName[]> = 
 export class ProjectsComponent extends Component {
   constructor(mountTarget: HTMLElement) {
     super({ templateFn, mountTarget, tagName: 'section' });
-    this.listenToRenderEvents(['language-changed']);
   }
 
   public registerChildren(): Nutin.ComponentConfig[] {

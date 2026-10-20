@@ -1,6 +1,6 @@
 import { Service } from '../../../../core/index.js';
 
-export class ThemeTogglerService extends Service<ThemeTogglerService> {  
+export class ThemeTogglerService extends Service<ThemeTogglerService> {
   private _isLightTheme: boolean;
   private readonly _lightTheme = 'light';
   private readonly _darkTheme = 'dark';
@@ -9,7 +9,8 @@ export class ThemeTogglerService extends Service<ThemeTogglerService> {
   constructor() {
     super();
     this._isLightTheme = this.lightTheme();
-    this.initTheme();
+    // No transition on load: the page would fade from the default theme
+    this.initTheme(false);
   }
 
   public get isLightTheme(): boolean {
@@ -22,27 +23,31 @@ export class ThemeTogglerService extends Service<ThemeTogglerService> {
     this.initTheme();
   }
 
-  public initTheme() {
-    const theme = this.getThemeFromStorage();
+  public initTheme(transition = true) {
+    const theme = this._isLightTheme ? this._lightTheme : this._darkTheme;
     document.body.classList.remove('light-theme', 'dark-theme', 'theme-transition');
-    document.body.classList.add(`${theme}-theme`, 'theme-transition');
+    document.body.classList.add(`${theme}-theme`);
+    if (transition) document.body.classList.add('theme-transition');
   }
 
   private lightTheme(): boolean {
-    const theme = this.getThemeFromStorage();
-    if (theme === this._lightTheme) return true;
-    else return false;
+    return this.getThemeFromStorage() === this._lightTheme;
   }
-  
+
   private savePreferences() {
-    let pref;
-    if (this._isLightTheme) pref = this._lightTheme;
-    else pref = this._darkTheme;
-    localStorage.setItem(this._localStorageName, pref);
+    const pref = this._isLightTheme ? this._lightTheme : this._darkTheme;
+    // Storage can be blocked (privacy settings): the choice then lasts for this page only
+    try {
+      localStorage.setItem(this._localStorageName, pref);
+    } catch { /* not persisted */ }
   }
 
   private getThemeFromStorage(): string {
-    return localStorage.getItem(this._localStorageName) || this.getSystemPreference() || this._lightTheme;
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(this._localStorageName);
+    } catch { /* blocked storage: fall back to the system preference */ }
+    return stored || this.getSystemPreference();
   }
 
   private getSystemPreference(): string {

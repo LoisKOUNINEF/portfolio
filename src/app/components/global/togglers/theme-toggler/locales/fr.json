@@ -1,1 +1,3 @@
-{ "default": "ThemeToggler works !"}
+{
+  "label": "Activer/désactiver le thème sombre"
+}

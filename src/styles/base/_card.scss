@@ -14,7 +14,7 @@ $card-config: (
 	'header-gap': 10px,
 	'header-margin-bottom': map.get($spacings, small),
 	'title-font-size': 1rem,
-	'title-font-weight': 600,
+	'title-font-weight': 700,
 	'title-line-height': 1.4,
 	'grid-gap': 12px,
 	// Max-width of the card grids
@@ -40,9 +40,6 @@ $card-config: (
 	align-items: center;
 	gap: map.get($card-config, 'header-gap');
 	margin-bottom: map.get($card-config, 'header-margin-bottom');
-	h3 {
-		font-weight: 700;
-	}
 }
 
 // For a 24×24 line-icon <svg>

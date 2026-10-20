@@ -1,11 +1,11 @@
-import { ModalView } from '../../common/modal-host/modal-host.js';
+import { ModalHost } from '../../common/modal-host/modal-host.js';
 import { html } from '../../../../core/index.js';
 import { ProjectSectionComponent } from '../common/project-section/project-section.component.js';
 import { ProjectHeaderComponent } from '../common/project-header/project-header.component.js';
 import { ProjectLinksComponent } from '../common/project-links/project-links.component.js';
 
 export const displayProjectModal = (project: IProject) => {
-  const modal = new ModalView({
+  const modal = new ModalHost({
     template: projectModalTemplate(project),
     viewName: project.name,
     components: projectModalComponents(project),

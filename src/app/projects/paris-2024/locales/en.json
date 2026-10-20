@@ -1,7 +1,7 @@
 {
 	"name": "Fullstack App | Paris 2024",
 	"tagline": "Fullstack e-ticket platform handling authentication, payments, and secure user flows in production-like conditions.",
-	"imageSrc": "./assets/images/projects/paris-2024",
+	"imageSrc": "/assets/images/projects/paris-2024",
 	"tags": [
 		{
 			"i18nKey": "study",

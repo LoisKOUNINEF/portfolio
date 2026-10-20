@@ -1,7 +1,7 @@
 {
 	"name": "Games in TypeScript | Retro Cabinet",
 	"tagline": "A classic games platform where nine games share one engine contract, one game loop and one save system.",
-	"imageSrc": "./assets/images/projects/retro-cabinet",
+	"imageSrc": "/assets/images/projects/retro-cabinet",
 	"tags": [
 		{
 			"i18nKey": "personal",

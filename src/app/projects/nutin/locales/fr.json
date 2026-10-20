@@ -1,7 +1,7 @@
 {
 	"name": "Framework TypeScript | nutin",
 	"tagline": "Conçu et développé un framework frontend minimal pour explorer les compromis explicites en matière d’architecture.",
-	"imageSrc": "./assets/images/projects/nutin",
+	"imageSrc": "/assets/images/projects/nutin",
 	"tags": [
 		{
 			"i18nKey": "personal",

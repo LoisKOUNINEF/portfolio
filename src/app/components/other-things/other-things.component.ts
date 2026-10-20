@@ -1,4 +1,4 @@
-import { Component, html } from '../../../core/index.js';
+import { Component, I18nService, html } from '../../../core/index.js';
 import { displayCarouselModal } from './carousel-modal/carousel-modal.js';
 import { PictureComponent } from '../common/picture/picture.component.js';
 
@@ -21,7 +21,10 @@ export class OtherThingsComponent extends Component {
           { src: `${this._thumbnailSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${this._thumbnailSrc}.jpg`,
-        alt: 'Carved books.',
+        // Named by the surrounding button
+        alt: '',
+        width: 1080,
+        height: 1080,
         loading: 'eager',
       })
     }]

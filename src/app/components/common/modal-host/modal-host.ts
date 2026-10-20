@@ -76,5 +76,3 @@ export class ModalHost extends BaseComponent<ModalElement> {
     document.title = AppPipeRegistry.apply('capitalize', this._viewName);
   }
 }
-
-export { ModalHost as ModalView };

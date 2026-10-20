@@ -1,7 +1,7 @@
 {
 	"name": "Infrastructure | Self-hosting",
 	"tagline": "Self-hosted production environment — deployment, security, and day-to-day operations for internet-exposed services.",
-	"imageSrc": "./assets/images/projects/self-hosting",
+	"imageSrc": "/assets/images/projects/self-hosting",
 	"tags": [
 		{
 			"i18nKey": "personal",

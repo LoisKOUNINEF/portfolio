@@ -19,8 +19,10 @@
 						<p data-i18n="other-things.marbles-content"></p>
 					</article>
 				</div>
-				<aside class="other-things__image-wrapper" data-event="click:_displayCarouselModal">
-					<div data-component="other-things-thumbnail"></div>
+				<aside class="other-things__image-wrapper">
+					<button type="button" class="app-button other-things__thumbnail-button" aria-label="${I18nService.translate('other-things.thumbnail-label')}" data-event="click:_displayCarouselModal">
+						<span data-component="other-things-thumbnail"></span>
+					</button>
 				</aside>
 			</section>
 		</div>

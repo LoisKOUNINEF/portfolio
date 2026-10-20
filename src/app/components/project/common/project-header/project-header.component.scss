@@ -18,7 +18,7 @@
   padding-top:  map.get($spacings, largest);
   width: 100%;
   @include mixins.flex-between;
-  h3 {
+  h2 {
     width: 100%;
     font-size: map.get($font-sizes, large);
     text-wrap: wrap;

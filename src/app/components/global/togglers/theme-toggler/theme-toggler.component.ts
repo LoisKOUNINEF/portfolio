@@ -1,4 +1,4 @@
-import { Component, html } from '../../../../../core/index.js';
+import { Component, I18nService, html } from '../../../../../core/index.js';
 import { themeTogglerService } from '../../../../services/togglers/theme-toggler/theme-toggler.service.js';
 import { ButtonComponent } from '../../../common/button/button.component.js';
 
@@ -15,6 +15,7 @@ export class ThemeTogglerComponent extends Component {
       factory: (el) => new ButtonComponent(el, {
         callback: () => this.toggleTheme(),
         className: 'navbar__toggler theme-toggler',
+        ariaLabel: I18nService.translate('theme-toggler.label'),
       })
     }]
   }

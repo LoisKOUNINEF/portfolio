@@ -1,7 +1,7 @@
 {
 	"name": "TypeScript Framework | nutin",
 	"tagline": "Designed and built a minimal frontend framework to explore explicit architecture trade-offs.",
-	"imageSrc": "./assets/images/projects/nutin",
+	"imageSrc": "/assets/images/projects/nutin",
 	"tags": [
 		{
 			"i18nKey": "personal",

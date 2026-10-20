@@ -9,7 +9,7 @@
   max-width: 100%;
   line-height: map.get($spacings, large);
   padding: 0 map.get($spacings, large);
-  h5, h6 {
+  .project-section__name, .project-section__head {
     font-weight: bold;
     padding: map.get($spacings, small) 0;
   }

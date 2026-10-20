@@ -9,12 +9,6 @@ export class Project extends Service<Project> {
     return this.handleIndex(folderName);
   }
 
-  public getProjectBatch(projectFolderNames: ProjectFolderName[]): ProjectConfigObject[] {
-    return projectFolderNames.map((folderName: ProjectFolderName) => {
-      return this.getProject(folderName);
-    })
-  }
-
   public parseFolderName(folderName: ProjectConfigFolder): ProjectFolderName {
     let parsedFolderName;
 

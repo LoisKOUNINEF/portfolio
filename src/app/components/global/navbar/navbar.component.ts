@@ -25,8 +25,8 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
 
   protected override onAfterRender(): void {
     super.onAfterRender();
-    const onScroll: EventListener = () => this.scrollHelper();
-    window.addEventListener('scroll', onScroll);
+    const onScroll: EventListener = () => NavToggleHelper.onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     this.eventListeners.push([window, 'scroll', onScroll]);
     NavToggleHelper.setupAnchorListeners();
     // A re-render (e.g. language change) resets the links to their initial classes
@@ -76,10 +76,5 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
 
   private toggleNav(): void {
     NavToggleHelper.toggleNav();
-  }
-
-  private scrollHelper() {
-    NavToggleHelper.hideOnScrollDown();
-    NavToggleHelper.highlightCurrent();
   }
 }

@@ -19,7 +19,8 @@ const SCROLL_IDLE_MS = 150;
  */
 export class FeaturedProjectComponent extends Component {
   private readonly _folder: ProjectFolderName = 'nutin';
-  private readonly _imageSrc = './assets/images/projects/nutin';
+  private readonly _imageSrc = '/assets/images/projects/nutin';
+  private _pendingJump = false;
 
   constructor(mountTarget: HTMLElement) {
     super({ templateFn, mountTarget, tagName: 'section' });
@@ -57,8 +58,17 @@ export class FeaturedProjectComponent extends Component {
     if (event.key === ' ' && (event.target as Element).closest('a[href]')) this._openProjectAfterScroll();
   }
 
-  // Runs after <a11y-anchor>'s own handler on the link, so the scroll has started
+  // A modified or non-primary click opens the link elsewhere (new tab/window): no jump here
+  private _onLinkClick(event: MouseEvent): void {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    this._openProjectAfterScroll();
+  }
+
+  // Runs after <a11y-anchor>'s own handler on the link, so the scroll has started.
+  // One jump at a time: a second activation during the scroll would open a second modal
   private _openProjectAfterScroll(): void {
+    if (this._pendingJump) return;
+    this._pendingJump = true;
     const card = document.getElementById(this._folder);
     // The link targets the section, not the card: select the card's tab ourselves
     if (card) card.closest('a11y-tabs')?.reveal(card);
@@ -66,6 +76,7 @@ export class FeaturedProjectComponent extends Component {
     const done = (): void => {
       clearTimeout(idleTimer);
       window.removeEventListener('scroll', onScroll);
+      this._pendingJump = false;
       // The modal returns focus to what was focused when it opened: the card's own
       // button, as if the modal had been opened from the card
       card?.querySelector<HTMLElement>('.project-card__button')?.focus({ preventScroll: true });

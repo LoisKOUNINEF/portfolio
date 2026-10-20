@@ -1,1 +1,3 @@
-{ "default": "ThemeToggler works !"}
+{
+  "label": "Toggle dark theme"
+}

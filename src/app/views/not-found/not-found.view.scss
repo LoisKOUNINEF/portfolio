@@ -19,6 +19,8 @@
 .not-found__image-container {
   padding: map.get($spacings, large) 0;
   img {
+    max-width: 100%;
+    height: auto;
     border-radius: map.get($spacings, large);
     box-shadow: 0 4px 6px var(--text);
   } 

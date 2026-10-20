@@ -27,6 +27,8 @@ export class NavToggleHelper {
   private static _heldHref: string | null = null;
   // Inputs that mean the user is scrolling (or interacting) on their own
   private static readonly _userScrollEvents = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+  // Pending scroll update: scroll events fire faster than frames, and each update reads layout
+  private static _scrollFrame: number | null = null;
 
   public static get toggleClasses(): INavToggleClasses {
     return this._toggleClasses;
@@ -41,9 +43,20 @@ export class NavToggleHelper {
     toggler.setAttribute('aria-expanded', String(isOpen));
   }
 
-	public static hideOnScrollDown(): void {
+  // Scroll listener: at most one update per frame
+  public static onScroll(): void {
+    if (this._scrollFrame !== null) return;
+    this._scrollFrame = requestAnimationFrame(() => {
+      this._scrollFrame = null;
+      const dom = this.getDomElements();
+      this.hideOnScrollDown(dom);
+      this.highlightCurrent(dom);
+    });
+  }
+
+  public static hideOnScrollDown(dom: INavDomElements = this.getDomElements()): void {
     if (this._clickJustOccurred) return;
-    const { navbar, navAnchorsContainer } = this.getDomElements();
+    const { navbar, navAnchorsContainer } = dom;
     const current = window.scrollY;
 
     if (current > this._lastScrollY && current > 100) {
@@ -61,8 +74,7 @@ export class NavToggleHelper {
   // it slides down to the middle: the last section (Contact) can't scroll up to the top
   // quarter, but gets highlighted once it fills the end of the page. At the very bottom
   // (2px tolerance: zoomed pages scroll by fractions), the last link regardless.
-  public static highlightCurrent(): void {
-    const { anchors } = this.getDomElements();
+  public static highlightCurrent({ anchors }: INavDomElements = this.getDomElements()): void {
     if (this._heldHref !== null) {
       this.setActive(anchors, anchors.find(anchor => anchor.getAttribute('href') === this._heldHref));
       return;

@@ -1,7 +1,7 @@
 {
 	"name": "App Fullstack | Paris 2024",
 	"tagline": "Plateforme fullstack de billets électroniques gérant l'authentification, les paiements et les flux utilisateur sécurisés dans des conditions proches de la production.",
-	"imageSrc": "./assets/images/projects/paris-2024",
+	"imageSrc": "/assets/images/projects/paris-2024",
 	"tags": [
 		{
 			"i18nKey": "study",

@@ -1,7 +1,7 @@
 {
 	"name": "Infrastructure | Auto-hébergement",
 	"tagline": "Auto-hébergement en production — déploiement, sécurité et opérations quotidiennes pour des services exposés sur Internet.",
-	"imageSrc": "./assets/images/projects/self-hosting",
+	"imageSrc": "/assets/images/projects/self-hosting",
 	"tags": [
 		{
 			"i18nKey": "personal",
