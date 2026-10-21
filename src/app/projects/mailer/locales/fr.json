@@ -1,6 +1,7 @@
 {
 	"name": "Service mail | Mailer Dockerisé",
 	"tagline": "L'envoi d'e-mails pour mes applications : Postfix et OpenDKIM sur Docker Swarm, en réutilisant les certificats TLS de Traefik.",
+	"imageSrc": "/assets/images/projects/mail-delivery",
 	"tags": [
 		{
 			"i18nKey": "personal",

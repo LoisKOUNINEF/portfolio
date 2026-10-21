@@ -1,6 +1,7 @@
 {
 	"name": "CI / CD | Pipelines réutilisables",
 	"tagline": "Des workflows GitHub Actions et scripts bash réutilisés dans mes projets, des déploiements Docker Swarm aux publications npm et sur les stores de navigateurs.",
+	"imageSrc": "/assets/images/projects/ci-cd",
 	"tags": [
 		{
 			"i18nKey": "personal",

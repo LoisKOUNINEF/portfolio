@@ -14,6 +14,9 @@ $featured-project-config: (
 	'name-font-size': map.get($font-sizes, large),
 	'name-font-weight': 700,
 	'name-margin-bottom': map.get($spacings, small),
+	'name-gap': map.get($spacings, small),
+	'logo-height': 2rem,
+	'logo-height-small': 1.75rem,
 	'text-line-height': 1.6,
 	'summary-margin-bottom': map.get($spacings, medium),
 	'highlights-gap': map.get($spacings, small),
@@ -76,12 +79,29 @@ $-card-width: calc(#{$-text-width} + #{map.get($featured-project-config, 'conten
 	}
 }
 
-.featured-project__name {
+// Baseline: the logo's bottom edge sits on the title's text baseline
+.featured-project__name-row {
+	display: flex;
+	align-items: baseline;
+	gap: map.get($featured-project-config, 'name-gap');
 	margin-bottom: map.get($featured-project-config, 'name-margin-bottom');
+}
+
+.featured-project__logo {
+	flex: none;
+	width: auto;
+	height: map.get($featured-project-config, 'logo-height');
+	@include mixins-nutin.respond-to(medium) {
+		height: map.get($featured-project-config, 'logo-height-small');
+	}
+}
+
+.featured-project__name {
 	font-family: $secondary-font;
 	font-size: map.get($featured-project-config, 'name-font-size');
 	font-weight: map.get($featured-project-config, 'name-font-weight');
 	color: map.get($featured-project-config, 'color-primary');
+	padding-left: .2rem;
 }
 
 .featured-project__summary {

@@ -1,6 +1,7 @@
 {
 	"name": "Extension de navigateur | Notelet",
 	"tagline": "Des notes et des tâches pour chaque page et chaque site, dans le panneau latéral de Chrome ou la barre latérale de Firefox.",
+	"imageSrc": "/assets/images/projects/notelet",
 	"tags": [
 		{
 			"i18nKey": "personal",

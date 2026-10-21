@@ -1,6 +1,7 @@
 {
 	"name": "Palettes de couleurs | narrative-palettes",
 	"tagline": "Des palettes de couleurs contrastées claires / sombres avec polices suggérées, chacune fondée sur une référence historique ou culturelle.",
+	"imageSrc": "/assets/images/projects/palettes",
 	"tags": [
 		{
 			"i18nKey": "personal",

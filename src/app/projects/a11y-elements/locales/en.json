@@ -1,6 +1,7 @@
 {
 	"name": "Web Components | a11y-elements",
 	"tagline": "Framework-agnostic accessibility Custom Elements: a behavior layer for real markup, not a themed UI kit.",
+	"imageSrc": "/assets/images/projects/a11y-elements",
 	"tags": [
 		{
 			"i18nKey": "personal",

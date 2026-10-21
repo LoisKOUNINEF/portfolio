@@ -1,6 +1,7 @@
 {
 	"name": "Color palettes | narrative-palettes",
 	"tagline": "Contrasted light / dark color palettes with suggested fonts, each based on a historical or cultural reference.",
+	"imageSrc": "/assets/images/projects/palettes",
 	"tags": [
 		{
 			"i18nKey": "personal",

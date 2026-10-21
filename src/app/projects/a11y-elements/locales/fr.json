@@ -1,6 +1,7 @@
 {
 	"name": "Web Components | a11y-elements",
 	"tagline": "Des Custom Elements d'accessibilité indépendants de tout framework : une couche de comportement pour du vrai markup, pas un kit UI stylé.",
+	"imageSrc": "/assets/images/projects/a11y-elements",
 	"tags": [
 		{
 			"i18nKey": "personal",

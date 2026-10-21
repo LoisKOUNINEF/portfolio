@@ -139,7 +139,6 @@ jobs:
     permissions:
       packages: write
     env:
-      # delete-package-versions v5 still targets Node 20; remove once a Node 24 release ships
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Delete old container images

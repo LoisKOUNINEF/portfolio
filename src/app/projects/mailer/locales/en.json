@@ -1,6 +1,7 @@
 {
 	"name": "Mail service | Dockerised mailer",
 	"tagline": "Outgoing mail for my applications: Postfix and OpenDKIM on Docker Swarm, reusing Traefik's TLS certificates.",
+	"imageSrc": "/assets/images/projects/mail-delivery",
 	"tags": [
 		{
 			"i18nKey": "personal",

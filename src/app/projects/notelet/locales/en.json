@@ -1,6 +1,7 @@
 {
 	"name": "Browser extension | Notelet",
 	"tagline": "Notes and to-dos for each page and each site, in Chrome's side panel or Firefox's sidebar.",
+	"imageSrc": "/assets/images/projects/notelet",
 	"tags": [
 		{
 			"i18nKey": "personal",
