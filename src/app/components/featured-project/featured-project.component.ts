@@ -6,10 +6,9 @@ import { ProjectService } from '../../services/project/project.service.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
-// Quiet time after the last scroll event that counts as the jump being over (also
-// covers a jump that doesn't scroll). Not `scrollend`: one left over from an earlier
-// scroll would open the modal too early. Longer than <a11y-anchor>'s 100ms delay
-// before focusing the target, so that focus doesn't land after the modal's.
+// Quiet time after the last scroll event that counts as the jump being over
+// (also covers a jump that doesn't scroll).
+// Not `scrollend`: one left over from an earlier scroll would open the modal too early.
 const SCROLL_IDLE_MS = 150;
 
 /**
@@ -19,7 +18,7 @@ const SCROLL_IDLE_MS = 150;
  */
 export class FeaturedProjectComponent extends Component {
   private readonly _folder: ProjectFolderName = 'nutin';
-  private readonly _imageSrc = '/assets/images/projects/nutin-home';
+  private readonly _imageSrc = '/assets/images/projects/why-nutin';
   private _pendingJump = false;
 
   constructor(mountTarget: HTMLElement) {
@@ -70,7 +69,7 @@ export class FeaturedProjectComponent extends Component {
     if (this._pendingJump) return;
     this._pendingJump = true;
     const card = document.getElementById(this._folder);
-    // The link targets the section, not the card: select the card's tab ourselves
+    // Select the card's tab because the link targets the section, not the card 
     if (card) card.closest('a11y-tabs')?.reveal(card);
     let idleTimer: ReturnType<typeof setTimeout>;
     const done = (): void => {
