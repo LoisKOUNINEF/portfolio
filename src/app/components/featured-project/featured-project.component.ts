@@ -18,7 +18,7 @@ const SCROLL_IDLE_MS = 150;
  */
 export class FeaturedProjectComponent extends Component {
   private readonly _folder: ProjectFolderName = 'nutin';
-  private readonly _imageSrc = '/assets/images/projects/why-nutin';
+  private readonly _imageSrc = '/assets/images/projects/nutin';
   private _pendingJump = false;
 
   constructor(mountTarget: HTMLElement) {

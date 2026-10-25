@@ -17,11 +17,6 @@ const ABOUT_SECTIONS: { title: string; text: string; icon: string }[] = [
     icon: '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>',
   },
   {
-    title: 'pitch-headline', text: 'pitch-subtext',
-    // three connected nodes
-    icon: '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M12 11l-5.6 6.4M12 11l5.6 6.4"/>',
-  },
-  {
     title: 'background-title', text: 'background',
     // briefcase
     icon: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/>',
