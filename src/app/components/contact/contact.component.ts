@@ -3,9 +3,12 @@ import { InfoCardComponent } from '../common/info-card/info-card.component.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
-// Contact cards (InfoCardComponent), also used by the résumé card: lifted on hover,
+// Contact cards (InfoCardComponent), also used by the résumé card: border and shadow on hover,
 // the label's ::after stretched over the card so a click anywhere follows the link
-export const contactCardClass = 'relative cursor-pointer no-underline text-inherit transition-[transform,box-shadow,border-color] duration-fast hover:[transform:translateY(-2px)] hover:[box-shadow:0_7px_10px_color-mix(in_srgb,var(--primary),transparent_86%)] hover:border-border hover:[&_.info-card-label]:text-text-muted hover:[&_.info-card-subtext]:text-text-muted active:[transform:translateY(1px)] focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary [&_.info-card-label]:after:absolute [&_.info-card-label]:after:inset-0 [&_.info-card-label]:after:rounded-large';
+export const contactCardClass = 'relative cursor-pointer no-underline text-inherit transition-[transform,box-shadow,border-color] duration-fast hover:[box-shadow:0_7px_10px_color-mix(in_srgb,var(--primary),transparent_86%)] hover:border-border hover:[&_.info-card-label]:text-text-muted hover:[&_.info-card-subtext]:text-text-muted focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary [&_.info-card-label]:after:absolute [&_.info-card-label]:after:inset-0 [&_.info-card-label]:after:rounded-large';
+
+// Lifted on hover, pressed on click: the résumé card only
+export const cardLiftClass = 'hover:[transform:translateY(-2px)] active:[transform:translateY(1px)]';
 
 export class ContactComponent extends Component {
   constructor(mountTarget: HTMLElement) {

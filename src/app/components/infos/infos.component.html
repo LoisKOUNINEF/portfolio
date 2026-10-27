@@ -1,10 +1,11 @@
-<!-- Spacing and alignment come from the home view's contact/infos grid -->
-<div class="p-0">
-	<div class="w-full text-left">
-		<div class="section-header">
+<!-- Spacing and alignment come from the home view's contact/infos card: two columns, the wrappers
+     are display: contents so the header and each card are rows of the article's subgrid -->
+<div class="p-0 contents max-medium:block">
+	<div class="w-full text-left contents max-medium:block">
+		<div class="section-header [--section-header-margin-bottom:var(--spacing-small)] max-medium:[--section-header-margin-bottom:var(--spacing-large)]">
 			<h2 data-i18n="infos.title"></h2>
 		</div>
-		<div class="w-full pb-large grid grid-cols-[1fr] gap-medium [&_[data-component]]:contents">
+		<div class="contents w-full grid-cols-[1fr] gap-medium max-medium:grid max-medium:pb-large">
 			<span data-component="location-card"></span>
 			<span data-component="availability-card"></span>
 			<span data-component="languages-card"></span>

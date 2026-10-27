@@ -11,13 +11,17 @@
 		<div class="separator-line"></div>
 		<article id="tech-stack"><span data-component="tech-stack"></span></article>
 		<div class="separator-line"></div>
-		<!-- Contact and Infos side by side, as wide as the card grids above -->
-		<div class="grid grid-cols-2 gap-x-largest gap-y-0 box-content max-w-[45rem] pb-16 pl-large pr-medium max-medium:grid-cols-1 max-medium:pl-0 max-medium:pr-0">
-			<article id="contact"><span data-component="contact"></span></article>
-			<!-- One column: Infos becomes its own section, separated from Contact like the others -->
-			<article id="infos" class="separator-line-before max-medium:order-2 max-medium:pt-[calc(2rem-15px)] max-medium:before:content-[''] max-medium:before:mb-largest"><span data-component="infos"></span></article>
-			<!-- Contact's résumé card, across both columns; one column: right after Contact -->
-			<div class="col-span-full max-medium:order-1"><span data-component="resume-card"></span></div>
+		<!-- Contact and Infos side by side in a single card, as wide as the card grids above -->
+		<div class="box-content max-w-[45rem] pb-16 pl-large pr-medium max-medium:pl-0 max-medium:pr-0">
+			<!-- Contact and Infos cards: border and shadow only on hover (contact cards); the résumé card keeps both -->
+			<div class="card pt-largest pb-large grid grid-cols-2 gap-x-largest gap-y-medium max-medium:grid-cols-1 max-medium:gap-y-0 [&>article_.info-card]:[--info-card-border:1px_solid_transparent] [&>article_.info-card]:[--info-card-shadow:none]">
+				<!-- Two columns: each article is a subgrid (title + 3 cards), so the cards of a row share their height -->
+				<article id="contact" class="row-span-4 grid grid-rows-subgrid max-medium:row-span-1 max-medium:block"><span data-component="contact" class="contents max-medium:block"></span></article>
+				<!-- One column: Infos follows Contact, separated by a line like the sections -->
+				<article id="infos" class="row-span-4 grid grid-rows-subgrid max-medium:row-span-1 max-medium:block separator-line-before max-medium:order-2 max-medium:pt-[calc(2rem-15px)] max-medium:before:content-[''] max-medium:before:mb-largest"><span data-component="infos" class="contents max-medium:block"></span></article>
+				<!-- Contact's résumé card, across both columns; one column: right after Contact -->
+				<div class="col-span-full mt-small max-medium:order-1 max-medium:mt-0"><span data-component="resume-card"></span></div>
+			</div>
 		</div>
 	</div>
 </div>
