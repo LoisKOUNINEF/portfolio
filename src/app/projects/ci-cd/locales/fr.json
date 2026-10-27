@@ -22,6 +22,59 @@
 		]
 	},
 	"popTagline": "Écrits une fois, puis réutilisés et adaptés de projet en projet.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd"
+		}
+	],
 	"overview": {
 		"mainContent": "Chaque projet se déploie avec les mêmes briques : des scripts de jobs exécutés dans GitHub Actions, et des scripts de déploiement copiés sur le serveur et exécutés via SSH. Les fichiers de stack sont générés à partir d'un modèle : un projet ne déclare que ses noms, son domaine et ses ports.",
 		"keyPointsTitle": "Fonctionnalités principales :",
@@ -89,10 +142,9 @@
 			"svgKey": "git"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
+	"links": {
+		"github": {
 			"url": "github.com/LoisKOUNINEF/paris-2024/tree/main/.github"
 		}
-	]
+	}
 }

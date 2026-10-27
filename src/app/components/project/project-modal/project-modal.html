@@ -2,11 +2,9 @@
   <div class="flex p-medium opacity-100 text-text h-full w-full max-medium:py-medium max-medium:px-0">
     <div class="justify-start items-center text-left min-w-full pl-medium">
       <div data-component="${_project.name}-modal-header"></div>
-      <div data-catalog="${_project.name}-modal-sections"></div>
+      <div data-component="${_project.name}-modal-links"></div>
+      <div class="flex flex-col gap-largest pt-largest" data-catalog="${_project.name}-modal-sections"></div>
       <p data-optional class="max-w-full leading-6 p-large max-medium:px-0">${_project.conclusion}</p>
-      <div class="flex p-medium gap-largest flex-nowrap max-medium:py-medium max-medium:px-0 max-medium:justify-between">
-        <p data-component="${_project.name}-modal-links"></p>
-      </div>
     </div>
   </div>
 </article>

@@ -22,6 +22,59 @@
 		]
 	},
 	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/paris-2024"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/paris-2024"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/paris-2024"
+		}
+	],
 	"overview": {
 		"mainContent": "Paris 2024 est une application full-stack de billetterie en ligne pour les Jeux Olympiques 2024, réalisée dans le cadre de mes études. Les visiteurs achètent leurs billets en ligne et les reçoivent par e-mail sous forme de QR codes, en remplacement des billets physiques, sujets à la fraude.",
 		"keyPointsTitle": "Fonctionnalités principales",
@@ -128,14 +181,12 @@
 			"svgKey": "typeorm"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
+	"links": {
+		"github": {
 			"url": "github.com/LoisKOUNINEF/paris-2024"
 		},
-		{
-			"svgKey": "live",
+		"website": {
 			"url": "studi-exam-jo.lois-kouninef.eu"
 		}
-	]
+	}
 }

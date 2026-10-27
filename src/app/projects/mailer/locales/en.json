@@ -21,6 +21,59 @@
 		]
 	},
 	"popTagline": "Set up so my applications can send verification and order emails without a third-party provider.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+		}
+	],
 	"overview": {
 		"mainContent": "The mail service is a Docker Swarm stack of four services: Postfix, OpenDKIM, a certificate extractor and a reloader. Applications join its network and send mail through Postfix, which has it signed by OpenDKIM.",
 		"keyPointsTitle": "Main features:",
@@ -78,10 +131,9 @@
 			"svgKey": "bash"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
+	"links": {
+		"github": {
 			"url": "github.com/LoisKOUNINEF/Mail-Delivery"
 		}
-	]
+	}
 }

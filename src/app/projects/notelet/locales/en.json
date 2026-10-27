@@ -22,6 +22,59 @@
 		]
 	},
 	"popTagline": "Built to keep notes about a page where they belong: next to it.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet"
+		}
+	],
 	"overview": {
 		"mainContent": "Notelet is a browser extension whose panel is a Nutin application mounted without the router. A background script follows the active tab, and the panel shows the notes and to-dos of that page and its site.",
 		"keyPointsTitle": "Main features:",
@@ -86,10 +139,9 @@
 			"svgKey": "sass"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
+	"links": {
+		"github": {
 			"url": "github.com/LoisKOUNINEF/Ticknote"
 		}
-	]
+	}
 }

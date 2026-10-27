@@ -21,6 +21,59 @@
 		]
 	},
 	"popTagline": "A token set for my Nutin projects, and an excuse to dig into the history of pigments.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/palettes"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/palettes"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/palettes"
+		}
+	],
 	"overview": {
 		"mainContent": "narrative-palettes is a showcase website built with Nutin: pick a palette and the whole page switches to it, showing its tokens, its fonts and the story behind them. The token set is the one used by my Nutin projects, this portfolio included.",
 		"keyPointsTitle": "Main features:",
@@ -75,14 +128,12 @@
 			"svgKey": "sass"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
+	"links": {
+		"github": {
 			"url": "github.com/LoisKOUNINEF/narrative-palettes"
 		},
-		{
-			"svgKey": "live",
+		"website": {
 			"url": "narrative-palettes.nutin.dev"
 		}
-	]
+	}
 }

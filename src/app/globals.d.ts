@@ -14,8 +14,6 @@ type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails' | 'golang' | 'jav
 type DatabaseSvgKey = 'postgresql' | 'mysql' | 'typeorm' | 'sqlite';
 type ToolsSvgKey = 'git' | 'docker' | 'jest' | 'linux' | 'traefik' | 'bash';
 
-declare type LinkSvgKey = 'github' | 'live' | 'npm' | 'linkedin';
-
 declare interface ITech {
   svgKey: TechSvgKey;
 }

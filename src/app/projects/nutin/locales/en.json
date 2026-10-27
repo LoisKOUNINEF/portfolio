@@ -22,6 +22,59 @@
 		]
 	},
 	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own mini-framework.",
+	"sections": [
+		{
+			"sectionName": "Section 1",
+			"sectionHead": "Lorem ipsum dolor sit amet",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/nutin"
+		},
+		{
+			"sectionName": "Section 2",
+			"sectionHead": "Consectetur adipiscing elit",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/nutin"
+		},
+		{
+			"sectionName": "Section 3",
+			"sectionHead": "Sed do eiusmod tempor",
+			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+			"sectionKeyPoints": [
+				{
+					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+				},
+				{
+					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+				},
+				{
+					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/nutin"
+		}
+	],
 	"overview": {
 		"mainContent": "nutin is a lightweight frontend toolkit I built to create small, maintainable single-page applications without relying on a full framework. It provides just the essentials—routing, event handling, view rendering, and a few quality-of-life utilities, while staying close to the DOM and standard web APIs. It is designed for personal projects and small applications where control, clarity, and low overhead matter more than feature completeness.",
 		"keyPointsTitle": "Main features:",
@@ -125,18 +178,18 @@
 			"svgKey": "handlebars"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
-			"url": "github.com/LoisKOUNINEF/nutin"	
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/nutin"
 		},
-		{
-			"svgKey": "npm",
-			"url": "npmjs.com/package/@nutin/cli"
-		},
-		{
-			"svgKey": "live",
+		"website": {
 			"url": "nutin.org"
-		}
-	]
+		},
+		"other": [
+			{
+				"url": "npmjs.com/package/@nutin/cli",
+				"label": "See the NPM package page"
+			}
+		]
+	}
 }

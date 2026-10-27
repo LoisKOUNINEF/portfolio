@@ -30,9 +30,10 @@ const projectModalComponents = (project: IProject): Nutin.ComponentConfig[] => [
   },
   {
     selector: `${project.name}-modal-links`,
-    factory: (el) => new ProjectLinksComponent(el,
-      project.links
-    )
+    factory: (el) => new ProjectLinksComponent(el, {
+      name: project.name,
+      links: project.links ?? {},
+    })
   },
 ];
 

@@ -7,7 +7,7 @@ declare interface IProjectBase {
   imageSrc?: string;
   presentation: IProjectPresentation;
   technos: ITechBase[];
-  links: IProjectLink[];
+  links?: IProjectLinks;
 }
 
 declare interface IProject extends IProjectBase {
@@ -28,13 +28,23 @@ declare interface IProjectSection {
   sectionKeyPoints?: Record<string, string>[];
   // Path without extension (.avif/.webp/.jpg variants), like imageSrc
   sectionImageSrc?: string;
-  // Only read when sectionImageSrc is set; defaults to 'right'
+  // Only read when sectionImageSrc is set; defaults to alternating by section order (right, left, right…)
   imagePosition?: 'left' | 'right';
 }
 
 declare interface IProjectLink {
-  svgKey: LinkSvgKey;
+  // Without protocol (https:// is prepended)
   url: string;
+  // Overrides the default label (project-links.<key>)
+  label?: string;
+}
+
+// At most 3 links in total, rendered GitHub → website → other (in array order)
+declare interface IProjectLinks {
+  github?: IProjectLink;
+  website?: IProjectLink;
+  // No default label: always say where it leads
+  other?: (IProjectLink & { label: string })[];
 }
 
 declare interface IProjectTag {

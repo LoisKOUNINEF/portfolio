@@ -501,10 +501,6 @@
 
   /* Badge images, one per svg-<key> class (external links, then tech badges).
      Adding a badge: drop its svg in assets/images/svgs/ and add its line here. */
-  .svg-live::after { background-image: url(/assets/images/svgs/external/live.svg); }
-  .svg-github::after { background-image: url(/assets/images/svgs/external/github.svg); }
-  .svg-npm::after { background-image: url(/assets/images/svgs/external/npm.svg); }
-  .svg-linkedin::after { background-image: url(/assets/images/svgs/external/linkedin.svg); }
   .svg-three-dots::after { background-image: url(/assets/images/svgs/external/three-dots.svg); }
   .svg-angular::after { background-image: url(/assets/images/svgs/tech-badges/angular.svg); }
   .svg-bash::after { background-image: url(/assets/images/svgs/tech-badges/bash.svg); }
@@ -535,7 +531,7 @@
   .svg-java::after { background-image: url(/assets/images/svgs/tech-badges/java.svg); }
 
   /* Dark icons on a dark theme */
-  .dark-theme :is(.svg-github, .svg-nx, .svg-handlebars, .svg-express, .svg-java, .svg-mysql)::after {
+  .dark-theme :is(.svg-nx, .svg-handlebars, .svg-express, .svg-java, .svg-mysql)::after {
     filter: invert(1);
   }
 
