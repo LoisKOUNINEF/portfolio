@@ -173,10 +173,10 @@ scripts/convert-fonts.sh -r -f --sources otf --outputs woff2 src/assets/fonts
 | `Missing dependency for jpg: sips, magick or convert (ImageMagick)` | No JPG encoder found (Linux) | `sudo apt install imagemagick`, or leave `jpg` out of `--outputs` |
 | `Missing dependency for webp: cwebp` | WebP tools not installed | `brew install webp` / `sudo apt install webp` |
 | `Missing dependency for avif: avifenc` | libavif tools not installed | `brew install libavif` / `sudo apt install libavif-bin` |
-| `avifenc` error about `-q` | libavif older than 1.0 | See [older distributions](#ubuntu-2204-and-other-older-distributions) |
+| `avifenc` error about `-q` | libavif older than 1.0 | Unsupported distribution |
 | `Missing dependency: fonttools` | fonttools not found by `fonttools` nor `python3` | `brew install fonttools` / `sudo apt install python3-fonttools` |
 | `Missing dependency for woff2: brotli` | fonttools installed without Brotli | `sudo apt install python3-brotli`, or `pip install "fonttools[woff]"` |
-| `No module named 'fontTools.pens.qu2cuPen'` | fonttools older than 4.39 (OTF output) | See [older distributions](#ubuntu-2204-and-other-older-distributions) |
+| `No module named 'fontTools.pens.qu2cuPen'` | fonttools older than 4.39 (OTF output) | Unsupported distribution |
 | `variable fonts can't be converted to OTF` | The TTF is a variable font | Leave `otf` out of `--outputs`; WOFF/WOFF2 work |
 | `Not a directory: …` | The folder argument doesn't exist | Check the path (relative paths are from the current directory) |
 | `Permission denied` | The script lost its executable bit | `chmod +x scripts/*.sh`, or run it with `bash` |
