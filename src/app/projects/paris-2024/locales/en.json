@@ -173,12 +173,6 @@
 		},
 		{
 			"svgKey": "postgresql"
-		},
-		{
-			"svgKey": "nx"
-		},
-		{
-			"svgKey": "typeorm"
 		}
 	],
 	"links": {

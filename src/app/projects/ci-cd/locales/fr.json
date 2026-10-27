@@ -133,10 +133,10 @@
 	},
 	"technos": [
 		{
-			"svgKey": "bash"
+			"svgKey": "docker"
 		},
 		{
-			"svgKey": "docker"
+			"svgKey": "bash"
 		},
 		{
 			"svgKey": "git"
