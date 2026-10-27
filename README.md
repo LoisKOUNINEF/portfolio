@@ -1,5 +1,9 @@
 # portfolio - Built with nutin
 
+## Live
+
+- See the [website](https://lois-kouninef.eu)
+
 ## Start
 
 - `npm run serve` (rebuild), `npm run serve:only` (no rebuild), `npm run dev` (watch).
@@ -14,3 +18,10 @@
 
 	Supports nested paths.
 
+## Test
+
+- `npm run testin-nutin`
+
+## Convert assets
+
+- See [Convert assets](./scripts/CONVERT_ASSETS.md)
