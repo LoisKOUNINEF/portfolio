@@ -1,51 +1,16 @@
 @use "sass:map";
-@use "variables" as *;
-@use "mixins";
-@use "section";
 
-// Override with `@use "tabs.component" with ($tabs-config: (...))`.
+// Only what restyles a11y-elements' tablist (a11y.css is unlayered, so utilities
+// would lose to it); the rest of the tabs is in the template.
 // Tab colors, font and indicator come from $a11y-tabs-config (styles/_a11y-theme.scss)
 $tabs-config: (
-	'list-gap': map.get($spacings, small),
-	'slot-margin-bottom': map.get($spacings, large),
-	'header-gap': map.get($spacings, medium),
-	'picker-padding': map.get($spacings, smallest) 2.25rem map.get($spacings, smallest) map.get($spacings, medium),
-	'picker-border-width': 1px,
-	'picker-border-radius': map.get($border-radius, pill),
-	'picker-font-size': map.get($font-sizes, small),
-	'picker-font-weight': 600,
-	'picker-line-height': 1.6,
-	'picker-chevron-size': 5px,
-	'picker-chevron-offset': 1.1rem,
-	'focus-outline-width': 2px,
-	'focus-outline-offset': 2px,
-	'color-surface': var(--surface),
-	'color-border': var(--border-strong),
-	'color-text': var(--text),
-	'color-focus': var(--primary),
+	'list-gap': var(--spacing-small),
 ) !default;
-
-// Section heading, with the small-screen picker on its line
-.tabs__header {
-	@include section.section-header;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: map.get($tabs-config, 'header-gap');
-}
 
 .tabs__list {
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	gap: map.get($tabs-config, 'list-gap');
-}
-
-.tabs__list-slot {
-	margin-bottom: map.get($tabs-config, 'slot-margin-bottom');
-}
-
-.tabs__picker {
-	display: none;
 }
 
 .tabs__tab {
@@ -56,47 +21,6 @@ $tabs-config: (
 	@media (hover: none) {
 		&:hover {
 			border-bottom: none;
-		}
-	}
-}
-
-// Small screens: the picker replaces the tablist
-@include mixins.respond-to(medium) {
-	.tabs__list-slot {
-		display: none;
-	}
-
-	.tabs__picker {
-		$chevron: map.get($tabs-config, 'picker-chevron-size');
-		$offset: map.get($tabs-config, 'picker-chevron-offset');
-
-		display: block;
-		flex-shrink: 0;
-		appearance: none;
-		-webkit-appearance: none;
-		padding: map.get($tabs-config, 'picker-padding');
-		border: map.get($tabs-config, 'picker-border-width') solid map.get($tabs-config, 'color-border');
-		border-radius: map.get($tabs-config, 'picker-border-radius');
-		// Chevron from two triangles in the text color, so it follows the theme
-		background-color: map.get($tabs-config, 'color-surface');
-		background-image:
-			linear-gradient(45deg, transparent 50%, currentColor 50%),
-			linear-gradient(135deg, currentColor 50%, transparent 50%);
-		background-position:
-			calc(100% - #{$offset}) 50%,
-			calc(100% - #{$offset} + #{$chevron}) 50%;
-		background-size: $chevron $chevron;
-		background-repeat: no-repeat;
-		color: map.get($tabs-config, 'color-text');
-		font: inherit;
-		font-size: map.get($tabs-config, 'picker-font-size');
-		font-weight: map.get($tabs-config, 'picker-font-weight');
-		line-height: map.get($tabs-config, 'picker-line-height');
-		cursor: pointer;
-
-		&:focus-visible {
-			outline: map.get($tabs-config, 'focus-outline-width') solid map.get($tabs-config, 'color-focus');
-			outline-offset: map.get($tabs-config, 'focus-outline-offset');
 		}
 	}
 }

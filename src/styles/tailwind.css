@@ -1,0 +1,623 @@
+/*
+  Cascade: theme < base < components < utilities, all layered.
+  The SCSS compiled into main.css (a11y-elements and its overrides) is unlayered,
+  so it wins over every layer below whatever its specificity.
+*/
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "./fonts.css";
+
+/* Only templates generate utilities (not locales, core/ or dist/) */
+@source "../app/**/*.{html,ts}";
+@source "../index.html";
+
+/* ------------------------------------------------
+   Tokens
+   ------------------------------------------------ */
+
+/* static: every token is emitted, so the SCSS can read them as CSS variables */
+@theme static {
+  /* Palette is the app's own (below); breakpoints are max-width variants (below) */
+  --color-*: initial;
+  --breakpoint-*: initial;
+
+  /* fonts */
+  --font-primary: Inter, Arial, sans-serif;
+  --font-secondary: Sora, Arial, sans-serif;
+
+  /* font sizes */
+  --text-smallest: 0.75rem;
+  --text-small: 0.875rem;
+  --text-medium: 1rem;
+  --text-large: 1.5rem;
+  --text-largest: 2rem;
+
+  /* spacing (margin / padding / gap) */
+  --spacing-smallest: 0.25rem;
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.5rem;
+  --spacing-largest: 2rem;
+
+  /* border radius */
+  --radius-small: 2px;
+  --radius-medium: 4px;
+  --radius-large: 8px;
+  --radius-pill: 9999px;
+
+  /* box sizes: size-* (width + height) only; w-* / h-* use the spacing above */
+  --size-small: 32px;
+  --size-medium: 64px;
+  --size-large: 128px;
+  --size-largest: 256px;
+
+  /* transition durations: duration-fast/normal/slow utilities, below */
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.5s;
+
+  /* easings: the plain CSS keywords, not Tailwind's own curves; transition-* defaults to `ease` like CSS */
+  --default-transition-timing-function: ease;
+  --ease-in: ease-in;
+  --ease-out: ease-out;
+  --ease-in-out: ease-in-out;
+
+  /* project tags (project-tag component): text on a light background, same in both themes */
+  --color-tag-green: rgb(30 110 40);
+  --color-tag-green-bg: rgb(220 245 220);
+  --color-tag-blue: rgb(20 80 180);
+  --color-tag-blue-bg: rgb(210 230 255);
+  --color-tag-teal: rgb(25 90 95);
+  --color-tag-teal-bg: rgb(205 235 237);
+  --color-tag-purple: rgb(90 30 170);
+  --color-tag-purple-bg: rgb(235 220 255);
+  --color-tag-orange: rgb(170 80 10);
+  --color-tag-orange-bg: rgb(255 235 210);
+  --color-tag-red: rgb(170 30 20);
+  --color-tag-red-bg: rgb(255 220 218);
+  --color-tag-pink: rgb(170 20 90);
+  --color-tag-pink-bg: rgb(255 218 235);
+  --color-tag-yellow: rgb(140 100 0);
+  --color-tag-yellow-bg: rgb(255 248 200);
+  --color-tag-cyan: rgb(0 110 130);
+  --color-tag-cyan-bg: rgb(205 245 250);
+  --color-tag-indigo: rgb(50 30 160);
+  --color-tag-indigo-bg: rgb(220 220 255);
+  --color-tag-lime: rgb(60 120 10);
+  --color-tag-lime-bg: rgb(225 250 200);
+  --color-tag-brown: rgb(120 60 20);
+  --color-tag-brown-bg: rgb(240 225 210);
+  --color-tag-grey: rgb(70 70 80);
+  --color-tag-grey-bg: rgb(225 225 228);
+
+  /* animations */
+  --animate-fade-in: fade-in 1s;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* Theme colors resolve at use time, so they follow body.dark-theme */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-accent: var(--accent);
+  --color-bg-disabled: var(--bg-disabled);
+  --color-text-disabled: var(--text-disabled);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-overlay: var(--overlay);
+}
+
+/* Tailwind has no theme namespace for durations: the tokens get their own utilities */
+@utility duration-fast {
+  --tw-duration: var(--duration-fast);
+  transition-duration: var(--duration-fast);
+}
+@utility duration-normal {
+  --tw-duration: var(--duration-normal);
+  transition-duration: var(--duration-normal);
+}
+@utility duration-slow {
+  --tw-duration: var(--duration-slow);
+  transition-duration: var(--duration-slow);
+}
+
+/* Desktop-first, inclusive (max-width) like the former respond-to() mixin */
+@custom-variant max-small (@media (max-width: 576px));
+@custom-variant max-medium (@media (max-width: 815px));
+@custom-variant max-large (@media (max-width: 1450px));
+@custom-variant max-largest (@media (max-width: 1600px));
+
+/* ThemeTogglerService sets the theme class on <body> */
+@custom-variant dark (&:where(.dark-theme, .dark-theme *));
+@custom-variant hover-none (@media (hover: none));
+
+/* ------------------------------------------------
+   Base
+   ------------------------------------------------ */
+
+@layer base {
+  /* css reset */
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, button, input, textarea {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* palette */
+  :root {
+    --background: #F5F5F2;
+    --surface: #E9EAE7;
+    --text: #242628;
+    --text-muted: #6F7478;
+    --primary: #343A40;
+    --primary-hover: #202428;
+    --secondary: #626A70;
+    --secondary-hover: #464D52;
+    --accent: #52768B;
+    --bg-disabled: #E1E2DF;
+    --text-disabled: #9A9D9E;
+    --success: #39764E;
+    --error: #B53E3E;
+    --warning: #956A22;
+    --info: #3F6E9B;
+    --border: #D5D7D4;
+    --border-strong: #B8BCBB;
+    --overlay: #17191A99;
+    font-size: 18px;
+  }
+
+  :root .dark-theme {
+    --background: #111314;
+    --surface: #1C2022;
+    --text: #E8E9E6;
+    --text-muted: #A2A7A8;
+    --primary: #D9DEDF;
+    --primary-hover: #FFFFFF;
+    --secondary: #A6ADB0;
+    --secondary-hover: #C4C9CA;
+    --accent: #83A9BE;
+    --bg-disabled: #292D2F;
+    --text-disabled: #73797B;
+    --success: #72B787;
+    --error: #E47770;
+    --warning: #D8B16A;
+    --info: #82B1DF;
+    --border: #343A3D;
+    --border-strong: #50585B;
+    --overlay: #000000B8;
+  }
+
+  /* global styles */
+  body {
+    background-color: var(--background);
+    color: var(--text);
+    min-height: 100svh;
+    width: 100%;
+    cursor: default;
+    line-height: 1.6;
+    font-family: var(--font-primary);
+    display: flex;
+    flex-direction: column;
+    scrollbar-gutter: stable;
+  }
+
+  main {
+    flex: 1;
+    margin-top: 3rem;
+    @variant max-medium {
+      margin-top: 1.5rem;
+      padding: 0 .5rem;
+    }
+  }
+
+  h1 {
+    font-family: var(--font-secondary);
+    font-size: 3.5rem;
+    @variant max-medium {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    max-width: 80ch;
+  }
+
+  a, button {
+    cursor: pointer;
+  }
+
+  a {
+    color: var(--accent);
+  }
+
+  a [href^="http"]::after {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: currentColor;
+    mask-image: url(/assets/images/external-link.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  a:hover,
+  a:focus-visible {
+    text-decoration: underline;
+  }
+
+  .theme-transition {
+    transition: background-color ease-in-out .2s, background ease-in-out .2s, border ease-in-out .2s, color ease-in-out .2s, scale ease-in-out .2s, transform ease-in-out .2s;
+  }
+
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+/* ------------------------------------------------
+   Components: patterns shared across components, or that utilities express poorly.
+   Tunable values are custom properties on the class itself: override one from a
+   template with an arbitrary property, e.g. class="card [--card-radius:8px]".
+   ------------------------------------------------ */
+
+@layer components {
+  /* Card look shared by the project and tech stack cards (icon, title, content) */
+  .card {
+    --card-padding: 1.1rem 1.25rem 1.4rem;
+    --card-padding-small: 1.1rem --theme(--spacing-small) --theme(--spacing-medium);
+    --card-border-width: 0.5px;
+    --card-radius: 12px;
+    --card-color-surface: var(--surface);
+    --card-color-border: var(--border);
+    padding: var(--card-padding);
+    background: var(--card-color-surface);
+    border: var(--card-border-width) solid var(--card-color-border);
+    border-radius: var(--card-radius);
+    @variant max-medium {
+      padding: var(--card-padding-small);
+    }
+  }
+
+  /* Icon and title on one line */
+  .card-header {
+    --card-header-gap: 10px;
+    --card-header-margin-bottom: --theme(--spacing-small);
+    display: flex;
+    align-items: center;
+    gap: var(--card-header-gap);
+    margin-bottom: var(--card-header-margin-bottom);
+  }
+
+  /* For a 24×24 line-icon <svg> */
+  .card-icon {
+    --card-icon-size: 20px;
+    --card-icon-stroke-width: 1.5;
+    --card-icon-color: var(--primary);
+    display: block;
+    flex-shrink: 0;
+    width: var(--card-icon-size);
+    height: var(--card-icon-size);
+    fill: none;
+    stroke: var(--card-icon-color);
+    stroke-width: var(--card-icon-stroke-width);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card-title {
+    --card-title-font-size: 1rem;
+    --card-title-font-weight: 700;
+    --card-title-line-height: 1.4;
+    --card-title-color: var(--primary);
+    color: var(--card-title-color);
+    font-size: var(--card-title-font-size);
+    font-weight: var(--card-title-font-weight);
+    line-height: var(--card-title-line-height);
+  }
+
+  .card-grid {
+    --card-grid-gap: 12px;
+    --card-grid-max-width: 45rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--card-grid-gap);
+    max-width: var(--card-grid-max-width);
+  }
+
+  /* Home page sections: same horizontal padding, same heading.
+     Vertical spacing between sections is the home view's. */
+  .section-wrapper {
+    --section-padding-left: --theme(--spacing-large);
+    --section-padding-right: --theme(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 var(--section-padding-right) 0 var(--section-padding-left);
+    @variant max-medium {
+      padding: 0;
+    }
+  }
+
+  .section-header {
+    --section-header-min-width: 40%;
+    --section-header-line-height: --theme(--spacing-largest);
+    --section-header-margin-bottom: --theme(--spacing-large);
+    --section-title-font-size: --theme(--text-largest);
+    --section-title-color: var(--primary);
+    min-width: var(--section-header-min-width);
+    line-height: var(--section-header-line-height);
+    text-align: left;
+    width: auto;
+    margin-bottom: var(--section-header-margin-bottom);
+    & :where(h2, h3) {
+      font-size: var(--section-title-font-size);
+      font-family: var(--font-secondary);
+      font-weight: bold;
+      color: var(--section-title-color);
+    }
+  }
+
+  /* Monitor-like frame around a project picture: screen, foot and stand. The screen takes
+     the picture's own ratio, so nothing is cropped. Sizing (width, margins) is the consumer's.
+     On the frame's container, which holds the content element and the stand: */
+  .screen-mock {
+    /* picture ratio until it has loaded; its natural ratio is used afterwards */
+    --screen-mock-img-fallback-ratio: 16 / 9;
+    position: relative;
+    display: block;
+    & picture {
+      display: block;
+    }
+    & img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto var(--screen-mock-img-fallback-ratio);
+    }
+  }
+
+  /* On the picture's root element: the screen, with the picture inset inside it */
+  .screen-mock-content {
+    --screen-mock-background: var(--background);
+    --screen-mock-border-width: 2px;
+    --screen-mock-border-color: color-mix(in srgb, var(--text), transparent 70%);
+    --screen-mock-radius: --theme(--radius-medium);
+    --screen-mock-shadow: 0 2px 8px color-mix(in srgb, var(--text), transparent 95%), inset 0 1px 0 color-mix(in srgb, var(--text), transparent 20%);
+    --screen-mock-content-inset: .4rem;
+    --screen-mock-content-radius: --theme(--radius-small);
+    --screen-mock-content-background: color-mix(in srgb, var(--text), transparent 90%);
+    --screen-mock-content-border: 1px solid color-mix(in srgb, var(--text), transparent 80%);
+    display: block;
+    margin: 0;
+    padding: var(--screen-mock-content-inset);
+    background: var(--screen-mock-background);
+    border: var(--screen-mock-border-width) solid var(--screen-mock-border-color);
+    border-radius: var(--screen-mock-radius);
+    box-shadow: var(--screen-mock-shadow);
+    & picture {
+      border-radius: var(--screen-mock-content-radius);
+      overflow: hidden;
+      background: var(--screen-mock-content-background);
+      border: var(--screen-mock-content-border);
+    }
+  }
+
+  /* On an empty element after the content: the foot, pole and base below the screen */
+  .screen-mock-stand {
+    /* width / height, so it scales with the frame's width */
+    --screen-mock-stand-ratio: 16 / 1.35;
+    --screen-mock-stand-color: color-mix(in srgb, var(--text), transparent 80%);
+    --screen-mock-stand-pole-width: 2px;
+    --screen-mock-stand-pole-height: 60%;
+    --screen-mock-stand-base-width: 60%;
+    --screen-mock-stand-base-height: 2px;
+    /* trapezoid between the screen and the stand, as shares of the stand */
+    --screen-mock-foot-top: 0;
+    --screen-mock-foot-left: 40%;
+    --screen-mock-foot-width: 20%;
+    --screen-mock-foot-height: 66.67%;
+    --screen-mock-foot-color: color-mix(in srgb, var(--text), transparent 70%);
+    --screen-mock-foot-clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--screen-mock-stand-ratio);
+
+    /* foot */
+    &::before {
+      content: '';
+      position: absolute;
+      top: var(--screen-mock-foot-top);
+      left: var(--screen-mock-foot-left);
+      width: var(--screen-mock-foot-width);
+      height: var(--screen-mock-foot-height);
+      background: var(--screen-mock-foot-color);
+      clip-path: var(--screen-mock-foot-clip-path);
+    }
+
+    /* pole and base */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(var(--screen-mock-stand-color), var(--screen-mock-stand-color)) center bottom / var(--screen-mock-stand-pole-width) var(--screen-mock-stand-pole-height) no-repeat,
+        linear-gradient(var(--screen-mock-stand-color), var(--screen-mock-stand-color)) center bottom / var(--screen-mock-stand-base-width) var(--screen-mock-stand-base-height) no-repeat;
+    }
+  }
+
+  /* Row of SVG badges (tech badges, project links) */
+  .svgs__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: --theme(--spacing-largest);
+    @variant max-medium {
+      flex-wrap: wrap;
+      gap: --theme(--spacing-medium);
+    }
+  }
+
+  /* The badge image is the ::after background, set per badge (svg-<key> classes) */
+  .base-svg::after {
+    padding: --theme(--spacing-medium);
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: --theme(--radius-large);
+    transition: scale ease .3s;
+    box-shadow: 0 4px 4px -3px color-mix(in srgb, var(--primary), transparent 50%);
+  }
+
+  /* Badge images, one per svg-<key> class (external links, then tech badges).
+     Adding a badge: drop its svg in assets/images/svgs/ and add its line here. */
+  .svg-live::after { background-image: url(/assets/images/svgs/external/live.svg); }
+  .svg-github::after { background-image: url(/assets/images/svgs/external/github.svg); }
+  .svg-npm::after { background-image: url(/assets/images/svgs/external/npm.svg); }
+  .svg-linkedin::after { background-image: url(/assets/images/svgs/external/linkedin.svg); }
+  .svg-three-dots::after { background-image: url(/assets/images/svgs/external/three-dots.svg); }
+  .svg-angular::after { background-image: url(/assets/images/svgs/tech-badges/angular.svg); }
+  .svg-bash::after { background-image: url(/assets/images/svgs/tech-badges/bash.svg); }
+  .svg-docker::after { background-image: url(/assets/images/svgs/tech-badges/docker.svg); }
+  .svg-linux::after { background-image: url(/assets/images/svgs/tech-badges/linux.svg); }
+  .svg-nestjs::after { background-image: url(/assets/images/svgs/tech-badges/nestjs.svg); }
+  .svg-vuejs::after { background-image: url(/assets/images/svgs/tech-badges/vuejs.svg); }
+  .svg-rails::after { background-image: url(/assets/images/svgs/tech-badges/rails.svg); }
+  .svg-csharp::after { background-image: url(/assets/images/svgs/tech-badges/csharp.svg); }
+  .svg-golang::after { background-image: url(/assets/images/svgs/tech-badges/golang.svg); }
+  .svg-ruby::after { background-image: url(/assets/images/svgs/tech-badges/ruby.svg); }
+  .svg-nodejs::after { background-image: url(/assets/images/svgs/tech-badges/nodejs.svg); }
+  .svg-nx::after { background-image: url(/assets/images/svgs/tech-badges/nx.svg); }
+  .svg-nginx::after { background-image: url(/assets/images/svgs/tech-badges/nginx.svg); }
+  .svg-git::after { background-image: url(/assets/images/svgs/tech-badges/git.svg); }
+  .svg-jest::after { background-image: url(/assets/images/svgs/tech-badges/jest.svg); }
+  .svg-postgresql::after { background-image: url(/assets/images/svgs/tech-badges/postgresql.svg); }
+  .svg-sass::after { background-image: url(/assets/images/svgs/tech-badges/sass.svg); }
+  .svg-traefik::after { background-image: url(/assets/images/svgs/tech-badges/traefik.svg); }
+  .svg-typescript::after { background-image: url(/assets/images/svgs/tech-badges/typescript.svg); }
+  .svg-handlebars::after { background-image: url(/assets/images/svgs/tech-badges/handlebars.svg); }
+  .svg-html::after { background-image: url(/assets/images/svgs/tech-badges/html.svg); }
+  .svg-typeorm::after { background-image: url(/assets/images/svgs/tech-badges/typeorm.svg); }
+  .svg-mysql::after { background-image: url(/assets/images/svgs/tech-badges/mysql.svg); }
+  .svg-express::after { background-image: url(/assets/images/svgs/tech-badges/express.svg); }
+  .svg-tailwind::after { background-image: url(/assets/images/svgs/tech-badges/tailwind.svg); }
+  .svg-sqlite::after { background-image: url(/assets/images/svgs/tech-badges/sqlite.svg); }
+  .svg-java::after { background-image: url(/assets/images/svgs/tech-badges/java.svg); }
+
+  /* Dark icons on a dark theme */
+  .dark-theme :is(.svg-github, .svg-nx, .svg-handlebars, .svg-express, .svg-java, .svg-mysql)::after {
+    filter: invert(1);
+  }
+
+  /* Base for ButtonComponent (common/button); consumers add their own classes */
+  .app-button {
+    --app-button-outline-color: var(--primary);
+    --app-button-outline-width: 2px;
+    --app-button-outline-offset: 2px;
+    --app-button-active-opacity: 0.85;
+    cursor: pointer;
+    &:focus-visible {
+      outline: var(--app-button-outline-width) solid var(--app-button-outline-color);
+      outline-offset: var(--app-button-outline-offset);
+    }
+    &:active {
+      opacity: var(--app-button-active-opacity);
+    }
+    &:disabled {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+
+  /* Root of InfoCardComponent (common/info-card): the <a>, <a11y-focusable> or <div>;
+     consumers add their own classes */
+  .info-card {
+    --info-card-gap: --theme(--spacing-medium);
+    --info-card-padding: --theme(--spacing-medium);
+    --info-card-radius: --theme(--radius-large);
+    --info-card-surface: var(--surface);
+    --info-card-border: 1px solid var(--border);
+    --info-card-shadow: 0 1px 3px color-mix(in srgb, var(--text) 8%, transparent);
+    --info-card-focus-outline: 2px solid var(--primary);
+    --info-card-focus-outline-offset: 2px;
+    display: flex;
+    align-items: center;
+    gap: var(--info-card-gap);
+    padding: var(--info-card-padding);
+    border-radius: var(--info-card-radius);
+    background: var(--info-card-surface);
+    border: var(--info-card-border);
+    box-shadow: var(--info-card-shadow);
+    :where(.dark-theme) & {
+      --info-card-shadow: 0 1px 3px color-mix(in srgb, var(--text) 30%, transparent);
+    }
+    &[role="button"]:focus-visible {
+      outline-offset: var(--info-card-focus-outline-offset);
+      outline: var(--info-card-focus-outline);
+    }
+  }
+
+  /* Home sections' separator: a soft line at the bottom edge of a --separator-height box.
+     .separator-line-before draws it as the element's ::before (give that a content) */
+  .separator-line,
+  .separator-line-before::before {
+    --separator-height: 15px;
+    display: block;
+    width: 50%;
+    margin-left: 25%;
+    height: var(--separator-height);
+    box-shadow: 0 4px 4px -4px var(--border-strong);
+    @variant max-medium {
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+
+  /* Native <select> with a chevron drawn from two triangles in the text color,
+     so it follows the theme (e.g. the tabs' small-screen picker) */
+  .select-chevron {
+    --select-chevron-size: 5px;
+    --select-chevron-offset: 1.1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      calc(100% - var(--select-chevron-offset)) 50%,
+      calc(100% - var(--select-chevron-offset) + var(--select-chevron-size)) 50%;
+    background-size: var(--select-chevron-size) var(--select-chevron-size);
+    background-repeat: no-repeat;
+  }
+}

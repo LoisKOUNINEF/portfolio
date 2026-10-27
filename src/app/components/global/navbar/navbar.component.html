@@ -1,18 +1,19 @@
-<div id="header" class="navbar__container">
-	<div class="navbar__inner">
+<div id="header" class="transition-all duration-fast ease-in-out transition-discrete fixed top-0 w-full z-2 max-medium:min-w-auto max-medium:right-0 max-medium:text-nowrap [&.is-hidden]:opacity-0 [&.is-hidden]:[transform:translate(0,-50%)] [&.is-hidden]:pointer-events-none">
+	<div class="flex justify-between items-center gap-medium bg-background [backdrop-filter:blur(10px)] py-small px-large rounded-[0.5rem] max-medium:flex-row-reverse">
 		<div data-component="nav-toggle"></div>
-		<nav 
-			id="navbar-anchors" 
-			class="navbar__anchors" 
+		<!-- Small screens: a dropdown, shown (.open) by the toggle -->
+		<nav
+			id="navbar-anchors"
+			class="w-[70%] flex gap-[3rem] max-medium:w-full max-medium:opacity-0 max-medium:gap-small max-medium:hidden max-medium:flex-col max-medium:items-end max-medium:absolute max-medium:top-[3rem] max-medium:left-1/2 max-medium:[transform:translateX(-50%)] max-medium:bg-inherit max-medium:[backdrop-filter:blur(10px)] max-medium:py-medium max-medium:px-large max-medium:rounded-[1.5rem] [&.open]:flex [&.open]:opacity-100 [&.open]:animate-fade-in"
 			data-catalog="navbar-anchors"
 		></nav>
-		<section class="navbar__togglers-container">
-			<div 
-				class="navbar__toggler" 
+		<section class="flex justify-end basis-1/4 max-medium:justify-start">
+			<div
+				class="transition-[transform,fade] duration-fast ease-in-out bg-inherit px-small rounded-medium hover:text-primary focus-visible:text-primary focus-visible:outline-2 focus-visible:outline-primary"
 				data-component="language-toggler"
 			></div>
-			<div 
-				class="navbar__toggler" 
+			<div
+				class="transition-[transform,fade] duration-fast ease-in-out bg-inherit px-small rounded-medium hover:text-primary focus-visible:text-primary focus-visible:outline-2 focus-visible:outline-primary"
 				data-component="theme-toggler"
 			></div>
 		</section>

@@ -1,0 +1,16 @@
+// Touch devices: undo sticky hover styles on links and buttons.
+// Unlayered, with its :root specificity, so it still wins over the a11y-elements overrides
+// and over utilities (as before Tailwind). Tailwind's own hover: variant already skips
+// (hover: none), so utilities never add sticky hover styles in the first place.
+:root {
+	@media (hover: none) {
+		a:hover {
+			text-decoration: none;
+		}
+		button:hover {
+			text-decoration: none;
+			background-color: inherit;
+			color: inherit;
+		}
+	}
+}

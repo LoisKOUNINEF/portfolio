@@ -4,9 +4,9 @@ import { IProjectKeyPoint, ProjectKeyPointComponent } from '../project-key-point
 
 type ProjectSectionConfig = Nutin.CatalogItemConfig<IProjectSection>;
 
-// imagePosition only matters when there is an image to place
+// imagePosition only matters when there is an image to place; small screens stack it anyway
 const imageModifier = (section: IProjectSection): string =>
-  section.sectionImageSrc ? `project-section--image-${section.imagePosition ?? 'right'}` : '';
+  section.sectionImageSrc && section.imagePosition === 'left' ? 'flex-row-reverse' : '';
 
 const templateFn = (_config: ProjectSectionConfig) => html`__TEMPLATE_PLACEHOLDER__`;
 

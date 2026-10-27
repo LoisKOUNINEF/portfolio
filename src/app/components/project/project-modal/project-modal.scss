@@ -1,7 +1,7 @@
-@use "sass:map";
-@use "variables" as *;
 @use "mixins";
 
+// Sizes a11y-elements' modal wrapper (unlayered a11y.css, so not a utility);
+// the modal's content is styled in project-modal.html
 .a11y-modal-wrapper:has(.project-modal__wrapper) {
   width: 80%;
   height: 90%;
@@ -10,76 +10,5 @@
   @include mixins.respond-to(medium) {
     width: 100%;
     height: 80%;
-  }
-}
-
-.project-modal__container {
-  display: flex;
-  padding: map.get($spacings, 'medium');
-  opacity: 1;
-  color: var(--text);
-  height: 100%;
-  width: 100%;
-  @include mixins.respond-to(medium) {
-    padding: map.get($spacings, medium) 0;
-  }
-}
-
-.project-modal__content {
-  justify-content: flex-start;
-  align-items: center;
-  text-align: left;
-  min-width: 100%;
-  padding-left: map.get($spacings, medium);
-  .project-header__container {
-    .project-header__title {
-      border-bottom: 3px solid var(--primary);
-      h3 {
-        font-size: map.get($font-sizes, largest);
-        color: var(--primary);
-        @include mixins.respond-to(medium) {
-          line-height: 2.5rem;
-        }
-      }
-    }
-  }
-
-  .project-header__tagline {
-    max-width: 50ch;
-  }
-}
-
-.project-modal__conclusion {
-  max-width: 100%;
-  line-height: map.get($spacings, large);
-  padding: map.get($spacings, large);
-  @include mixins.respond-to(medium) {
-    padding: map.get($spacings, large) 0;
-  }
-}
-
-.project-modal__links {
-  display: flex;
-  padding: map.get($spacings, medium);
-  gap: map.get($spacings, largest);
-  flex-wrap: nowrap;
-  .svgs__container {
-    padding-top: map.get($spacings, medium);
-    padding-left: map.get($spacings, medium);
-    .base-svg {
-      &::after {
-        padding: map.get($spacings, large);
-      }
-    }
-    .svg-external {
-      &:focus-visible {
-        padding-top: map.get($spacings, small);
-        padding-bottom: map.get($spacings, medium);
-      }
-    }
-  }
-  @include mixins.respond-to(medium) {
-    padding: map.get($spacings, medium) 0;
-    justify-content: space-between;
   }
 }

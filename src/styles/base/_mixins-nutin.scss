@@ -2,66 +2,6 @@
 @use "variables" as *;
 @use "sass:color";
 
-@mixin card-shadow($color) {
-  @include themed(box-shadow, 0 10px 15px rgba(map.get($light-theme, $color), 0.1), 0 10px 15px rgba(map.get($dark-theme, $color), 0.1));
-}
-
-@mixin container() {
-  border-radius: map.get($spacings, medium);
-  padding: 0 map.get($spacings, medium);
-  @include respond-to(medium) {
-    width: 100%;
-  }
-}
-
-@mixin header($color-identity: false) {
-  min-width: 40%;
-  line-height: map.get($spacings, largest);
-  text-align: left;
-  width: auto;
-  h2, h3 {
-    font-size: map.get($font-sizes, largest);
-    font-family: $secondary-font;
-    font-weight: bold;
-    color: var(--primary);
-  }
-  .project-header__title {
-    border-bottom: 3px solid transparent;
-    border-color: var(--border);
-  }
-}
-
-@mixin tech-badges-title {
-  font-family: $secondary-font;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  opacity: .75;
-  border-radius: map.get($spacings, small);
-}
-
-@mixin tech-badges-underline {
-  @include themed(box-shadow, 0 4px 4px -4px rgba(map.get($light-theme, accent), .3), 0 4px 4px -4px rgba(map.get($dark-theme, accent), .5));
-}
-
-@mixin themed($property, $light-value, $dark-value) {
-  #{$property}: $light-value;
-
-  .dark-theme & {
-    #{$property}: $dark-value;
-  }
-}
-
-@mixin wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: map.get($spacings, 'medium');
-  @include respond-to(medium) {
-    padding: 0;
-  }
-}
-
 // ================================================
 // TABLE OF CONTENTS
 //   1. Responsive

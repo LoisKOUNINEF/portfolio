@@ -1,15 +1,15 @@
-<div class="project-header__container">
-	<div class="project-header__title">
-		<h2>${_config.name}</h2>
-		<div data-optional class="project-header__tags" data-catalog="project-header-tags"></div>
+<div class="min-w-[40%] leading-8 text-left w-auto flex flex-col p-large max-medium:pl-0">
+	<div class="pt-largest w-full flex justify-between items-center border-b-3 border-border border-b-primary max-medium:flex-wrap">
+		<h2 class="w-full font-secondary font-bold text-primary text-large text-wrap">${_config.name}</h2>
+		<div data-optional class="flex self-end pl-medium pb-smallest gap-small max-medium:pl-0" data-catalog="project-header-tags"></div>
 	</div>
 	<p data-component="project-header-tech-string"></p>
-	<div class="project-header__images ${_config.displayTechIcons ? '' : 'u-hide'}">
-		<div class="project-header__screen-mock ${_config.displayTechIcons && _config.imageSrc ? '' : 'u-hide'}">
+	<div class="${_config.displayTechIcons ? 'flex justify-between max-medium:justify-center max-medium:items-center max-medium:flex-col max-medium:pb-medium' : 'hidden'}">
+		<div class="screen-mock w-[24rem] my-largest max-medium:w-full ${_config.displayTechIcons && _config.imageSrc ? '' : 'hidden'}">
 			<div data-component="project-header-picture"></div>
-			<div class="project-header__screen-mock-stand"></div>
+			<div class="screen-mock-stand"></div>
 		</div>
-		<p class="svgs__container project-header__svgs" data-catalog="project-header-technos"></p>
+		<p class="svgs__container flex-wrap pl-large max-medium:pl-0 max-medium:[&_.svg-tech-label]:tracking-[0]" data-catalog="project-header-technos"></p>
 	</div>
-	<p class="project-header__tagline">${_config.tagline}</p>
+	<p class="max-w-[50ch] font-secondary pt-medium text-[1.1rem] max-medium:pl-0">${_config.tagline}</p>
 </div>

@@ -34,7 +34,8 @@ export class InfoCardComponent extends Component<HTMLElement, IFocusableElementC
       normalizeKeys: ['href', 'target', 'download', 'iconSrc'],
       props: restProps,
     });
-    this._classNames = ['focusable-element', ...(className?.split(' ').filter(Boolean) ?? [])];
+    // info-card: base look in tailwind.css (@layer components), so className utilities override it
+    this._classNames = ['info-card', ...(className?.split(' ').filter(Boolean) ?? [])];
     if (!config.href) this.applyCardAttributes(this.element);
   }
 

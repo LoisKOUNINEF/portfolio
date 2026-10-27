@@ -1,9 +1,9 @@
-<div class="project-section__container ${imageModifier(_config)}">
-	<div class="project-section__text">
-		<h3 class="project-section__name">${_config.sectionName}</h3>
-		<h4 data-optional class="project-section__head">${_config.sectionHead}</h4>
-		<p data-optional class="project-section__content">${_config.sectionContent}</p>
-		<div data-optional class="project-section__key-points" data-catalog="project-section-key-points"></div>
+<div class="flex gap-large items-start max-w-full leading-6 px-large max-medium:flex-col max-medium:p-0 ${imageModifier(_config)}">
+	<div class="flex-[1_1_0] min-w-0">
+		<h3 class="font-secondary text-[1.05rem] font-bold py-small">${_config.sectionName}</h3>
+		<h4 data-optional class="font-bold py-small">${_config.sectionHead}</h4>
+		<p data-optional class="py-large">${_config.sectionContent}</p>
+		<div data-optional class="pb-small" data-catalog="project-section-key-points"></div>
 	</div>
-	${_config.sectionImageSrc ? html`<div class="project-section__picture" data-component="project-section-picture"></div>` : ''}
+	${_config.sectionImageSrc ? html`<div class="flex-[0_1_40%] self-center max-medium:w-full [&_img]:block [&_img]:w-full [&_img]:h-auto" data-component="project-section-picture"></div>` : ''}
 </div>

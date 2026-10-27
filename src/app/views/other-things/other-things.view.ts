@@ -28,7 +28,8 @@ export class OtherThingsView extends View {
         selector: 'other-things-back',
         factory: (el) => new ButtonComponent(el, {
           i18nKey: 'other-things.back',
-          className: 'other-things-view__back-btn',
+          // Fixed pill, top left: stands in for the navbar on this page
+          className: 'py-small px-medium border border-border-strong rounded-pill bg-surface [box-shadow:0_2px_6px_color-mix(in_srgb,var(--text),transparent_85%)] text-primary text-medium font-semibold hover:text-primary-hover hover:underline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2',
           callback: () => Navigation.navigateTo('/'),
         }),
       },

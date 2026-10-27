@@ -16,12 +16,17 @@ const pathsToLoad = [ ...stylesInput ];
 // resolves `@use "pkg:<package>/<subpath>"` through node_modules (package exports)
 const importers = [ new sass.NodePackageImporter() ];
 
+const compileOptions = {
+  loadPaths: [ ...pathsToLoad ],
+  importers,
+  style: 'compressed',
+  // Every result is appended to main.css: no U+FEFF (compressed) / @charset (expanded) prefix,
+  // which Sass adds to non-ASCII output and which would break the first selector mid-file
+  charset: false,
+};
+
 try {
-  const mainResult = await sass.compileAsync(path.join(stylesPath, 'main.scss'), {
-    loadPaths: [ ...pathsToLoad ],
-    importers,
-    style: 'compressed'
-  });
+  const mainResult = await sass.compileAsync(path.join(stylesPath, 'main.scss'), compileOptions);
   fs.writeFileSync(stylesOutput, mainResult.css);
 
   // features styles
@@ -30,11 +35,7 @@ try {
   const appStyles = getFilesRecursive(appInput, 'scss').filter((file) => !path.basename(file).startsWith('_'));
 
   for (const style of appStyles) {
-    const result = await sass.compileAsync(style, {
-      loadPaths: [ ...pathsToLoad ],
-      importers,
-      style: 'compressed'
-    })
+    const result = await sass.compileAsync(style, compileOptions);
     fs.appendFileSync(stylesOutput, result.css);
   }
 } catch (err) {

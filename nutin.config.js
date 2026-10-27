@@ -1,6 +1,6 @@
 export default {
   // Nutin options
-  tailwind: false,         // Enable Tailwind CSS v4
+  tailwind: true,         // Enable Tailwind CSS v4
   i18n: true,              // Enable i18n; configure languages in config/languages.json
   generateSEOFiles: true,  // Generate per-route HTML, robots.txt and sitemap.xml; configure SEO data in config/seo.json
 

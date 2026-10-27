@@ -1,8 +1,9 @@
 import { InfoCardComponent } from '../../common/info-card/info-card.component.js';
+import { contactCardClass } from '../contact.component.js';
 import { displayResumeModal } from '../resume-modal/resume-modal.js';
 
 // Contact's résumé card, mounted on its own by the home view so it can span the
-// Contact and Infos columns. Styled by contact.component.scss.
+// Contact and Infos columns. Same look as the contact cards, with a primary label.
 export class ResumeCardComponent extends InfoCardComponent {
   constructor(mountTarget: HTMLElement) {
     super(mountTarget, {
@@ -10,7 +11,7 @@ export class ResumeCardComponent extends InfoCardComponent {
       labelKey: 'contact.resume',
       subtextKey: 'contact.resume-subtext',
       callback: () => displayResumeModal(),
-    }, { className: 'contact__link-card contact__resume-card' });
+    }, { className: `${contactCardClass} [&_.info-card-label]:text-primary` });
     this.listenToRenderEvents(['language-changed']);
   }
 }

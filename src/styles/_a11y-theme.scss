@@ -8,9 +8,10 @@
 $a11y-semantic-config: (
   'color-success': rgb(76 175 80),
   'color-error': rgb(244 67 54),
-  'color-info': rgb(33 150 243),
+  'color-info': var(--primary),
   'color-warning': rgb(244 67 54),
   'color-text': white,
+  'color-text-on-info': var(--background),
 ) !default;
 
 $a11y-z-index-config: (

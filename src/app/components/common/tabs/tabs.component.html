@@ -1,10 +1,10 @@
-<div class="tabs__header">
+<div class="section-header flex items-center justify-between gap-medium">
 	<h2 data-i18n="${config.titleI18nKey}"></h2>
-	<select class="tabs__picker" aria-label="${I18nService.translate(config.labelI18nKey)}" data-event="change:_onPick:@target">
+	<select class="tabs__picker select-chevron hidden max-medium:block shrink-0 py-smallest pr-[2.25rem] pl-medium border border-border-strong rounded-pill bg-surface text-text text-small font-semibold leading-[1.6] cursor-pointer focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2" aria-label="${I18nService.translate(config.labelI18nKey)}" data-event="change:_onPick:@target">
 		${config.tabs.map((tab) => html`<option value="${tab.name}" data-i18n="${tab.i18nKey}"></option>`)}
 	</select>
 </div>
-<div class="tabs__list-slot">
+<div class="mb-large max-medium:hidden">
 	<div class="tabs__list" data-tablist>
 		${config.tabs.map((tab) => html`<button class="tabs__tab" data-tab="${tab.name}" data-i18n="${tab.i18nKey}"></button>`)}
 	</div>

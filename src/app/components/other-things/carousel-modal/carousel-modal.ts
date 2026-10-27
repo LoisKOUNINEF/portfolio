@@ -43,6 +43,9 @@ export const displayCarouselModal = () => {
 
 const carouselModalTemplate = () => html`__TEMPLATE_PLACEHOLDER__`;
 
+// Round prev/next buttons over the slide, vertically centered
+const carouselButtonClass = 'absolute top-1/2 [transform:translateY(-50%)] z-2 size-10 border-none rounded-[50%] cursor-pointer flex items-center justify-center text-[1.5rem] leading-none bg-background/20 text-text dark:bg-text/20 dark:text-background transition-[background,scale] duration-fast ease-in-out hover:scale-110 hover:bg-background/60 dark:hover:bg-text/60';
+
 const carouselModalComponents = (): Nutin.ComponentConfig[] => [
   {
     selector: 'prev-button',
@@ -50,7 +53,7 @@ const carouselModalComponents = (): Nutin.ComponentConfig[] => [
       textContent: '‹',
       ariaLabel: I18nService.translate('other-things.carousel-prev'),
       callback: () => displayPrev(),
-      className: 'carousel__button carousel__button--prev'
+      className: `${carouselButtonClass} left-medium`
     }),
   },
   {
@@ -59,7 +62,7 @@ const carouselModalComponents = (): Nutin.ComponentConfig[] => [
       textContent: '›',
       ariaLabel: I18nService.translate('other-things.carousel-next'),
       callback: () => displayNext(),
-      className: 'carousel__button carousel__button--next',
+      className: `${carouselButtonClass} right-medium`,
     }),
   }
 ];

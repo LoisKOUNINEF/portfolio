@@ -1,15 +1,23 @@
-<div class="featured-project__wrapper">
-	<div class="featured-project__header">
+<div class="section-wrapper @container">
+	<div class="section-header">
 		<h2 data-i18n="featured-project.title"></h2>
 	</div>
-	<div class="featured-project__content">
-		<div class="featured-project__text">
-			<div class="featured-project__name-row">
-				<img class="featured-project__logo" src="/assets/images/projects/nutin-logo.avif" alt="" width="252" height="272" decoding="async">
-				<h3 class="featured-project__name" data-i18n="featured-project.name"></h3>
+	<!--
+		Card widths, from the room inside the card if it spanned the whole section (100cqw: the
+		wrapper, minus padding and border). The text keeps the width it has in a full-width card
+		(60%); the screen takes 40% up to 17rem, then the card shrinks around them instead of
+		growing. Set explicitly rather than fit-content: browsers size a flex container's content
+		differently, and a too-narrow card let the screen stick out of it.
+	-->
+	<div class="card flex w-[calc(var(--fp-text)+2rem+var(--fp-screen)+2.5rem+1px)] max-w-full items-center gap-largest [--card-padding-small:var(--card-padding)] [--fp-inner:calc(100cqw-2.5rem-1px)] [--fp-text:calc(var(--fp-inner)*0.6-2rem)] [--fp-screen:min(calc(var(--fp-inner)*0.4),17rem)] max-medium:flex-col-reverse max-medium:items-stretch max-medium:w-auto">
+		<div class="flex-[0_0_var(--fp-text)] text-text leading-[1.6] max-medium:flex-none">
+			<!-- Baseline: the logo's bottom edge sits on the title's text baseline -->
+			<div class="flex items-baseline gap-small mb-small">
+				<img class="flex-none w-auto h-8 max-medium:h-7" src="/assets/images/projects/nutin-logo.avif" alt="" width="252" height="272" decoding="async">
+				<h3 class="font-secondary text-large font-bold text-primary pl-[.2rem]" data-i18n="featured-project.name"></h3>
 			</div>
-			<p class="featured-project__summary" data-i18n="featured-project.summary"></p>
-			<ul class="featured-project__highlights">
+			<p class="mb-medium" data-i18n="featured-project.summary"></p>
+			<ul class="flex flex-col gap-small mb-large pl-large list-disc">
 				<li data-i18n="featured-project.highlight-1"></li>
 				<li data-i18n="featured-project.highlight-2"></li>
 				<li data-i18n="featured-project.highlight-3"></li>
@@ -18,9 +26,9 @@
 				<div data-component="featured-project-link" data-event="click:_onLinkClick:@event"></div>
 			</div>
 		</div>
-		<div class="featured-project__screen">
+		<div class="screen-mock shrink-0 w-[var(--fp-screen)] max-medium:w-full">
 			<div data-component="featured-project-picture"></div>
-			<div class="featured-project__screen-stand"></div>
+			<div class="screen-mock-stand"></div>
 		</div>
 	</div>
 </div>

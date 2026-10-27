@@ -14,7 +14,7 @@ export interface INavToggleClasses {
 export class NavToggleHelper {
   private static readonly _toggleClasses: INavToggleClasses = {
     open: 'open',
-    hidden: 'hidden',
+    hidden: 'is-hidden',
     active: 'active'
   };
   private static _lastScrollY = window.scrollY;

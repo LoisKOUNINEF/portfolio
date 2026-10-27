@@ -1,6 +1,7 @@
 import { Component, I18nService, html } from '../../../../../core/index.js';
 import { languageTogglerService } from '../../../../services/togglers/language-toggler/language-toggler.service.js';
 import { ButtonComponent } from '../../../common/button/button.component.js';
+import { togglerButtonClass } from '../toggler-classes.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
@@ -15,7 +16,7 @@ export class LanguageTogglerComponent extends Component {
       factory: (el) => new ButtonComponent(el, {
         callback: async () => await this.toggleLang(),
         i18nKey: 'language-toggler.flag',
-        className: 'navbar__toggler lang-toggler',
+        className: `${togglerButtonClass} text-nowrap text-inherit lowercase font-secondary`,
         ariaLabel: I18nService.translate('language-toggler.label'),
       })
     }]

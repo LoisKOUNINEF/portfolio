@@ -1,4 +1,6 @@
-// primary
+/* Self-hosted fonts (assets/fonts); referenced by --font-primary / --font-secondary in tailwind.css */
+
+/* primary */
 @font-face {
   font-family: 'Inter';
   src: url('/assets/fonts/inter/woff/inter-400-normal.woff2') format('woff2'),
@@ -79,7 +81,7 @@
   font-display: swap;
 }
 
-// secondary
+/* secondary */
 @font-face {
   font-family: 'Sora';
   src: url('/assets/fonts/sora/woff/sora-400-normal.woff2') format('woff2'),

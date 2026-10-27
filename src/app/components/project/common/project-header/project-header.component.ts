@@ -71,7 +71,7 @@ export class ProjectHeaderComponent extends Component {
         alt: `${this._headConfig.name} illustration picture`,
       },
       {
-        className: 'project-header__screen-mock-content'
+        className: 'screen-mock-content'
       })
 
   }}

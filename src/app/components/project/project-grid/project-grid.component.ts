@@ -45,7 +45,8 @@ export class ProjectGridComponent extends Component<HTMLElement, IProjectGrid> {
       selector: 'project-grid-more',
       factory: (el) => new ButtonComponent(el, {
         textContent: this.toggleText(),
-        className: 'project-grid__more',
+        // "+X more projects…" toggle: same look as the pre-rework "show more" button
+        className: 'project-grid__more py-smallest px-0 border-none rounded-large bg-transparent text-accent font-secondary text-[1.1rem] italic underline-offset-[3px] hover:underline focus-visible:underline focus-visible:outline-1 focus-visible:outline-accent focus-visible:outline-offset-2',
         ariaControls: this.config.gridId,
         ariaExpanded: this._expanded,
         callback: () => this.toggle(),

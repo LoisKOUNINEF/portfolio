@@ -38,7 +38,7 @@ export class FeaturedProjectComponent extends Component {
           fallback: `${this._imageSrc}.jpg`,
           alt: I18nService.translate('featured-project.image-alt'),
         }, {
-          className: 'featured-project__screen-content',
+          className: 'screen-mock-content',
         }),
       },
       {
@@ -46,7 +46,7 @@ export class FeaturedProjectComponent extends Component {
         factory: (el) => new AnchorComponent(el, {
           href: '#projects',
           i18nKey: 'featured-project.link',
-          className: 'featured-project__link',
+          className: 'font-semibold',
         }),
       },
     ];

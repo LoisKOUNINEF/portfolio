@@ -1,26 +1,27 @@
-<div class="other-things__wrapper">
-	<div class="other-things__container">
-		<div class="other-things__header">
-			<h1 data-i18n="other-things.title"></h1>
+<div class="flex justify-center w-full pt-16 pr-medium pb-largest pl-large max-medium:px-0">
+	<div class="w-full rounded-[1rem] px-medium text-center">
+		<!-- A page heading here (its own route): same look as the home sections' h2 -->
+		<div class="min-w-[40%] leading-8 text-left w-auto flex-col items-center">
+			<h1 class="text-largest font-secondary font-bold text-primary" data-i18n="other-things.title"></h1>
 		</div>
-		<div class="other-things__content">
-			<section class="other-things__section">
+		<div class="pt-largest text-left max-medium:pt-large">
+			<section class="w-full grid grid-cols-[2fr_1fr] max-medium:flex max-medium:flex-col [&_h3]:font-bold [&_p]:leading-[1.8rem] [&_p]:pt-small [&_p]:pb-medium [&_p]:pl-medium max-medium:[&_p]:leading-6 max-medium:[&_p]:pl-0">
 				<div>
-					<article class="other-things__presentation">
+					<article>
 						<h3 data-i18n="other-things.carving-title"></h3>
 						<p data-i18n="other-things.carving-content"></p>
 					</article>
-					<article class="other-things__presentation">
+					<article>
 						<h3 data-i18n="other-things.board-title"></h3>
 						<p data-i18n="other-things.board-content"></p>
 					</article>
-					<article class="other-things__presentation">
+					<article>
 						<h3 data-i18n="other-things.marbles-title"></h3>
 						<p data-i18n="other-things.marbles-content"></p>
 					</article>
 				</div>
-				<aside class="other-things__image-wrapper">
-					<button type="button" class="app-button other-things__thumbnail-button" aria-label="${I18nService.translate('other-things.thumbnail-label')}" data-event="click:_displayCarouselModal">
+				<aside class="other-things__image-wrapper -mt-[10%] w-full flex justify-end items-center pl-largest max-medium:pl-0 max-medium:pt-large max-medium:mt-0">
+					<button type="button" class="app-button other-things__thumbnail-button flex justify-end w-full bg-transparent text-inherit rounded-[1rem] max-medium:justify-center" aria-label="${I18nService.translate('other-things.thumbnail-label')}" data-event="click:_displayCarouselModal">
 						<span data-component="other-things-thumbnail"></span>
 					</button>
 				</aside>

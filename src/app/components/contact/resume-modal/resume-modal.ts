@@ -5,6 +5,9 @@ import { InfoCardComponent } from '../../common/info-card/info-card.component.js
 
 const resumeModalTemplate = () => html`__TEMPLATE_PLACEHOLDER__`;
 
+// Download cards (InfoCardComponent): content centered, lifted on hover
+const resumeCardClass = 'cursor-pointer no-underline w-3/4 self-center justify-between transition-[transform,box-shadow,border-color] duration-fast max-medium:w-full [&_.info-card-content]:text-center [&_.info-card-content]:grow max-medium:[&_.info-card-content]:pl-0 [&_.info-card-icon]:self-center hover:[transform:translateY(-2px)] hover:[box-shadow:0_7px_10px_color-mix(in_srgb,var(--primary),transparent_86%)] hover:border-primary hover:[&_.info-card-label]:text-text-muted hover:[&_.info-card-subtext]:text-text-muted active:[transform:translateY(1px)] focus-visible:outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary focus-visible:[&_.info-card-label]:text-text focus-visible:[&_.info-card-subtext]:text-text';
+
 export const displayResumeModal = () => {
   const lang = I18nService.currentLanguage;
   const modal = new ModalHost({
@@ -40,7 +43,7 @@ const resumeModalComponents = (lang: string): Nutin.ComponentConfig[] => {
         href: colorHref,
         download: colorFilename,
         callback: () => downloadStarted(),
-      }, { className: 'resume-modal__card' })
+      }, { className: resumeCardClass })
     },
     {
       selector: 'resume-mono-card',
@@ -51,7 +54,7 @@ const resumeModalComponents = (lang: string): Nutin.ComponentConfig[] => {
         href: monoHref,
         download: monoFilename,
         callback: () => downloadStarted(),
-      }, { className: 'resume-modal__card resume-mono-card' })
+      }, { className: `${resumeCardClass} [&_.info-card-icon-img]:[filter:grayscale(1)]` })
     },
   ];
 };

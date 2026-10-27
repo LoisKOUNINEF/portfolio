@@ -1,6 +1,7 @@
 import { Component, I18nService, html } from '../../../../../core/index.js';
 import { themeTogglerService } from '../../../../services/togglers/theme-toggler/theme-toggler.service.js';
 import { ButtonComponent } from '../../../common/button/button.component.js';
+import { togglerButtonClass } from '../toggler-classes.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
@@ -14,7 +15,7 @@ export class ThemeTogglerComponent extends Component {
       selector: 'theme-toggle',
       factory: (el) => new ButtonComponent(el, {
         callback: () => this.toggleTheme(),
-        className: 'navbar__toggler theme-toggler',
+        className: `${togglerButtonClass} before:content-['🌙'] dark:before:content-['🔅']`,
         ariaLabel: I18nService.translate('theme-toggler.label'),
       })
     }]

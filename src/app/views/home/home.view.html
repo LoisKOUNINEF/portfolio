@@ -1,19 +1,23 @@
-<div class="home__container">
-	<div class="home__sections">
+<div class="w-full pl-largest max-medium:pl-0">
+	<!-- One vertical spacing between all sections (4rem); a separator sits in its middle, its line at its bottom edge -->
+	<div class="w-[70%] max-medium:w-full [&>*]:pt-16 [&>.separator-line]:pt-0 [&>.separator-line]:mt-[calc(2rem-15px)] [&>.separator-line+*]:pt-largest">
 		<article id="hero"><span data-component="hero"></span></article>
-		<div class="home__separator"></div>
+		<div class="separator-line"></div>
 		<div id="featured"><span data-component="featured-project"></span></div>
-		<div class="home__separator"></div>
+		<div class="separator-line"></div>
 		<div id="projects"><span data-component="projects"></span></div>
-		<div class="home__separator"></div>
+		<div class="separator-line"></div>
 		<article id="about"><span data-component="about"></span></article>
-		<div class="home__separator"></div>
+		<div class="separator-line"></div>
 		<article id="tech-stack"><span data-component="tech-stack"></span></article>
-		<div class="home__separator"></div>
-		<div class="home__contact-infos">
+		<div class="separator-line"></div>
+		<!-- Contact and Infos side by side, as wide as the card grids above -->
+		<div class="grid grid-cols-2 gap-x-largest gap-y-0 box-content max-w-[45rem] pb-16 pl-large pr-medium max-medium:grid-cols-1 max-medium:pl-0 max-medium:pr-0">
 			<article id="contact"><span data-component="contact"></span></article>
-			<article id="infos" class="home__infos"><span data-component="infos"></span></article>
-			<div class="home__resume"><span data-component="resume-card"></span></div>
+			<!-- One column: Infos becomes its own section, separated from Contact like the others -->
+			<article id="infos" class="separator-line-before max-medium:order-2 max-medium:pt-[calc(2rem-15px)] max-medium:before:content-[''] max-medium:before:mb-largest"><span data-component="infos"></span></article>
+			<!-- Contact's résumé card, across both columns; one column: right after Contact -->
+			<div class="col-span-full max-medium:order-1"><span data-component="resume-card"></span></div>
 		</div>
 	</div>
 </div>
