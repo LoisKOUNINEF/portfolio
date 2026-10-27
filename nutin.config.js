@@ -5,7 +5,7 @@ export default {
   generateSEOFiles: true,  // Generate per-route HTML, robots.txt and sitemap.xml; configure SEO data in config/seo.json
 
   // Nutin features
-  dockerPorts: [9090],     // Ports the Docker container exposes/listens on — edit as needed
+  dockerPorts: [9069],     // Ports the Docker container exposes/listens on — edit as needed
 
   // Build pipeline
   builder: {
