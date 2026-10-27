@@ -22,9 +22,8 @@
 		]
 	},
 	"popTagline": "Conçu pour garder les notes sur une page là où elles ont leur place : à côté d'elle.",
-	"sections": [
-		{
-			"sectionName": "Section 1",
+	"sections": {
+		"features": {
 			"sectionHead": "Lorem ipsum dolor sit amet",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -40,8 +39,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		},
-		{
-			"sectionName": "Section 2",
+		"designDecisions": {
 			"sectionHead": "Consectetur adipiscing elit",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -57,8 +55,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		},
-		{
-			"sectionName": "Section 3",
+		"challenges": {
 			"sectionHead": "Sed do eiusmod tempor",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -74,7 +71,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		}
-	],
+	},
 	"overview": {
 		"mainContent": "Notelet est une extension de navigateur dont le panneau est une application Nutin montée sans le router. Un script d'arrière-plan suit l'onglet actif, et le panneau affiche les notes et tâches de cette page et de son site.",
 		"keyPointsTitle": "Fonctionnalités principales :",

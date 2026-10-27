@@ -22,9 +22,8 @@
 		]
 	},
 	"popTagline": "Écrits une fois, puis réutilisés et adaptés de projet en projet.",
-	"sections": [
-		{
-			"sectionName": "Section 1",
+	"sections": {
+		"features": {
 			"sectionHead": "Lorem ipsum dolor sit amet",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -40,8 +39,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/ci-cd"
 		},
-		{
-			"sectionName": "Section 2",
+		"designDecisions": {
 			"sectionHead": "Consectetur adipiscing elit",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -57,8 +55,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/ci-cd"
 		},
-		{
-			"sectionName": "Section 3",
+		"challenges": {
 			"sectionHead": "Sed do eiusmod tempor",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -74,7 +71,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/ci-cd"
 		}
-	],
+	},
 	"overview": {
 		"mainContent": "Chaque projet se déploie avec les mêmes briques : des scripts de jobs exécutés dans GitHub Actions, et des scripts de déploiement copiés sur le serveur et exécutés via SSH. Les fichiers de stack sont générés à partir d'un modèle : un projet ne déclare que ses noms, son domaine et ses ports.",
 		"keyPointsTitle": "Fonctionnalités principales :",

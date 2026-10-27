@@ -22,9 +22,8 @@
 		]
 	},
 	"popTagline": "Set up to gain hands-on experience with deployment, security basics, and everyday operational concerns in a self-hosted environment.",
-	"sections": [
-		{
-			"sectionName": "Section 1",
+	"sections": {
+		"features": {
 			"sectionHead": "Lorem ipsum dolor sit amet",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -40,8 +39,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		},
-		{
-			"sectionName": "Section 2",
+		"designDecisions": {
 			"sectionHead": "Consectetur adipiscing elit",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -57,8 +55,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		},
-		{
-			"sectionName": "Section 3",
+		"challenges": {
 			"sectionHead": "Sed do eiusmod tempor",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -74,7 +71,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		}
-	],
+	},
 	"overview": {
 		"mainContent": "This project covers the self-hosting of my personal websites and applications, from deployment to maintenance. I operated the full system end-to-end, without managed platform guarantees.",
 		"keyPointsTitle": "Main features:",

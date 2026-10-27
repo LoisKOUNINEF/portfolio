@@ -22,9 +22,8 @@
 		]
 	},
 	"popTagline": "Formerly PixelsMansion (Angular), rebuilt with Nutin to put its game architecture to the test.",
-	"sections": [
-		{
-			"sectionName": "Section 1",
+	"sections": {
+		"features": {
 			"sectionHead": "Lorem ipsum dolor sit amet",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -40,8 +39,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		},
-		{
-			"sectionName": "Section 2",
+		"designDecisions": {
 			"sectionHead": "Consectetur adipiscing elit",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -57,8 +55,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		},
-		{
-			"sectionName": "Section 3",
+		"challenges": {
 			"sectionHead": "Sed do eiusmod tempor",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -74,7 +71,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		}
-	],
+	},
 	"overview": {
 		"mainContent": "Retro Cabinet is a browser arcade of classic game clones. It started as PixelsMansion, an Angular application, and was rebuilt with Nutin: the framework is now an orchestration layer around game code that doesn't depend on it.",
 		"keyPointsTitle": "Main features:",

@@ -14,17 +14,16 @@
 	],
 	"presentation": {
 		"keyPoints": [
-		"Designed around explicit event-driven updates, trading framework convenience (e.g. automatic change detection) for predictability and control.",
-		"DOM-based components and views (no virtual DOM).",
-		"Router and event bus for navigation and state flow.",
-		"Built for focused use cases, with a deliberately small and explicit feature set.",
-		"Used to build this portfolio and the framework's website."
+			"Designed around explicit event-driven updates, trading framework convenience (e.g. automatic change detection) for predictability and control.",
+			"DOM-based components and views (no virtual DOM).",
+			"Router and event bus for navigation and state flow.",
+			"Built for focused use cases, with a deliberately small and explicit feature set.",
+			"Used to build this portfolio and the framework's website."
 		]
 	},
 	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own mini-framework.",
-	"sections": [
-		{
-			"sectionName": "Section 1",
+	"sections": {
+		"features": {
 			"sectionHead": "Lorem ipsum dolor sit amet",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -40,8 +39,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/nutin"
 		},
-		{
-			"sectionName": "Section 2",
+		"designDecisions": {
 			"sectionHead": "Consectetur adipiscing elit",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -57,8 +55,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/nutin"
 		},
-		{
-			"sectionName": "Section 3",
+		"challenges": {
 			"sectionHead": "Sed do eiusmod tempor",
 			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
@@ -74,7 +71,7 @@
 			],
 			"sectionImageSrc": "/assets/images/projects/nutin"
 		}
-	],
+	},
 	"overview": {
 		"mainContent": "nutin is a lightweight frontend toolkit I built to create small, maintainable single-page applications without relying on a full framework. It provides just the essentials—routing, event handling, view rendering, and a few quality-of-life utilities, while staying close to the DOM and standard web APIs. It is designed for personal projects and small applications where control, clarity, and low overhead matter more than feature completeness.",
 		"keyPointsTitle": "Main features:",

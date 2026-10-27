@@ -1,8 +1,10 @@
-import { Component, html } from '../../../../../core/index.js';
+import { Component, html, I18nService, raw } from '../../../../../core/index.js';
 import { PictureComponent } from '../../../common/picture/picture.component.js';
+import { projectSectionIcons } from './project-section-icons.js';
 import { IProjectKeyPoint, ProjectKeyPointComponent } from '../project-key-point/project-key-point.component.js';
 
-type ProjectSectionConfig = Nutin.CatalogItemConfig<IProjectSection>;
+export type ProjectSectionItem = IProjectSection & { key: ProjectSectionKey };
+type ProjectSectionConfig = Nutin.CatalogItemConfig<ProjectSectionItem>;
 
 // imagePosition only matters when there is an image to place; small screens stack it anyway.
 // Without one, sections alternate: even index → image right, odd → image left
@@ -50,7 +52,7 @@ export class ProjectSectionComponent extends Component {
           { src: `${imageSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${imageSrc}.jpg`,
-        alt: `${this._section.sectionName} illustration picture`,
+        alt: `${I18nService.translate(`project-section.${this._section.key}`)} illustration picture`,
       },
       {
         className: 'project-section__picture-content'

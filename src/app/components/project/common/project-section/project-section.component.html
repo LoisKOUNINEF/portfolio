@@ -1,6 +1,6 @@
 <div class="flex gap-large items-start max-w-full leading-6 px-large max-medium:flex-col max-medium:p-0 ${imageModifier(_config)}">
 	<div class="flex-[1_1_0] min-w-0">
-		<h3 class="font-secondary text-[1.05rem] font-bold py-small">${_config.sectionName}</h3>
+		<h3 class="flex items-center gap-small font-secondary text-[1.05rem] font-bold py-small"><svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">${raw(projectSectionIcons[_config.key])}</svg><span data-i18n="project-section.${_config.key}"></span></h3>
 		<h4 data-optional class="font-bold py-small">${_config.sectionHead}</h4>
 		<p data-optional class="py-large">${_config.sectionContent}</p>
 		<div data-optional class="pb-small" data-catalog="project-section-key-points"></div>

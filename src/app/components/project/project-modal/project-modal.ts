@@ -1,6 +1,7 @@
 import { ModalHost } from '../../common/modal-host/modal-host.js';
 import { html } from '../../../../core/index.js';
-import { ProjectSectionComponent } from '../common/project-section/project-section.component.js';
+import { ProjectSectionComponent, ProjectSectionItem } from '../common/project-section/project-section.component.js';
+import { PROJECT_SECTION_ORDER } from '../common/project-section/project-section-icons.js';
 import { ProjectHeaderComponent } from '../common/project-header/project-header.component.js';
 import { ProjectLinksComponent } from '../common/project-links/project-links.component.js';
 
@@ -41,7 +42,7 @@ const projectModalCatalogs = (project: IProject): Nutin.CatalogConfig[] => [
   {
     selector: `${project.name}-modal-sections`,
     component: ProjectSectionComponent,
-    items: project.sections ?? [],
+    items: PROJECT_SECTION_ORDER.map((key): ProjectSectionItem => ({ key, ...project.sections[key] })),
     elementName: `${project.name}-modal-section`
   },
 ];

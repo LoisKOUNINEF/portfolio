@@ -12,7 +12,8 @@ declare interface IProjectBase {
 
 declare interface IProject extends IProjectBase {
   popTagline: string;
-  sections: IProjectSection[];
+  // Always rendered Features → Design decisions → Challenges, titled from project-section.<key>
+  sections: Record<ProjectSectionKey, IProjectSection>;
   conclusion?: string;
 }
 
@@ -20,8 +21,9 @@ declare interface IProjectPresentation {
   keyPoints?: string[];
 }
 
+declare type ProjectSectionKey = 'features' | 'designDecisions' | 'challenges';
+
 declare interface IProjectSection {
-  sectionName: string;
   sectionHead?: string;
   sectionContent?: string;
   // Each entry renders as "label: text"
