@@ -1,6 +1,6 @@
 import { Component, html } from '../../../../../core/index.js';
 import { AnchorComponent, IAnchorConfig } from '../../../common/anchor/anchor.component.js';
-import { ctaOutlineClass } from '../../../common/anchor/cta-classes.js';
+import { ctaExternalClass, ctaOutlineClass } from '../../../common/anchor/cta-classes.js';
 
 interface IProjectLinksConfig {
   name: string;
@@ -15,7 +15,7 @@ const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 const toAnchorConfig = (link: IProjectLink, defaultKey?: string): IAnchorConfig => ({
   href: `https://${link.url}`,
   target: '_blank',
-  className: ctaOutlineClass,
+  className: `${ctaOutlineClass} ${ctaExternalClass}`,
   ...(link.label ? { textContent: link.label } : { i18nKey: `project-links.${defaultKey}` }),
 });
 
