@@ -122,9 +122,6 @@
 			"svgKey": "nodejs"
 		},
 		{
-			"svgKey": "sass"
-		},
-		{
 			"svgKey": "handlebars"
 		}
 	],
