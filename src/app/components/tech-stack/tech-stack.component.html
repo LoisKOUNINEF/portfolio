@@ -3,7 +3,7 @@
 		<h2 data-i18n="tech-stack.title"></h2>
 	</div>
 	<div class="card-grid">
-		${_groups.groups.map((group) => html`<div class="card" id="tech-stack-${group.name}">
+		${_groups.groups.map((group) => html`<div class="card card-nobg" id="tech-stack-${group.name}">
 			<div class="card-header">
 				<svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">${raw(group.icon)}</svg>
 				<h3 class="card-title" data-i18n="tech-stack.${group.name}-title"></h3>
