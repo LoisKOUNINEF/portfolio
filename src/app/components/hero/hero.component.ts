@@ -1,4 +1,4 @@
-import { Component, html, Navigation } from '../../../core/index.js';
+import { Component, html } from '../../../core/index.js';
 import { AnchorComponent } from '../common/anchor/anchor.component.js';
 import { ctaFilledClass, ctaOutlineClass } from '../common/anchor/cta-classes.js';
 
@@ -30,9 +30,5 @@ export class HeroComponent extends Component {
         })
       },
     ];
-  }
-
-  _secret(): void {
-    Navigation.navigateTo('/other-things');
   }
 }
