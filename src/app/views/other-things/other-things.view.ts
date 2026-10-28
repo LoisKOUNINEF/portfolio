@@ -14,11 +14,11 @@ export class OtherThingsView extends View {
     hideGlobals(GLOBAL_IDS);
   }
 
-  public onExit(): void {
+  public override onExit(): void {
     revealGlobals(GLOBAL_IDS);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'other-things',

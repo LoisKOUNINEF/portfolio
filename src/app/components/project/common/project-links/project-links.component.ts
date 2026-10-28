@@ -27,7 +27,7 @@ export class ProjectLinksComponent extends Component {
     this._linksConfig = config;
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.createCatalogComponents({
       selector: `project-links`,
       items: this.getOrderedLinks(),

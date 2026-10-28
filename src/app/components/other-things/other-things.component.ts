@@ -12,7 +12,7 @@ export class OtherThingsComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'other-things-thumbnail',
       factory: (el) => new PictureComponent(el, {

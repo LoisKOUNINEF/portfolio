@@ -23,7 +23,7 @@ export class ProjectHeaderComponent extends Component {
     this._headConfig = config;
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     const configs = this.getTagsConfig();
     if (!this._headConfig.displayTechIcons) {
       configs.push(this.getTechStringConfig());

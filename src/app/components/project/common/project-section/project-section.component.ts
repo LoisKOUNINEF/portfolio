@@ -24,7 +24,7 @@ export class ProjectSectionComponent extends Component {
     this._section = config;
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     const configs = this.getKeyPoints();
     if (this._section.sectionImageSrc) configs.push(this.getPictureConfig(this._section.sectionImageSrc));
     return configs;

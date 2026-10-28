@@ -26,7 +26,7 @@ export class FeaturedProjectComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'featured-project-picture',

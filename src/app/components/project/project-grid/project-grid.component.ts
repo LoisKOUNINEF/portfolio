@@ -32,7 +32,7 @@ export class ProjectGridComponent extends Component<HTMLElement, IProjectGrid> {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     const children = this.createCatalogComponents({
       items: this.config.folders,
       selector: 'project-grid',

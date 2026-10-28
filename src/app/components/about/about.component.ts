@@ -29,7 +29,7 @@ export class AboutMeComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.createCatalogComponents({
       selector: 'about-sections',
       items: this.getSections(),

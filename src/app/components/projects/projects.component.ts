@@ -15,7 +15,7 @@ export class ProjectsComponent extends Component {
     super({ templateFn, mountTarget, tagName: 'section' });
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'projects-tabs',
       factory: (el) => new TabsComponent(el, {

@@ -29,7 +29,7 @@ export class ProjectCardComponent extends Component<HTMLElement, IProjectCard> {
     return { folder: ProjectService.parseFolderName(config), project: ProjectService.getProject(config) };
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     const imageSrc = this.config.project.imageSrc;
     if (!imageSrc) return [];
     return [{

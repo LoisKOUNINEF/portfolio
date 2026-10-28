@@ -10,7 +10,7 @@ export class LanguageTogglerComponent extends Component {
     super({templateFn, mountTarget});
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'language-toggle',
       factory: (el) => new ButtonComponent(el, {

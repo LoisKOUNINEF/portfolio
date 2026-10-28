@@ -36,7 +36,7 @@ export class NavbarComponent extends Component<HTMLHeadingElement> {
     NavToggleHelper.highlightCurrent();
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [ ...this.getAnchors(), ...this.getTogglers() ]
   }
 

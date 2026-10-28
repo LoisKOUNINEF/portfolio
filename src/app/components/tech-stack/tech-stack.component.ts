@@ -43,7 +43,7 @@ export class TechStackComponent extends Component<HTMLElement, { groups: ITechGr
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.config.groups.flatMap(({ name, keys }) => this.createCatalogComponents({
       selector: `${name}-badges`,
       items: keys.map((svgKey) => ({ svgKey, displayProficiency: true })),

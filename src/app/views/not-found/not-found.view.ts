@@ -16,11 +16,11 @@ export class NotFoundView extends View {
     return I18nService.translate('not-found.meta.title', 'Page Not Found');
   }
 
-  public onExit(): void {
+  public override onExit(): void {
     this.revealGlobals();    
   }
 
-  registerChildren(): Nutin.ComponentConfig[] {
+  override registerChildren(): Nutin.ComponentConfig[] {
     const btnClass = 'bg-inherit text-text text-large italic rounded-[2rem] underline py-small px-large transition-[font-size] duration-normal hover:text-secondary hover:text-[1.7rem]';
     return [
       {

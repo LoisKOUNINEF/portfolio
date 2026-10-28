@@ -35,7 +35,7 @@ export class TabsComponent extends Component<HTMLElementTagNameMap['a11y-tabs'],
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.config.tabs.map((tab) => ({
       selector: `tab-panel-${tab.name}`,
       factory: tab.factory,

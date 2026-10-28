@@ -11,7 +11,7 @@ export class HeroComponent extends Component {
   }
 
   // Real same-page links: <a11y-anchor> smooth-scrolls to the section and moves focus there
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'hero-cta-primary',

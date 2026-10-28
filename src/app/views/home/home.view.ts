@@ -15,7 +15,7 @@ export class HomeView extends View {
     super({template, tagName: 'div', viewName: 'home'});
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.getChildConfigs();
   }
 

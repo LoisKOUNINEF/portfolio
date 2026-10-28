@@ -11,6 +11,7 @@
 ## Build
 
 - `npm run build` (dev) or `npm run build:prod` (production)
+- `npm run typecheck`: type-check the application without building it
 
 ## Generate Component, View, Service
 

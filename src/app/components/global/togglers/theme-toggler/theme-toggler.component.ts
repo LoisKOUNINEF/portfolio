@@ -10,7 +10,7 @@ export class ThemeTogglerComponent extends Component {
     super({templateFn, mountTarget});
   }
 
-  public registerChildren(): Nutin.ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'theme-toggle',
       factory: (el) => new ButtonComponent(el, {
