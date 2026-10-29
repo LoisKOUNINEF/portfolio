@@ -3,6 +3,7 @@ import 'a11y-elements/components/focusable';
 import 'a11y-elements/components/picture';
 import 'a11y-elements/overlays/modal';
 import 'a11y-elements/overlays/snackbar';
+import 'a11y-elements/overlays/tooltip';
 import 'a11y-elements/components/tabs';
 import { AppRouter, initI18n, registerGlobals, registerPipes } from '../core/index.js';
 import { FooterComponent } from './components/global/footer/footer.component.js';

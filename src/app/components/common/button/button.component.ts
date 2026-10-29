@@ -8,6 +8,8 @@ export interface ButtonConfig {
   ariaLabel?: string;
   ariaControls?: string;
   ariaExpanded?: boolean;
+  // Hint shown on hover/focus (<a11y-tooltip>, a11y-elements, defined in main.ts)
+  tooltip?: string;
 }
 
 const optionalAttr = (name: string, value: string | boolean | undefined) =>
@@ -26,6 +28,37 @@ const templateFn = (config: ButtonConfig) => html`<button type="button" class="a
 export class ButtonComponent extends Component<HTMLElement, ButtonConfig> {
   constructor(mountTarget: HTMLElement, config: ButtonConfig) {
     super({ templateFn, mountTarget, config });
+  }
+
+  private _tooltip: HTMLElementTagNameMap['a11y-tooltip'] | null = null;
+
+  protected override onBeforeRender(): void {
+    super.onBeforeRender();
+    this._removeTooltip();
+  }
+
+  protected override onAfterRender(): void {
+    super.onAfterRender();
+    const button = this.element.querySelector('button');
+    if (this.config.tooltip === undefined || !button) return;
+    // Created here, not in the template: the tooltip portals itself to <body> on connect, so it can't be
+    // queried back from this.element. Anchored by element before it connects, so its onConnect binds
+    // hover/focus on the <button> itself (focus doesn't bubble)
+    const tooltip = document.createElement('a11y-tooltip');
+    tooltip.textContent = this.config.tooltip;
+    tooltip.anchorElement = button;
+    this.element.append(tooltip);
+    this._tooltip = tooltip;
+  }
+
+  // It lives in <body>, outside this.element: removed by hand on re-render and destroy
+  protected override onBeforeDestroy(): void {
+    this._removeTooltip();
+  }
+
+  private _removeTooltip(): void {
+    this._tooltip?.remove();
+    this._tooltip = null;
   }
 
   protected _onClick(): void {

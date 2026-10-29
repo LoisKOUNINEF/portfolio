@@ -11,13 +11,15 @@ export class LanguageTogglerComponent extends Component {
   }
 
   public override registerChildren(): Nutin.ComponentConfig[] {
+    const label = I18nService.translate('language-toggler.label');
     return [{
       selector: 'language-toggle',
       factory: (el) => new ButtonComponent(el, {
         callback: async () => await this.toggleLang(),
         i18nKey: 'language-toggler.flag',
         className: `${togglerButtonClass} text-nowrap text-inherit lowercase font-secondary`,
-        ariaLabel: I18nService.translate('language-toggler.label'),
+        ariaLabel: label,
+        tooltip: label,
       })
     }]
   }

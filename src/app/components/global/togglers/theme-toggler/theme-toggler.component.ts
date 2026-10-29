@@ -11,12 +11,14 @@ export class ThemeTogglerComponent extends Component {
   }
 
   public override registerChildren(): Nutin.ComponentConfig[] {
+    const label = I18nService.translate('theme-toggler.label');
     return [{
       selector: 'theme-toggle',
       factory: (el) => new ButtonComponent(el, {
         callback: () => this.toggleTheme(),
         className: `${togglerButtonClass} before:content-['🌙'] dark:before:content-['🔅']`,
-        ariaLabel: I18nService.translate('theme-toggler.label'),
+        ariaLabel: label,
+        tooltip: label,
       })
     }]
   }

@@ -18,6 +18,7 @@ $a11y-z-index-config: (
   'snackbar': 400,
   'modal-backdrop': 500,
   'modal': 510,
+  'tooltip': 320,
 ) !default;
 
 $a11y-modal-config: (
@@ -80,6 +81,17 @@ $a11y-tabs-config: (
   'color-disabled': var(--text-disabled),
 ) !default;
 
+// The package paints the bubble with 'color-text' and its text with 'color-background':
+// an inverted bubble, which follows the dark theme
+$a11y-tooltip-config: (
+  'border-radius': 0.35rem,
+  'font-size': 0.85rem,
+  'max-width': 240px,
+  'content-padding': 0.35rem 0.6rem,
+  'color-background': var(--background),
+  'color-text': var(--text),
+) !default;
+
 @mixin emit-tokens($prefix, $config) {
   @each $key, $value in $config {
     --a11y-#{$prefix}#{$key}: #{$value};
@@ -96,4 +108,5 @@ $a11y-tabs-config: (
   @include emit-tokens('snackbar-', $a11y-snackbar-config);
   @include emit-tokens('picture-', $a11y-picture-config);
   @include emit-tokens('tabs-', $a11y-tabs-config);
+  @include emit-tokens('tooltip-', $a11y-tooltip-config);
 }
