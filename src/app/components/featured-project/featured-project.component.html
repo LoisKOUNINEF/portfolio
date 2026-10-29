@@ -16,8 +16,19 @@
 				<img class="flex-none w-auto h-8 max-medium:h-7" src="/assets/images/projects/nutin-logo.avif" alt="" width="252" height="272" decoding="async">
 				<h3 class="font-secondary text-large font-bold text-primary pl-[.2rem]" data-i18n="featured-project.name"></h3>
 			</div>
-			<p class="mb-medium" data-i18n="featured-project.summary"></p>
-			<ul class="flex flex-col gap-small mb-large pl-large list-disc">
+			<p class="mb-medium text-text-muted text-lg" data-i18n="featured-project.tagline"></p>
+			<!-- Metrics of a freshly generated app: name/value pairs, a grid so the values line up -->
+			<dl class="grid grid-cols-[auto_1fr] gap-x-medium gap-y-smallest mb-large py-small px-medium border border-border rounded-large bg-background text-small" aria-describedby="featured-project-metrics-note">
+				<dt id="featured-project-metrics-note" class="mb-smallest text-smallest text-text-disabled" data-i18n="featured-project.metrics.note"></dt>
+				<dd></dd>
+				<dt class="font-semibold" data-i18n="featured-project.metrics.bundle"></dt>
+				<dd data-i18n="featured-project.metrics.bundle-value"></dd>
+				<dt class="font-semibold" data-i18n="featured-project.metrics.build"></dt>
+				<dd data-i18n="featured-project.metrics.build-value"></dd>
+				<dt class="font-semibold" data-i18n="featured-project.metrics.docker"></dt>
+				<dd data-i18n="featured-project.metrics.docker-value"></dd>
+			</dl>
+			<ul class="flex flex-col gap-small mb-large pl-large list-disc leading-[2rem]">
 				<li data-i18n="featured-project.highlight-1"></li>
 				<li data-i18n="featured-project.highlight-2"></li>
 				<li data-i18n="featured-project.highlight-3"></li>

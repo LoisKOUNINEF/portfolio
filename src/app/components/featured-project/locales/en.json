@@ -1,10 +1,22 @@
 {
 	"title": "Featured project",
 	"name": "Nutin",
-	"summary": "A minimal TypeScript frontend framework: DOM-based components and views, a router and an event bus, with no runtime dependency. It powers this portfolio, its own website and my other frontend projects.",
-	"highlight-1": "Explicit, event-driven updates: no virtual DOM, no hidden change detection.",
-	"highlight-2": "CLI, build pipeline, generators and test runner included.",
-	"highlight-3": "Published on npm, documented on nutin.org.",
+	"tagline": "Nutin is a minimal frontend framework that brings structure to web applications while leaving developers in control of the underlying platform.",
+	"metrics": {
+		"note": "Default generated app",
+		"bundle": "Bundle",
+		"bundle-value": "30 KB minified · 10 KB gzip · 9 KB brotli",
+		"build": "Build",
+		"build-value": "dev 0.6 s · prod 0.7 s",
+		"docker": "Docker",
+		"docker-value": "4 s · 19 MB image"
+	},
+	"highlight-1-title": "Minimal by design",
+	"highlight-1": "Zero runtime dependency, with native web APIs at the core and explicit rendering instead of a virtual DOM.",
+	"highlight-2-title": "Tested and documented",
+	"highlight-2": "A dedicated testing toolkit, extensive automated tests, and structured documentation designed to make the framework understandable and verifiable.",
+	"highlight-3-title": "Used in real projects",
+	"highlight-3": "Developed alongside applications and tools that put its architecture, features, and maintainability into practice.",
 	"link": "See Nutin in projects",
 	"image-alt": "Screenshot of the Nutin website."
 }
