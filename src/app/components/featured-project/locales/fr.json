@@ -1,7 +1,7 @@
 {
 	"title": "Projet phare",
 	"name": "Nutin",
-	"tagline": "Un framework TypeScript minimal, du DOM à Docker, sans aucune dépendance à l'exécution.",
+	"tagline": "Nutin est un framework frontend minimal qui structure les applications web tout en laissant aux développeurs la maîtrise de la plateforme sous-jacente.",
 	"metrics": {
 		"note": "Application générée par défaut",
 		"bundle": "Bundle",
@@ -11,9 +11,12 @@
 		"docker": "Docker",
 		"docker-value": "4 s · image de 19 Mo"
 	},
-	"highlight-1": "Des mises à jour explicites, pilotées par les événements : ni DOM virtuel, ni détection de changements cachée.",
-	"highlight-2": "CLI, pipeline de build, générateurs et runner de tests inclus.",
-	"highlight-3": "Publié sur npm, documenté sur nutin.org.",
+	"highlight-1-title": "Minimal par conception",
+	"highlight-1": "Aucune dépendance à l'exécution, des API web natives au cœur et un rendu explicite plutôt qu'un DOM virtuel.",
+	"highlight-2-title": "Testé et documenté",
+	"highlight-2": "Une boîte à outils de test dédiée, de nombreux tests automatisés et une documentation structurée, pensée pour rendre le framework compréhensible et vérifiable.",
+	"highlight-3-title": "Utilisé dans de vrais projets",
+	"highlight-3": "Développé en parallèle d'applications et d'outils qui mettent en pratique son architecture, ses fonctionnalités et sa maintenabilité.",
 	"link": "Voir Nutin dans les projets",
 	"image-alt": "Capture d'écran du site de Nutin."
 }
