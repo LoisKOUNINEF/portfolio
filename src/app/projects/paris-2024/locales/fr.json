@@ -27,7 +27,7 @@
 					"Administration": "Un back-office pour gérer les offres et consulter les statistiques de ventes, et des tâches planifiées pour purger les tokens expirés et supprimer les comptes."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Monorepo Nx": "Client Angular, serveur NestJS et librairies partagées, avec des interfaces TypeScript communes à toute la stack."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Sécurité et performances": "Un ORM prévient les injections SQL et facilite les migrations, tandis que des index et des requêtes SQL sur mesure améliorent les performances."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-challenges"
 		}
 	},
 	"technos": [

@@ -27,7 +27,7 @@
 					"Local ou synchronisé": "Le stockage peut passer du local au synchronisé, avec une fusion élément par élément à l'activation de la synchro."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Un pipeline de release avec validation": "Un tag de version crée la release GitHub, puis les soumissions aux stores attendent une validation manuelle; les actions tierces sont épinglées sur des hashs de commit."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Une interface dense et pilotée au clavier": "Le panneau devait rester accessible tout en regroupant de nombreuses actions dans un petit espace."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-challenges"
 		}
 	},
 	"technos": [

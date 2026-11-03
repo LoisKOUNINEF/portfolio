@@ -27,7 +27,7 @@
 					"Garde-fous de release": "Le tag doit être sur la branche principale et correspondre à la version du package; les fichiers des déploiements échoués sont archivés avec un horodatage."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Des scripts des deux côtés": "Les scripts de jobs tournent sur le runner CI, ceux de déploiement sur le serveur: chaque côté peut aussi être lancé à la main."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Un échec sans conséquence": "Un déploiement échoué doit être détecté, annulé et archivé: c'est le rollback qui rend les déploiements fréquents sereins."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-challenges"
 		}
 	},
 	"technos": [

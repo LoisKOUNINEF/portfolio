@@ -27,7 +27,7 @@
 					"Hidden palettes": "A few extra palettes, behind a secret route."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Shared token names": "Any palette can replace another without touching the components that use it."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Testable content": "Typing the palettes made their content checkable by the test suite."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-challenges"
 		}
 	},
 	"technos": [

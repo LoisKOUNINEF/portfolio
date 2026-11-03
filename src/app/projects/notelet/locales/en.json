@@ -27,7 +27,7 @@
 					"Local or synced": "Storage can switch between local and synced, with an item-by-item merge when sync is turned on."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"A release pipeline with approval": "A version tag creates the GitHub release, then store submissions wait for manual approval; third-party actions are pinned to commit hashes."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"A dense, keyboard-heavy interface": "The panel had to stay accessible while packing many actions into a small space."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/notelet"
+			"sectionImageSrc": "/assets/images/projects/notelet-challenges"
 		}
 	},
 	"technos": [

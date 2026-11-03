@@ -27,7 +27,7 @@
 					"Sécurité et supervision": "Accès root désactivé, UFW et fail2ban contre la force brute, et Grafana + Prometheus pour suivre les performances du système."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Automatiser quand ça rapporte": "Les étapes répétitives et sources d'erreurs sont automatisées; une automatisation qui ajoute plus d'abstraction que de valeur est reportée."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Apprendre sans sacrifier la fiabilité": "Les composants stables et éprouvés restent intouchés, séparés des parties expérimentales où l'apprentissage est l'objectif."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-challenges"
 		}
 	},
 	"technos": [

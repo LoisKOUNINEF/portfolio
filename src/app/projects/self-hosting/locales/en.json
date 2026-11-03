@@ -27,7 +27,7 @@
 					"Security and monitoring": "Root access disabled, UFW and fail2ban against brute force, and Grafana + Prometheus for insights into system performance."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Automation where it pays off": "Repetitive and error-prone steps are automated; automation that adds more abstraction than value is deferred."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Learning vs reliability": "Stable, proven components stay untouched, kept apart from the experimental parts where learning is the goal."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/self-hosting"
+			"sectionImageSrc": "/assets/images/projects/self-hosting-challenges"
 		}
 	},
 	"technos": [

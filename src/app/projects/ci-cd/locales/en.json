@@ -27,7 +27,7 @@
 					"Release guards": "The tag must be on the main branch and match the package version; files of failed deployments are archived with a timestamp."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Scripts on both sides": "Job scripts run on the CI runner, deployment scripts on the server: each side can also be run by hand."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Making failure a non-event": "A failed deployment has to be detected, rolled back and archived: the rollback path is what makes frequent deployments comfortable."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/ci-cd"
+			"sectionImageSrc": "/assets/images/projects/ci-cd-challenges"
 		}
 	},
 	"technos": [

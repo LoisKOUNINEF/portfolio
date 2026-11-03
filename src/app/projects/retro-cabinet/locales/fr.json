@@ -27,7 +27,7 @@
 					"Contrôles": "Les touches sont gérées selon leur position physique: les claviers QWERTY et AZERTY fonctionnent tous les deux."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Une persistance défensive": "Les données stockées sont considérées comme non fiables, et les sauvegardes portent une version par jeu: les anciennes sont abandonnées plutôt que restaurées dans une mauvaise forme."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Contrôles tactiles": "Une croix directionnelle, ou un stick, envoie les mêmes codes de touches que le clavier: la saisie reste une préoccupation unique pour les jeux."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-challenges"
 		}
 	},
 	"technos": [

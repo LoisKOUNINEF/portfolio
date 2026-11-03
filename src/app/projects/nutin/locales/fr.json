@@ -27,7 +27,7 @@
 					"Outillage": "Un pipeline de build maison, des générateurs et un runner de tests léger."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,21 +41,21 @@
 					"Des vues basées sur le DOM": "Les vues sont rendues directement dans le DOM, sans DOM virtuel: les performances restent lisibles et le débogage simple."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
 				{
-					"Éviter le couplage fort": "À mesure que les fonctionnalités s'ajoutaient, les contrats d'événements ont été formalisés et les responsabilités des modules restreintes."
-				},
-				{
 					"Éviter la généralisation prématurée": "Le développement s'est limité aux besoins réels de projets existants, gardant une base de code petite et ciblée."
 				},
 				{
-					"Tester sans framework": "Des utilitaires de test légers basés sur jsdom et Node.js, privilégiant la clarté à l'automatisation exhaustive."
+					"Sécuriser les applications": "Prévenir les vulnérabilités courantes comme les attaques XSS grâce à un rendu sécurisé, une gestion rigoureuse des entrées et des niveaux de confiance explicites."
+				},
+				{
+					"Trouver sa place dans un écosystème concurrentiel": "Nutin cherche à combler le fossé entre le développement web natif et les frameworks complets."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-challenges"
 		}
 	},
 	"technos": [

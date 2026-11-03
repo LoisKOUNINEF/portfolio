@@ -27,7 +27,7 @@
 					"Controls": "Keys are handled by physical position, so QWERTY and AZERTY layouts both work."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Defensive persistence": "Stored data is treated as untrusted, and saves carry a version per game: older saves are dropped instead of being restored into the wrong shape."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Touch input": "A D-pad, or a stick for steering games, sends the same key codes as the keyboard, so input stays a single concern for the games."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-challenges"
 		}
 	},
 	"technos": [

@@ -27,7 +27,7 @@
 					"Administration": "An admin panel to manage offers and view sales statistics, and scheduled jobs for expired token cleanup and account deletion."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Nx monorepo": "Angular client, NestJS server and shared libraries, with TypeScript interfaces shared across the full stack."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Security and performance": "An ORM prevents SQL injections and eases migrations, while indexes and custom SQL queries improve performance."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/paris-2024"
+			"sectionImageSrc": "/assets/images/projects/paris-2024-challenges"
 		}
 	},
 	"technos": [

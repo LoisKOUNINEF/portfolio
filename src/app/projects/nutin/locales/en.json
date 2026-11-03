@@ -27,7 +27,7 @@
 					"Tooling": "A custom build pipeline, generators and a lightweight test runner."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,21 +41,21 @@
 					"DOM-based views": "Views render directly to the DOM, without a virtual DOM, keeping performance obvious and debugging straightforward."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
 				{
-					"Preventing tight coupling": "As features grew, event contracts were formalized and module responsibilities kept narrow."
-				},
-				{
 					"Avoiding premature generalization": "Development was constrained to real needs from actual projects, keeping the codebase small and focused."
 				},
 				{
-					"Testing without a framework": "Lightweight test utilities built on jsdom and Node.js, favoring clarity over exhaustive automation."
+					"Securing user applications": "Preventing common vulnerabilities such as XSS through safe rendering, input handling and explicit trust boundaries."
+				},
+				{
+					"Finding its place in a crowded ecosystem": "Nutin aims to bridge the gap between vanilla web development and full-fledged frameworks."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/nutin"
+			"sectionImageSrc": "/assets/images/projects/nutin-challenges"
 		}
 	},
 	"technos": [

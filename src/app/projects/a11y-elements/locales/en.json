@@ -31,7 +31,7 @@
 					"Overlays": "A complete set of overlay patterns: modals, drawers, dropdowns, tooltips, notifications and more."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -45,7 +45,7 @@
 					"Native-first": "Form controls remain the source of truth, while documented CSS custom properties and an opt-in dark theme leave presentation in the developer's hands."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -59,7 +59,7 @@
 					"Reliability": "Maintaining reliable distribution across modular ESM imports and standalone browser bundles, with a test suite covering 700+ tests across 50 files."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-challenges"
 		}
 	},
 	"technos": [

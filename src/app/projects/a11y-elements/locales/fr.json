@@ -31,7 +31,7 @@
 					"Overlays": "Un ensemble complet d'overlays: modales, drawers, dropdowns, tooltips, notifications et plus encore."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -45,7 +45,7 @@
 					"Le natif d'abord": "Les contrôles de formulaire natifs restent la source de vérité, tandis que des propriétés CSS personnalisées documentées et un thème sombre optionnel laissent la présentation entre les mains des développeurs."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -59,7 +59,7 @@
 					"Fiabilité": "Garantir une distribution fiable, entre imports ESM modulaires et bundles navigateur autonomes, avec une suite de plus de 700 tests répartis sur 50 fichiers."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/a11y-elements"
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-challenges"
 		}
 	},
 	"technos": [

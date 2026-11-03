@@ -27,7 +27,7 @@
 					"Palettes cachées": "Quelques palettes supplémentaires, derrière une route secrète."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Des noms de tokens communs": "Une palette peut en remplacer une autre sans toucher aux composants qui l'utilisent."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"Un contenu testable": "Typer les palettes a rendu leur contenu vérifiable par la suite de tests."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/palettes"
+			"sectionImageSrc": "/assets/images/projects/palettes-challenges"
 		}
 	},
 	"technos": [

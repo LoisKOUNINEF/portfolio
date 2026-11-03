@@ -27,7 +27,7 @@
 					"DKIM": "Clés de signature générées par script."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-features"
 		},
 		"designDecisions": {
 			"sectionKeyPoints": [
@@ -41,7 +41,7 @@
 					"Des conteneurs à usage unique": "Chaque service fait une seule chose: un renouvellement de certificat ne nécessite aucun redémarrage, et chaque partie peut être remplacée seule."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-design"
 		},
 		"challenges": {
 			"sectionKeyPoints": [
@@ -55,7 +55,7 @@
 					"TLS": "Le chiffrement du transport repose sur des certificats maintenus valides sans intervention manuelle."
 				}
 			],
-			"sectionImageSrc": "/assets/images/projects/mail-delivery"
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-challenges"
 		}
 	},
 	"technos": [

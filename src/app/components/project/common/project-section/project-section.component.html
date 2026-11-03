@@ -3,5 +3,5 @@
 		<h3 class="flex items-center gap-small font-secondary text-[1.05rem] font-bold py-small"><svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">${raw(projectSectionIcons[_config.key])}</svg><span data-i18n="project-section.${_config.key}"></span></h3>
 		<div data-optional class="flex flex-col justify-center flex-1 pb-small" data-catalog="project-section-key-points"></div>
 	</div>
-	${_config.sectionImageSrc ? html`<div class="flex-[0_1_40%] self-start max-medium:w-full [&_img]:block [&_img]:w-full [&_img]:h-auto" data-component="project-section-picture"></div>` : ''}
+	${_config.sectionImageSrc ? html`<div class="flex-[0_1_40%] self-start max-medium:w-full rounded-large overflow-hidden [&_img]:block [&_img]:w-full [&_img]:h-auto" data-component="project-section-picture"></div>` : ''}
 </div>
