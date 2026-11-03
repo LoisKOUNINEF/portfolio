@@ -16,60 +16,47 @@
 			"color": "purple"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Coverage: ~30 reusable elements.",
-			"Customization: CSS variables and theming.",
-			"Accessibility: The core. Semantic foundations and accessible interactions."
-		]
-	},
 	"popTagline": "Built to stop rewriting the same accessibility behavior in every project.",
 	"popOverview": "A framework-agnostic library of accessible Web Components, providing reusable interface elements and interaction patterns without imposing a framework or design system. Built around native browser capabilities, it aims to make accessible interfaces easier to integrate and customize.",
 	"sections": {
 		"features": {
-			"sectionHead": "Component library",
-			"sectionContent": "A framework-agnostic library of accessible Web Components, providing reusable interface elements and interaction patterns without imposing a framework or design system. Built around native browser capabilities, it aims to make accessible interfaces easier to integrate and customize.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Around 30 custom elements covering form controls, navigation, images, loading states and overlays."
+					"Component library": "Around 30 custom elements covering form controls, navigation, images, loading states and overlays."
 				},
 				{
-					"Dolor": "Native form validation enhanced with custom validators, contextual errors and reusable field components."
+					"Form validation": "Native form validation enhanced with custom validators, contextual errors and reusable field components."
 				},
 				{
-					"Tempor": "A complete set of overlay patterns: modals, drawers, dropdowns, tooltips, notifications and more."
+					"Overlays": "A complete set of overlay patterns: modals, drawers, dropdowns, tooltips, notifications and more."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/a11y-elements"
 		},
 		"designDecisions": {
-			"sectionHead": "Design decisions",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Framework-agnostic by design: a behavior layer rather than a themed UI kit, usable with vanilla JavaScript or any frontend framework."
+					"Framework-agnostic by design": "A behavior layer rather than a themed UI kit, usable with vanilla JavaScript or any frontend framework."
 				},
 				{
-					"Dolor": "Light DOM architecture, without Shadow DOM, keeps the underlying markup accessible and directly styleable."
+					"Light DOM architecture": "No shadow DOM, keeps the underlying markup accessible and directly styleable."
 				},
 				{
-					"Tempor": "Native form controls remain the source of truth, while documented CSS custom properties and an opt-in dark theme leave presentation in the developer's hands."
+					"Native-first": "Form controls remain the source of truth, while documented CSS custom properties and an opt-in dark theme leave presentation in the developer's hands."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/a11y-elements"
 		},
 		"challenges": {
-			"sectionHead": "Challenges",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Implementing consistent keyboard interaction and focus management across different browsers, components and interaction patterns."
+					"Consistency": "Implementing consistent keyboard interaction and focus management across different browsers, components and interaction patterns."
 				},
 				{
-					"Dolor": "Handling complex overlay behavior: focus containment and restoration, background inertness, dismissal rules and screen-reader announcements."
+					"Handling complex overlay behavior": "Focus containment and restoration, background inertness, dismissal rules and screen-reader announcements."
 				},
 				{
-					"Tempor": "Maintaining reliable distribution across modular ESM imports and standalone browser bundles, with a test suite covering 700+ tests across 50 files."
+					"Reliability": "Maintaining reliable distribution across modular ESM imports and standalone browser bundles, with a test suite covering 700+ tests across 50 files."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/a11y-elements"

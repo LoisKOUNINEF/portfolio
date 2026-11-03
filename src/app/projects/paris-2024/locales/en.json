@@ -12,154 +12,51 @@
 			"color": "red"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Designed to handle secure payment flows and user state consistency across sessions",
-			"Complete authentication flow (signup, email verification, password reset). Role-based access (RBAC), dashboard admin.",
-			"Purchase flow with cart persistence and merge on login. Stripe integration for secure payments.",
-			"PostgreSQL database with indexation and query optimisation.",
-			"Sensitive data encryption, controlled API access, rate limiting / load balancing."
-		]
-	},
-	"popTagline": "Developed to explore authentication, payment flows, and end-to-end application architecture in a full-stack context.",
+	"popTagline": "Built to explore full-stack application design, from authentication and payments to end-to-end integration.",
+	"popOverview": "A full-stack online ticketing application for the 2024 Olympic Games, built as a study project. Visitors buy their tickets online and receive them by email as QR codes.",
 	"sections": {
 		"features": {
-			"sectionHead": "Lorem ipsum dolor sit amet",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Shopping": "Offers, cart and authentication, with the cart kept across sessions and merged on login."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"E-tickets": "Stripe payments, then a user key and a ticket key concatenated into a QR code sent by email."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Administration": "An admin panel to manage offers and view sales statistics, and scheduled jobs for expired token cleanup and account deletion."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024"
 		},
 		"designDecisions": {
-			"sectionHead": "Consectetur adipiscing elit",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Business rules on the server": "The backend validates carts and orders, handles payments and tickets, and enforces access rules; the frontend focuses on presentation and interaction."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"API-first approach": "Frontend development was guided by explicit API contracts, designed around its needs but generic enough to avoid tight coupling."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Nx monorepo": "Angular client, NestJS server and shared libraries, with TypeScript interfaces shared across the full stack."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024"
 		},
 		"challenges": {
-			"sectionHead": "Sed do eiusmod tempor",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Consistent user state": "An anonymous cart had to be merged with the account's cart on login, without duplicating or losing items."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Frontend–backend drift": "Tightening API contracts and being explicit about response shapes reduced regressions."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Security and performance": "An ORM prevents SQL injections and eases migrations, while indexes and custom SQL queries improve performance."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024"
 		}
-	},
-	"overview": {
-		"mainContent": "Paris 2024 is a full-stack online ticketing application for the 2024 Olympic Games, built as a study project. Visitors buy their tickets online and receive them by email as QR codes, replacing fraud-prone physical tickets.",
-		"keyPointsTitle": "Main features",
-		"keyPoints": [
-			"Offers, cart and authentication, with the cart kept across sessions and merged on login.",
-			"Stripe payments, then e-tickets: a user key and a ticket key, concatenated into a QR code sent by email.",
-			"Admin panel to manage offers and view sales statistics.",
-			"Scheduled jobs for expired token cleanup and account deletion.",
-			"Nx monorepo: Angular client, NestJS server and shared libraries."
-		],
-		"after": "It served both as a functional product and as a way to work end-to-end on a complete system: data ingestion, backend logic, API design, frontend consumption, and deployment. Even without external users, the system was operated as if failures mattered."
-	},
-	"purpose": {
-		"title": "Purpose",
-		"mainContent": "The main objectives were:",
-		"keyPoints": [
-			"To design and implement a complete full-stack application from scratch.",
-			"To practice clean separation between backend responsibilities and frontend concerns.",
-			"To implement essential security measures (SQL injection prevention, sensitive data encryption)."
-		],
-		"after": "Beyond functionality, the project emphasized coherence across layers: each part of the system should remain understandable in isolation."
-	},
-	"constraints": {
-		"title": "Constraints",
-		"keyPoints": [
-			"Clear contract between frontend and backend: predictable APIs over ad-hoc coupling.",
-			"Reasonable scope: focus on core features rather than exhaustive coverage.",
-			"Maintainability: code that remains readable and modifiable as requirements evolve.",
-			"Production mindset: even as a study project, deployment and reliability mattered"
-		]
-	},
-	"choices": [
-		{
-			"title": "Business rules on the server",
-			"mainContent": "The backend is responsible for:",
-			"keyPoints": [
-				"Validating carts and orders.",
-				"Handling payments and issuing tickets.",
-				"Enforcing access rules (roles, sessions)."
-			],
-			"after": "This avoids leaking data complexity into the frontend and makes the system easier to evolve or reuse."
-		},
-		{
-			"title": "API-first approach",
-			"mainContent": "Frontend development was guided by explicit API contracts rather than implicit assumptions. Endpoints were designed around frontend needs, but kept generic enough to avoid tight coupling.",
-			"after": "This reduced friction during iteration and made data flow easier to reason about."
-		},
-		{
-			"title": "Frontend focused on presentation and interaction",
-			"mainContent": "The frontend is intentionally thin:",
-			"keyPoints": [
-				"Consume API responses.",
-				"Handle user interactions.",
-				"Present data clearly and predictably."
-			],
-			"after": "Business logic is kept out of the UI layer as much as possible, improving testability and readability."
-		},
-		{
-			"title": "Pragmatic full-stack boundaries",
-			"mainContent": "Used Nx for monorepo management, enforcing module boundaries through library architecture and sharing TypeScript interfaces between frontend and backend.",
-			"after": "This architectural foundation enabled faster feature development while maintaining type safety across the full stack."
-		}
-	],
-	"challenges": [
-		{
-			"title": "Keeping user state consistent",
-			"mainContent": "Visitors can fill a cart before signing in. That anonymous cart had to be kept, then merged with the account's cart on login, without duplicating or losing items.",
-			"after": "Making the merge rules explicit simplified the rest of the purchase flow."
-		},
-		{
-			"title": "Avoiding frontend–backend drift",
-			"mainContent": "As features evolved, there was a risk of the frontend depending on backend behavior that was not explicitly defined. This was mitigated by tightening API contracts and being explicit about response shapes.",
-			"after": "This discipline reduced regressions and simplified debugging."
-		},
-		{
-			"title": "Combine smooth development, security and performances",
-			"mainContent": "Using an ORM as a way to reinforce security by preventing SQL injections, as well as facilitating migrations.",
-			"after": "Using indexes and custom SQL requests as a way to improve performances."
-		}
-	],
-	"learned": {
-		"keyPoints": [
-			"Full-stack projects succeed or fail at the boundaries between layers.",
-			"A well-designed API simplifies everything built on top of it.",
-			"Payment and authentication flows expose design weaknesses quickly.",
-			"Clear contracts matter more than stack sophistication."
-		],
-		"after": "This project reinforced the importance of thinking holistically about applications: not just how each part works, but how responsibilities are divided and communicated across the system."
 	},
 	"technos": [
 		{

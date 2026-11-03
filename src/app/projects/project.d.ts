@@ -10,11 +10,13 @@ declare interface IProjectBase {
   links?: IProjectLinks;
 }
 
+// Modal structure, shared by every project: header (title, tags, picture, technos, popTagline)
+// → links → popOverview → sections
 declare interface IProject extends IProjectBase {
   popTagline: string;
+  popOverview: string;
   // Always rendered Features → Design decisions → Challenges, titled from project-section.<key>
   sections: Record<ProjectSectionKey, IProjectSection>;
-  conclusion?: string;
 }
 
 declare interface IProjectPresentation {
@@ -24,8 +26,6 @@ declare interface IProjectPresentation {
 declare type ProjectSectionKey = 'features' | 'designDecisions' | 'challenges';
 
 declare interface IProjectSection {
-  sectionHead?: string;
-  sectionContent?: string;
   // Each entry renders as "label: text"
   sectionKeyPoints?: Record<string, string>[];
   // Path without extension (.avif/.webp/.jpg variants), like imageSrc

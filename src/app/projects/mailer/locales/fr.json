@@ -21,101 +21,50 @@
 		]
 	},
 	"popTagline": "Mis en place pour que mes applications envoient leurs e-mails de vérification et de commande sans fournisseur tiers.",
+	"popOverview": "Un service mail auto-hébergé, en envoi seul, qui permet à mes applications d'envoyer des emails transactionnels (vérification de compte, réinitialisation de mot de passe, commandes) depuis mon propre domaine. Il tourne sous forme d'une stack Docker Swarm de quatre services : Postfix, OpenDKIM, un extracteur de certificats et un reloader.",
 	"sections": {
 		"features": {
-			"sectionHead": "Lorem ipsum dolor sit amet",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Certificats": "Lus dans le fichier que Traefik renouvelle, et surveillés pour détecter les changements."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Reloader": "Une petite image qui prévient Postfix quand de nouveaux certificats sont en place."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"DKIM": "Clés de signature générées par script."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/mail-delivery"
 		},
 		"designDecisions": {
-			"sectionHead": "Consectetur adipiscing elit",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Réutiliser les certificats de Traefik": "Plutôt qu'un second client de certificats, un conteneur extrait le certificat et la clé du domaine mail depuis le stockage de Traefik, et les réécrit à chaque changement."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Signaler via un volume partagé": "L'extracteur dépose un fichier signal dans un volume partagé ; le reloader le détecte et demande à Postfix de recharger sa configuration."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Des conteneurs à usage unique": "Chaque service fait une seule chose : un renouvellement de certificat ne nécessite aucun redémarrage, et chaque partie peut être remplacée seule."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/mail-delivery"
 		},
 		"challenges": {
-			"sectionHead": "Sed do eiusmod tempor",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Signature DKIM": "Chaque message sortant doit être signé pour que les serveurs destinataires lui fassent confiance."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Enregistrements DNS": "Des enregistrements corrects ont été nécessaires avant que les messages arrivent de façon fiable."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"TLS": "Le chiffrement du transport repose sur des certificats maintenus valides sans intervention manuelle."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/mail-delivery"
 		}
-	},
-	"overview": {
-		"mainContent": "Le service mail est une stack Docker Swarm de quatre services : Postfix, OpenDKIM, un extracteur de certificats et un service de rechargement. Les applications rejoignent son réseau et envoient leurs e-mails via Postfix, qui les fait signer par OpenDKIM.",
-		"keyPointsTitle": "Fonctionnalités principales :",
-		"keyPoints": [
-			"Certificats lus depuis le fichier renouvelé par Traefik, surveillé en continu.",
-			"Une petite image dédiée qui signale à Postfix l'arrivée de nouveaux certificats.",
-			"Clés DKIM générées par script."
-		]
-	},
-	"purpose": {
-		"title": "Objectifs",
-		"mainContent": "Les principaux objectifs étaient :",
-		"keyPoints": [
-			"Envoyer des e-mails transactionnels (vérification de compte, réinitialisation de mot de passe, commandes) depuis mon propre domaine.",
-			"Comprendre ce qu'exige la délivrabilité des e-mails : DKIM, TLS, enregistrements DNS."
-		]
-	},
-	"constraints": {
-		"title": "Contraintes",
-		"keyPoints": [
-			"Pas de gestion de certificats supplémentaire : réutiliser ce que Traefik renouvelle déjà.",
-			"Envoi uniquement : aucune boîte mail à maintenir."
-		]
-	},
-	"choices": [
-		{
-			"title": "Réutiliser les certificats de Traefik",
-			"mainContent": "Plutôt qu'un second client de certificats, un conteneur extrait le certificat et la clé du domaine mail depuis le stockage de Traefik, et les réécrit à chaque changement."
-		},
-		{
-			"title": "Se signaler via un volume partagé",
-			"mainContent": "L'extracteur dépose un fichier de signal dans un volume partagé. Le service de rechargement le détecte et demande à Postfix de recharger sa configuration : un renouvellement de certificat ne nécessite aucun redémarrage."
-		}
-	],
-	"challenges": [
-		{
-			"title": "Délivrabilité",
-			"mainContent": "Les e-mails auto-hébergés sont facilement classés en spam : signature DKIM, enregistrements DNS corrects et TLS ont tous été nécessaires pour que les messages arrivent de façon fiable."
-		}
-	],
-	"learned": {
-		"keyPoints": [
-			"L'e-mail est un vieux protocole, aux nombreuses règles implicites.",
-			"De petits conteneurs à usage unique se combinent bien."
-		]
 	},
 	"technos": [
 		{

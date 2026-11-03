@@ -22,111 +22,50 @@
 		]
 	},
 	"popTagline": "Conçu pour garder les notes sur une page là où elles ont leur place : à côté d'elle.",
+	"popOverview": "Une extension de navigateur pour garder ses notes et to-dos à côté de la page qu'elles concernent. Son panneau est une application Nutin montée sans le router, publiée sur Chrome et Firefox à partir d'une seule base de code, en passant par la validation des stores.",
 	"sections": {
 		"features": {
-			"sectionHead": "Lorem ipsum dolor sit amet",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Deux navigateurs, une source": "Le panneau latéral de Chrome et la sidebar de Firefox : le manifest Firefox est dérivé de celui de Chrome au build."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Des clés stables": "Les adresses sont normalisées avant de servir de clés (sans fragment ni paramètres de suivi)."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Local ou synchronisé": "Le stockage peut passer du local au synchronisé, avec une fusion élément par élément à l'activation de la synchro."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		},
 		"designDecisions": {
-			"sectionHead": "Consectetur adipiscing elit",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Simuler les API du navigateur": "Les tests de l'application tournent sur une imitation des API d'extension, qui peut aussi se comporter comme Firefox : la logique de stockage et d'onglets est testée sans navigateur."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Des packages reproductibles": "Les mêmes sources donnent la même archive, octet pour octet, ce que la CI vérifie avec un second build."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Un pipeline de release avec validation": "Un tag de version crée la release GitHub, puis les soumissions aux stores attendent une validation manuelle ; les actions tierces sont épinglées sur des hashs de commit."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		},
 		"challenges": {
-			"sectionHead": "Sed do eiusmod tempor",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Fenêtres simultanées": "Chaque fenêtre a son propre panneau, qui sauvegarde de son côté : deux fenêtres modifiant la même liste au même instant peuvent perdre une modification."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Conflits de synchronisation": "La synchro du navigateur garde une entrée par liste, donc la dernière écriture l'emporte entre deux ordinateurs ; activer la synchro fusionne plutôt les listes élément par élément."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Une interface dense et pilotée au clavier": "Le panneau devait rester accessible tout en regroupant de nombreuses actions dans un petit espace."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/notelet"
 		}
-	},
-	"overview": {
-		"mainContent": "Notelet est une extension de navigateur dont le panneau est une application Nutin montée sans le router. Un script d'arrière-plan suit l'onglet actif, et le panneau affiche les notes et tâches de cette page et de son site.",
-		"keyPointsTitle": "Fonctionnalités principales :",
-		"keyPoints": [
-			"Panneau latéral de Chrome et barre latérale de Firefox à partir d'une même source : le manifeste Firefox est dérivé de celui de Chrome au build.",
-			"Adresses normalisées avant d'être utilisées comme clés (sans fragment ni paramètres de pistage).",
-			"Bascule entre stockage local et synchronisé, avec fusion élément par élément à l'activation de la synchronisation.",
-			"Paquets reproductibles : les mêmes sources donnent la même archive, à l'octet près."
-		]
-	},
-	"purpose": {
-		"title": "Objectifs",
-		"mainContent": "Les principaux objectifs étaient :",
-		"keyPoints": [
-			"Publier un produit en passant par la revue des stores, des justifications de permissions à la politique de confidentialité.",
-			"Utiliser Nutin en dehors d'un site web classique.",
-			"Construire une interface accessible pour un outil dense, très utilisé au clavier."
-		]
-	},
-	"constraints": {
-		"title": "Contraintes",
-		"keyPoints": [
-			"Permissions minimales : uniquement l'adresse de l'onglet actif, jamais le contenu des pages.",
-			"Aucune requête réseau : les données restent dans le stockage du navigateur.",
-			"Deux navigateurs, une seule base de code."
-		]
-	},
-	"choices": [
-		{
-			"title": "Simuler les API du navigateur dans les tests",
-			"mainContent": "Les tests de l'application s'exécutent sur une imitation des API d'extension, qui peut aussi se comporter comme Firefox : la logique de stockage et d'onglets est testée sans navigateur."
-		},
-		{
-			"title": "Un pipeline de publication avec validation",
-			"mainContent": "La CI compile, teste, empaquette et analyse les deux extensions, et vérifie qu'un second build donne la même archive. Un tag de version crée la release GitHub, puis les soumissions aux stores attendent une validation manuelle.",
-			"after": "Les actions tierces sont épinglées par hash de commit et mises à jour par Dependabot."
-		}
-	],
-	"challenges": [
-		{
-			"title": "Fenêtres simultanées",
-			"mainContent": "Chaque fenêtre a son propre panneau, qui enregistre de son côté : deux fenêtres modifiant la même liste au même instant peuvent perdre l'une des modifications.",
-			"after": "Les limites connues sont documentées plutôt que cachées."
-		},
-		{
-			"title": "Conflits de synchronisation",
-			"mainContent": "La synchronisation du navigateur conserve une entrée par liste : entre deux ordinateurs, la dernière écriture l'emporte. L'activation de la synchronisation fusionne en revanche les listes élément par élément."
-		}
-	],
-	"learned": {
-		"keyPoints": [
-			"Publier sur les stores est un projet en soi : permissions, revues, confidentialité.",
-			"Des builds reproductibles rendent les publications vérifiables.",
-			"Documenter les limites connues fait partie du produit."
-		]
 	},
 	"technos": [
 		{

@@ -22,148 +22,50 @@
 		]
 	},
 	"popTagline": "Mis en place pour acquérir une expérience pratique du déploiement, des bases de la sécurité et des préoccupations opérationnelles quotidiennes dans un environnement auto-hébergé.",
+	"popOverview": "L'auto-hébergement de mes sites et applications personnels, du déploiement à la maintenance, géré de bout en bout sans les garanties d'une plateforme managée. Le résultat est une infrastructure flexible, qui accueille plusieurs applications et évolue avec mes besoins.",
 	"sections": {
 		"features": {
-			"sectionHead": "Lorem ipsum dolor sit amet",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Orchestration": "Docker Swarm pour la gestion des conteneurs, avec des secrets pour les données sensibles."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Routage": "Traefik pour le routage HTTPS dynamique, avec Nginx dans les images des sites statiques."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Sécurité et supervision": "Accès root désactivé, UFW et fail2ban contre la force brute, et Grafana + Prometheus pour suivre les performances du système."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		},
 		"designDecisions": {
-			"sectionHead": "Consectetur adipiscing elit",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Autogéré plutôt que managé": "Les plateformes clés en main limitent la flexibilité et peuvent masquer des coûts ; gérer ma propre infrastructure impose des décisions explicites."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Une construction incrémentale et modulaire": "Commencer simple, n'ajouter des composants qu'en cas de besoin réel, et refactorer quand la complexité le justifie."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Automatiser quand ça rapporte": "Les étapes répétitives et sources d'erreurs sont automatisées ; une automatisation qui ajoute plus d'abstraction que de valeur est reportée."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		},
 		"challenges": {
-			"sectionHead": "Sed do eiusmod tempor",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Coûts prévisibles ou scalabilité": "Des coûts fixes et prévisibles, en acceptant une mise à l'échelle manuelle."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Déboguer seul": "Les premiers incidents ont mené à de meilleurs logs et à plus d'observabilité, et à des configurations plus simples à comprendre."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Apprendre sans sacrifier la fiabilité": "Les composants stables et éprouvés restent intouchés, séparés des parties expérimentales où l'apprentissage est l'objectif."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
 		}
-	},
-	"overview": {
-		"mainContent": "Ce projet couvre l’auto-hébergement de mes sites web et applications personnels, du déploiement à la maintenance. J'ai géré l'intégralité du système de bout en bout, sans les garanties d'une plateforme gérée.",
-		"keyPointsTitle": "Fonctionnalités principales :",
-		"keyPoints": [
-			"Déploiement full-stack: hébergement de sites et d’applications personnels avec un contrôle complet.",
-			"Orchestration Docker: Swarm pour la gestion des conteneurs, secrets pour la gestion sécurisée des données sensibles.",
-			"Reverse proxy et routage: Traefik pour le routage HTTPS dynamique, avec Nginx utilisé dans les images pour les sites statiques.",
-			"Sécurité: désactivation de l’accès root, configuration d’UFW, fail2ban pour la protection contre les attaques par force brute.",
-			"Déploiements automatisés : voir le projet CI / CD.",
-			"Envoi d'e-mails : voir le projet Mailer Dockerisé.",
-			"Monitoring: Grafana et Prometheus pour suivre les performances du système."
-		],
-		"after": "Le résultat est une configuration flexible, capable de supporter plusieurs applications, d’évoluer avec mes besoins et de servir de terrain d’apprentissage concret pour les problématiques réelles de déploiement."
-	},
-	"purpose": {
-		"title": "Objectif",
-		"mainContent": "Les objectifs principaux étaient :",
-		"keyPoints": [
-			"Comprendre ce qui se passe réellement au-delà du développement local.",
-			"Déployer des applications sans dépendance à un fournisseur ni complexité cachée.",
-			"Construire une plateforme capable de supporter une variété de projets, de bases de données et de services.",
-			"Gagner en confiance dans l’exploitation de systèmes en production, même à petite échelle."
-		],
-		"after": "Il s’agissait autant d’un projet d’apprentissage que d’un projet pratique : je voulais supprimer l’effet « boîte noire » de l’hébergement et de l’infrastructure."
-	},
-	"constraints": {
-		"title": "Contraintes",
-		"keyPoints": [
-			"La transparence des coûts était essentielle: des dépenses mensuelles prévisibles et faibles.",
-			"Liberté des outils: aucune restriction sur les bases de données, les runtimes ou les architectures.",
-			"La maintenabilité plutôt que l’ingéniosité: des configurations simples, compréhensibles et débogables en autonomie.",
-			"Échelle personnelle: optimisé pour de petits projets, sans complexité d’entreprise prématurée."
-		]
-	},
-	"choices": [
-		{
-			"title": "Infrastructure auto-gérée plutôt que plateformes managées",
-			"mainContent": "J’ai volontairement évité les plateformes clés en main qui masquent les détails du déploiement. Bien que pratiques, elles limitent souvent la flexibilité et peuvent dissimuler des coûts ou des contraintes opérationnelles.",
-			"after": "Gérer ma propre infrastructure m’oblige à prendre des décisions explicites et me fournit un modèle mental plus clair du système."
-		},
-		{
-			"title": "Mise en place incrémentale et modulaire",
-			"mainContent": "Plutôt que de concevoir une infrastructure « parfaite » dès le départ, je l’ai construite de manière incrémentale :",
-			"keyPoints": [
-				"Commencer simple.",
-				"Ajouter des composants uniquement lorsqu’un besoin réel apparaît.",
-				"Refactoriser lorsque la complexité le justifie.",
-				"Comprendre les coûts réels de l’infrastructure cloud et les compromis entre contrôle total et services managés.",
-				"Apprendre à monitorer et dépanner des systèmes en production avec Grafana et Prometheus."
-			],
-			"after": "Cette approche reflète ma manière de concevoir l’architecture applicative et aide à garder la complexité opérationnelle sous contrôle."
-		},
-		{
-			"title": "Automatisation là où elle apporte de la valeur",
-			"mainContent": "J’ai automatisé les étapes répétitives et sujettes aux erreurs (déploiement, mises à jour, monitoring de base), tout en évitant la sur-automatisation. Lorsque l’automatisation apporte plus d’abstraction que de valeur, elle est différée.",
-			"after": "L’objectif est la confiance et la clarté, pas l’automatisation maximale."
-		}
-	],
-	"challenges": [
-		{
-			"title": "Prévisibilité des coûts versus scalabilité",
-			"mainContent": "Les récits catastrophes du cloud proviennent souvent de systèmes qui scalent implicitement et facturent de manière imprévisible. Pour éviter cela, j’ai choisi des configurations à coûts fixes et prévisibles, en acceptant le scaling manuel comme compromis.",
-			"after": "Ce choix a réduit l’anxiété liée à l’expérimentation et rendu les décisions d’infrastructure plus réfléchies."
-		},
-		{
-			"title": "Déboguer sans filet de sécurité",
-			"mainContent": "Lorsqu’un problème survient sur une infrastructure auto-hébergée, il n’y a pas de support plateforme sur lequel s’appuyer. Les premiers incidents m’ont forcé à :",
-			"keyPoints": [
-				"Améliorer les logs et l’observabilité.",
-				"Adopter une approche méthodique pour diagnostiquer les pannes.",
-				"Privilégier des configurations simples, plus faciles à comprendre."
-			],
-			"after": "Cela a considérablement renforcé ma discipline opérationnelle."
-		},
-		{
-			"title": "Trouver l’équilibre entre apprentissage et fiabilité",
-			"mainContent": "Il est tentant de modifier constamment l’infrastructure pour tester de nouveaux outils. J’ai appris à distinguer :",
-			"keyPoints": [
-				"Les composants stables et éprouvés (qui restent inchangés).",
-				"Les parties expérimentales (où l’apprentissage est l’objectif)."
-			],
-			"after": "Cet équilibre permet de maintenir une production fiable tout en laissant de la place à l’exploration."
-		}
-	],
-	"learned": {
-		"keyPoints": [
-			"Les choix d’infrastructure influencent l’architecture applicative plus qu’on ne l’imagine.",
-			"La simplicité est un avantage compétitif en exploitation, surtout en solo.",
-			"Comprendre le déploiement et l’hébergement améliore les décisions de développement en amont.",
-			"La liberté des outils est précieuse, mais uniquement si elle s’accompagne de discipline et de contraintes claires."
-		],
-		"after": "Plus important encore, ce projet a renforcé ma préférence pour une compréhension des systèmes de bout en bout, plutôt que de dépendre d’abstractions opaques. Cet état d’esprit guide désormais la manière dont je conçois, développe et déploie l’ensemble de mes projets."
 	},
 	"technos": [
 		{

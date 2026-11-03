@@ -22,117 +22,50 @@
 		]
 	},
 	"popTagline": "Anciennement PixelsMansion (Angular), reconstruit avec Nutin pour mettre son architecture de jeux à l'épreuve.",
+	"popOverview": "Une salle d'arcade dans le navigateur, faite de clones de jeux classiques. Le projet a commencé sous le nom de PixelsMansion, une application Angular, avant d'être reconstruit avec Nutin : le framework est désormais une couche d'orchestration autour d'un code de jeu qui n'en dépend pas.",
 	"sections": {
 		"features": {
-			"sectionHead": "Lorem ipsum dolor sit amet",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Registre des jeux": "Un registre unique, à partir duquel sont construites les routes et les cartes de la page d'accueil."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Options typées": "Chaque définition de jeu déclare ses réglages (niveau de départ, labyrinthe, options activables) et une factory qui construit le jeu à partir d'eux."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Contrôles": "Les touches sont gérées selon leur position physique : les claviers QWERTY et AZERTY fonctionnent tous les deux."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		},
 		"designDecisions": {
-			"sectionHead": "Consectetur adipiscing elit",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Un contrat restreint": "Chaque jeu implémente reset, tick, la gestion des touches et, en option, snapshot / restore ; la vue le pilote et affiche une grille de cellules ou un dessin canvas."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Une boucle, deux types de jeux": "Les jeux en grille avancent par timeouts chaînés qui relisent leur vitesse avant chaque tick ; les jeux canvas avancent sur les frames d'animation, avec un pas de temps plafonné."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Une persistance défensive": "Les données stockées sont considérées comme non fiables, et les sauvegardes portent une version par jeu : les anciennes sont abandonnées plutôt que restaurées dans une mauvaise forme."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		},
 		"challenges": {
-			"sectionHead": "Sed do eiusmod tempor",
-			"sectionContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 			"sectionKeyPoints": [
 				{
-					"Lorem": "Ipsum dolor sit amet, consectetur adipiscing elit."
+					"Se passer du framework": "PixelsMansion reposait sur les signals d'Angular ; rendre les mises à jour explicites a sorti la logique de la couche UI pour la placer dans les jeux."
 				},
 				{
-					"Dolor": "Sed do eiusmod tempor incididunt ut labore et dolore."
+					"Contraintes temps réel": "Les règles des jeux restent testables isolément, à l'écart du rendu et du timing."
 				},
 				{
-					"Tempor": "Ut enim ad minim veniam, quis nostrud exercitation."
+					"Contrôles tactiles": "Une croix directionnelle, ou un stick pour les jeux de pilotage, envoie les mêmes codes de touches que le clavier : la saisie reste une seule préoccupation pour les jeux."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
 		}
-	},
-	"overview": {
-		"mainContent": "Retro Cabinet est une arcade de clones de jeux classiques dans le navigateur. Le projet a commencé sous le nom de PixelsMansion, une application Angular, puis a été reconstruit avec Nutin : le framework est désormais une couche d'orchestration autour d'un code de jeu qui n'en dépend pas.",
-		"keyPointsTitle": "Fonctionnalités principales :",
-		"keyPoints": [
-			"Un registre unique des jeux, à partir duquel sont construites les routes et les cartes de la page d'accueil.",
-			"Des définitions de jeux avec options typées (niveau de départ, labyrinthe, réglages on/off) et une fabrique qui construit le jeu selon les réglages choisis.",
-			"Des sauvegardes versionnées : quand les champs sauvegardés d'un jeu changent, ses anciennes sauvegardes sont ignorées plutôt que restaurées dans une forme incorrecte.",
-			"Touches gérées par position physique : les claviers QWERTY et AZERTY fonctionnent tous deux.",
-			"Un morpion caché contre l'ordinateur, derrière sa propre route."
-		],
-		"after": "Comme pour PixelsMansion, les jeux sont des fonctionnalités : l'essentiel est l'architecture qui leur permet de coexister."
-	},
-	"purpose": {
-		"title": "Objectifs",
-		"mainContent": "Les principaux objectifs étaient :",
-		"keyPoints": [
-			"Vérifier que l'architecture de jeux conçue avec Angular tient sans framework complet.",
-			"Garder les règles des jeux testables isolément, à l'écart du rendu et du timing.",
-			"Utiliser Nutin sur une application soumise à des contraintes temps réel."
-		]
-	},
-	"constraints": {
-		"title": "Contraintes",
-		"keyPoints": [
-			"Les jeux sont de la logique pure : ni DOM, ni timers, ni accès au stockage.",
-			"Une boucle, un système de sauvegarde et un schéma de contrôles pour tous les jeux.",
-			"Ajouter un jeu revient à écrire ses règles et une entrée dans le registre."
-		]
-	},
-	"choices": [
-		{
-			"title": "Un contrat étroit entre les jeux et la vue",
-			"mainContent": "Chaque jeu implémente la même interface : réinitialisation, tick, gestion des touches, et snapshot / restauration optionnels pour les sauvegardes. La vue le pilote et affiche ce qu'il expose : une grille de cellules, ou un dessin sur canvas.",
-			"after": "Les jeux restent testables unitairement, sans navigateur."
-		},
-		{
-			"title": "Jeux en grille et jeux canvas dans une même boucle",
-			"mainContent": "Les jeux en grille avancent par timeouts chaînés, en relisant leur vitesse avant chaque tick pour qu'un passage de niveau s'applique immédiatement. Les jeux canvas avancent à chaque frame d'animation, avec un pas de temps plafonné pour qu'une frame bloquée ne fasse pas traverser les briques à la balle."
-		},
-		{
-			"title": "Une persistance défensive",
-			"mainContent": "Les données stockées sont considérées comme non fiables : chaque lecture vérifie la forme reçue et traite toute autre valeur comme une absence de données. Les sauvegardes portent une version par jeu."
-		}
-	],
-	"challenges": [
-		{
-			"title": "Porter sans emporter le framework",
-			"mainContent": "PixelsMansion s'appuyait sur les signals d'Angular pour propager les changements. Le reconstruire avec Nutin a imposé des mises à jour explicites, ce qui a sorti de la logique de la couche UI pour la placer dans les jeux eux-mêmes."
-		},
-		{
-			"title": "Saisie tactile",
-			"mainContent": "Les contrôles tactiles (une croix directionnelle, ou un stick pour les jeux de pilotage comme Snake) envoient les mêmes codes de touches que le clavier, avec une répétition optionnelle pour les directions maintenues.",
-			"after": "La saisie reste une préoccupation unique pour les jeux."
-		}
-	],
-	"learned": {
-		"keyPoints": [
-			"Une architecture se valide en la déplaçant, pas en la construisant une fois.",
-			"Garder la logique des jeux indépendante du rendu a facilité à la fois le portage et les tests.",
-			"Les données sauvegardées doivent être versionnées dès qu'elles survivent à une mise en production."
-		]
 	},
 	"technos": [
 		{
