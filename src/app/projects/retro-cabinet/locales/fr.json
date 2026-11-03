@@ -12,17 +12,8 @@
 			"color": "yellow"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Neuf jeux classiques (Tetris, Pacman, Space Invaders, Snake, Arkanoid, Asteroids, Columns, Frogger, Pong) derrière un contrat unique : chaque jeu gère son état et ses règles, sans rien connaître du DOM ni des timers.",
-			"Jeux en grille cadencés à leur propre vitesse et jeux canvas pilotés par les frames d'animation, exécutés par la même boucle de jeu.",
-			"Sauvegarde automatique à la pause ou au changement d'onglet, meilleurs scores datés, options par jeu.",
-			"Contrôles virtuels sur écrans tactiles, qui envoient les mêmes codes de touches que le clavier : aucun code spécifique au tactile dans les jeux.",
-			"Chaque jeu est chargé à sa première visite."
-		]
-	},
-	"popTagline": "Anciennement PixelsMansion (Angular), reconstruit avec Nutin pour mettre son architecture de jeux à l'épreuve.",
-	"popOverview": "Une salle d'arcade dans le navigateur, faite de clones de jeux classiques. Le projet a commencé sous le nom de PixelsMansion, une application Angular, avant d'être reconstruit avec Nutin : le framework est désormais une couche d'orchestration autour d'un code de jeu qui n'en dépend pas.",
+	"popTagline": "Une salle d'arcade de clones de jeux classiques, dans le navigateur.",
+	"popOverview": "Initialement développé avec Angular, Retro Cabinet a été reconstruit avec Nutin pour explorer des systèmes de gameplay réutilisables et l'architecture de jeu. Et accessoirement, une excuse parfaitement légitime pour jouer pendant les heures de travail.",
 	"sections": {
 		"features": {
 			"sectionKeyPoints": [
@@ -30,10 +21,10 @@
 					"Registre des jeux": "Un registre unique, à partir duquel sont construites les routes et les cartes de la page d'accueil."
 				},
 				{
-					"Options typées": "Chaque définition de jeu déclare ses réglages (niveau de départ, labyrinthe, options activables) et une factory qui construit le jeu à partir d'eux."
+					"Options typées": "Chaque définition de jeu déclare ses réglages (niveau de départ, options activables, etc.) et une factory qui construit le jeu à partir d'eux."
 				},
 				{
-					"Contrôles": "Les touches sont gérées selon leur position physique : les claviers QWERTY et AZERTY fonctionnent tous les deux."
+					"Contrôles": "Les touches sont gérées selon leur position physique: les claviers QWERTY et AZERTY fonctionnent tous les deux."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
@@ -41,13 +32,13 @@
 		"designDecisions": {
 			"sectionKeyPoints": [
 				{
-					"Un contrat restreint": "Chaque jeu implémente reset, tick, la gestion des touches et, en option, snapshot / restore ; la vue le pilote et affiche une grille de cellules ou un dessin canvas."
+					"Un contrat restreint": "Chaque jeu implémente reset, tick, la gestion des touches et, en option, snapshot / restore; la vue le pilote et affiche une grille de cellules ou un dessin canvas."
 				},
 				{
-					"Une boucle, deux types de jeux": "Les jeux en grille avancent par timeouts chaînés qui relisent leur vitesse avant chaque tick ; les jeux canvas avancent sur les frames d'animation, avec un pas de temps plafonné."
+					"Une boucle, deux types de jeux": "Les jeux en grille avancent par timeouts chaînés qui relisent leur vitesse avant chaque tick; les jeux canvas avancent sur les frames d'animation, avec un pas de temps plafonné."
 				},
 				{
-					"Une persistance défensive": "Les données stockées sont considérées comme non fiables, et les sauvegardes portent une version par jeu : les anciennes sont abandonnées plutôt que restaurées dans une mauvaise forme."
+					"Une persistance défensive": "Les données stockées sont considérées comme non fiables, et les sauvegardes portent une version par jeu: les anciennes sont abandonnées plutôt que restaurées dans une mauvaise forme."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"
@@ -55,13 +46,13 @@
 		"challenges": {
 			"sectionKeyPoints": [
 				{
-					"Se passer du framework": "PixelsMansion reposait sur les signals d'Angular ; rendre les mises à jour explicites a sorti la logique de la couche UI pour la placer dans les jeux."
+					"Se passer du framework": "RetroCabinet reposait sur les signals d'Angular; rendre les mises à jour explicites a sorti la logique de la couche UI pour la placer dans les jeux."
 				},
 				{
-					"Contraintes temps réel": "Les règles des jeux restent testables isolément, à l'écart du rendu et du timing."
+					"Contraintes temps réel": "Les règles des jeux restent testables en isolation, à l'écart du rendu et du timing."
 				},
 				{
-					"Contrôles tactiles": "Une croix directionnelle, ou un stick pour les jeux de pilotage, envoie les mêmes codes de touches que le clavier : la saisie reste une seule préoccupation pour les jeux."
+					"Contrôles tactiles": "Une croix directionnelle, ou un stick, envoie les mêmes codes de touches que le clavier: la saisie reste une préoccupation unique pour les jeux."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/retro-cabinet"

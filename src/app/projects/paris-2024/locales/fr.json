@@ -1,6 +1,6 @@
 {
 	"name": "App Fullstack | Paris 2024",
-	"tagline": "Plateforme fullstack de billets électroniques gérant l'authentification, les paiements et les flux utilisateur sécurisés dans des conditions proches de la production.",
+	"tagline": "Plateforme fullstack de billeterie électronique gérant l'authentification, les paiements et les flux utilisateur sécurisés dans des conditions de production.",
 	"imageSrc": "/assets/images/projects/paris-2024",
 	"tags": [
 		{
@@ -12,17 +12,8 @@
 			"color": "red"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Conçu pour gérer les flux de paiement sécurisés et la cohérence de l'état utilisateur entre les sessions.",
-			"Flux d'authentification complet (inscription, vérification email, réinitialisation mot de passe). Accès basé sur les rôles (RBAC), dashboard admin.",
-			"Parcours d'achat avec persistance du panier et fusion à la connexion. Intégration Stripe pour des paiements sécurisés.",
-			"Base de données PostgreSQL avec indexation et optimisation des requêtes.",
-			"Chiffrement des données sensibles, accès API contrôlé, rate limiting / load balancing."
-		]
-	},
-	"popTagline": "Développé pour explorer l'authentification, les flux de paiement et l'architecture d'application de bout en bout dans un contexte full-stack.",
-	"popOverview": "Une application full-stack de billetterie en ligne pour les Jeux Olympiques 2024, réalisée dans le cadre de mes études. Les visiteurs achètent leurs billets en ligne et les reçoivent par email sous forme de QR codes, en remplacement des billets physiques sujets à la fraude.",
+	"popTagline": "Développé pour explorer la conception d'une application full-stack, de l'authentification et des paiements jusqu'à l'intégration de bout en bout.",
+	"popOverview": "Une application full-stack de billetterie en ligne pour les Jeux Olympiques 2024, réalisée dans le cadre de mes études. Les visiteurs achètent leurs billets en ligne et les reçoivent par email sous forme de QR codes.",
 	"sections": {
 		"features": {
 			"sectionKeyPoints": [
@@ -41,7 +32,7 @@
 		"designDecisions": {
 			"sectionKeyPoints": [
 				{
-					"Règles métier côté serveur": "Le backend valide paniers et commandes, gère paiements et billets, et applique les règles d'accès ; le frontend se concentre sur la présentation et l'interaction."
+					"Règles métier côté serveur": "Le backend valide paniers et commandes, gère paiements et billets, et applique les règles d'accès; le frontend se concentre sur la présentation et l'interaction."
 				},
 				{
 					"Approche API-first": "Le développement du frontend a suivi des contrats d'API explicites, conçus pour ses besoins mais assez génériques pour éviter un couplage fort."

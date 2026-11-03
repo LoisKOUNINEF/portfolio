@@ -1,6 +1,6 @@
 {
-	"name": "Framework TypeScript | nutin",
-	"tagline": "Conçu et développé un framework frontend minimal pour explorer les compromis explicites en matière d’architecture.",
+	"name": "Framework TypeScript | Nutin",
+	"tagline": "Conception et développement d'un framework frontend minimal, pour explorer des compromis d'architecture explicites.",
 	"imageSrc": "/assets/images/projects/nutin",
 	"tags": [
 		{
@@ -12,17 +12,8 @@
 			"color": "orange"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Conçu autour de mises à jour explicites pilotées par les événements, échangeant la commodité des frameworks contre la prévisibilité et le contrôle.",
-			"Composants et vues basés sur le DOM (pas de DOM virtuel).",
-			"Router et bus d'événements pour la navigation et le flux d'état.",
-			"Développé pour des cas d’usage ciblés, avec un ensemble de fonctionnalités volontairement restreint et explicite.",
-			"Utilisé pour développer ce portfolio et le site du framework."
-		]
-	},
-	"popTagline": "Un framework frontend minimaliste construit pour explorer l'architecture SPA, le rendu et le flux d'état.",
-	"popOverview": "Une boîte à outils frontend légère pour créer de petites applications monopages maintenables, sans dépendre d'un framework complet. Elle fournit l'essentiel (routing, gestion d'événements, rendu des vues et quelques utilitaires pratiques) tout en restant proche du DOM et des API web standard.",
+	"popTagline": "Un framework frontend léger pour créer de petites SPA maintenables, sans dépendre d'un framework complet.",
+	"popOverview": "Né d'une exploration de l'architecture SPA, le projet est devenu un framework façonné par un usage réel et des choix d'ingénierie. Il fournit l'essentiel (routing, gestion d'événements, rendu des vues et quelques utilitaires pratiques) tout en restant proche du DOM et des API web standard.",
 	"sections": {
 		"features": {
 			"sectionKeyPoints": [
@@ -44,10 +35,10 @@
 					"Un cœur événementiel": "La navigation, la mise à jour des vues et la communication entre modules passent par des événements explicites plutôt que par un couplage d'état implicite."
 				},
 				{
-					"Le router comme coordinateur": "Le router se contente de faire correspondre les routes et de déclencher le rendu des vues ; il ne gère ni état applicatif ni logique métier."
+					"Le router comme coordinateur": "Le router se contente de faire correspondre les routes et de déclencher le rendu des vues; il ne gère ni état applicatif ni logique métier."
 				},
 				{
-					"Des vues basées sur le DOM": "Les vues sont rendues directement dans le DOM, sans DOM virtuel : les performances restent lisibles et le débogage simple."
+					"Des vues basées sur le DOM": "Les vues sont rendues directement dans le DOM, sans DOM virtuel: les performances restent lisibles et le débogage simple."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/nutin"

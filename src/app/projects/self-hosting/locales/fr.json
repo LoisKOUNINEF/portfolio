@@ -1,6 +1,6 @@
 {
 	"name": "Infrastructure | Auto-hébergement",
-	"tagline": "Auto-hébergement en production — déploiement, sécurité et opérations quotidiennes pour des services exposés sur Internet.",
+	"tagline": "Auto-hébergement en production: déploiement, sécurité et opérations quotidiennes pour des services exposés sur Internet.",
 	"imageSrc": "/assets/images/projects/self-hosting",
 	"tags": [
 		{
@@ -12,15 +12,6 @@
 			"color": "indigo"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-			"Gestion conjointe des aspects déploiement, réseau et sécurité, pour un comportement prévisible en environnement réel.",
-			"Mesures de sécurité essentielles (mises à jour automatiques, accès restreint, pare-feu, prévention des intrusions).",
-			"Reverse proxy avec renouvellement automatique des certificats TLS.",
-			"Services conteneurisés orchestrés avec Docker Swarm.",
-			"Monitoring avec Grafana et Prometheus."
-		]
-	},
 	"popTagline": "Mis en place pour acquérir une expérience pratique du déploiement, des bases de la sécurité et des préoccupations opérationnelles quotidiennes dans un environnement auto-hébergé.",
 	"popOverview": "L'auto-hébergement de mes sites et applications personnels, du déploiement à la maintenance, géré de bout en bout sans les garanties d'une plateforme managée. Le résultat est une infrastructure flexible, qui accueille plusieurs applications et évolue avec mes besoins.",
 	"sections": {
@@ -41,13 +32,13 @@
 		"designDecisions": {
 			"sectionKeyPoints": [
 				{
-					"Autogéré plutôt que managé": "Les plateformes clés en main limitent la flexibilité et peuvent masquer des coûts ; gérer ma propre infrastructure impose des décisions explicites."
+					"Autogéré plutôt que managé": "Les plateformes clés en main limitent la flexibilité et peuvent masquer des coûts; gérer ma propre infrastructure impose des décisions explicites."
 				},
 				{
 					"Une construction incrémentale et modulaire": "Commencer simple, n'ajouter des composants qu'en cas de besoin réel, et refactorer quand la complexité le justifie."
 				},
 				{
-					"Automatiser quand ça rapporte": "Les étapes répétitives et sources d'erreurs sont automatisées ; une automatisation qui ajoute plus d'abstraction que de valeur est reportée."
+					"Automatiser quand ça rapporte": "Les étapes répétitives et sources d'erreurs sont automatisées; une automatisation qui ajoute plus d'abstraction que de valeur est reportée."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/self-hosting"
