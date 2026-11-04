@@ -18,6 +18,8 @@ const carouselImagesSrc = (): IImageModalConfig[] => {
         { src: `${base}.webp`, type: 'image/webp' },
       ],
       fallback: `${base}.jpg`,
+      // The modal is 55% of the viewport (carousel-modal.scss), full width on small screens
+      sizes: '(max-width: 815px) 100vw, 55vw',
       alt: I18nService.translate(`other-things.${s}-caption`),
       width: 1080,
       height: 1080,

@@ -36,6 +36,8 @@ export class FeaturedProjectComponent extends Component {
             { src: `${this._imageSrc}.webp`, type: 'image/webp' },
           ],
           fallback: `${this._imageSrc}.jpg`,
+          // The screen is at most 17rem wide; hidden on small screens (lazy, so not fetched there)
+          sizes: '17rem',
           alt: I18nService.translate('featured-project.image-alt'),
         }, {
           className: 'screen-mock-content',

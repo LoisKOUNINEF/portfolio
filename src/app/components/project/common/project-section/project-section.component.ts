@@ -52,6 +52,8 @@ export class ProjectSectionComponent extends Component {
           { src: `${imageSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${imageSrc}.jpg`,
+        // 40% of the modal (80% of the viewport); full width on small screens
+        sizes: '(max-width: 815px) 100vw, 32vw',
         alt: `${I18nService.translate(`project-section.${this._section.key}`)} illustration picture`,
       },
       {

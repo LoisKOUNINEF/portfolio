@@ -188,7 +188,8 @@
     --border: #D5D7D4;
     --border-strong: #808786;
     --overlay: #17191A99;
-    font-size: 18px;
+    /* fluid: 16px at 576px and below, 18px from 1450px up; rem so it follows the browser font setting */
+    font-size: clamp(1rem, 0.9176rem + 0.2288vw, 1.125rem);
   }
 
   :root .dark-theme {
@@ -587,10 +588,8 @@
     }
   }
 
-  /* Home sections' separator: a soft line at the bottom edge of a --separator-height box.
-     .separator-line-before draws it as the element's ::before (give that a content) */
-  .separator-line,
-  .separator-line-before::before {
+  /* Home sections' separator: a soft line at the bottom edge of a --separator-height box */
+  .separator-line {
     --separator-height: 15px;
     display: block;
     width: 50%;

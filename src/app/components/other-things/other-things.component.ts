@@ -21,6 +21,8 @@ export class OtherThingsComponent extends Component {
           { src: `${this._thumbnailSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${this._thumbnailSrc}.jpg`,
+        // At most 20rem wide (other-things.component.scss), full width on small screens
+        sizes: '(max-width: 815px) 100vw, 20rem',
         // Named by the surrounding button
         alt: '',
         width: 1080,
