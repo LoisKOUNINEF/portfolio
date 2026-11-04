@@ -1,77 +1,57 @@
-import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/index.js';
-import { AppEventBus, Component, ComponentConfig, ComponentProps } from '../../../../core/index.js';
-import { displayProjectPop, ProjectHeaderComponent, ProjectLinksComponent, ButtonComponent, ProjectSectionComponent } from '../../index.js';
+import { ProjectConfigFolder, ProjectConfigObject, ProjectService } from '../../../services/project/project.service.js';
+import { Component, html, raw } from '../../../../core/index.js';
+import { PictureComponent } from '../../common/picture/picture.component.js';
+import { displayProjectModal } from '../project-modal/project-modal.js';
+import { projectIcons } from './project-icons.js';
 
-const templateFn = (_project: ProjectConfigObject) => `__TEMPLATE_PLACEHOLDER__`;
+interface IProjectCard {
+  folder: ProjectFolderName;
+  project: ProjectConfigObject;
+}
 
-export class ProjectCardComponent extends Component {
-  private _project: ProjectConfigObject;
+const templateFn = (_card: IProjectCard) => html`__TEMPLATE_PLACEHOLDER__`;
+
+/**
+ * Icon, name and tagline, then the project's picture (or an empty slot of the same size
+ * until it has one); the whole card opens the project's modal.
+ * The card's id is the project's folder name, so `#<folder>` links can target it.
+ */
+export class ProjectCardComponent extends Component<HTMLElement, IProjectCard> {
   private readonly _initialConfig: ProjectConfigFolder;
 
-  constructor(mountTarget: HTMLElement, config: ProjectConfigFolder, props?: ComponentProps) {
-    const project = ProjectService.getProject(config);
-
-    super({ templateFn, mountTarget, config: project, props });
-
-    this._project = project;
+  constructor(mountTarget: HTMLElement, config: ProjectConfigFolder, props?: Nutin.ComponentProps) {
+    super({ templateFn, mountTarget, config: ProjectCardComponent.toCard(config), props });
     this._initialConfig = config;
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
-    return [
-      this.getHeaderConfig(),
-      this.getPresentationConfig(),
-      this.getLinksConfig(),
-      this.getViewMoreBtnConfig()
-    ]
+  private static toCard(config: ProjectConfigFolder): IProjectCard {
+    return { folder: ProjectService.parseFolderName(config), project: ProjectService.getProject(config) };
   }
 
-  private getHeaderConfig(): ComponentConfig {
-    const { name, imageSrc, tagline, technos, tags } = {...this._project};
-    return {
-      selector: `project-card-header`,
-      factory: (el) => new ProjectHeaderComponent(
-        el,
-        { name, imageSrc, tagline, technos, tags }
-      )
-    }
+  public override registerChildren(): Nutin.ComponentConfig[] {
+    const imageSrc = this.config.project.imageSrc;
+    if (!imageSrc) return [];
+    return [{
+      selector: 'project-card-picture',
+      factory: (el) => new PictureComponent(el, {
+        sources: [
+          { src: `${imageSrc}.avif`, type: 'image/avif' },
+          { src: `${imageSrc}.webp`, type: 'image/webp' },
+        ],
+        fallback: `${imageSrc}.jpg`,
+        // Decorative: the card's name and tagline already say what it shows
+        alt: '',
+      }),
+    }];
   }
 
-  private getPresentationConfig(): ComponentConfig {
-    return {
-      selector: `project-card-presentation`,
-      factory: (el) => new ProjectSectionComponent(el, 
-        this._project.presentation
-      ),
-    }
-  }
-
-  private getLinksConfig(): ComponentConfig {
-    return {
-      selector: `project-card-links`,
-      factory: (el) => new ProjectLinksComponent(el,
-        this._project.links
-      )
-    }
-  }
-
-  private getViewMoreBtnConfig(): ComponentConfig {
-    return {
-      selector: `project-card-view-more`,
-      factory: (el) => new ButtonComponent(el, {
-        i18nKey: 'project-card.view-more',
-        className: 'project-card__view-more',
-        callback: () => this.displayPop()
-      })
-    }
-  }
-
-  private displayPop() {
-    displayProjectPop(this._project);
+  private _openModal(): void {
+    displayProjectModal(this.config.project);
   }
 
   protected override onBeforeRender(): void {
-    this._project = ProjectService.getProject(this._initialConfig);
+    super.onBeforeRender();
+    this.config = ProjectCardComponent.toCard(this._initialConfig);
   }
 }

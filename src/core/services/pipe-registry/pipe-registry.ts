@@ -1,15 +1,13 @@
-import { Service } from "../../base-classes/index.js";
-
-export type PipeFunction = (value: any, ...args: any[]) => string;
+import { Service } from "../../base-classes/service/service.js";
 
 class PipeRegistry extends Service<PipeRegistry> {
-  private _pipes: Record<string, PipeFunction> = {};
+  private _pipes: Record<string, Nutin.PipeFunction> = {};
 
   constructor() { super(); }
 
-  public register(name: string, fn: PipeFunction): void {
+  public register(name: string, fn: Nutin.PipeFunction): void {
     if(this._pipes[name]) {
-      console.warn(`Skipping pipe "${name}": A pipe with this name already exists.`);
+      console.warn(`Pipe "${name}" already exists - skipping.`);
       return;
     }
     this._pipes[name] = fn;
@@ -24,9 +22,9 @@ class PipeRegistry extends Service<PipeRegistry> {
     return pipe(value, ...args);
   }
 
-  protected onDestroy(): void {
+  protected override onDestroy(): void {
     this._pipes = {};
   }
 }
 
-export const AppPipeRegistry = PipeRegistry.getInstance();
+export const AppPipeRegistry = /* @__PURE__ */ PipeRegistry.getInstance();

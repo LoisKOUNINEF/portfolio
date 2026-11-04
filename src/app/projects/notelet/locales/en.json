@@ -1,0 +1,74 @@
+{
+	"name": "Browser extension | Notelet",
+	"tagline": "Notes and to-dos for each page and each site, in Chrome's side panel or Firefox's sidebar.",
+	"imageSrc": "/assets/images/projects/notelet",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "extension",
+			"color": "cyan"
+		}
+	],
+	"popTagline": "Built to keep notes about a page where they belong: next to it.",
+	"popOverview": "A browser extension for keeping notes and to-dos next to the page they relate to. Its panel is a Nutin application mounted without the router, published on both Chrome and Firefox from a single codebase, through the stores' reviews.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Two browsers, one source": "Chrome's side panel and Firefox's sidebar: Firefox's manifest is derived from Chrome's at build time."
+				},
+				{
+					"Stable keys": "Addresses are normalized before being used as keys (no fragment, no tracking parameters)."
+				},
+				{
+					"Local or synced": "Storage can switch between local and synced, with an item-by-item merge when sync is turned on."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Faking browser APIs in tests": "Application tests run against a fake of the extension APIs, which can also behave like Firefox: storage and tab logic is tested without a browser."
+				},
+				{
+					"Reproducible packages": "The same sources give the same archive, byte for byte, and CI checks it with a second build."
+				},
+				{
+					"A release pipeline with approval": "A version tag creates the GitHub release, then store submissions wait for manual approval; third-party actions are pinned to commit hashes."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Concurrent windows": "Each window has its own panel, saving on its own: two windows changing the same list at the very same moment can lose one change."
+				},
+				{
+					"Sync conflicts": "Browser sync keeps one entry per list, so the last write wins between two computers; turning sync on merges lists item by item instead."
+				},
+				{
+					"A dense, keyboard-heavy interface": "The panel had to stay accessible while packing many actions into a small space."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/notelet-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/Ticknote"
+		}
+	}
+}

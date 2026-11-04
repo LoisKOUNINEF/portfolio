@@ -1,5 +1,9 @@
 # portfolio - Built with nutin
 
+## Live
+
+- See the [website](https://lois-kouninef.eu)
+
 ## Start
 
 - `npm run serve` (rebuild), `npm run serve:only` (no rebuild), `npm run dev` (watch).
@@ -7,8 +11,7 @@
 ## Build
 
 - `npm run build` (dev) or `npm run build:prod` (production)
-
-	Accepts `--bundle` (= build:prod) and `--log` (verbose output) flags
+- `npm run typecheck`: type-check the application without building it
 
 ## Generate Component, View, Service
 
@@ -16,3 +19,10 @@
 
 	Supports nested paths.
 
+## Test
+
+- `npm run testin-nutin`
+
+## Convert assets
+
+- See [Convert assets](./scripts/CONVERT_ASSETS.md)

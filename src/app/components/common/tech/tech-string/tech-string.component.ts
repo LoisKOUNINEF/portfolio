@@ -1,7 +1,7 @@
-import { AppPipeRegistry, CatalogItemConfig, Component } from '../../../../../core/index.js';
-import { getLabel, getProficiency,  } from '../tech-metadata.helper.js';
+import { Component, html } from '../../../../../core/index.js';
+import { getLabel } from '../tech-metadata.helper.js';
 
-const templateFn = (_config: string[]) => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = (_config: { labels: string }) => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class TechStringComponent extends Component {
   constructor(mountTarget: HTMLElement, config: ITech[]) {

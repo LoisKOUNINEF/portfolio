@@ -1,136 +1,89 @@
-import { ComponentConfig, View } from '../../../core/index.js';
-import {
-  AboutMeComponent,
-  ContactComponent, EmptyComponent,
-  HeroComponent, InfosComponent,
-  OtherThingsComponent,
-  ProjectCardComponent, ProjectsCatalogHeaderComponent,
-  ShowMoreComponent,
-  TechStackComponent
-} from '../../components/index.js';
+import { View, html } from '../../../core/index.js';
+import { AboutMeComponent } from '../../components/about/about.component.js';
+import { ContactComponent } from '../../components/contact/contact.component.js';
+import { FeaturedProjectComponent } from '../../components/featured-project/featured-project.component.js';
+import { HeroComponent } from '../../components/hero/hero.component.js';
+import { InfosComponent } from '../../components/infos/infos.component.js';
+import { ResumeCardComponent } from '../../components/contact/resume-card/resume-card.component.js';
+import { ProjectsComponent } from '../../components/projects/projects.component.js';
+import { TechStackComponent } from '../../components/tech-stack/tech-stack.component.js';
 
-const template = `__TEMPLATE_PLACEHOLDER__`;
+const template = html`__TEMPLATE_PLACEHOLDER__`;
 
 export class HomeView extends View {
-  private readonly _allProjects: ProjectFolderName[] = ['nutin', 'paris-2024', 'pixels-mansion', /*'run-for-the-bun'*/];
-  private readonly _mainProjectsCount = 2;
-  private _selfHostingProjectFolder: ProjectFolderName = 'self-hosting';
-
   constructor() {
-    super({template, tagName: 'div'});
+    super({template, tagName: 'div', viewName: 'home'});
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return this.getChildConfigs();
   }
 
-  private getChildConfigs(): ComponentConfig[] {
+  private getChildConfigs(): Nutin.ComponentConfig[] {
     return [
       this.getHeroConfig(),
       this.getAboutMeConfig(),
-      this.getProjectsCatalogHeaderConfig(),
-      ...this.getMainProjectsCatalog(),
-      this.getShowMoreBtnConfig(),
-      ...this.getAdditionalProjectsCatalog(),
+      this.getFeaturedProjectConfig(),
+      this.getProjectsConfig(),
       this.getStackConfig(),
-      this.getSelfHostingProjectConfig(),
       this.getContactConfig(),
       this.getInfosConfig(),
-      this.getOtherThingsConfig()
+      this.getResumeCardConfig(),
     ]
   }
-  private getHeroConfig(): ComponentConfig {
+  private getHeroConfig(): Nutin.ComponentConfig {
     return {
       selector: 'hero',
       factory: (el) => new HeroComponent(el)
     }
   }
 
-  private getAboutMeConfig(): ComponentConfig {
+  private getAboutMeConfig(): Nutin.ComponentConfig {
     return {
       selector: 'about',
       factory: (el) => new AboutMeComponent(el)
     }
   }
 
-  private getProjectsCatalogHeaderConfig(): ComponentConfig {
+  private getFeaturedProjectConfig(): Nutin.ComponentConfig {
     return {
-      selector: 'projects-catalog-header',
-      factory: (el) => new ProjectsCatalogHeaderComponent(el)
+      selector: 'featured-project',
+      factory: (el) => new FeaturedProjectComponent(el)
     }
   }
 
-  private getMainProjectsCatalog(): ComponentConfig[] {
-    return this.catalogConfig({
-      array: this._allProjects.slice(0, this._mainProjectsCount),
-      selector: 'main-projects-catalog',
-      elementName: 'main-project',
-      component: ProjectCardComponent,
-      elementTag: 'article'
-    });
-  }
-
-  private getShowMoreBtnConfig(): ComponentConfig {
-    const selector = 'show-more-btn';
-    const additional = this._allProjects.slice(this._mainProjectsCount);
-    if (!additional.length) {
-      return {
-        selector: selector,
-        factory: (el) => new EmptyComponent(el)
-      }
-    }
+  private getProjectsConfig(): Nutin.ComponentConfig {
     return {
-      selector: selector,
-      factory: (el) => new ShowMoreComponent(el, additional.length)
-    };
+      selector: 'projects',
+      factory: (el) => new ProjectsComponent(el)
+    }
   }
 
-  private getAdditionalProjectsCatalog(): ComponentConfig[] {
-    const additional = this._allProjects.slice(this._mainProjectsCount);
-    if (!additional.length) return [];
-    return this.catalogConfig({
-      array: additional,
-      selector: 'additional-projects-catalog',
-      elementName: 'additional-project',
-      component: ProjectCardComponent,
-      elementTag: 'article'
-    });
-  }
-
-  private getStackConfig(): ComponentConfig {
+  private getStackConfig(): Nutin.ComponentConfig {
     return {
       selector: 'tech-stack',
       factory: (el) => new TechStackComponent(el)
     }
   }
 
-  private getSelfHostingProjectConfig(): ComponentConfig {
-    return {
-      selector: 'infrastructure',
-      factory: (el) => new ProjectCardComponent(el, 
-        this._selfHostingProjectFolder
-      )
-    }
-  }
-
-  private getContactConfig(): ComponentConfig {
+  private getContactConfig(): Nutin.ComponentConfig {
     return {
       selector: 'contact',
       factory: (el) => new ContactComponent(el)
     }
   }
 
-  private getInfosConfig(): ComponentConfig {
+  private getInfosConfig(): Nutin.ComponentConfig {
     return {
       selector: 'infos',
       factory: (el) => new InfosComponent(el)
     }
   }
 
-  private getOtherThingsConfig(): ComponentConfig {
+  private getResumeCardConfig(): Nutin.ComponentConfig {
     return {
-      selector: 'other-things',
-      factory: (el) => new OtherThingsComponent(el)
+      selector: 'resume-card',
+      factory: (el) => new ResumeCardComponent(el)
     }
   }
 }

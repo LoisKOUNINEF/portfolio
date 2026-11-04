@@ -1,7 +1,7 @@
 {
-	"name": "TypeScript Framework | nutin",
+	"name": "TypeScript Framework | Nutin",
 	"tagline": "Designed and built a minimal frontend framework to explore explicit architecture trade-offs.",
-	"imageSrc": "./assets/images/projects/nutin",
+	"imageSrc": "/assets/images/projects/nutin",
 	"tags": [
 		{
 			"i18nKey": "personal",
@@ -12,107 +12,51 @@
 			"color": "orange"
 		}
 	],
-	"presentation": {
-		"keyPoints": [
-		"Designed around explicit event-driven updates, trading framework convenience (e.g. automatic change detection) for predictability and control.",
-		"DOM-based components and views (no virtual DOM).",
-		"Router and event bus for navigation and state flow.",
-		"Built for focused use cases, with a deliberately small and explicit feature set.",
-		"Used to build this portfolio and the framework's website."
-		]
-	},
-	"popTagline": "Created to explore SPA architecture and frontend patterns by building my own mini-framework.",
-	"overview": {
-		"mainContent": "nutin is a lightweight frontend toolkit I built to create small, maintainable single-page applications without relying on a full framework. It provides just the essentials—routing, event handling, view rendering, and a few quality-of-life utilities, while staying close to the DOM and standard web APIs. It is designed for personal projects and small applications where control, clarity, and low overhead matter more than feature completeness.",
-		"keyPointsTitle": "Main features:",
-		"keyPoints": [
-			"Lightweight SPA foundation with routing, event bus, and DOM-based views.",
-			"Event-driven architecture enabling loose coupling between modules.",
-			"No runtime dependencies and explicit control over execution flow.",
-			"Custom build and lightweight testing tooling.",
-			"Built-in additional features: i18n support, pipes & guards, HTTP client."
-		],
-		"after": "TypeScript was intentionally used instead of JavaScript: strong typing reduced implementation errors during development, while interfaces provide clear, enforceable documentation for the public API."
-	},
-	"purpose": {
-		"title": "Purpose",
-		"mainContent": "The main goals were:",
-		"keyPoints": [
-			"To create a reusable foundation for small projects and experiments.",
-			"To understand how SPA building blocks actually work under the hood."
-		],
-		"after": "This toolkit is not meant to compete with established frameworks, but to serve as a focused, transparent alternative for scoped use cases."
-	},
-	"constraints": {
-		"title": "Constraints",
-		"keyPoints": [
-			"Minimal dependencies: avoid pulling large ecosystems for simple needs.",
-			"Explicit architecture: no hidden magic or implicit conventions.",
-			"DOM-first approach: work with the platform, not around it.",
-			"Long-term readability: code that remains understandable months later"
-		],
-		"after": "Every feature had to justify its existence."
-	},
-	"choices": [
-		{
-			"title": "Event-driven core",
-			"mainContent": "At the heart of the toolkit is a simple event bus. Navigation, view updates, and cross-module communication are driven by explicit events rather than implicit state coupling.",
-			"after": "This keeps modules loosely connected and makes execution flow easy to trace."
-		},
-		{
-			"title": "Router as a coordinator, not a controller",
-			"mainContent": "The router’s responsibility is deliberately narrow: match routes and trigger view rendering. It does not own application state or business logic.",
-			"after": "This separation avoids the “god router” pattern and keeps routing predictable."
-		},
-		{
-			"title": "DOM-based views over virtual abstractions",
-			"mainContent": "Views render directly to the DOM, without a virtual DOM or templating layer. This keeps:",
-			"keyPoints": [
-				"Performance characteristics obvious.",
-				"Debugging straightforward.",
-				"The mental model aligned with native browser behavior."
+	"popTagline": "A small frontend framework for building small, maintainable single-page applications without relying on a full framework.",
+	"popOverview": "What started as an exploration of SPA architecture grew into a framework shaped by real-world use and engineering decisions. It provides just the essentials (routing, event handling, view rendering and a few quality-of-life utilities) while staying close to the DOM and standard web APIs.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"SPA foundation": "Routing, event bus and DOM-based views, with no runtime dependencies."
+				},
+				{
+					"Built-in extras": "i18n support, pipes and guards, and an HTTP client."
+				},
+				{
+					"Tooling": "A custom build pipeline, generators and a lightweight test runner."
+				}
 			],
-			"after": "The goal is not abstraction for its own sake, but clarity."
+			"sectionImageSrc": "/assets/images/projects/nutin-features"
 		},
-		{
-			"title": "Tooling as support, not foundation",
-			"mainContent": "The surrounding tooling (builder, dev scripts, testing setup) exists to improve developer experience without becoming a framework itself."
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Event-driven core": "Navigation, view updates and cross-module communication are driven by explicit events rather than implicit state coupling."
+				},
+				{
+					"Router as a coordinator": "The router only matches routes and triggers view rendering; it owns no application state or business logic."
+				},
+				{
+					"DOM-based views": "Views render directly to the DOM, without a virtual DOM, keeping performance obvious and debugging straightforward."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/nutin-design"
 		},
-		{
-			"title": "Open Source and Distribution Choices",
-			"keyPoints": [
-				"The project is developed in the open, with a structured repository and basic contribution hygiene (e.g. issue templates). This reflects an intention to align with standard open-source practices and to make design decisions and trade-offs transparent.",
-				"Core functionality is packaged and published on npm, making the toolkit consumable. This required handling versioning, build output, and public API boundaries.",
-				"The project uses a very simple npm-based monorepo to host both the toolkit package and its documentation/demo website. This keeps shared code and examples close, without introducing heavy tooling or orchestration layers.",
-				"Handlebars is used for code and file templates within the package, favoring a minimal, explicit templating solution over more complex generators. This aligns with the project’s focus on clarity, predictability, and low dependency overhead."
-			]
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Avoiding premature generalization": "Development was constrained to real needs from actual projects, keeping the codebase small and focused."
+				},
+				{
+					"Securing user applications": "Preventing common vulnerabilities such as XSS through safe rendering, input handling and explicit trust boundaries."
+				},
+				{
+					"Finding its place in a crowded ecosystem": "Nutin aims to bridge the gap between vanilla web development and full-fledged frameworks."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/nutin-challenges"
 		}
-	],
-	"challenges": [
-		{
-			"title": "Preventing tight coupling as features grew",
-			"mainContent": "As new features were added, there was a risk of modules becoming implicitly dependent on each other. The event bus helped enforce clear boundaries, but only when used deliberately.",
-			"after": "This led me to formalize event contracts and keep module responsibilities narrow."
-		},
-		{
-			"title": "Avoiding premature generalization",
-			"mainContent": "It was tempting to design the toolkit for hypothetical future use cases. Instead, I constrained development to real needs from actual projects.",
-			"after": "This prevented unnecessary abstraction and kept the codebase small and focused."
-		},
-		{
-			"title": "Explore and implement testing logic.",
-			"mainContent": "Testing DOM-based logic without a full testing framework required extra care. I built lightweight test utilities using jsdom and Node.js, favoring clarity over exhaustive automation.",
-			"after": "This reinforced the importance of isolating logic and keeping side effects explicit."
-		}
-	],
-	"learned": {
-		"mainContent": "Building nutin made me realize the amount of heavy-lifting that frameworks actually do, with very limited boilerplate code.",
-		"keyPoints": [
-			"Explicit architecture scales better than clever abstractions.",
-			"Staying close to platform APIs improves both debugging and confidence.",
-			"A well-defined scope helps maintain a good balance between KISS and DRY."
-		],
-		"after": "Most importantly, nutin improved drastically my debugging skills and sharpened my ability to evaluate tooling pragmatically: choosing the simplest solution that fully serves the problem, and no more."
 	},
 	"technos": [
 		{
@@ -122,24 +66,21 @@
 			"svgKey": "nodejs"
 		},
 		{
-			"svgKey": "sass"
-		},
-		{
 			"svgKey": "handlebars"
 		}
 	],
-	"links": [
-		{
-			"svgKey": "github",
-			"url": "github.com/LoisKOUNINEF/nutin"	
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/nutin"
 		},
-		{
-			"svgKey": "npm",
-			"url": "npmjs.com/package/@nutin/cli"
+		"website": {
+			"url": "nutin.dev"
 		},
-		{
-			"svgKey": "live",
-			"url": "nutin.org"
-		}
-	]
+		"other": [
+			{
+				"url": "npmjs.com/package/@nutin/cli",
+				"label": "See the NPM package page"
+			}
+		]
+	}
 }

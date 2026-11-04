@@ -4,5 +4,8 @@
   "study": "Etudes",
   "fullstack": "Fullstack",
   "tool": "Outil",
-  "oop": "OOP"
+  "oop": "OOP",
+  "infra": "Infrastructure",
+  "a11y": "Accessibilité",
+  "extension": "Extension de navigateur"
 }

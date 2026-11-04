@@ -1,37 +1,33 @@
-import { AnchorManager, Component, ComponentProps, IAnchorConfig } from '../../../../core/index.js';
+import { Component, html } from '../../../../core/index.js';
 
-/**
- * ```typescript
- * interface IAnchorConfig {
+export interface IAnchorConfig {
   // prefix href with '#' for internal anchor
   href: string;
   target?: string;
-  textContent?: string;
   i18nKey?: string;
+  textContent?: string;
   className?: string;
-  style?: string;
-  // use regular pipe syntax for arguments / chaining
-  pipes?: string;
-  tagName?: keyof HTMLElementTagNameMap;
+  ariaLabel?: string;
 }
-```
-*/
-export class AnchorComponent extends Component<HTMLAnchorElement, IAnchorConfig> {
-  private _config: IAnchorConfig;
 
-  constructor(mountTarget: HTMLElement, config: IAnchorConfig, props?: ComponentProps) {
+const optionalAttr = (name: string, value: string | undefined) =>
+  value === undefined ? '' : html`${name}="${value}"`;
+
+const templateFn = (config: IAnchorConfig) => html`<a href="${config.href}" class="${config.className}" ${optionalAttr('target', config.target)} ${optionalAttr('data-i18n', config.i18nKey)} ${optionalAttr('aria-label', config.ariaLabel)}>${config.textContent}</a>`;
+
+/**
+ * Renders a real `<a>` inside `<a11y-anchor>` (a11y-elements, defined in main.ts), which handles
+ * new-tab `rel`/labelling and smooth-scroll + focus for internal `#` anchors.
+ */
+export class AnchorComponent extends Component<HTMLElement, IAnchorConfig> {
+  constructor(mountTarget: HTMLElement, config: IAnchorConfig, props?: Nutin.ComponentProps) {
     super({
+      templateFn,
       mountTarget,
-      tagName: config.tagName,
+      tagName: 'a11y-anchor',
       config,
-      normalizeKeys: ['style', 'pipes', 'className'],
+      normalizeKeys: ['className', 'textContent'],
       props
     });
-    this._config = config;
-  }
-
-  protected override onAfterRender(): void {
-    this.element.innerHTML = '';  // clear before AnchorManager appends
-    new AnchorManager(this._config, this.element);
   }
 }

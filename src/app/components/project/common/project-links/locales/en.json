@@ -1,1 +1,4 @@
-{ "default": "ProjectLinks works !"}
+{
+  "github": "See on GitHub",
+  "website": "See the website"
+}

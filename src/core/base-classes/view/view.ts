@@ -1,12 +1,10 @@
-import { BaseComponent, BaseComponentOptions } from '../../index.js';
-
-export interface ViewOptions extends BaseComponentOptions {
-  viewName?: string;
-}
+import { BaseComponent } from '../base-component/base-component.js';
 
 export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComponent<T> {
-  public viewName: string;
+  private _viewName: string;
   protected routeParams: Record<string, string> = {};
+  protected queryParams: Record<string, string> = {};
+  private _template: Nutin.Template;
 
   constructor({
     template,
@@ -14,15 +12,18 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     mountTarget = '#app',
     viewName,
     trustLevel,
-  }: ViewOptions) {
+  }: Nutin.ViewOptions) {
     super({ mountTarget, tagName, trustLevel });
+    if (!viewName) throw new Error('View requires a viewName.');
     this._template = template ?? '';
-    this.viewName = viewName || this.getKebabCaseViewName();
+    this._viewName = viewName;
   }
 
-  private _template: string;
+  public get viewName(): string {
+    return this._viewName;
+  }
 
-  protected override generateTemplate(): string {
+  protected override generateTemplate(): Nutin.Template {
     return this._template;
   }
 
@@ -42,14 +43,28 @@ export abstract class View<T extends HTMLElement = HTMLElement> extends BaseComp
     return key in this.routeParams && this.routeParams[key] !== undefined;
   }
 
-  public shouldUpdateMetaContent(): boolean {
-    return true;
+  // The URL's query string ("?tab=posts"), parsed: a repeated key keeps its last value.
+  public setQueryParams(params: Record<string, string>): void {
+    this.queryParams = { ...params };
   }
 
-  private getKebabCaseViewName(): string {
-    const className = this.constructor.name;
-    const baseName = className.replace(/View$/, '');
-    return baseName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  public getQueryParams(): Record<string, string> {
+    return { ...this.queryParams };
+  }
+
+  public getQueryParam(key: string): string | undefined {
+    return this.queryParams[key];
+  }
+
+  public hasQueryParam(key: string): boolean {
+    return key in this.queryParams && this.queryParams[key] !== undefined;
+  }
+
+  // The page's title, read by the router after each navigation (document.title). Override it
+  // for a title that depends on the route, e.g. the page being shown. Undefined: the router
+  // uses config/seo.json's title, then the "<viewName>.title" translation, then viewName.
+  public documentTitle(): string | undefined {
+    return undefined;
   }
 
   // Navigation hooks — called by router only, never by render lifecycle

@@ -1,0 +1,77 @@
+{
+	"name": "Service mail | Mailer Dockerisé",
+	"tagline": "L'envoi d'e-mails pour mes applications: Postfix et OpenDKIM sur Docker Swarm, en réutilisant les certificats TLS de Traefik.",
+	"imageSrc": "/assets/images/projects/mail-delivery",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"popTagline": "Mis en place pour que mes applications puissent envoyer des e-mails sans fournisseur tiers.",
+	"popOverview": "Un service mail auto-hébergé, en envoi seul, qui permet à mes applications d'envoyer des e-mails transactionnels (vérification de compte, réinitialisation de mot de passe...) depuis mon propre domaine. Il tourne sous forme d'une stack Docker Swarm de quatre services: Postfix, OpenDKIM, un extracteur de certificats et un reloader.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Certificats": "Lus dans le fichier que Traefik renouvelle, et surveillés pour détecter les changements."
+				},
+				{
+					"Reloader": "Une petite image qui prévient Postfix quand de nouveaux certificats sont en place."
+				},
+				{
+					"DKIM": "Clés de signature générées par script."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Réutiliser les certificats de Traefik": "Plutôt qu'un second client de certificats, un conteneur extrait le certificat et la clé du domaine mail depuis le stockage de Traefik, et les réécrit à chaque changement."
+				},
+				{
+					"Signaler via un volume partagé": "L'extracteur dépose un fichier signal dans un volume partagé ; le reloader le détecte et demande à Postfix de recharger sa configuration."
+				},
+				{
+					"Des conteneurs à usage unique": "Chaque service fait une seule chose: un renouvellement de certificat ne nécessite aucun redémarrage, et chaque partie peut être remplacée seule."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Signature DKIM": "Chaque message sortant doit être signé pour que les serveurs destinataires lui fassent confiance."
+				},
+				{
+					"Enregistrements DNS": "Des enregistrements corrects ont été nécessaires avant que les messages arrivent de façon fiable en boîte de réception."
+				},
+				{
+					"TLS": "Le chiffrement du transport repose sur des certificats maintenus valides sans intervention manuelle."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/mail-delivery-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "linux"
+		},
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "bash"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/Mail-Delivery"
+		}
+	}
+}

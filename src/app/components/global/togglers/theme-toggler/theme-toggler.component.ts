@@ -1,40 +1,29 @@
-import { Component, ComponentConfig } from '../../../../../core/index.js';
-import { ThemeTogglerService } from '../../../../services/index.js';
-import { ButtonComponent } from '../../../index.js';
+import { Component, I18nService, html } from '../../../../../core/index.js';
+import { themeTogglerService } from '../../../../services/togglers/theme-toggler/theme-toggler.service.js';
+import { ButtonComponent } from '../../../common/button/button.component.js';
+import { togglerButtonClass } from '../toggler-classes.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class ThemeTogglerComponent extends Component {
-  private readonly _label = 'theme-toggle';
-
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-    this.initTheme();
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
+    const label = I18nService.translate('theme-toggler.label');
     return [{
       selector: 'theme-toggle',
       factory: (el) => new ButtonComponent(el, {
         callback: () => this.toggleTheme(),
-        className: 'navbar__toggler theme-toggler',
-        label: this._label,
+        className: `${togglerButtonClass} before:content-['🌙'] dark:before:content-['🔅']`,
+        ariaLabel: label,
+        tooltip: label,
       })
     }]
   }
 
   private toggleTheme(): void {
-    ThemeTogglerService.toggleTheme();
-  }
-
-  private initTheme(): void {
-    if (ThemeTogglerService.isLightTheme) return;
-    else this.initCheckbox();
-  }
-
-  private initCheckbox(): void {
-    this.render();
-    const checkbox = <HTMLInputElement> document.getElementById(this._label);
-    checkbox.checked = true;
+    themeTogglerService.toggleTheme();
   }
 }

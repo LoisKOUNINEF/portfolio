@@ -1,10 +1,11 @@
-// libs - using partials to ensure proper stacking context for overlays
-@use "../libs";
+// Reset, fonts, palette and global element styles live in tailwind.css (@layer base).
+// Everything here is unlayered, so it wins over Tailwind's layers.
 
-// global styles
-@use "styles";
+// a11y-elements default styles - first, so every rule below wins the cascade
+@use "pkg:a11y-elements/a11y.css";
 
-// custom classes
-@use "custom-classes";
+// a11y-elements theme tokens
+@use "a11y-theme";
 
-@use "svgs-common";
+// touch devices: no sticky hover (see the partial)
+@use "hover-none";

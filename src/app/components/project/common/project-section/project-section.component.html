@@ -1,9 +1,7 @@
-<div class="project-section__container">
-	<h6 data-optional class="project-section__title">${_config.title}</h6>
-	<p data-optional class="project-section__main-content">${_config.mainContent}</p>
-	<h6 data-optional class="project-section__key-points-title">${_config.keyPointsTitle}</h6>
-	<div data-optional class="project-section__key-points">
-		<div data-catalog="project-section-key-points"></div>
+<div class="flex gap-large items-stretch max-w-full leading-6 px-large max-medium:flex-col max-medium:p-0 ${imageModifier(_config)}">
+	<div class="flex flex-col flex-[1_1_0] min-w-0">
+		<h3 class="flex items-center gap-small font-secondary text-[1.05rem] font-bold py-small"><svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">${raw(projectSectionIcons[_config.key])}</svg><span data-i18n="project-section.${_config.key}"></span></h3>
+		<div data-optional class="flex flex-col justify-center flex-1 pb-small" data-catalog="project-section-key-points"></div>
 	</div>
-	<p data-optional class="project-section__after">${_config.after}</p>
+	${_config.sectionImageSrc ? html`<div class="flex-[0_1_40%] self-start max-medium:w-full rounded-large overflow-hidden [&_img]:block [&_img]:w-full [&_img]:h-auto" data-component="project-section-picture"></div>` : ''}
 </div>

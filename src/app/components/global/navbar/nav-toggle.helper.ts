@@ -1,7 +1,7 @@
 export interface INavDomElements {
   navbar: HTMLElement | null;
   anchors: Element[];
-  toggler: Element | null | undefined;
+  toggler: Element | null;
   navAnchorsContainer: Element | null;
 }
 
@@ -12,19 +12,23 @@ export interface INavToggleClasses {
 }
 
 export class NavToggleHelper {
-  private static readonly _label = 'nav-toggle';
   private static readonly _toggleClasses: INavToggleClasses = {
     open: 'open',
-    hidden: 'hidden',
+    hidden: 'is-hidden',
     active: 'active'
   };
   private static _lastScrollY = window.scrollY;
   private static _clickJustOccurred = false;
   private static _clickTimeout: number | null = null; 
-
-  public static get label(): string {
-    return this._label;
-  }
+  // Where the current section is read, as a share of the viewport height from the top:
+  // `start` until the last screen of scroll, sliding to `end` at the bottom of the page
+  private static readonly _highlightLine = { start: 0.25, end: 0.5 };
+  // A clicked link's href, kept highlighted until the user scrolls themselves (see holdHighlight)
+  private static _heldHref: string | null = null;
+  // Inputs that mean the user is scrolling (or interacting) on their own
+  private static readonly _userScrollEvents = ['wheel', 'touchstart', 'keydown', 'pointerdown'] as const;
+  // Pending scroll update: scroll events fire faster than frames, and each update reads layout
+  private static _scrollFrame: number | null = null;
 
   public static get toggleClasses(): INavToggleClasses {
     return this._toggleClasses;
@@ -35,11 +39,24 @@ export class NavToggleHelper {
     if (!navAnchorsContainer || !toggler) return;
     toggler.classList.toggle(this._toggleClasses.open);
     navAnchorsContainer.classList.toggle(this._toggleClasses.open);
+    const isOpen = toggler.classList.contains(this._toggleClasses.open);
+    toggler.setAttribute('aria-expanded', String(isOpen));
   }
 
-	public static hideOnScrollDown(): void {
+  // Scroll listener: at most one update per frame
+  public static onScroll(): void {
+    if (this._scrollFrame !== null) return;
+    this._scrollFrame = requestAnimationFrame(() => {
+      this._scrollFrame = null;
+      const dom = this.getDomElements();
+      this.hideOnScrollDown(dom);
+      this.highlightCurrent(dom);
+    });
+  }
+
+  public static hideOnScrollDown(dom: INavDomElements = this.getDomElements()): void {
     if (this._clickJustOccurred) return;
-    const { navbar, navAnchorsContainer } = this.getDomElements();
+    const { navbar, navAnchorsContainer } = dom;
     const current = window.scrollY;
 
     if (current > this._lastScrollY && current > 100) {
@@ -50,24 +67,51 @@ export class NavToggleHelper {
     this._lastScrollY = current;
   }
 
-  public static highlightCurrent(): void {
-    const { anchors } = this.getDomElements();
-    const sections = anchors.map(anchor => {
-      const id = anchor.getAttribute('href')?.replace('#', '');
-      return { anchor, el: document.getElementById(id!) };
-    });
+  // Highlights the link of the section a reference line is in, or of the last section above
+  // it: content between linked sections (e.g. Featured, after Home) belongs to the link
+  // before it. The line sits at the top quarter of the viewport, so that a short section
+  // (About) jumped to from its link is the one highlighted. Over the last screen of scroll
+  // it slides down to the middle: the last section (Contact) can't scroll up to the top
+  // quarter, but gets highlighted once it fills the end of the page. At the very bottom
+  // (2px tolerance: zoomed pages scroll by fractions), the last link regardless.
+  public static highlightCurrent({ anchors }: INavDomElements = this.getDomElements()): void {
+    if (this._heldHref !== null) {
+      this.setActive(anchors, anchors.find(anchor => anchor.getAttribute('href') === this._heldHref));
+      return;
+    }
+    const sections = anchors
+      .map(anchor => ({ anchor, el: document.getElementById(anchor.getAttribute('href')?.slice(1) ?? '') }))
+      .filter((section): section is { anchor: HTMLAnchorElement; el: HTMLElement } => section.el !== null);
+    if (!sections.length) return;
 
-    const y = window.scrollY + window.innerHeight / 2;
+    const viewport = window.innerHeight;
+    const remaining = Math.max(0, document.documentElement.scrollHeight - viewport - window.scrollY);
+    const endProgress = viewport > 0 ? Math.max(0, 1 - remaining / viewport) : 0;
+    const { start, end } = this._highlightLine;
+    const y = window.scrollY + viewport * (start + (end - start) * endProgress);
+    const current = remaining <= 2
+      ? sections.at(-1)!
+      : [...sections].reverse().find(({ el }) => el.getBoundingClientRect().top + window.scrollY <= y) ?? sections[0]!;
 
-    sections.forEach(({ anchor, el }) => {
-      const top = el?.offsetTop;
-      const bottom = top! + el?.offsetHeight!;
+    this.setActive(anchors, current.anchor);
+  }
 
-      if (y >= top! && y < bottom) {
-        anchors.forEach((el: Element) => el.classList.remove(this._toggleClasses.active));
-        anchor.classList.add(this._toggleClasses.active);
-      }
-    });
+  private static setActive(anchors: Element[], active: Element | undefined): void {
+    if (!active) return;
+    anchors.forEach((anchor: Element) => anchor.classList.toggle(this._toggleClasses.active, anchor === active));
+  }
+
+  // The clicked link stays highlighted until the user scrolls themselves: its section may
+  // never reach the reference line (end of the page, very tall screens), and the smooth
+  // scroll to it passes through other sections
+  private static holdHighlight(anchor: HTMLAnchorElement): void {
+    this._heldHref = anchor.getAttribute('href');
+    this.highlightCurrent();
+    const release = (): void => {
+      this._heldHref = null;
+      this._userScrollEvents.forEach(type => window.removeEventListener(type, release));
+    };
+    this._userScrollEvents.forEach(type => window.addEventListener(type, release, { passive: true }));
   }
 
   public static setupAnchorListeners(): void {
@@ -78,16 +122,17 @@ export class NavToggleHelper {
       const anchor = target.closest('a');
 
       if (anchor && anchor.hasAttribute('href') && anchor.getAttribute('href')?.startsWith('#')) {
-        this.handleAnchorClick(navbar, navAnchorsContainer)
+        this.handleAnchorClick(navbar, navAnchorsContainer);
+        this.holdHighlight(anchor);
       }
     });
   }
 
   private static getDomElements(): INavDomElements {
-    const navbar = document.getElementById('navbar');
+    const navbar = document.getElementById('header');
     const navAnchorsContainer = document.getElementById('navbar-anchors');
-    const anchors = Array.from(navAnchorsContainer!.querySelectorAll('div span a'));
-    const toggler = document.querySelector(`label[for="${this._label}"]`)?.firstElementChild;
+    const anchors = Array.from(navAnchorsContainer!.querySelectorAll('a'));
+    const toggler = document.querySelector('.navbar__toggle-navbar');
     return { navbar, anchors, toggler, navAnchorsContainer };
   }
 

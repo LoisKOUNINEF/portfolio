@@ -1,28 +1,36 @@
-import { Component, ComponentConfig } from '../../../core/index.js';
-import { displayCarouselPop } from './carousel-popover/carousel-popover.js';
-import { PictureComponent } from '../index.js';
+import { Component, I18nService, html } from '../../../core/index.js';
+import { displayCarouselModal } from './carousel-modal/carousel-modal.js';
+import { PictureComponent } from '../common/picture/picture.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class OtherThingsComponent extends Component {
-  private readonly _thumbnailSrc = './assets/images/other-things/thumbnail';
+  private readonly _thumbnailSrc = '/assets/images/other-things/thumbnail';
 
   constructor(mountTarget: HTMLElement) {
     super({templateFn, mountTarget});
-    this.listenToRenderEvents(['language-changed'])
+    this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [{
       selector: 'other-things-thumbnail',
       factory: (el) => new PictureComponent(el, {
-        imageSrc: this._thumbnailSrc,
-        imageAlt: 'Carved books.'
+        sources: [
+          { src: `${this._thumbnailSrc}.avif`, type: 'image/avif' },
+          { src: `${this._thumbnailSrc}.webp`, type: 'image/webp' },
+        ],
+        fallback: `${this._thumbnailSrc}.jpg`,
+        // Named by the surrounding button
+        alt: '',
+        width: 1080,
+        height: 1080,
+        loading: 'eager',
       })
     }]
   }
 
-  private _displayCarouselPop = (): void => {
-    displayCarouselPop();
+  protected _displayCarouselModal = (): void => {
+    displayCarouselModal();
   }
 }

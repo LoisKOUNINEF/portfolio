@@ -1,0 +1,77 @@
+{
+	"name": "CI / CD | Pipelines réutilisables",
+	"tagline": "Des workflows GitHub Actions et scripts bash réutilisés dans mes projets, des déploiements Docker Swarm aux publications npm et sur les stores de navigateurs.",
+	"imageSrc": "/assets/images/projects/ci-cd",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"popTagline": "Des pipelines GitHub Actions réutilisables pour déployer des applications et publier des packages.",
+	"popOverview": "Un ensemble de générateurs Bash et de templates de workflows partagés, conçus pour standardiser la CI/CD de mes projets. Il couvre les déploiements de sites basés sur Docker, la publication npm et les releases d'extensions de navigateur, et s'adapte aussi bien aux dépôts autonomes qu'aux monorepos.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Promotion": "Les tags d'images sont injectés dans le fichier de stack généré, et la production reprend les tags validés en staging."
+				},
+				{
+					"Flux de branches": "Les pull requests vers la branche principale peuvent être limitées à staging, recréée après chaque release."
+				},
+				{
+					"Garde-fous de release": "Le tag doit être sur la branche principale et correspondre à la version du package; les fichiers des déploiements échoués sont archivés avec un horodatage."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Promouvoir, pas reconstruire": "La production déploie exactement les images validées en staging, en reprenant leurs tags."
+				},
+				{
+					"Health checks, puis rollback": "Le nombre de réplicas est surveillé après le déploiement; si les services ne sont pas sains à temps, le fichier de stack précédent est restauré et redéployé."
+				},
+				{
+					"Des scripts des deux côtés": "Les scripts de jobs tournent sur le runner CI, ceux de déploiement sur le serveur: chaque côté peut aussi être lancé à la main."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Synchroniser les copies": "Les scripts sont réutilisés par copie: les améliorations sont reportées à la main d'un dépôt à l'autre."
+				},
+				{
+					"Garder les actions à jour": "L'abandon de Node 20 pour les actions GitHub a imposé de passer chaque workflow à des versions plus récentes, et d'épingler les images des runners."
+				},
+				{
+					"Un échec sans conséquence": "Un déploiement échoué doit être détecté, annulé et archivé: c'est le rollback qui rend les déploiements fréquents sereins."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "bash"
+		},
+		{
+			"svgKey": "git"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/pipelines"
+		}
+	}
+}

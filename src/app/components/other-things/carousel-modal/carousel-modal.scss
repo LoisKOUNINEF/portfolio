@@ -1,0 +1,69 @@
+@use "mixins";
+
+// a11y-elements' modal wrapper and the slides (each slide is an <a11y-picture>):
+// unlayered a11y.css styles them, so these can't be utilities. The rest is in the
+// template and in carousel-modal.ts (buttons).
+.a11y-modal-wrapper:has(.carousel-modal__wrapper) {
+	@include mixins.flex-center;
+	width: 55%;
+	height: auto;
+
+	@include mixins.respond-to(medium) {
+		width: 100%;
+	}
+}
+
+.carousel__slide {
+	display: none;
+	opacity: 0;
+	visibility: hidden;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+
+	&.active {
+		display: flex;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		object-fit: cover;
+		display: block;
+		border-radius: 1rem;
+	}
+
+  .a11y-picture {
+  	position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  figcaption {
+  	font-weight: 600;
+  	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: .5rem;
+    border-radius: var(--radius-large);
+    color: var(--text);
+    text-shadow: 0 0 10px color-mix(in srgb, var(--background) 30%, transparent);
+    backdrop-filter: blur(8px);
+
+    .dark-theme & {
+      color: var(--background);
+      text-shadow: 0 0 10px color-mix(in srgb, var(--text) 30%, transparent);
+    }
+  }
+}

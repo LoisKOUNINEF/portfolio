@@ -1,0 +1,77 @@
+{
+	"name": "CI / CD | Reusable pipelines",
+	"tagline": "GitHub Actions workflows and bash scripts reused across my projects, from Docker Swarm deployments to npm and browser store releases.",
+	"imageSrc": "/assets/images/projects/ci-cd",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "infra",
+			"color": "indigo"
+		}
+	],
+	"popTagline": "Reusable GitHub Actions pipelines for deploying applications and releasing packages.",
+	"popOverview": "A collection of Bash generators and shared workflow templates designed to standardize CI/CD across my projects. It covers Docker-based website deployments, npm publishing and browser extension releases, while adapting to both standalone repositories and monorepos.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Promotion": "Image tags are injected into the generated stack file, and production reuses the tags validated in staging."
+				},
+				{
+					"Branch flow": "Pull requests to the main branch can be restricted to staging, which is recreated after each release."
+				},
+				{
+					"Release guards": "The tag must be on the main branch and match the package version; files of failed deployments are archived with a timestamp."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Promote, don't rebuild": "Production deploys the exact images validated in staging, by copying their tags."
+				},
+				{
+					"Health checks, then rollback": "Replica counts are polled after deploying; if services aren't healthy in time, the previous stack file is restored and deployed again."
+				},
+				{
+					"Scripts on both sides": "Job scripts run on the CI runner, deployment scripts on the server: each side can also be run by hand."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Keeping copies in sync": "Scripts are reused by copying them, so improvements are carried over by hand from one repository to another."
+				},
+				{
+					"Keeping actions up to date": "GitHub retiring Node 20 for actions meant moving every workflow to newer action versions, and pinning the runner images."
+				},
+				{
+					"Making failure a non-event": "A failed deployment has to be detected, rolled back and archived: the rollback path is what makes frequent deployments comfortable."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/ci-cd-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "docker"
+		},
+		{
+			"svgKey": "bash"
+		},
+		{
+			"svgKey": "git"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/pipelines"
+		}
+	}
+}

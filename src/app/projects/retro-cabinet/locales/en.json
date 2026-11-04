@@ -1,0 +1,77 @@
+{
+	"name": "Games in TypeScript | Retro Cabinet",
+	"tagline": "A classic games platform where nine games share one engine contract, one game loop and one save system.",
+	"imageSrc": "/assets/images/projects/retro-cabinet",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "oop",
+			"color": "yellow"
+		}
+	],
+	"popTagline": "A browser arcade of classic game clones.",
+	"popOverview": "Originally built with Angular, it was rebuilt with Nutin to explore reusable gameplay systems and game architecture. Also, a perfectly legitimate excuse to play games during work hours.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Game registry": "A single registry of games, from which routes and home page cards are built."
+				},
+				{
+					"Typed options": "Each game definition declares its settings (starting level, on/off options, etc) and a factory building the game from them."
+				},
+				{
+					"Controls": "Keys are handled by physical position, so QWERTY and AZERTY layouts both work."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"A narrow contract": "Every game implements reset, tick, key handling and optional snapshot / restore; the view drives it and renders a grid of cells or a canvas drawing."
+				},
+				{
+					"One loop, two kinds of games": "Grid games tick on chained timeouts that read their speed before every tick; canvas games tick on animation frames with a capped time step."
+				},
+				{
+					"Defensive persistence": "Stored data is treated as untrusted, and saves carry a version per game: older saves are dropped instead of being restored into the wrong shape."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Leaving the framework behind": "RetroCabinet relied on Angular signals; making updates explicit moved logic out of the UI layer and into the games."
+				},
+				{
+					"Real-time constraints": "Game rules stay testable in isolation, away from rendering and timing."
+				},
+				{
+					"Touch input": "A D-pad, or a stick for steering games, sends the same key codes as the keyboard, so input stays a single concern for the games."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/retro-cabinet-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "sass"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/retro-cabinet"
+		},
+		"website": {
+			"url": "arcade.lois-kouninef.eu"
+		}
+	}
+}

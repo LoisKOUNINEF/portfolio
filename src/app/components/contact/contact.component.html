@@ -1,13 +1,16 @@
-<div class="contact__wrapper">
-	<div class="contact__container">
-		<div class="contact__header">
+<!-- Spacing and alignment come from the home view's contact/infos card: two columns, the wrappers
+     are display: contents so the header and each card are rows of the article's subgrid -->
+<div class="p-0 contents max-medium:block">
+	<div class="w-full text-left contents max-medium:block">
+		<div class="section-header [--section-header-margin-bottom:var(--spacing-small)] max-medium:[--section-header-margin-bottom:var(--spacing-large)]">
 			<h2 data-i18n="contact.title"></h2>
 		</div>
-		<div class="contact__links">
+		<!-- One column: the résumé card (home view) follows directly, spaced like the cards.
+		     Link cards are an <a> inside <a11y-anchor>: grid stretches the <a> to the row height -->
+		<div class="contents w-full grid-cols-[1fr] gap-medium max-medium:grid max-medium:pb-medium *:grid">
 			<span data-component="email-card"></span>
 			<span data-component="linkedin-card"></span>
 			<span data-component="github-card"></span>
-			<span data-component="resume-card"></span>
 		</div>
 	</div>
 </div>

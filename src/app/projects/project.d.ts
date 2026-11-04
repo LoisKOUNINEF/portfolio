@@ -3,33 +3,50 @@ declare interface IProjectBase {
   name: string;
   tags: IProjectTag[];
   tagline: string;
-  imageSrc: string;
-  presentation: IProjectSection;
+  // Path without extension (.avif/.webp/.jpg variants); optional until a picture exists
+  imageSrc?: string;
+  presentation: IProjectPresentation;
   technos: ITechBase[];
-  links: IProjectLink[];
+  links?: IProjectLinks;
 }
 
+// Modal structure, shared by every project: header (title, tags, picture, technos, popTagline)
+// → links → popOverview → sections
 declare interface IProject extends IProjectBase {
   popTagline: string;
-  overview: IProjectSection;
-  purpose: IProjectSection;
-  constraints: IProjectSection;
-  choices: IProjectSection[];
-  challenges: IProjectSection[];
-  learned: IProjectSection;
+  popOverview: string;
+  // Always rendered Features → Design decisions → Challenges, titled from project-section.<key>
+  sections: Record<ProjectSectionKey, IProjectSection>;
 }
 
-declare interface IProjectSection {
-  title?: string;
-  mainContent?: string;
-  keyPointsTitle?: string;
+declare interface IProjectPresentation {
   keyPoints?: string[];
-  after?: string;
+}
+
+declare type ProjectSectionKey = 'features' | 'designDecisions' | 'challenges';
+
+declare interface IProjectSection {
+  // Each entry renders as "label: text"
+  sectionKeyPoints?: Record<string, string>[];
+  // Path without extension (.avif/.webp/.jpg variants), like imageSrc
+  sectionImageSrc?: string;
+  // Only read when sectionImageSrc is set; defaults to alternating by section order (right, left, right…)
+  imagePosition?: 'left' | 'right';
 }
 
 declare interface IProjectLink {
-  svgKey: LinkSvgKey;
+  // Without protocol (https:// is prepended)
   url: string;
+  // Overrides the default label (project-links.<key>)
+  label?: string;
+}
+
+// At most 3 links in total, rendered GitHub → website → other (in array order)
+declare interface IProjectLinks {
+  github?: IProjectLink;
+  website?: IProjectLink;
+  // No default label: always say where it leads
+  other?: (IProjectLink & { label: string })[];
 }
 
 declare interface IProjectTag {

@@ -1,7 +1,7 @@
-import { AppEventBus, Component, ComponentConfig } from '../../../core/index.js';
-import { InfoCardComponent } from '../common/index.js';
+import { Component, html } from '../../../core/index.js';
+import { InfoCardComponent } from '../common/info-card/info-card.component.js';
 
-const templateFn = () => `__TEMPLATE_PLACEHOLDER__`;
+const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
 
 export class InfosComponent extends Component {
   constructor(mountTarget: HTMLElement) {
@@ -9,12 +9,11 @@ export class InfosComponent extends Component {
     this.listenToRenderEvents(['language-changed']);
   }
 
-  public childConfigs(): ComponentConfig[] {
+  public override registerChildren(): Nutin.ComponentConfig[] {
     return [
       {
         selector: 'location-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/pin.svg',
           labelKey: 'infos.location-label',
           subtextKey: 'infos.location-subtext',
@@ -23,7 +22,6 @@ export class InfosComponent extends Component {
       {
         selector: 'availability-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/calendar.svg',
           labelKey: 'infos.availability-label',
           subtextKey: 'infos.availability-subtext',
@@ -32,7 +30,6 @@ export class InfosComponent extends Component {
       {
         selector: 'languages-card',
         factory: (el) => new InfoCardComponent(el, {
-          icon: '',
           iconSrc: '/assets/images/svgs/mock-emojis/dialog.svg',
           labelKey: 'infos.languages-label',
           subtextKey: 'infos.languages-subtext',

@@ -1,7 +1,5 @@
-{ 
-	"overview-title": "Aperçu",
-	"purpose-title": "Objectifs & Contraintes",
-	"choices-title": "Principales Décisions de Conception",
-	"learned-title": "Les Enseignements",
-	"challenges-title": "Difficultés Rencontrées"
+{
+  "features": "Fonctionnalités",
+  "designDecisions": "Choix de conception",
+  "challenges": "Défis"
 }

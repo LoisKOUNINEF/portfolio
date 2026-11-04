@@ -1,66 +1,72 @@
-import { Component, ComponentProps } from '../../../../core/index.js';
+import { Component, html } from '../../../../core/index.js';
 
-export interface IInfoCardConfig {
-  icon: string;
-  labelKey: string;
-  subtextKey: string;
+export interface IFocusableConfig {
   href?: string;
   target?: string;
   download?: string;
-  id?: string;
-  iconSrc?: string;
   callback?: () => void;
+  ariaLabel?: string;
 }
 
-const templateFn = (_config: IInfoCardConfig) => `__TEMPLATE_PLACEHOLDER__`;
+export interface IFocusableElementConfig extends IFocusableConfig {
+  iconSrc: string;
+  labelKey: string;
+  subtextKey: string;
+}
 
-export class InfoCardComponent extends Component<HTMLElement, IInfoCardConfig> {
-  constructor(mountTarget: HTMLElement, config: IInfoCardConfig, props?: ComponentProps) {
+const templateFn = (_config: IFocusableElementConfig) => html`__TEMPLATE_PLACEHOLDER__`;
+
+/**
+ * Link mode (`href`): a real `<a>` wrapped in `<a11y-anchor>` (new-tab rel/label, internal anchor focus).
+ * Action mode (`callback` only): `<a11y-focusable>` (role="button", Enter/Space → click).
+ * Neither: a plain, non-interactive `<div>`.
+ */
+export class InfoCardComponent extends Component<HTMLElement, IFocusableElementConfig> {
+  private readonly _classNames: string[];
+
+  constructor(mountTarget: HTMLElement, config: IFocusableElementConfig, props?: Nutin.ComponentProps) {
     const { className, ...restProps } = props ?? {};
     super({
       templateFn,
       mountTarget,
       config,
-      tagName: config.href ? 'a' : 'div',
-      normalizeKeys: ['href', 'target', 'download', 'id', 'iconSrc'],
+      tagName: InfoCardComponent.tagFor(config),
+      normalizeKeys: ['href', 'target', 'download', 'iconSrc'],
       props: restProps,
     });
-    this.setStyles(className);
-    this.setLinkAttributes();
-    this.setCallback();
-    this.setTabNav();
+    // info-card: base look in tailwind.css (@layer components), so className utilities override it
+    this._classNames = ['info-card', ...(className?.split(' ').filter(Boolean) ?? [])];
+    if (!config.href) this.applyCardAttributes(this.element);
   }
 
-  private setStyles(className: string | undefined): void {
-    const extraClasses = className?.split(' ').filter(Boolean) ?? [];
-    this.element.classList.add('info-card', ...extraClasses);
+  private static tagFor(config: IFocusableConfig): 'a11y-anchor' | 'a11y-focusable' | 'div' {
+    if (config.href) return 'a11y-anchor';
+    return config.callback ? 'a11y-focusable' : 'div';
   }
 
-  private setLinkAttributes(): void {
-    if (!this.config.href) return;
-    const el = this.element as HTMLAnchorElement;
-    el.href = this.config.href;
-    if (this.config.target) el.target = this.config.target;
-    if (this.config.download) el.download = this.config.download;
-    if (this.config.id) el.id = this.config.id;
-  }
-
-  private setCallback() {
+  protected override onAfterRender(): void {
+    super.onAfterRender();
+    const target = this.config.href ? this.wrapInAnchor() : this.element;
     if (this.config.callback) {
-      this.element.addEventListener('click', this.config.callback);
+      const click: EventListener = () => this.config.callback!();
+      target.addEventListener('click', click);
+      this.eventListeners.push([target, 'click', click]);
     }
   }
-  private setTabNav() {
-    if (!this.config.href && this.config.callback) {
-      this.element.setAttribute('role', 'button');
-      this.element.setAttribute('tabindex', '0');
-      this.element.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.config.callback!();
-        }
-      });
-    }
+
+  private wrapInAnchor(): HTMLAnchorElement {
+    const anchor = document.createElement('a');
+    anchor.href = this.config.href!;
+    if (this.config.target) anchor.target = this.config.target;
+    if (this.config.download) anchor.download = this.config.download;
+    this.applyCardAttributes(anchor);
+    anchor.append(...Array.from(this.element.childNodes));
+    this.element.replaceChildren(anchor);
+    return anchor;
+  }
+
+  private applyCardAttributes(el: HTMLElement): void {
+    el.classList.add(...this._classNames);
+    if (this.config.ariaLabel) el.setAttribute('aria-label', this.config.ariaLabel);
   }
 }
-

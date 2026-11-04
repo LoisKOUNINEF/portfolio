@@ -1,0 +1,87 @@
+{
+	"name": "Web Components | a11y-elements",
+	"tagline": "Des Custom Elements d'accessibilité indépendants de tout framework: une couche de comportement pour du vrai markup, pas un kit UI stylé.",
+	"imageSrc": "/assets/images/projects/a11y-elements",
+	"tags": [
+		{
+			"i18nKey": "personal",
+			"color": "teal"
+		},
+		{
+			"i18nKey": "tool",
+			"color": "orange"
+		},
+		{
+			"i18nKey": "a11y",
+			"color": "purple"
+		}
+	],
+	"popTagline": "Conçu pour ne plus avoir à réécrire les mêmes comportements d'accessibilité dans chaque projet.",
+	"popOverview": "Une librairie de Web Components accessibles, indépendante de tout framework, qui fournit des éléments d'interface et des schémas d'interaction réutilisables sans imposer de framework ni de design system. Construite sur les capacités natives du navigateur, elle vise à rendre les interfaces accessibles plus simples à intégrer et à personnaliser.",
+	"sections": {
+		"features": {
+			"sectionKeyPoints": [
+				{
+					"Librairie de composants": "Une trentaine de custom elements couvrant les champs de formulaire, la navigation, les images, les états de chargement et les overlays."
+				},
+				{
+					"Validation de formulaires": "La validation native des formulaires, enrichie de validateurs personnalisés, d'erreurs contextuelles et de composants de champ réutilisables."
+				},
+				{
+					"Overlays": "Un ensemble complet d'overlays: modales, drawers, dropdowns, tooltips, notifications et plus encore."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-features"
+		},
+		"designDecisions": {
+			"sectionKeyPoints": [
+				{
+					"Indépendant de tout framework": "Une couche de comportement plutôt qu'un kit UI stylé, utilisable en JavaScript natif ou avec un framework frontend."
+				},
+				{
+					"Une architecture en Light DOM": "Pas de Shadow DOM: le markup sous-jacent reste accessible et directement stylable."
+				},
+				{
+					"Le natif d'abord": "Les contrôles de formulaire natifs restent la source de vérité, tandis que des propriétés CSS personnalisées documentées et un thème sombre optionnel laissent la présentation entre les mains des développeurs."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-design"
+		},
+		"challenges": {
+			"sectionKeyPoints": [
+				{
+					"Cohérence": "Assurer des interactions clavier et une gestion du focus cohérentes entre navigateurs, composants et schémas d'interaction."
+				},
+				{
+					"Gérer le comportement complexe des overlays": "Confinement et restauration du focus, inertie de l'arrière-plan, règles de fermeture et annonces aux lecteurs d'écran."
+				},
+				{
+					"Fiabilité": "Garantir une distribution fiable, entre imports ESM modulaires et bundles navigateur autonomes, avec une suite de plus de 700 tests répartis sur 50 fichiers."
+				}
+			],
+			"sectionImageSrc": "/assets/images/projects/a11y-elements-challenges"
+		}
+	},
+	"technos": [
+		{
+			"svgKey": "typescript"
+		},
+		{
+			"svgKey": "html"
+		}
+	],
+	"links": {
+		"github": {
+			"url": "github.com/LoisKOUNINEF/a11y-elements"
+		},
+		"website": {
+			"url": "nutin.dev/a11y-elements"
+		},
+		"other": [
+			{
+				"url": "npmjs.com/package/a11y-elements",
+				"label": "Voir la page du package NPM"
+			}
+		]
+	}
+}

@@ -1,8 +1,7 @@
-import { Language } from '../../../../core/services/i18n/languages.js';
 import { I18nService, Service } from '../../../../core/index.js';
-import { notify } from '../../../../libs/index.js';
+import { notify } from 'a11y-elements/overlays/snackbar';
 
-export class LanguageToggler extends Service<LanguageToggler> {  
+export class LanguageTogglerService extends Service<LanguageTogglerService> {  
   public async toggleLang(): Promise<void> {
     const switchTo = I18nService.currentLanguage === 'en' ? 'fr' : 'en';
     await I18nService.setCurrentLanguage(switchTo);
@@ -10,7 +9,7 @@ export class LanguageToggler extends Service<LanguageToggler> {
   }
 
   private notifyChange() {
-    const messages: Record<Language, string> = {
+    const messages: Record<Nutin.Language, string> = {
       fr: 'Langue: Français',
       en: 'Language: English'
     };
@@ -21,4 +20,4 @@ export class LanguageToggler extends Service<LanguageToggler> {
 
 }
 
-export const LanguageTogglerService = LanguageToggler.getInstance();
+export const languageTogglerService = LanguageTogglerService.getInstance();

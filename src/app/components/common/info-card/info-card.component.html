@@ -1,7 +1,7 @@
-<span class="info-card__icon">
-	<img class="info-card__icon-img" src="${_config.iconSrc}" alt="" data-optional="src">
+<span class="info-card-icon text-large size-16 flex items-center justify-center shrink-0 max-medium:size-12">
+	<img class="info-card-icon-img size-12 object-contain max-medium:size-9 ${_config.iconSrc.includes('github') ? 'dark:[filter:invert(1)]' : ''}" src="${_config.iconSrc}" alt="" data-optional="src">
 </span>
-<span class="info-card__content">
-	<span class="info-card__label" data-i18n="${_config.labelKey}"></span>
-	<span class="info-card__subtext c-external-link" data-i18n="${_config.subtextKey}"></span>
+<span class="info-card-content flex flex-col gap-[2px]">
+	<span class="info-card-label font-bold text-medium" data-i18n="${_config.labelKey}"></span>
+	<span class="info-card-subtext text-small font-normal opacity-65 empty:hidden" data-i18n="${_config.subtextKey}"></span>
 </span>

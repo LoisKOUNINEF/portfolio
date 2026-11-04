@@ -1,23 +1,11 @@
-declare type CoreEventMap = {
-  'navigate': string;
-  'reload': string;
-  'language-changed': string;
-  'view-mount': string;
-  'view-render': string;
-  'view-unmount': string;
-  'track-pageview': { page: string };
-  'popover-opened': string;
-  'popover-close': string;
-  // Add other events and their payload types here
-};
+declare namespace Nutin {
+  interface AppEventMap {}
+}
 
-declare type StoreEventMap = {[ K in `store:${string}` ]: any; };
-
-// Merged event map
-declare type EventMap = CoreEventMap & StoreEventMap;
-declare type EventKey = keyof EventMap;
-
-declare type ProjectFolderName = 'nutin' | 'paris-2024' | 'pixels-mansion' | 'self-hosting' | 'run-for-the-bun';
+declare type ProjectFolderName =
+  | 'nutin' | 'a11y-elements'
+  | 'paris-2024' | 'retro-cabinet' | 'notelet' | 'narrative-palettes'
+  | 'self-hosting' | 'ci-cd' | 'mailer';
 
 declare type TechSvgKey = FrontendSvgKey | BackendSvgKey | DatabaseSvgKey | ToolsSvgKey;
 
@@ -25,8 +13,6 @@ type FrontendSvgKey = 'typescript' | 'angular' | 'vuejs' | 'sass' | 'html' | 'ta
 type BackendSvgKey = 'nestjs' | 'nodejs' | 'express' | 'rails' | 'golang' | 'java';
 type DatabaseSvgKey = 'postgresql' | 'mysql' | 'typeorm' | 'sqlite';
 type ToolsSvgKey = 'git' | 'docker' | 'jest' | 'linux' | 'traefik' | 'bash';
-
-declare type LinkSvgKey = 'github' | 'live' | 'npm' | 'linkedin';
 
 declare interface ITech {
   svgKey: TechSvgKey;

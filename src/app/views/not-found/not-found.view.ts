@@ -1,51 +1,60 @@
-import { AppEventBus, ComponentConfig, View } from '../../../core/index.js';
-import { ButtonComponent, PictureComponent } from '../../components/index.js';
+import { I18nService, Navigation, View, hideGlobals, html, revealGlobals } from '../../../core/index.js';
+import { ButtonComponent } from '../../components/common/button/button.component.js';
+import { PictureComponent } from '../../components/common/picture/picture.component.js';
 
-const template = `__TEMPLATE_PLACEHOLDER__`;
+const template = html`__TEMPLATE_PLACEHOLDER__`;
+
+const GLOBAL_IDS = ['navbar', 'site-footer'];
 
 export class NotFoundView extends View {
   constructor() {
-    super({template});
+    super({template, viewName: 'not-found'});
     this.hideGlobals();
   }
 
-  public onExit(): void {
+  public override documentTitle(): string {
+    return I18nService.translate('not-found.meta.title', 'Page Not Found');
+  }
+
+  public override onExit(): void {
     this.revealGlobals();    
   }
 
-  childConfigs(): ComponentConfig[] {
-    const btnClass = 'not-found__back-btn';
+  override registerChildren(): Nutin.ComponentConfig[] {
+    const btnClass = 'bg-inherit text-text text-large italic rounded-[2rem] underline py-small px-large transition-[font-size] duration-normal hover:text-secondary hover:text-[1.7rem]';
     return [
       {
-        selector: 'other-things-thumbnail',
+        selector: 'not-found-image',
         factory: (el) => new PictureComponent(el, {
-          imageSrc: './assets/images/404',
-          imageAlt: 'Carved books.' 
+          sources: [
+            { src: '/assets/images/404.avif', type: 'image/avif' },
+            { src: '/assets/images/404.webp', type: 'image/webp' },
+          ],
+          fallback: '/assets/images/404.jpg',
+          width: 900,
+          height: 699,
+          alt: 'Page not found illustration — Black and white picture of a man standing on the edge of a wall. From the movie "Das Cabinet des Doktor Caligari", R. Wiene, 1920.',
+          loading: 'eager',
         })
       },
       { 
         selector: 'back-to-home',
-        factory: (el) => new ButtonComponent(el, { i18nKey: 'not-found.redirect', callback: () => this.handleHome(), className: btnClass 
-        })
+        factory: (el) => new ButtonComponent(el, 
+          { i18nKey: 'not-found.redirect', callback: () => this.handleHome(), className: btnClass }
+        )
       },
     ]
   }
 
+  private hideGlobals(): void {
+    hideGlobals(GLOBAL_IDS);
+  }
+
+  private revealGlobals(): void {
+    revealGlobals(GLOBAL_IDS);
+  }
+
   private handleHome(): void {
-    AppEventBus.emit('navigate', '/');
-  }
-
-  private hideGlobals() {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    navbar.style = 'display: none';
-    const footer = document.getElementById('footer') as HTMLElement;
-    footer.style = 'display: none';
-  }
-
-  private revealGlobals() {
-    const navbar = document.getElementById('navbar') as HTMLElement;
-    navbar.style = 'display: block';
-    const footer = document.getElementById('footer') as HTMLElement;
-    footer.style = 'display: block';
+    Navigation.navigateTo('/');
   }
 }

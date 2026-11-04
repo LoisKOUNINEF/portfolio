@@ -1,0 +1,48 @@
+@use "sass:map";
+
+// Only what restyles a11y-elements' tablist; the rest of the tabs is in the template.
+// Tab colors, font and indicator come from $a11y-tabs-config (styles/_a11y-theme.scss)
+$tabs-config: (
+	'list-gap': var(--spacing-small),
+	// Panel shown by a tab switch (see markEntering() in tabs.component.ts)
+	'enter-duration': var(--duration-slow),
+	'enter-easing': ease-out,
+	'enter-offset': 0.5rem,
+) !default;
+
+@keyframes tabs-panel-enter {
+	from {
+		opacity: 0;
+		transform: translateY(map.get($tabs-config, 'enter-offset'));
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+// Replays each time the panel goes from hidden (display: none) to shown
+@media (prefers-reduced-motion: no-preference) {
+	.tabs__panel--enter:not([hidden]) {
+		animation: tabs-panel-enter map.get($tabs-config, 'enter-duration') map.get($tabs-config, 'enter-easing');
+	}
+}
+
+.tabs__list {
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	gap: map.get($tabs-config, 'list-gap');
+}
+
+.tabs__tab {
+	&:hover {
+		border-bottom: 1px solid var(--text);
+	}
+
+	@media (hover: none) {
+		&:hover {
+			border-bottom: none;
+		}
+	}
+}
