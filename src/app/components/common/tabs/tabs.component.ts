@@ -47,13 +47,26 @@ export class TabsComponent extends Component<HTMLElementTagNameMap['a11y-tabs'],
     super.onAfterRender();
     this.element.setAttribute('label', I18nService.translate(this.config.labelI18nKey));
     // Tabs → picker: keyboard (larger screens), links and URL hash
-    this.element.onChange = (name) => this.syncPicker(name);
+    this.element.onChange = (name) => {
+      this.markEntering(name);
+      this.syncPicker(name);
+    };
     this.syncPicker(this.element.selected);
   }
 
   // Picker → tabs. Nutin's @value token doesn't read <select>s, hence @target
   private _onPick(picker: HTMLSelectElement): void {
+    // select() doesn't call onChange: mark the panel here
+    if (picker.value !== this.element.selected) this.markEntering(picker.value);
     this.element.select(picker.value);
+  }
+
+  // Enables the enter animation (tabs.component.scss) on a panel the user switches to.
+  // Never set on render, so the first panel (and a re-render's) shows without it
+  private markEntering(name: string): void {
+    this.element
+      .querySelector(`:scope > .tabs__panel[data-panel="${CSS.escape(name)}"]`)
+      ?.classList.add('tabs__panel--enter');
   }
 
   private syncPicker(name: string): void {
