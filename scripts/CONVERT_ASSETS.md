@@ -1,15 +1,16 @@
 # Convert assets
 
-Two Bash scripts convert the site's assets into web formats:
+Three Bash scripts convert the site's assets into web formats:
 
 | Script | Converts |
 |---|---|
 | `scripts/convert-images.sh` | PNG, JPG → JPG, WebP, AVIF |
+| `scripts/resize-images.sh` | PNG, JPG → smaller JPG, WebP, AVIF copies for `srcset` (`foo-640w.avif`, …) |
 | `scripts/convert-fonts.sh` | TTF, OTF → OTF, WOFF, WOFF2 |
 
-Both work the same way:
+They all work the same way:
 
-- Each source file is converted **directly** to every requested output format (never through an intermediate format), so no quality is lost along the way.
+- Each source file is converted **directly** to every requested output format (never through an intermediate format), so no quality is lost along the way. (`resize-images.sh` goes through one lossless PNG per width, which loses nothing either.)
 - Outputs that already exist are **skipped**, so a second run only converts new files. Use `-f` to regenerate them.
 - Source files are never modified or deleted.
 - Only the given folder is scanned; `-r` includes its subfolders.
@@ -105,6 +106,52 @@ scripts/convert-images.sh -r -f --sources jpg --outputs avif src/assets/images
 scripts/convert-images.sh --sources jpg,png src/assets/images
 ```
 
+## Images: `resize-images.sh`
+
+```
+scripts/resize-images.sh [options] [folder]
+```
+
+Writes smaller copies of each image for `srcset`, next to it: `foo.jpg` → `foo-640w.jpg`, `foo-640w.webp`, `foo-640w.avif`, `foo-1080w.jpg`, … `PictureComponent` (`src/app/components/common/picture/`) lists them as candidates when its config has `sizes`: its `RESPONSIVE_WIDTHS` must match the widths generated here.
+
+Run it after adding or replacing an image (after `convert-images.sh`, so the full-size WebP/AVIF exist):
+
+```bash
+scripts/resize-images.sh -r src/assets/images/projects
+```
+
+### Arguments and options
+
+| Option | Required | Default | Values | Description |
+|---|---|---|---|---|
+| `folder` | No | `.` (current directory) | Path to a folder | Folder to scan for source images. Outputs are written next to their source. |
+| `--widths LIST` (alias `--width`) | No | `640,1080` | Comma-separated widths, in px | Widths to generate. The height follows the source's ratio. |
+| `--sources LIST` (alias `--source`) | No | `jpg,png` | Comma-separated: `png`, `jpg` | Source formats. `jpg` also matches `.jpeg`. Case-insensitive. |
+| `--outputs LIST` (alias `--output`) | No | `jpg,webp,avif` | Comma-separated: `jpg`, `webp`, `avif` | Formats to generate for each width (the source's own format included). |
+| `-r`, `--recursive` | No | Off | — | Also scan subfolders, at any depth. |
+| `-f`, `--force` | No | Off | — | Regenerate outputs that already exist. |
+| `-h`, `--help` | No | — | — | Print the usage and exit. |
+
+### How it works
+
+- Each width is resized once from the source into a lossless PNG (temporary, deleted on exit), with `sips` on macOS or ImageMagick elsewhere. Every format is then encoded from it with the same encoders and quality as `convert-images.sh`.
+- No upscaling: when the source isn't wider than a width, that width's files are copies of the full-size `foo.jpg`/`foo.webp`/`foo.avif` (encoded from the source if one is missing). Every variant always exists, so a `srcset` never points at a missing file.
+- Files named `*-<n>w.*` are never used as sources. `convert-images.sh` may still pick up a `foo-640w.jpg`, but its WebP and AVIF already exist, so it skips them.
+- When `foo.jpg` and `foo.png` are in the same folder, the source format listed first in `--sources` wins.
+- Images that never go through `PictureComponent` (e.g. `og-cover.jpg`, for link previews) don't need variants: delete them or run the script on their sibling folders only.
+
+### Examples
+
+```bash
+# Every image used by the site
+scripts/resize-images.sh -r src/assets/images/projects
+scripts/resize-images.sh -r src/assets/images/other-things
+scripts/resize-images.sh src/assets/images && rm src/assets/images/og-cover-*w.*   # 404.jpg
+
+# Regenerate the AVIF variants only (e.g. after changing the quality)
+scripts/resize-images.sh -r -f --outputs avif src/assets/images/projects
+```
+
 ## Fonts: `convert-fonts.sh`
 
 ```
@@ -172,6 +219,7 @@ scripts/convert-fonts.sh -r -f --sources otf --outputs woff2 src/assets/fonts
 |---|---|---|
 | `Missing dependency for jpg: sips, magick or convert (ImageMagick)` | No JPG encoder found (Linux) | `sudo apt install imagemagick`, or leave `jpg` out of `--outputs` |
 | `Missing dependency for webp: cwebp` | WebP tools not installed | `brew install webp` / `sudo apt install webp` |
+| `Missing dependency for resizing: sips, magick or convert (ImageMagick)` | No resizing tool found (Linux, `resize-images.sh`) | `sudo apt install imagemagick` |
 | `Missing dependency for avif: avifenc` | libavif tools not installed | `brew install libavif` / `sudo apt install libavif-bin` |
 | `avifenc` error about `-q` | libavif older than 1.0 | Unsupported distribution |
 | `Missing dependency: fonttools` | fonttools not found by `fonttools` nor `python3` | `brew install fonttools` / `sudo apt install python3-fonttools` |

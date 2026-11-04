@@ -40,6 +40,8 @@ export class ProjectCardComponent extends Component<HTMLElement, IProjectCard> {
           { src: `${imageSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${imageSrc}.jpg`,
+        // Thumbnail column (11rem); full card width once stacked
+        sizes: '(max-width: 815px) 100vw, 11rem',
         // Decorative: the card's name and tagline already say what it shows
         alt: '',
       }),

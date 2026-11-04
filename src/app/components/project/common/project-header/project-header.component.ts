@@ -68,6 +68,8 @@ export class ProjectHeaderComponent extends Component {
           { src: `${this._headConfig.imageSrc}.webp`, type: 'image/webp' },
         ],
         fallback: `${this._headConfig.imageSrc}.jpg`,
+        // The screen mock is 24rem wide, full width on small screens
+        sizes: '(max-width: 815px) 100vw, 24rem',
         alt: `${this._headConfig.name} illustration picture`,
       },
       {

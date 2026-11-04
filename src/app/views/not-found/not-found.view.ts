@@ -31,6 +31,8 @@ export class NotFoundView extends View {
             { src: '/assets/images/404.webp', type: 'image/webp' },
           ],
           fallback: '/assets/images/404.jpg',
+          // Shown at its own width (900px), at most the screen's
+          sizes: '(max-width: 815px) 100vw, 900px',
           width: 900,
           height: 699,
           alt: 'Page not found illustration — Black and white picture of a man standing on the edge of a wall. From the movie "Das Cabinet des Doktor Caligari", R. Wiene, 1920.',
