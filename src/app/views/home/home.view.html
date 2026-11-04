@@ -1,6 +1,6 @@
 <div class="w-full pl-largest max-medium:pl-0">
 	<!-- One vertical spacing between all sections (4rem); a separator sits in its middle, its line at its bottom edge -->
-	<div class="w-[70%] max-medium:w-full [&>*]:pt-16 [&>.separator-line]:pt-0 [&>.separator-line]:mt-[calc(2rem-15px)] [&>.separator-line+*]:pt-largest">
+	<div class="w-[max(70%,min(88%,1300px))] max-medium:w-full [&>*]:pt-16 [&>.separator-line]:pt-0 [&>.separator-line]:mt-[calc(2rem-15px)] [&>.separator-line+*]:pt-largest">
 		<article id="hero"><span data-component="hero"></span></article>
 		<div class="separator-line"></div>
 		<div id="featured"><span data-component="featured-project"></span></div>
@@ -17,8 +17,8 @@
 			<div class="card pt-largest pb-large grid grid-cols-2 gap-x-largest gap-y-medium max-medium:grid-cols-1 max-medium:gap-y-0 [&>article_.info-card]:[--info-card-border:1px_solid_transparent] [&>article_.info-card]:[--info-card-shadow:none]">
 				<!-- Two columns: each article is a subgrid (title + 3 cards), so the cards of a row share their height -->
 				<article id="contact" class="row-span-4 grid grid-rows-subgrid max-medium:row-span-1 max-medium:block"><span data-component="contact" class="contents max-medium:block"></span></article>
-				<!-- One column: Infos follows Contact, separated by a line like the sections -->
-				<article id="infos" class="row-span-4 grid grid-rows-subgrid max-medium:row-span-1 max-medium:block separator-line-before max-medium:order-2 max-medium:pt-[calc(2rem-15px)] max-medium:before:content-[''] max-medium:before:mb-largest"><span data-component="infos" class="contents max-medium:block"></span></article>
+				<!-- One column: Infos follows Contact (and its résumé card) -->
+				<article id="infos" class="row-span-4 grid grid-rows-subgrid max-medium:row-span-1 max-medium:block max-medium:order-2 max-medium:pt-largest"><span data-component="infos" class="contents max-medium:block"></span></article>
 				<!-- Contact's résumé card, across both columns; one column: right after Contact -->
 				<div class="col-span-full mt-small max-medium:order-1 max-medium:mt-0"><span data-component="resume-card"></span></div>
 			</div>

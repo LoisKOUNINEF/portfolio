@@ -10,11 +10,11 @@
 		differently, and a too-narrow card let the screen stick out of it.
 		Between the medium and large breakpoints, the card fills the section instead: the text
 		takes the room the screen leaves, the metrics stay on one line, and the screen gives up
-		room (down to 10rem) when they need it. A section narrower than 37rem can't hold both side
-		by side: the card stacks them as on small screens.
+		room (down to 10rem) when they need it. A section narrower than 666px (37rem at the 18px root, in px so it doesn't follow the fluid root) can't hold both side
+		by side: the card stacks them, screen on top. Small screens hide the screen (and its alt text) altogether.
 	-->
-	<div class="card flex w-[calc(var(--fp-text)+2rem+var(--fp-screen)+2.5rem+1px)] max-w-full items-center gap-largest [--card-padding-small:var(--card-padding)] [--fp-inner:calc(100cqw-2.5rem-1px)] [--fp-text:calc(var(--fp-inner)*0.6-2rem)] [--fp-screen:min(calc(var(--fp-inner)*0.4),17rem)] max-medium:flex-col-reverse max-medium:items-stretch max-medium:w-auto not-max-medium:max-large:w-auto @max-[37rem]:flex-col-reverse @max-[37rem]:items-stretch">
-		<div class="flex-[0_0_var(--fp-text)] text-text leading-[1.6] max-medium:flex-none not-max-medium:max-large:@min-[37rem]:flex-[1_1_0] @max-[37rem]:flex-none">
+	<div class="card flex w-[calc(var(--fp-text)+2rem+var(--fp-screen)+2.5rem+1px)] max-w-full items-center gap-largest [--card-padding-small:var(--card-padding)] [--fp-inner:calc(100cqw-2.5rem-1px)] [--fp-text:calc(var(--fp-inner)*0.6-2rem)] [--fp-screen:min(calc(var(--fp-inner)*0.4),17rem)] max-medium:flex-col-reverse max-medium:items-stretch max-medium:w-auto not-max-medium:max-large:w-auto @max-[666px]:flex-col-reverse @max-[666px]:items-stretch">
+		<div class="flex-[0_0_var(--fp-text)] text-text leading-[1.6] max-medium:flex-none not-max-medium:max-large:@min-[666px]:flex-[1_1_0] @max-[666px]:flex-none">
 			<!-- Baseline: the logo's bottom edge sits on the title's text baseline -->
 			<div class="flex items-baseline gap-small mb-small">
 				<img class="flex-none w-auto h-8 max-medium:h-7" src="/assets/images/projects/nutin-logo.avif" alt="" width="252" height="272" decoding="async">
@@ -42,7 +42,7 @@
 				<div data-component="featured-project-link" data-event="click:_onLinkClick:@event"></div>
 			</div>
 		</div>
-		<div class="screen-mock shrink-0 w-[var(--fp-screen)] max-medium:w-full not-max-medium:max-large:shrink not-max-medium:max-large:min-w-[10rem] @max-[37rem]:w-full">
+		<div class="screen-mock shrink-0 w-[var(--fp-screen)] max-medium:hidden not-max-medium:max-large:shrink not-max-medium:max-large:min-w-[10rem] @max-[666px]:w-full">
 			<div data-component="featured-project-picture"></div>
 			<div class="screen-mock-stand"></div>
 		</div>
