@@ -9,7 +9,7 @@
 		"build": "Build",
 		"build-value": "dev 0,6 s · prod 0,7 s",
 		"docker": "Docker",
-		"docker-value": "4 s · image de 19 Mo"
+		"docker-value": "image de 19 Mo"
 	},
 	"highlight-1-title": "Minimal par conception",
 	"highlight-1": "Aucune dépendance à l'exécution, des API web natives au cœur et un rendu explicite plutôt qu'un DOM virtuel.",

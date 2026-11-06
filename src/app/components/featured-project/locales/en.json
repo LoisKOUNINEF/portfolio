@@ -9,7 +9,7 @@
 		"build": "Build",
 		"build-value": "dev 0.6 s · prod 0.7 s",
 		"docker": "Docker",
-		"docker-value": "4 s · 19 MB image"
+		"docker-value": "19 MB image"
 	},
 	"highlight-1-title": "Minimal by design",
 	"highlight-1": "Zero runtime dependency, with native web APIs at the core and explicit rendering instead of a virtual DOM.",
