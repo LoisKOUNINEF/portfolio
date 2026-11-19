@@ -500,7 +500,6 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: --theme(--radius-large);
-    transition: scale ease .3s;
     box-shadow: 0 4px 4px -3px color-mix(in srgb, var(--primary), transparent 50%);
   }
 
