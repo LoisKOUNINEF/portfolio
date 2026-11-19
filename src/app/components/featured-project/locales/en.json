@@ -6,8 +6,6 @@
 		"note": "Default generated app",
 		"bundle": "Bundle",
 		"bundle-value": "30 KB minified · 10 KB gzip · 9 KB brotli",
-		"build": "Build",
-		"build-value": "dev 0.6 s · prod 0.7 s",
 		"docker": "Docker",
 		"docker-value": "19 MB image"
 	},
