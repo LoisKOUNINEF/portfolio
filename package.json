@@ -37,7 +37,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "a11y-elements": "^1.0.0"
+    "a11y-elements": "^1.0.1"
   },
   "engines": {
     "node": ">=24"
