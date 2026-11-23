@@ -1,14 +1,9 @@
 import { Component, html } from '../../../core/index.js';
 import { ITab, TabsComponent } from '../common/tabs/tabs.component.js';
 import { ProjectGridComponent } from '../project/project-grid/project-grid.component.js';
+import { PROJECT_GROUPS } from '../../services/project/project.service.js';
 
 const templateFn = () => html`__TEMPLATE_PLACEHOLDER__`;
-
-const PROJECT_GROUPS: Record<'apps' | 'tools' | 'infra', ProjectFolderName[]> = {
-  apps: ['paris-2024', 'retro-cabinet', 'notelet', 'narrative-palettes'],
-  tools: ['nutin', 'a11y-elements'],
-  infra: ['self-hosting', 'ci-cd', 'mailer'],
-};
 
 export class ProjectsComponent extends Component {
   constructor(mountTarget: HTMLElement) {

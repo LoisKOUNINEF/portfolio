@@ -4,6 +4,17 @@ export type ProjectConfigFolder = ProjectFolderName | Nutin.CatalogItemConfig<Pr
 // A project, with its catalog index when rendered from a catalog
 export type ProjectConfigObject = IProject & Partial<Nutin.CatalogItemBase>;
 
+// Projects shown in each tab of the Projects section, in display order
+export const PROJECT_GROUPS: Record<'apps' | 'tools' | 'infra', ProjectFolderName[]> = {
+  apps: ['paris-2024', 'notelet', 'retro-cabinet', 'narrative-palettes'],
+  tools: ['nutin', 'a11y-elements'],
+  infra: ['self-hosting', 'ci-cd', 'mailer'],
+};
+
+// Every project folder, for validating a value read from the URL
+export const isProjectFolder = (value: string): value is ProjectFolderName =>
+  Object.values(PROJECT_GROUPS).some((folders) => (folders as string[]).includes(value));
+
 export class Project extends Service<Project> {
   public getProject(folderName: ProjectConfigFolder): ProjectConfigObject {
     return this.handleIndex(folderName);

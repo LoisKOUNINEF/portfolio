@@ -32,13 +32,13 @@
 		"designDecisions": {
 			"sectionKeyPoints": [
 				{
+					"Accès explicite aux données": "Les relations entre les tables sont garanties par des clés étrangères, tandis que les requêtes SQL restent explicites. L’ORM est limité à la génération des migrations et à l’exécution de requêtes paramétrées, évitant ainsi le couplage aux entités et le lazy loading implicite."
+				},
+				{
 					"Règles métier côté serveur": "Le backend valide paniers et commandes, gère paiements et billets, et applique les règles d'accès; le frontend se concentre sur la présentation et l'interaction."
 				},
 				{
 					"Approche API-first": "Le développement du frontend a suivi des contrats d'API explicites, conçus pour ses besoins mais assez génériques pour éviter un couplage fort."
-				},
-				{
-					"Monorepo Nx": "Client Angular, serveur NestJS et librairies partagées, avec des interfaces TypeScript communes à toute la stack."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024-design"
@@ -52,7 +52,7 @@
 					"Dérive entre frontend et backend": "Resserrer les contrats d'API et expliciter la forme des réponses a réduit les régressions."
 				},
 				{
-					"Sécurité et performances": "Un ORM prévient les injections SQL et facilite les migrations, tandis que des index et des requêtes SQL sur mesure améliorent les performances."
+					"Performance et évolutivité" : "Les index de base de données et les requêtes SQL optimisées améliorent les performances des requêtes. La mise en cache et la montée en charge horizontale restent des axes d'amélioration pour supporter des charges plus importantes."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024-challenges"

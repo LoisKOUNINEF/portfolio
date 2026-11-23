@@ -25,8 +25,20 @@
 				<li><strong class="font-bold" data-i18n="featured-project.highlight-2-title"></strong>: <span data-i18n="featured-project.highlight-2"></span></li>
 				<li><strong class="font-bold" data-i18n="featured-project.highlight-3-title"></strong>: <span data-i18n="featured-project.highlight-3"></span></li>
 			</ul>
-			<div data-event="keydown:_onLinkKeydown:@event">
-				<div data-component="featured-project-link" data-event="click:_onLinkClick:@event"></div>
+			<div class="flex gap-largest">
+				<div data-event="keydown:_onLinkKeydown:@event">
+					<div data-component="featured-project-link" data-event="click:_onLinkClick:@event"></div>
+				</div>
+				<div>
+					<p>
+						<a
+							href="https://nutin.dev/articles/why-nutin"
+							target="_blank"
+							title="why nutin?"
+							data-i18n="featured-project.why-nutin"
+						></a>
+					</p>
+				</div>
 			</div>
 		</div>
 		<div class="screen-mock shrink-0 w-[var(--fp-screen)] max-medium:hidden not-max-medium:max-large:shrink not-max-medium:max-large:min-w-[10rem] @max-[666px]:w-full">
