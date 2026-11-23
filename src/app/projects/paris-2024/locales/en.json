@@ -32,13 +32,13 @@
 		"designDecisions": {
 			"sectionKeyPoints": [
 				{
+					"Explicit data access": "Database relationships are enforced through foreign keys, while SQL queries remain explicit. The ORM is restricted to migration generation and parameterized query execution, avoiding entity coupling and implicit lazy-loading."
+				},
+				{
 					"Business rules on the server": "The backend validates carts and orders, handles payments and tickets, and enforces access rules; the frontend focuses on presentation and interaction."
 				},
 				{
 					"API-first approach": "Frontend development was guided by explicit API contracts, designed around its needs but generic enough to avoid tight coupling."
-				},
-				{
-					"Nx monorepo": "Angular client, NestJS server and shared libraries, with TypeScript interfaces shared across the full stack."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024-design"
@@ -52,7 +52,7 @@
 					"Frontend–backend drift": "Tightening API contracts and being explicit about response shapes reduced regressions."
 				},
 				{
-					"Security and performance": "An ORM prevents SQL injections and eases migrations, while indexes and custom SQL queries improve performance."
+					"Performance and scalability": "Database indexes and optimized SQL queries improve query performance. Caching and horizontal scaling remain areas for further improvement to accommodate higher workloads."
 				}
 			],
 			"sectionImageSrc": "/assets/images/projects/paris-2024-challenges"

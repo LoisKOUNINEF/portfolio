@@ -17,7 +17,8 @@ interface IProjectGrid {
 /**
  * The first `visibleCount` project cards; the others are hidden behind a
  * "+X more projects…" / "Show less" toggle. A same-page link or URL hash targeting a
- * hidden card expands the grid first, so the jump lands on a visible card.
+ * hidden card expands the grid first, so the jump lands on a visible card (same for a
+ * `project-reveal` event, sent before a `?project=` link opens the project's modal).
  */
 export class ProjectGridComponent extends Component<HTMLElement, IProjectGrid> {
   private _expanded = false;
@@ -30,6 +31,7 @@ export class ProjectGridComponent extends Component<HTMLElement, IProjectGrid> {
   constructor(mountTarget: HTMLElement, folders: ProjectFolderName[], visibleCount = MAX_VISIBLE) {
     super({ templateFn, mountTarget, config: { folders, visibleCount, gridId: `project-grid-${folders[0] ?? ''}` } });
     this.listenToRenderEvents(['language-changed']);
+    this.listen('project-reveal', (folder) => this.revealTarget(`#${folder}`));
   }
 
   public override registerChildren(): Nutin.ComponentConfig[] {

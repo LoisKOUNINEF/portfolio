@@ -1,5 +1,8 @@
 declare namespace Nutin {
-  interface AppEventMap {}
+  interface AppEventMap {
+    // Expands the project grid holding this project's card, if it's hidden
+    'project-reveal': ProjectFolderName;
+  }
 }
 
 declare type ProjectFolderName =

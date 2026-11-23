@@ -49,7 +49,7 @@ export class ProjectCardComponent extends Component<HTMLElement, IProjectCard> {
   }
 
   private _openModal(): void {
-    displayProjectModal(this.config.project);
+    displayProjectModal(this.config.folder);
   }
 
   protected override onBeforeRender(): void {
