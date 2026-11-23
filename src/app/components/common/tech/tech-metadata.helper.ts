@@ -5,7 +5,7 @@ export const labels: Record<string, string> = {
   postgresql: 'PostgreSQL',
   mysql: 'MySQL',
   typeorm: 'TypeOrm',
-  nodejs: 'NodeJs',
+  nodejs: 'Node.js',
   nestjs: 'NestJs',
   vuejs: 'VueJs',
   sqlite: 'SQLite',
