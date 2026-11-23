@@ -1,4 +1,4 @@
-# portfolio - Built with nutin
+# portfolio - Built with [Nutin](https://nutin.dev)
 
 ## Live
 
