@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { UserError } from '../../../../utils/error-exit.js';
 
 /**
  * Installs the minimum browser globals the framework's own base classes touch
@@ -184,12 +185,17 @@ export function installGlobals(window, { lang, mockFetch = {}, localesDir, stati
   return { trackedFetches };
 }
 
+// A prod bundle fetches the runtime JSON files by their content-hashed copy's URL
+// (prod-bundle/data-files.js): /locales/en.3fa9c21b.json is /locales/en.json.
+const DATA_FILE_HASH = /\.[0-9a-f]{8}(\.json)$/;
+
 export async function resolveFetch(url, { mockFetch = {}, localesDir, staticDir } = {}) {
-  if (Object.prototype.hasOwnProperty.call(mockFetch, url)) {
-    return jsonResponse(mockFetch[url]);
+  const plainUrl = typeof url === 'string' ? url.replace(DATA_FILE_HASH, '$1') : url;
+  for (const key of [url, plainUrl]) {
+    if (Object.prototype.hasOwnProperty.call(mockFetch, key)) return jsonResponse(mockFetch[key]);
   }
 
-  const localeMatch = /^\/locales\/([a-zA-Z-]+)\.json$/.exec(url ?? '');
+  const localeMatch = /^\/locales\/([a-zA-Z-]+)\.json$/.exec(plainUrl ?? '');
   if (localeMatch) {
     const filePath = path.join(localesDir, `${localeMatch[1]}.json`);
     if (fs.existsSync(filePath)) {
@@ -200,13 +206,13 @@ export async function resolveFetch(url, { mockFetch = {}, localesDir, staticDir 
     return jsonResponse({});
   }
 
-  const staticFile = resolveStaticFile(url, staticDir);
+  const staticFile = resolveStaticFile(url, staticDir) ?? resolveStaticFile(plainUrl, staticDir);
   if (staticFile) {
     const text = fs.readFileSync(staticFile, 'utf-8');
     return staticFile.endsWith('.json') ? jsonResponse(JSON.parse(text)) : textResponse(text);
   }
 
-  throw new Error(
+  throw new UserError(
     `Unexpected fetch("${url}") during SSR — no "mockFetch" entry for this endpoint and it isn't a ` +
     `/locales/*.json request or a file built into dist. Add a "mockFetch" entry for this route in config/seo.json if this is intentional.`
   );

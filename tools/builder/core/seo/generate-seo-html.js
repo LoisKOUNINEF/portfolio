@@ -133,7 +133,7 @@ export async function generateSeoHtml() {
       const lines = fallbacks
         .map(({ path, field, lang, sourceLang }) => `  - route "${path}": "${field}.${lang}" not set — using "${field}.${sourceLang}"`)
         .join('\n');
-      print.error(`[generate-seo-html] Using defaultLanguage fallback for missing i18n content:\n${lines}`);
+      print.warn(`[generate-seo-html] Using defaultLanguage fallback for missing i18n content:\n${lines}`);
     }
 
     if (missing.length > 0) {

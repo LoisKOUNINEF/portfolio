@@ -22,33 +22,33 @@ async function validateDocker() {
   try {
     ports = validateDockerPorts(nutinConfig.dockerPorts);
   } catch (err) {
-    errorExit(err.message);
+    errorExit(err.message, 'validate-docker');
   }
 
   let markdownCopy;
   try {
     markdownCopy = markdownSourcesCopy(nutinConfig.markdownSources?.sourceFolders);
   } catch (err) {
-    errorExit(err.message);
+    errorExit(err.message, 'validate-docker');
   }
 
   await renderFromTemplate(DOCKER_DIR, 'Dockerfile.template', 'Dockerfile', [
     [PLACEHOLDER, ports.join(' ')],
     ['__PRIMARY_PORT_PLACEHOLDER__', String(ports[0])],
     [MARKDOWN_SOURCES_PLACEHOLDER, markdownCopy],
-  ]).catch((err) => errorExit(err.message));
+  ]).catch((err) => errorExit(err.message, 'validate-docker'));
 
   let redirects;
   try {
     redirects = rootRedirect();
   } catch (err) {
-    errorExit(err.message);
+    errorExit(err.message, 'validate-docker');
   }
 
   await renderFromTemplate(DOCKER_DIR, 'nginx.conf.template', 'nginx.conf', [
     [PLACEHOLDER, ports.map((port) => `listen ${port};`).join('\n    ')],
     [ROOT_REDIRECT_PLACEHOLDER, redirects],
-  ]).catch((err) => errorExit(err.message));
+  ]).catch((err) => errorExit(err.message, 'validate-docker'));
 }
 
 validateDocker().catch((err) => {

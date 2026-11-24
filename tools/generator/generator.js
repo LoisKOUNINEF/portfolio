@@ -12,7 +12,7 @@ import nutinConfig from "../../nutin.config.js";
 const creators = {
   service: async (name, targetPath) => {
     const suffix = 'service';
-    print.section(`Generating service: ${name.capitalized}`);
+    print.section(`Generating service: ${name.pascal}`);
     try {
       generateFile({ name, targetPath, templateFn: serviceTemplate, suffix: suffix });
       await generateTest({ name, targetPath, suffix: suffix });
@@ -22,7 +22,7 @@ const creators = {
   },
   component: async (name, targetPath) => {
     const suffix = 'component';
-    print.section(`Generating component: ${name.capitalized}`);
+    print.section(`Generating component: ${name.pascal}`);
 
     try {
       generateFile({ name, targetPath, templateFn: componentTemplate, suffix: suffix });
@@ -36,7 +36,7 @@ const creators = {
   },
   view: async (name, targetPath) => {
     const suffix = 'view';
-    print.section(`Generating view: ${name.capitalized}`);
+    print.section(`Generating view: ${name.pascal}`);
 
     try {
       generateFile({ name, targetPath, templateFn: viewTemplate, suffix: suffix });
@@ -75,9 +75,9 @@ if (create) {
     process.exit(1);
   }
   await create(name, targetPath);
-  print.boldSuccess(`\n${type.capitalized} ${name.capitalized} generated in ${targetPath}.\n`)
+  print.boldSuccess(`\n${type.capitalized} ${name.pascal} generated in ${targetPath}.\n`)
 } else {
-  showUsageAndExit(`Unsupported type: '${type.kebab}'`);
+  showUsageAndExit(`Unsupported type: "${type.kebab}".`);
   process.exit(1);
 }
 
@@ -98,5 +98,5 @@ function showUsageAndExit(message) {
 }
 
 function handleError(context, error) {
-  errorExit(error, context);
+  errorExit(error instanceof Error ? Object.assign(error, { message: `${context}: ${error.message}` }) : `${context}: ${error}`, 'generator');
 }
