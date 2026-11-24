@@ -5,7 +5,7 @@
 	"metrics": {
 		"note": "Application générée par défaut",
 		"bundle": "Bundle",
-		"bundle-value": "30 Ko minifié · 10 Ko gzip · 9 Ko brotli",
+		"bundle-value": "28 Ko minifié · 10 Ko gzip · 9 Ko brotli",
 		"docker": "Docker",
 		"docker-value": "image de 19 Mo"
 	},
